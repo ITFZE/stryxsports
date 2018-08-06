@@ -1,0 +1,134 @@
+<core:View
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+		controllerName="com.ss.app.StryxSports.controller.details.create.CreateInvoice"
+	xmlns:m="sap.m"
+	xmlns:c="sap.suite.ui.commons"
+	xmlns:f="sap.ui.layout.form">
+	<m:Page id="newPaymnetPage" title="{i18n>CreateInvoice}" showNavButton="true" navButtonPress="onBack">
+		<m:content>
+			<ObjectPageLayout id="createObjectPageLayout"  enableLazyLoading="false" showTitleInHeaderContent="true" showHeaderContent="true">
+				<headerTitle>
+					<ObjectPageHeader id="headerPageId" isActionAreaAlwaysVisible="true" 
+            				objectImageURI="sap-icon://customer"
+							objectTitle="{mLeadDetails>/CardName} {path: 'mLeadDetails>/U_SS_MEMBER_TYPE', formatter: '.childAdultFormatter'}"
+							objectImageShape="Circle"
+							objectImageAlt="{mLeadDetails>/CardName}"
+    						isObjectIconAlwaysVisible="false"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false"/>
+				</headerTitle>
+				<headerContent>
+					<layout:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop" text="{mLeadDetails>/Cellular}"/>
+						<m:Link class="sapUiTinyMarginTop" text="{mLeadDetails>/EmailAddress}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label/>
+						<m:ObjectStatus class="sapUiTinyMarginTop" text="{mLeadDetails>/U_Nationality}"/>
+						<m:ObjectStatus class="sapUiTinyMarginTop" text="{mLeadDetails>/U_School}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout id="emgPanelId" visible="false">
+						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
+						<m:HBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/2/Name}"/>
+								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{mLeadDetails>/ContactEmployees/2/MobilePhone}"/>
+							</m:VBox>
+								<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/0/Name}"/>
+								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{mLeadDetails>/ContactEmployees/0/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/1/Name}"/>
+								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{mLeadDetails>/ContactEmployees/1/MobilePhone}"/>
+							</m:VBox>
+						</m:HBox>
+					</layout:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="objectPageSectionId" title="Create Invoice">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks >
+									<m:VBox>
+										<m:Table class="width-full bg-color-table" items="{InvoiceDetailsModel>/DocumentLines}">
+											<m:columns>
+												<m:Column width="12em">
+													<m:Text text="Services"/>
+												</m:Column>
+												<m:Column width="12em"  hAlign="Center">
+													<m:Text text="{i18n>i_Quantity}"/>
+												</m:Column>
+												<m:Column  width="12em" hAlign="End" >
+													<m:Text text="{i18n>i_UnitPrice}"/>
+												</m:Column>
+												<m:Column  width="12em" hAlign="End" >
+													<m:Text text="{i18n>i_LineTotal}"/>
+												</m:Column>
+												<m:Column  width="12em" hAlign="End" >
+													<m:Text text="Vat"/>
+												</m:Column>
+												<m:Column  width="12em" hAlign="End" >
+													<m:Text text="Total Price"/>
+												</m:Column>
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem>
+													<m:cells>
+														<m:Text text="{InvoiceDetailsModel>ItemDescription}"/>
+														<m:Text text="{InvoiceDetailsModel>Quantity}" />
+														<m:Text text="{parts:[{path:'InvoiceDetailsModel>UnitPrice'},{path:'InvoiceDetailsModel>Currency'}],formatter: '.toCurrencyAddPrice'} "/>
+														<m:Text text="{parts:[{path:'InvoiceDetailsModel>LineTotal'},{path:'InvoiceDetailsModel>Currency'}],formatter: '.toCurrencyAddPrice'} "/>
+														<m:Text text="{parts:[{path:'InvoiceDetailsModel>NetTaxAmount'},{path:'InvoiceDetailsModel>Currency'}],formatter: '.toCurrencyAddPrice'}"/>
+														<m:Text text="{parts:[{path:'InvoiceDetailsModel>Currency'},{path:'InvoiceDetailsModel>Quantity'},{path:'InvoiceDetailsModel>UnitPrice'},{path:'InvoiceDetailsModel>NetTaxAmount'}],formatter: '.toTotalAmount' }"/>
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+										<m:VBox alignItems="End" justifyContent="Center">
+											<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+												<m:Label text="{i18n>i_TotalWithoutTax}" width="9em"/>
+												<m:Input  editable="false" textDirection="RTL" enabled="true" value="{InvoiceDetailsModel>/DocCurrency} {
+                                				path: 'InvoiceDetailsModel>/TotalItemPrice',
+                                				type: 'sap.ui.model.type.Float',
+                                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+											</m:HBox>
+											<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+												<m:Label text="{i18n>i_VAT}" width="3em"/>
+												<m:Input  editable="false" enabled="true" textDirection="RTL"  value="{InvoiceDetailsModel>/DocCurrency} {
+                                				path: 'InvoiceDetailsModel>/VatSum',
+                                				type: 'sap.ui.model.type.Float',
+                                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+											</m:HBox>
+											<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+												<m:Label text="{i18n>i_Total}" width="3em" />
+												<m:Input editable="false" enabled="true" textDirection="RTL" value="{InvoiceDetailsModel>/DocCurrency} {
+                                				path: 'InvoiceDetailsModel>/DocTotalSys',
+                                				type: 'sap.ui.model.type.Float',
+                                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+											</m:HBox>
+										</m:VBox>
+										<m:HBox alignItems="Center" justifyContent="Center">
+											<m:Button id="btnGenerateInvoice" class="sapUiSmallMargin" text="Generate Invoice" press="createGenerateInvoice"/>
+											<m:Button id="btnGenerateInvoiceLater"  text="Generate Invoice Later" press="onBack"/>
+										</m:HBox>
+									</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+	</m:Page>
+</core:View>

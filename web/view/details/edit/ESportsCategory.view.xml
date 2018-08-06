@@ -1,0 +1,86 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.edit.ESportsCategory"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page title="{i18n>scSportCategoryEdit}">
+		<content>
+			<l:Grid defaultSpan="L8 M12 S12" class="sapUiSmallMarginTop">
+				<l:content>
+					<f:SimpleForm id="frmCategory" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label text="{i18n>scName}"/>
+							<Input id="editSportsCategoryName" value="{ 
+                                  path : 'SportsCategoryEdit>/Name', 
+                                  type : 'sap.ui.model.type.String', 
+                                  constraints : { 
+                                      minLength : 1, 
+                                      maxLength : 50 
+                                  } }" placeholder="{i18n>scPleaseEnterTheName}"/>
+							<Label text="{i18n>scDecription}"/>
+							<TextArea id="editSportsCategoryDescription" value="{SportsCategoryEdit>/U_CatDescpriction}" maxLength="1500" placeholder="{i18n>scPleaseEnterTheDescription}"/>
+							<Label text="{i18n>scStatus}"/>
+							<Select id="editSportsCategroyStatus" selectedKey="{SportsCategoryEdit>/U_Status}" items="{path: 'BaseModel>/seasonState'}">
+								<items>
+									<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+								</items>
+							</Select>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+			<Panel width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<Title text="{i18n>scAddSports}"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://add" press="editSportsCategoryTable"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<ScrollContainer height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+						<Table id="addSportNameTable" inset="false" items="{SportsCategoryEdit>/sports}">
+							<columns>
+								<Column>
+									<Text text="{i18n>scSportsName}"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="{i18n>scSportsDescriptions}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>scSportsStatus}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+									<Text/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{SportsCategoryEdit>Name}"/>
+										<Text text="{SportsCategoryEdit>U_SportsDescription}"/>
+										<ObjectStatus text="{ path: 'SportsCategoryEdit>U_Status', formatter: '.setStatus' }" state="{ path: 'SportsCategoryEdit>U_Status', formatter: '.sportStatus' }"/>
+										<Button type="{path: 'SportsCategoryEdit>rec_status', formatter: '.colorFormatter' }" icon="{path: 'SportsCategoryEdit>rec_status', formatter: '.iconFormatter' }" press="onDeleteCatSport"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressSaveSportsCategory"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressCloseSportsCategory"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

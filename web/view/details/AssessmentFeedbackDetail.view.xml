@@ -1,0 +1,34 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.AssessmentFeedbackDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page title="{i18n>afAssessmentFeedbackDetails}" showNavButton="{device>/system/phone}" navButtonPress="onBackAssessment" >
+		<content>
+			<f:SimpleForm id="SimpleFormCoacheAssessmentDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3"
+						labelSpanM="3" labelSpanS="12" emptySpanXL="3" emptySpanL="3" emptySpanM="3" emptySpanS="12" columnsXL="12"
+						columnsL="12" columnsM="2" singleContainerFullSize="true">
+				<f:content>
+					<Label text="{i18n>afAssessmentName}"/>
+					<Input type="Text" value="{AssessmentFeedbackDetail>/U_SS_ASSESS_FEEDBACK/Name}" id="coachLeadName" editable="false" enabled="true"/>
+					<Label text="{i18n>afScheduleDateAndTime}"/>
+					<Input value="{AssessmentFeedbackDetail>/U_SS_ASSESSMENT/U_ScheduleSDate}  To  {AssessmentFeedbackDetail>/U_SS_ASSESSMENT/U_ScheduleEDate}" id="coachScheduleDate" enabled="true" editable="false"/>
+					<Input value="{AssessmentFeedbackDetail>/U_SS_ASSESSMENT/U_ScheduleSTime}  To  {AssessmentFeedbackDetail>/U_SS_ASSESSMENT/U_ScheduleETime}" id="coachScheduleTime" enabled="true" editable="false"/>
+					<Label text="{i18n>afComments}"/>
+					<TextArea groowing="true" value="{AssessmentFeedbackDetail>/U_SS_ASSESS_FEEDBACK/U_Comments}" id="coachAssessmentComments" growingMaxLines="7" editable="false" enabled="true"/>
+					<Label text="{i18n>afAssessmentFeesback}"/>
+					<Select enabled="false" id="coachFeedback" items="{AssessmentScoreList>/value}" selectedKey="{AssessmentFeedbackDetail>/U_SS_ASSESS_FEEDBACK/U_AssessmentScore}"  change="selectedFeedback"  >
+						<items >
+							<core:Item text="{AssessmentScoreList>Name}" key="{AssessmentScoreList>Name}"/>
+						</items>
+					</Select>
+					<Label/>
+					<Button	text="{i18n>afCreateMembership}" press="onPressCreateMembership"/>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+	</Page>
+</mvc:View>

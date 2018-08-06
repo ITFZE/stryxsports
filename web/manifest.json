@@ -1,0 +1,984 @@
+{
+	"_version": "1.8.0",
+	"stryx.account.series": {
+		"child": "70",
+		"adult": "75"
+	},
+	"stryx.placeholder": {
+		"0": {
+			"placeholder_select": {
+				"placeholders": [],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"1": {
+			"placeholder_select": {
+				"placeholders": ["LA_FName", "LA_MName", "LA_LName", "LA_Date", "SS_Location", "LR_Firstname", "LR_MiddleName", "LR_LastName"],
+				"phValues": ["FirstName", "MiddleName", "LastName", "Date", "Name", "FirstName", "MiddleName", "LastName"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"2": {
+			"placeholder_select": {
+				"placeholders": ["LR_Firstname", "LR_MiddleName", "LR_LastName", "LR_Date", "LR_Location"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"3": {
+			"placeholder_select": {
+				"placeholders": ["CT_Firstname", "CT_MiddleName", "CT_LastName", "CT_Date", "CT_Team", "CT_Location"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"4": {
+			"placeholder_select": {
+				"placeholders": ["SL_Firstname", "SL_MiddleName", "SL_LastName", "SL_Date", "SL_Time", "SL_Location"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"5": {
+			"placeholder_select": {
+				"placeholders": ["SC_Firstname", "SC_MiddleName", "SC_LastName", "SC_Date", "SC_LeadName", "SC_Time", "SC_Location"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"6": {
+			"placeholder_select": {
+				"placeholders": ["SRL_Firstname", "SRL_MiddleName", "SRL_LastName", "SRL_Date", "SRL_CoachName", "SRL_Time", "SRL_Location"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"7": {
+			"placeholder_select": {
+				"placeholders": ["SRC_Firstname", "SRC_MiddleName", "SRC_LastName", "SRC_Date", "SRC_LeadName", "SRC_Time", "SRC_Location"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"8": {
+			"placeholder_select": {
+				"placeholders": ["CF_LeadName", "CF_Date", "CF_Time", "CF_Location", "CF_FeedbackStatus", "CF_FeedbackComments"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"9": {
+			"placeholder_select": {
+				"placeholders": ["NM_Firstname", "NM_MiddleName", "NM_LastName", "NM_Date", "NM_Location", "NM_BatchNumber", "NM_BatchTiming"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"10": {
+			"placeholder_select": {
+				"placeholders": ["RM_Firstname", "NM_MiddleName", "NM_LastName", "NM_BatchNumber", "NM_BatchTiming", "NM_Date", "NM_Location",
+					"NM_OldMembershipAmount"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"11": {
+			"placeholder_select": {
+				"placeholders": ["PD_Firstname", "PD_MiddleName", "PD_LastName", "PD_Batch Number", "PD_Batch Timing", "PD_Date"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		},
+		"12": {
+			"placeholder_select": {
+				"placeholders": ["PR_Firstname", "PR_MiddleName", "PR_LastName", "PR_BatchNumber", "PR_BatchTiming", "PR_Date"],
+				"format": "[[%placeholder%]]"
+			},
+			"extraPlugins": "richcombo,placeholder_select",
+			"removePlugins": "forms"
+		}
+	},
+	"stryx.accountDetails": {
+
+		"parentDetails": {
+			"fatherDetails": {
+				"Series": "69"
+			},
+			"motherDetails": {
+				"Series": "69"
+			},
+			"gardianDetails": {
+				"Series": "69"
+			}
+		},
+		"CreateAccount": {
+			"fatherDetails": {
+				"Series": "69"
+			},
+			"motherDetails": {
+				"Series": "69"
+			},
+			"gardianDetails": {
+				"Series": "69"
+			}
+		}
+	},
+
+	"sap.app": {
+		"id": "com.ss.app.StryxSports",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "ui5template.basicSAPUI5ApplicationProject",
+			"version": "1.40.12"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "com.ss.app.StryxSports.images.favicon.ico",
+			"favIcon": "com/ss/app/StryxSports/images/favicon.ico",
+			"phone": "com.ss.app.StryxSports.images.favicon.ico",
+			"phone@2": "com.ss.app.StryxSports.images.favicon.ico",
+			"tablet": "com.ss.app.StryxSports.images.favicon.ico",
+			"tablet@2": "com.ss.app.StryxSports.images.favicon.ico"
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_belize"]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "com.ss.app.StryxSports.view.AppView",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "com.ss.app.StryxSports.i18n.i18n"
+				}
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "com.ss.app.StryxSports",
+				"controlId": "idAppControl",
+				"controlAggregation": "pages",
+				"transition": "slide",
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [
+				{
+					"name": "Login",
+					"pattern": "",
+					"target": "Login",
+					"viewLevel": 1
+				},
+				{
+					"name": "DashBoard",
+					"pattern": "DashBoard",
+					"target": "DashBoard",
+					"viewLevel": 2
+				},
+				{
+					"name": "Sports",
+					"pattern": "Sports",
+					"target": ["SportDetails", "sportMaster"],
+					"viewLevel": 3
+				},
+				{
+					"name": "SportDetails",
+					"pattern": "SportDetails",
+					"target": "SportDetails",
+					"viewLevel": 4
+				},
+				{
+					"name": "EditSport",
+					"pattern": "EditSport/{SportID}",
+					"target": ["sportMaster", "EditSport"],
+					"viewLevel": 5
+				},
+				{
+					"name": "SportsCategory",
+					"pattern": "SportsCategory",
+					"target": ["SportsCategoryDetail", "SportsCategoryMaster"],
+					"viewLevel": 6
+				},
+				{
+					"name": "SportsCategoryDetail",
+					"pattern": "SportsCategoryDetail",
+					"target": "SportsCategoryDetail",
+					"viewLevel": 7
+				},
+
+				{
+					"name": "EditSportsCategory",
+					"pattern": "EditSportsCategory/{sportsCategoryID}",
+					"target": ["SportsCategoryMaster", "EditSportsCategory"],
+					"viewLevel": 8
+				},
+				{
+					"name": "LocationDetail",
+					"pattern": "LocationDetail",
+					"target": "LocationDetail",
+					"viewLevel": 9
+				},
+				{
+					"name": "Location",
+					"pattern": "Location",
+					"target": ["LocationDetail", "LocationMaster"],
+					"viewLevel": 10
+				},
+				{
+					"name": "EditLocation",
+					"pattern": "EditLocation/{locationID}",
+					"target": ["LocationMaster", "EditLocation"],
+					"viewLevel": 11
+				},
+				{
+					"name": "Seasons",
+					"pattern": "Seasons",
+					"target": ["SeasonsDetail", "SeasonsMaster"],
+					"viewLevel": 12
+				},
+				{
+					"name": "SeasonsDetail",
+					"pattern": "SeasonsDetail",
+					"target": "SeasonsDetail",
+					"viewLevel": 13
+				},
+				{
+					"name": "EditSeason",
+					"pattern": "EditSeason/{seasonID}",
+					"target": ["SeasonsMaster", "EditSeason"],
+					"viewLevel": 14
+				},
+				{
+					"name": "Coaches",
+					"pattern": "Coaches",
+					"target": ["CoachesDetail", "CoachesMaster"],
+					"viewLevel": 15
+				},
+				{
+					"name": "CoachesDetail",
+					"pattern": "CoachesDetail/{EmployeeID}",
+					"target": ["CoachesMaster", "CoachesDetail"],
+					"viewLevel": 16
+				},
+				{
+					"name": "Teams",
+					"pattern": "Teams",
+					"target": ["TeamDetails", "TeamsMaster"],
+					"viewLevel": 17
+				},
+				{
+					"name": "TeamDetails",
+					"pattern": "TeamDetails/{PageID}/{teamID}",
+					"target": "TeamDetails",
+					"viewLevel": 18
+				},
+				{
+					"name": "EditTeam",
+					"pattern": "EditTeam/{teamID}",
+					"target": ["TeamsMaster", "EditTeam"],
+					"viewLevel": 19
+				},
+				{
+					"name": "SearchLeads",
+					"pattern": "SearchLeads",
+					"target": "SearchLeads",
+					"viewLevel": 20
+				},
+				{
+					"name": "CreateAssessmentsDetail",
+					"pattern": "CreateAssessments/{PageID}/{LeadID}",
+					"target": "AssessmentsDetail",
+					"viewLevel": 21
+				},
+				{
+					"name": "AssessmentFeedback",
+					"pattern": "AssessmentFeedback",
+					"target": ["AssessmentFeedbackDetail", "AssessmentFeedbackMaster"],
+					"viewLevel": 22
+				},
+				{
+					"name": "AssessmentFeedbackDetail",
+					"pattern": "AssessmentFeedbackDetail/{FeedbackID}",
+					"target": ["AssessmentFeedbackMaster", "AssessmentFeedbackDetail"],
+					"viewLevel": 23
+				},
+				{
+					"name": "EditMembershipFeedback",
+					"pattern": "EditMembershipFeedback",
+					"target": ["MembershipMaster", "EditMembershipFeedback"],
+					"viewLevel": 24
+				},
+				{
+					"name": "CoachAssessmentMaster",
+					"pattern": "CoachAssessmentMaster",
+					"target": ["CoachAssessmentDetail", "CoachAssessmentMaster"],
+					"viewLevel": 25
+				},
+				{
+					"name": "CoachAssessment",
+					"pattern": "CoachAssessment/{assessmentID}",
+					"target": ["CoachAssessmentMaster", "CoachAssessmentDetail"],
+					"viewLevel": 26
+				},
+				{
+					"name": "SearchMembership",
+					"pattern": "SearchLeadAndAccount",
+					"target": "SearchMembership",
+					"viewLevel": 27
+				},
+				{
+					"name": "EmailTemplate",
+					"pattern": "EmailTemplate",
+					"target": "EmailTemplate",
+					"viewLevel": 28
+				},
+				{
+					"name": "SMSTemplate",
+					"pattern": "SMSTemplate",
+					"target": "SMSTemplate",
+					"viewLevel": 29
+				},
+				{
+					"name": "MembershipNewCreate",
+					"pattern": "CreateAccount/{PageID}",
+					"target": "MembershipNewCreate",
+					"viewLevel": 30
+				},
+				{
+					"name": "LeadsMemnewCreate",
+					"pattern": "CreateLead/{PageID}",
+					"target": "LeadsMemnewCreate",
+					"viewLevel": 31
+				},
+
+				{
+					"name": "MembershipNewEdit",
+					"pattern": "EditAccount/{PageID}/{AccountId}",
+					"target": "MembershipNewCreate",
+					"viewLevel": 32
+				},
+				{
+					"name": "LeadMemEdit",
+					"pattern": "LeadEdit/{membershipID}",
+					"target": "LeadsMemnewCreate",
+					"viewLevel": 33
+				},
+				{
+					"name": "Membership",
+					"pattern": "Membership",
+					"target": ["MembershipMaster", "MembershipDetail"],
+					"viewLevel": 34
+				},
+				{
+					"name": "Membership",
+					"pattern": "Membership",
+					"target": ["MembershipMaster", "LeadsDetail"],
+					"viewLevel": 35
+
+				},
+				{
+					"name": "LeadsDetail",
+					"pattern": "Membership/{membershipID}",
+					"target": ["MembershipMaster", "LeadsDetail"],
+					"viewLevel": 36
+
+				},
+				{
+					"name": "MembershipDetail",
+					"pattern": "Membership/{membershipID}",
+					"target": ["MembershipMaster", "MembershipDetail"],
+					"viewLevel": 37
+				},
+				{
+					"name": "EditMembership",
+					"pattern": "EditMembership/{membershipID}",
+					"target": ["MembershipMaster", "EditMembership"],
+					"viewLevel": 38
+				},
+				{
+					"name": "CreateMembership",
+					"pattern": "CreateMembership",
+					"target": ["MembershipMaster", "CreateMembership"],
+					"viewLevel": 39
+				},
+				{
+					"name": "UserProfile",
+					"pattern": "UserProfile/{PageID}",
+					"target": "UserProfile",
+					"viewLevel": 40
+				},
+				{
+					"name": "InvoicePayment",
+					"pattern": "InvoicePayment",
+					"target": ["InvoicePaymentMaster", "InvoicePaymentDetail"],
+					"viewLevel": 41
+				},
+				{
+					"name": "InvoicePaymentDetail",
+					"pattern": "InvoicePaymentDetail/{membershipID}",
+					"target": ["InvoicePaymentMaster", "InvoicePaymentDetail"],
+					"viewLevel": 42
+				},
+				{
+					"name": "UserManagement",
+					"pattern": "UserManagement",
+					"target": ["UserManagementDetail", "UserManagementMaster"],
+					"viewLevel": 43
+				},
+				{
+					"name": "UserManagementDetail",
+					"pattern": "UserManagementDetail/{EmployeeID}",
+					"target": ["UserManagementMaster", "UserManagementDetail"],
+					"viewLevel": 44
+				},
+				{
+					"name": "CreateInvoice",
+					"pattern": "CreateInvoice/{PageID}/{DocEntryID}",
+					"target": "CreateInvoice",
+					"viewLevel": 45
+				},
+				{
+					"name": "SearchInvoice",
+					"pattern": "SearchInvoice",
+					"target": "SearchInvoice",
+					"viewLevel": 46
+				},
+				{
+					"name": "ViewInvoice",
+					"pattern": "ViewInvoice/{PageID}/{DocEntryID}",
+					"target": "ViewInvoice",
+					"viewLevel": 47
+				},
+				{
+					"name": "Payment",
+					"pattern": "Payment",
+					"target": "Payment",
+					"viewLevel": 48
+				},
+				{
+					"name": "Leads",
+					"pattern": "Leads",
+					"target": "Leads",
+					"viewLevel": 49
+
+				},
+				{
+					"name": "EditLead",
+					"pattern": "EditLead/{PageID}/{LeadID}",
+					"target": "LeadsMemnewCreate",
+					"viewLevel": 50
+
+				},
+				{
+					"name": "SearchActivity",
+					"pattern": "SearchActivity",
+					"target": "SearchActivity",
+					"viewLevel": 51
+				},
+				{
+					"name": "CreateActivity",
+					"pattern": "CreateActivity/{PageID}/{LeadID}",
+					"target": "CreateActivity",
+					"viewLevel": 52
+				},
+				{
+					"name": "CreateAssessmentsDetail",
+					"pattern": "CreateAssessments/{PageID}/{LeadID}",
+					"target": "AssessmentsDetail",
+					"viewLevel": 49
+				},
+				{
+					"name": "FollowUpActivity",
+					"pattern": "FollowUpActivity/{LeadID}",
+					"target": "CreateActivity",
+					"viewLevel": 53
+				},
+				{
+					"name": "EditActivity",
+					"pattern": "EditActivity/{ActivityID}/{PageID}",
+					"target": "CreateActivity",
+					"viewLevel": 54
+				},
+				{
+					"name": "CustomersDashBoard",
+					"pattern": "CustomersDashBoard",
+					"target": "CustomersDashBoard",
+					"viewLevel": 55
+				},
+				{
+					"name": "CrUpdateAccount",
+					"pattern": "UpdateAccount/{AccountID}",
+					"target": "CrUpdateAccount",
+					"viewLevel": 56
+				},
+				{
+					"name": "CrInvoices",
+					"pattern": "Invoices",
+					"target": "CrInvoices",
+					"viewLevel": 57
+				},
+				{
+					"name": "CrInvoicesDetail",
+					"pattern": "InvoicesDetail/{DocEntryID}",
+					"target": "CrInvoicesDetail",
+					"viewLevel": 58
+				},
+				{
+					"name": "CrReceipts",
+					"pattern": "Receipts",
+					"target": "CrReceipts",
+					"viewLevel": 59
+				},
+				{
+					"name": "CrReceiptDetail",
+					"pattern": "ReceiptDetail/{DocEntryID}",
+					"target": "CrReceiptDetail",
+					"viewLevel": 60
+				},
+				{
+					"name": "ViewLead",
+					"pattern": "ViewLead/{PageID}/{LeadID}",
+					"target": "ViewLead",
+					"viewLevel": 61
+				},
+				{
+					"name": "ViewAccount",
+					"pattern": "ViewAccount/{PageID}/{AccountId}",
+					"target": "ViewAccount",
+					"viewLevel": 62
+				},
+				{
+					"name": "SelectServices",
+					"pattern": "SelectServices/{PageID}/{AccountId}",
+					"target": "SelectServices",
+					"viewLevel": 63
+				},
+				{
+					"name": "NewPayment",
+					"pattern": "NewPayment/{PageID}/{InvoiceID}",
+					"target": "NewPayment",
+					"viewLevel": 64
+				},
+				{
+					"name": "TeamsDetail",
+					"pattern": "TeamsDetail",
+					"target": "TeamsDetail",
+					"viewLevel": 65
+				},
+				{
+					"name": "GoToTeamsDetail",
+					"pattern": "TeamsDetails/{PageID}/{TeamID}/{AccountId}",
+					"target": "TeamsDetail",
+					"viewLevel": 67
+			   },
+				{
+					"name": "EditTeamDetail",
+					"pattern": "EditTeamDetail/{PageID}/{TeamID}/{AccountId}",
+					"target": ["TeamsMaster", "EditTeam"],
+					"viewLevel": 19
+				},
+
+				{
+					"name": "ViewTeams",
+					"pattern": "Teams/{PageID}/{AccountId}",
+					"target": ["TeamDetails", "TeamsMaster"],
+					"viewLevel": 66
+				},
+
+				{
+					"name": "LeadToAccount",
+					"pattern": "LeadToAccount/{PageID}/{AccountId}",
+					"target": "MembershipNewCreate",
+					"viewLevel": 32
+				},
+
+				{
+					"name": "AssessmentToAccount",
+					"pattern": "LeadToAccount/{PageID}/{AccountId}/{AssessmentID}",
+					"target": "MembershipNewCreate",
+					"viewLevel": 32
+				},
+				{
+					"name": "CreateEvent",
+					"pattern": "CreateEvent/{PageID}",
+					"target": ["EventsDetails", "EventsMaster"],
+					"viewLevel": 68
+				},
+				{
+					"name": "SendEmail",
+					"pattern": "SendEmail",
+					"target": ["SendEmail"],
+					"viewLevel": 69
+				},
+				{
+					"name": "SendSMS",
+					"pattern": "SendSMS",
+					"target": ["SendSMS"],
+					"viewLevel": 70
+				}
+
+
+
+			],
+			"targets": {
+				"splitMasterAndDetail": {
+					"viewName": "view.SplitMasterAndDetail"
+				},
+				"Login": {
+					"viewName": "view.Login",
+					"viewLevel": 1
+				},
+				"DashBoard": {
+					"viewName": "view.DashBoard",
+					"viewLevel": 2
+				},
+				"sportMaster": {
+					"viewName": "view.masters.SportsMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"SportDetails": {
+					"viewName": "view.details.SportDetails",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"SportsCategoryDetail": {
+					"viewName": "view.details.SportsCategoryDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"SportsCategoryMaster": {
+					"viewName": "view.masters.SportsCategoryMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"EditSport": {
+					"viewName": "view.details.edit.ESports",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EditSportsCategory": {
+					"viewName": "view.details.edit.ESportsCategory",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"TeamDetails": {
+					"viewName": "view.details.TeamDetails",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"TeamsMaster": {
+					"viewName": "view.masters.TeamsMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"LocationMaster": {
+					"viewName": "view.masters.LocationMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"LocationDetail": {
+					"viewName": "view.details.LocationDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EditLocation": {
+					"viewName": "view.details.edit.EditLocation",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"CoachesMaster": {
+					"viewName": "view.masters.CoachesMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"CoachesDetail": {
+					"viewName": "view.details.CoachesDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EditTeam": {
+					"viewName": "view.details.edit.ETeamDetails",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"AssessmentFeedbackMaster": {
+					"viewName": "view.masters.AssessmentFeedbackMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"AssessmentFeedbackDetail": {
+					"viewName": "view.details.AssessmentFeedbackDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EditMembershipFeedback": {
+					"viewName": "view.details.edit.EditMembership",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"CoachAssessmentDetail": {
+					"viewName": "view.details.CoachAssessmentDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"CoachAssessmentMaster": {
+					"viewName": "view.masters.CoachAssessmentMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+
+				"SearchMembership": {
+					"viewName": "view.details.MembershipDetail"
+
+				},
+				"Leads": {
+					"viewName": "view.details.LeadsDetail"
+				},
+				"MembershipNewCreate": {
+					"viewName": "view.details.create.MembershipNewCreate"
+				},
+
+				"LeadsMemnewCreate": {
+					"viewName": "view.details.create.LeadsMemnewCreate"
+				},
+
+				"MembershipMaster": {
+					"viewName": "view.masters.MembershipMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"MembershipDetail": {
+					"viewName": "view.details.MembershipDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"LeadsDetail": {
+					"viewName": "view.details.LeadsDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EditMembership": {
+					"viewName": "view.details.edit.EditMembership",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"CreateAssessmentsMaster": {
+					"viewName": "view.masters.CreateAssessmentsMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"SearchLeads": {
+					"viewName": "view.details.SearchLeads"
+
+				},
+				"AssessmentsDetail": {
+					"viewName": "view.details.create.CreateAssessment"
+				},
+				"EmailTemplate": {
+					"viewName": "view.details.create.EmailTemplate"
+				},
+
+				"SMSTemplate": {
+					"viewName": "view.details.create.SMSTemplate"
+				},
+
+				"SeasonsMaster": {
+					"viewName": "view.masters.SeasonsMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"SeasonsDetail": {
+					"viewName": "view.details.SeasonsDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EditSeason": {
+					"viewName": "view.details.edit.ESeasons",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"CreateMembership": {
+					"viewName": "view.details.create.CreateMembership",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"UserProfile": {
+					"viewName": "view.UserProfile"
+				},
+				"InvoicePaymentMaster": {
+					"viewName": "view.masters.InvoicePaymentMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"InvoicePaymentDetail": {
+					"viewName": "view.details.InvoicePaymentDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"UserManagementMaster": {
+					"viewName": "view.masters.UserManagementMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"UserManagementDetail": {
+					"viewName": "view.details.UserManagementDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"CreateInvoice": {
+					"viewName": "view.details.create.CreateInvoice"
+				},
+				"SearchInvoice": {
+					"viewName": "view.details.create.SearchInvoice"
+				},
+				"TeamsDetail": {
+					"viewName": "view.details.TeamsDetail"
+				},
+				"ViewInvoice": {
+					"viewName": "view.details.ViewInvoice"
+				},
+				"Payment": {
+					"viewName": "view.details.Payment"
+				},
+				"SearchActivity": {
+					"viewName": "view.details.SearchActivity"
+				},
+				"CreateActivity": {
+					"viewName": "view.details.create.CreateActivity"
+				},
+				"CustomersDashBoard": {
+					"viewName": "LoginCustomers.view.CustomersDashBoard"
+				},
+				"CrUpdateAccount": {
+					"viewName": "LoginCustomers.view.edits.UpdateAccount"
+				},
+				"CrInvoices": {
+					"viewName": "LoginCustomers.view.searchs.Invoices"
+				},
+				"CrReceipts": {
+					"viewName": "LoginCustomers.view.searchs.Receipts"
+				},
+				"CrInvoicesDetail": {
+					"viewName": "LoginCustomers.view.details.Invoice"
+				},
+				"CrReceiptDetail": {
+					"viewName": "LoginCustomers.view.details.Receipt"
+				},
+				"ViewLead": {
+					"viewName": "view.details.ViewLead"
+				},
+				"ViewAccount": {
+					"viewName": "view.details.ViewAccount"
+				},
+				"SelectServices": {
+					"viewName": "view.details.create.SelectServices"
+				},
+				"NewPayment": {
+					"viewName": "view.details.create.NewPayment"
+				},
+				"EventsMaster": {
+					"viewName": "view.masters.EventM",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"EventsDetails": {
+					"viewName": "view.details.EventD",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"SendEmail": {
+					"viewName": "view.details.SendEmail"
+				},
+				"SendSMS": {
+					"viewName": "view.details.SendSMS"
+				}
+
+			}
+		}
+	}
+}

@@ -1,0 +1,89 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m"
+	height="100%"
+	xmlns:html="http://www.w3.org/1999/xhtml" controllerName="com.ss.app.StryxSports.controller.UserProfile">
+	<Page title="User Profile" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<f:Form editable="true" class="width-full" title="User Details">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+									emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer >
+									<f:formElements>
+										<f:FormElement label="Name">
+											<f:fields>
+												<Input id="userName" type="Text" editable="false" enabled="true" value="{mUserProfile>/FirstName} {mUserProfile>/LastName}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Email">
+											<f:fields >
+												<Input id="userEmail" type="Email" editable="false" enabled="true" value="{mUserProfile>/eMail}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Gender">
+											<f:fields >
+												<Input id="userGender" editable="false" enabled="true" value="{path: 'mUserProfile>/Gender', formatter: '.getGender'}"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Mobile">
+											<f:fields >
+												<Input id="userMobile" type="Number" editable="false" enabled="true" value="{mUserProfile>/MobilePhone}"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell>
+						<f:Form id="passwordInputForm" editable="true" class=" width-full " title="Change Password">
+							<f:layout>
+								<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+									emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true"/>
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer >
+									<f:formElements>
+										<f:FormElement label="Old Password">
+											<f:fields>
+												<Input id="userOldPassword" type="Password" placeholder="Please Enter The Old Password"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="New Password">
+											<f:fields>
+												<Input id="userNewPassword" type="Password" placeholder="Please Enter The New Password"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Confirm Password">
+											<f:fields >
+												<Input id="userConfirmPassword" type="Password" placeholder="Please Enter The Confirm Password"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressSaveUserProfile"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onNavBack"/>
+					<!-- <Button icon="sap-icon://edit" press="btnEditOnPressUserProfile" /> -->
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

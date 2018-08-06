@@ -1,0 +1,16 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core">
+    <Dialog title="Select Filter">
+        <List id="fCreateAssessmentListItem" items="{/cassessment_filter}" mode="SingleSelectLeft" includeItemInSelection="true" 
+        select="getViewonSelectEvent">
+            <StandardListItem id="seasonsItem" title="{txt_Filter}" iconInset="true" />
+        </List>
+        <buttons>
+            <Button text="Confirm" press="onPressFilterCreateAssessmentConfirm" />
+            <Button text="Close" press="onPressFilterCreateAssessmentClose" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,76 @@
+<mvc:View controllerName="com.ss.app.StryxSports.controller.details.SearchLeads"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="searchLeadsDetails" showHeader="true" title="{i18n>crA_SearchLeads}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Panel width="auto">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>crA_SearchTypeName}"/>
+						<Select id="sSearchLeadsType" items="{/SearchLeadsTypeData}" change="getSelectedSearchType" >
+							<items>
+								<core:Item text="{selectTxt}" key="{key}"/>
+							</items>
+						</Select>
+						<Input id="sLeadName" placeholder="{i18n>crA_PleaseEnterTheName}" class="width-full " type="Text"/>
+						<Label text="{i18n>crA_Mobile}"/>
+						<Input id="sLeadMobile" placeholder="{i18n>crA_PleaseEnterTheMobileNumber}" class="width-full" type="Number"/>
+						<core:Title/>
+						<Label text="{i18n>crA_Email}"/>
+						<Input id="sLeadEmail" placeholder="{i18n>crA_PleaseEnterTheEmail}" class="width-full" type="Email"/>
+						<Label text="{i18n>crA_DOB}"/>
+						<DatePicker id="sLeadDOB" displayFormat="dd-MM-yyyy" placeholder="{i18n>crA_PleaseEnteDate}" enabled="false" change="handleChange" type="Number"/>
+					</f:content>
+				</f:SimpleForm>
+				<FlexBox
+					alignItems="Center"
+					justifyContent="Center">
+					<items>
+						<Button text="{i18n>crA_Search}" press="onPressSearchLeads"  />
+					</items>
+				</FlexBox>
+			</Panel>
+			<Panel width="auto" visible="false" id="tableAssessmentBlockLayoutRow">
+				<Table class="width-full bg-color-table" growing="true" growingThreshold="10" inset="false" items="{AssessmentList>/value}">
+					<headerToolbar>
+						<Toolbar>
+							<content>
+								<Title id="searchTableTilte" text="" />
+							</content>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>crA_LastName}"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>crA_ContactNumber}"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>crA_Email}"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End"></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{AssessmentList>CardName}"/>
+								<Text text="{AssessmentList>Cellular}"/>
+								<Text text="{AssessmentList>EmailAddress}"/>
+								<Button icon="sap-icon://add" press="handleEditDetailAssessmentPress"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

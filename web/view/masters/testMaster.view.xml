@@ -1,0 +1,36 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.testMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="{i18n>Email Master}" showNavButton="true" navButtonPress="onNavBack">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchEmailMaster" placeholder="{i18n>Please Enter The Email}" liveChange="onSearchLocation"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listMasterEmailData" items="{TemplateMaster>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>Noitems}">
+				<items>
+					<ObjectListItem press="onPressEmail" type="Active" title="{i18n>Template Type}: {path: 'TemplateMaster>U_TemplateType', formatter: '.templateToString'}">
+						<attributes>
+								<ObjectAttribute text="{i18n>Template Content} : {TemplateMaster>U_Template}"/>
+						</attributes>
+							<secondStatus>
+							<ObjectStatus text="{ path: 'TemplateMaster>U_Status', formatter: '.setStatus'}" state="{ path: 'TemplateMaster>U_Status', formatter: '.sportStatus' }"/>
+						</secondStatus>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add-filter" text="{i18n>AddSports}" press="onPressFilterLocation"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

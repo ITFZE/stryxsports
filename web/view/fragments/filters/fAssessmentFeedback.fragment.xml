@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List items="{AssessmentFeedbackFilter>/assessment_filter_data}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewOnSelect">
+			<StandardListItem title="{AssessmentFeedbackFilter>assessment_filter}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" id="Assessmentfeedbackfilter" visible="false" press="onPressSelectedAssessmentFilter"/>
+			<Button text="Close" press="onPressCloseFeedbackAssessmentFilter"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

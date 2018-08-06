@@ -1,0 +1,43 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.masters.SportsMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="{i18n>sSportsMaster}" showNavButton="true" navButtonPress="onNavBackSports" >
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchSportsMaster" search="onSearchSports" placeholder="{i18n>sPleaseEnterTheSportName}"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listSportsMaster" items="{SportsList>/value}" busyIndicatorDelay="250" growing="true" growingThreshold="5"
+				enableBusyIndicator="true" noDataText="{i18n>sNoitems}">
+				<items>
+					<ObjectListItem press="onPressSports" type="Active" title="{i18n>sSportName}:  {SportsList>Name}">
+						<secondStatus>
+							<ObjectStatus text="{ path: 'SportsList>U_Status', formatter: '.setStatus'}" state="{ path: 'SportsList>U_Status', formatter: '.sportStatus' }"/>
+						</secondStatus>
+						<attributes>
+							<ObjectAttribute text="{i18n>sSportDescription}: {SportsList>U_SportsDescription}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		<!--	<FlexBox justifyContent="Center">
+				<items>
+					<Button text="More" press="onPressNextSports"  />
+				</items>
+			</FlexBox> -->
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton tooltip="Add" icon="sap-icon://add" visible="{checkPhoneModel>/CheckPhone}" text="{i18n>sAddSports}" press="onPressAddSports"/>
+				<OverflowToolbarButton tooltip="Filter" icon="sap-icon://add-filter" text="{i18n>sAddSports}"  press="onPressFilterSports"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

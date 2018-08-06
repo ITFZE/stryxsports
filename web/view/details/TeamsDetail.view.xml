@@ -1,0 +1,158 @@
+<core:View
+    controllerName="com.ss.app.StryxSports.controller.details.TeamsDetail"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:c="sap.suite.ui.commons">
+	<m:Page id="newTeamAddPage" showHeader="true" title="Teams Details" enableScrolling = "false" showNavButton="true"  navButtonPress="onBack">
+		<m:content>
+			<m:Panel >
+				<f:SimpleForm editable="true" id="simpleFromNewTeamDetails" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+							  labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+							  singleContainerFullSize="false">
+					<f:content>
+						<core:Title/>
+						<m:Label text="Location"/>
+						<m:ComboBox placeholder="{PleaseSelectTheLocation}" id="addTeamLocation" items="{mTeamLocations>/value}"
+						selectionChange = "onGetTeamName"
+        					selectedKey="{
+        					path: 'createTeamModel>/U_Location',
+        					type: 'sap.ui.model.type.Integer', 
+        					constraints : { minimum : 1 }}">
+							<m:items>
+								<core:Item key="{ path: 'mTeamLocations>Code', formatter: '.returnLocation'}" text="{mTeamLocations>Name}"/>
+							</m:items>
+						</m:ComboBox>
+						<core:Title/>
+						<m:Label text="Teams"/>
+						<m:ComboBox placeholder="{PleaseSelectTheTeamName}" id="addTeamName" items="{path: 'mTeamName>/value'}" 
+							change="onGetTeamDetailsList"
+					    	selectedKey="{
+        					path: 'createTeamModel>/Name',
+        					type: 'sap.ui.model.type.String', 
+        					constraints : { minimum : 1 
+        					}
+        					}">
+							<m:items>
+								<core:Item key="{path:'mTeamName>Code', formatter: '.returnTeam'}" text="{mTeamName>Name}"/>
+							</m:items>
+						</m:ComboBox>
+					</f:content>
+				</f:SimpleForm>
+			</m:Panel>
+		</m:content>
+		<m:content>
+			<ObjectPageLayout id="newTeamObjectPageLayout" enableLazyLoading="true" showTitleInHeaderContent="true"
+			showEditHeaderButton="true" editHeaderButtonPress="OnPressEditLead" >
+				<headerTitle>
+					<ObjectPageHeader id="headerPageId" isActionAreaAlwaysVisible="true"  scrollToLoad = "true"
+            				objectImageURI="sap-icon://group"
+							objectTitle="{TeamsDetails>/Name}"
+							objectImageShape="Circle"
+							objectImageAlt="{TeamsDetails>/Name}" 
+    						isObjectIconAlwaysVisible="false"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false" >
+					</ObjectPageHeader>
+				</headerTitle>
+				<headerContent>
+					<l:VerticalLayout>
+						<m:Text class="sapUiTinyMarginTop" text="{TeamsDetails>/U_SS_CATEGORY/Name} and {TeamsDetails>/U_SS_SPORT/Name}"/>
+						<m:Label class="sapUiTinyMarginTop" text="{TeamsDetails>/U_StartDate}   To   {TeamsDetails>/U_EndDate}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout>
+						<m:Label/>
+						<m:Text class="sapUiTinyMarginTop" text="{SeasonDetails>/Name}"/>
+						<m:Text class="sapUiTinyMarginTop" text="{TeamsDetails>/U_SS_LOCATION/Name}"/>
+						<m:ObjectStatus  class = "sapUiTinyMarginTop" text="{path : 'TeamsDetails>/U_Status', formatter: '.setStatus'}"  state="{path: 'TeamsDetails>/U_Status', formatter: '.sportStatus'}" />
+					</l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout>
+						<m:Label/>
+					</l:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="coachObjectPageSection"   title="Coach Details">
+						<subSections>
+							<ObjectPageSubSection id="StepOne">
+								<blocks>
+									<l:VerticalLayout id="coachVerticalLayoaut" width="100%">
+										<m:Panel width="auto" class="sapUiResponsiveMargin">
+											<m:Table growing="true" growingThreshold="10" items="{TeamsDetails>/Coaches}">
+												<m:columns>
+													<m:Column hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Coach Name"/>
+													</m:Column>
+													<m:Column hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Email"/>
+													</m:Column>
+													<m:Column minScreenWidth="Desktop"  hAlign="End" demandPopin="true">
+														<m:Text text="Contact Number"/>
+													</m:Column>
+												</m:columns>
+												<m:items>
+													<m:ColumnListItem>
+														<m:cells>
+															<m:Text text="{TeamsDetails>FirstName} {TeamsDetails>LastName}"/>
+															<m:Text text="{TeamsDetails>eMail}"/>
+															<m:Text text="{TeamsDetails>MobilePhone}"/>
+														</m:cells>
+													</m:ColumnListItem>
+												</m:items>
+											</m:Table>
+										</m:Panel>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection id="memberObjectPage" title="Member Details">
+						<subSections>
+							<ObjectPageSubSection id="StepTwo">
+								<blocks>
+									<m:Panel  width="auto" class="sapUiResponsiveMargin">
+										<m:Table  growing="true" growingThreshold="10" items="{MembersList>/value}">
+											<m:columns>
+												<m:Column hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+													<m:Text text="Member Name"/>
+												</m:Column>
+												<m:Column minScreenWidth="Desktop" hAlign="End" demandPopin="true">
+													<m:Text text="Date Of Birth"/>
+												</m:Column>
+												<m:Column hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+													<m:Text text="Email"/>
+												</m:Column>
+												<m:Column minScreenWidth="Desktop" hAlign="End" demandPopin="true">
+													<m:Text text="Contact Number"/>
+												</m:Column>
+													<m:Column hAlign="End" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text=""/>
+													</m:Column>
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem>
+													<m:cells>
+														<m:Text text="{MembersList>BusinessPartners/CardName}"/>
+														<m:Text text="{MembersList>BusinessPartners/U_Dob}"/>
+														<m:Text text="{MembersList>BusinessPartners/EmailAddress}"/>
+														<m:Text text="{MembersList>BusinessPartners/Cellular}"/>
+														<!--<m:Button   width="10em" icon="{path: 'MembersList>BusinessPartners/U_Status', formatter: '.setInvoiceIcons'}"  text="{ path: 'MembersList>BusinessPartners/U_Status', formatter: '.setCreateInvoice'}"  press="onPressViewAccount" />-->
+													<m:Button icon = "sap-icon://customer-view" press="onPressViewAccount" />
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+									</m:Panel>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+	</m:Page>
+</core:View>

@@ -1,0 +1,105 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.MembershipDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="membershipDetail" title="{i18n>smSearchAccountAndLeads}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Panel width="auto">
+				<f:SimpleForm id="CreateMemForm"
+            		editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false" >
+					<f:content>
+						<core:Title />
+						<Label text="{i18n>smTypeandiName}" />
+						<Select id="memType"  items="{path: '/createMemType'}" valueStateText="" change="changeCreateMemType" >
+							<core:Item text="{text}" key="{key}"/>
+						</Select>
+						<Input  id="sLeadName" placeholder="{i18n>smPleaseEnterTheName}" />
+						<Label text="{i18n>smMobile}" />
+						<Input  id="sLeadMobile" placeholder="{i18n>smPleaseEnterTheMobileNumber}" type="Number"/>
+						<Label />
+						<core:Title />
+						<Label text="{i18n>smEmail}" />
+						<Input  id="sLeadEmail" placeholder="{i18n>smPleaseEnterTheEmail}" type="Email"/>
+						<Label text="{i18n>crA_DOB}" />
+						<DatePicker id="sLeadDOB" enabled="false" placeholder="{i18n>smPleaseEnteDate}" displayFormat="dd-MM-yyyy"  type="Number"/>
+						<Label />
+					</f:content>
+				</f:SimpleForm>
+				<FlexBox>
+					<items>
+						<Label text="" class="sapUiSmallMarginEnd">
+							<layoutData>
+								<FlexItemData growFactor="3" />
+							</layoutData>
+						</Label>
+						<Button width="100px" text="{i18n>smSearch}"   press="onPressSearchLeads">
+							<layoutData>
+								<FlexItemData growFactor="2" />
+							</layoutData>
+						</Button>
+						<Button text="{i18n>smCreateMembership}" press="onPressCreateMembership">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Button>
+					</items>
+				</FlexBox>
+			</Panel>
+			<Panel visible="false" id="tableAssessmentBlockLayoutRow" width="auto">
+				<Table id="memTable" class="width-full bg-color-table" 
+				growing="true" growingThreshold="10" inset="false" 
+				items="{AssessmentList>/value}"
+				selectionMode="single">
+					<headerToolbar>
+						<Toolbar>
+							<content>
+								<Title id="txtMember" text="{i18n>smLeads}" />
+							</content>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column width="20em">
+							<Text text="{i18n>smLastName}"/>
+						</Column>
+						<Column width="20em">
+							<Text text="{i18n>smContactNumber}"/>
+						</Column>
+						<Column width="15em">
+							<Text text="{i18n>smEmail}"/>
+						</Column>
+						<Column hAlign="End" demandPopin="true" />
+						<Column hAlign="End" width="2em" demandPopin="true" />
+						<Column hAlign="End" width="2em" demandPopin="true" />
+						<Column hAlign="End" width="2em" demandPopin="true" />
+						<Column hAlign="End" width="2em" demandPopin="true" />
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{AssessmentList>CardName}"/>
+								<Text text="{AssessmentList>Cellular}"/>
+								<Text text="{AssessmentList>EmailAddress}"/>
+								<HBox class="slaHBoxStyle">
+							    	<Button id="editViewButton" tooltip="View Account" icon="sap-icon://customer-view" press="onPressViewAccount"/>
+    								<Button id="addEditButton" class="sapUiSmallMarginBegin" tooltip="Edit Account" icon="sap-icon://edit" press="noPressCreateCustome"/>
+    								<Button id="btnCreateAct" class="sapUiSmallMarginBegin" tooltip="Add Acitivity" icon="sap-icon://write-new" press="onPressMemCreateActivity"/>
+    								<Button id="addViewButton" class="sapUiSmallMarginBegin" tooltip="Select Service"  icon="sap-icon://sales-order" press="navToOrder"/>
+								</HBox>
+								<Button id="btnLeadView" tooltip="View Lead" icon="sap-icon://customer-view" press="onPressViewLead"/>
+								<Button id="btnCreateAcc" tooltip="Create Account"  icon="sap-icon://sys-add" press="onPressCreateMembership"/>
+								<Button id="btnActivity" tooltip="Add Acitivity" icon="sap-icon://write-new" press="onPressMemCreateActivity"/>
+								<Button id="btnAssessment" tooltip="Add Assessment" icon="sap-icon://add" press="onPressCreateAssessment"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

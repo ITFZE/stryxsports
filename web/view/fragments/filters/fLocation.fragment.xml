@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List items="{LocationFilter>/locationsData}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonLocation">
+			<StandardListItem title="{LocationFilter>txt_LocationsFilter}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" id="confirmLocationBtn" visible="false" press="onPressSelectedLocationFilter"/>
+			<Button text="Close" press="dialogLocationCloseFilter"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter"  >
+		<List  items="{SeasonsFilter>/seasonsFilterData}" mode="SingleSelectLeft" includeItemInSelection="true" 
+        select="getViewonSelectEvent">
+			<StandardListItem title="{SeasonsFilter>filterName}" iconInset="true" id="listItemSeasons" />
+		</List>
+		<buttons>
+			<Button  text="Confirm" id="confirmDialogBtnSeasons" visible="false"  press="onPressFilterSeasonsConfirm" />
+			<Button text="Close"  press="onPressFilterSeasonsClose" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

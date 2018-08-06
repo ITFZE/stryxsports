@@ -1,0 +1,97 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.LeadsDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="leadsDetaisPage" title="{i18n>leadSearchLeads}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Panel width="auto">
+				<f:SimpleForm id="CreateLeads"
+            		editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false" >
+					<f:content>
+						<core:Title />
+						<Label text = "{i18n>leadName}" />
+						<Input id = "sLeadName" placeholder = "{i18n>leadPleaseEnterTheLeadName}" type = "String" />
+						<Label text="{i18n>leadMobile}" />
+						<Input  id="sLeadMobile" placeholder="{i18n>leadPleaseEnterTheMobileNumber}" type="Number"/>
+						<Label />
+						<core:Title />
+						<Label text="{i18n>leadEmail}" />
+						<Input  id="sLeadEmail" placeholder="{i18n>leadPleaseEnterTheEmail}" type="Email"/>
+						<Label text="{i18n>leadDOB}"/>
+						<DatePicker id="sLeadDOB" displayFormat="dd-MM-yyyy" placeholder="{i18n>leadPleaseEnteDate}" enabled="false" change="handleChange" type="Number"/>
+					</f:content>
+				</f:SimpleForm>
+				<FlexBox >
+					<items>
+						<Label text="" class="sapUiSmallMarginEnd">
+							<layoutData>
+								<FlexItemData growFactor="3" />
+							</layoutData>
+						</Label>
+						<Button width="100px" text="{i18n>leadSearch}"   press="onPressSearchLeads">
+							<layoutData>
+								<FlexItemData growFactor="2" />
+							</layoutData>
+						</Button>
+						<Button  text="{i18n>leadCreateLeads}" press="onPressCreateMembership">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Button>
+					</items>
+				</FlexBox>
+			</Panel>
+			<Panel visible="false" id="tableView" width="auto">
+				<Table id="LeadDetailsTable" class="width-full bg-color-table" growing="true" 
+				growingThreshold="10" inset="false" items="{LeadList>/value}">
+					<headerToolbar>
+						<Toolbar>
+							<content>
+								<Title text="{i18n>leadLeads}" />
+								<ToolbarSpacer />
+							</content>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<!--<Column minScreenWidth="Desktop" width="2em" demandPopin="true" hAlign="Begin"></Column>-->
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>leadLastName}"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>leadContactNumber}"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true">
+							<Text text="{i18n>leadEmail}"/>
+						</Column>
+						<Column minScreenWidth="Desktop" width="2em" demandPopin="true"></Column>
+						<Column minScreenWidth="Desktop" width="2em" demandPopin="true"></Column>
+						<Column minScreenWidth="Desktop" width="2em" demandPopin="true"></Column>
+						<Column minScreenWidth="Desktop" width="2em" demandPopin="true"></Column>
+						<Column minScreenWidth="Desktop" width="2em" demandPopin="true" hAlign="End"></Column>
+					</columns>
+					<items>
+						<ColumnListItem id="columnListItem">
+							<cells>
+								<!--<RadioButton id="radioBtn" text="" select="toggleBtnGroup" />-->
+								<Text text="{LeadList>CardName}"/>
+								<Text text="{LeadList>Cellular}"/>
+								<Text text="{LeadList>EmailAddress}"/>
+								<Button tooltip="View Lead" icon="sap-icon://customer-view" id="viewLeadBtn" press="onPressViewLead"/>
+								<Button tooltip="Edit Lead" icon="sap-icon://edit" id="editLeadBtn" press="onPressEditLead"/>
+								<Button tooltip="Create Account" icon="sap-icon://sys-add" id="createMemBtn" press="onPressCreatemember"/>
+								<Button tooltip="Add Activity" icon="sap-icon://write-new" id="addActivityBtn" press="onPressAddActivity"/>
+								<Button tooltip="Add Assessment" icon="sap-icon://add" press="onPressCreateAssessment"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

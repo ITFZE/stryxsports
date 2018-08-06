@@ -1,0 +1,47 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.details.create.SMSTemplate"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%">
+	<Page id="smsDetails" showNavButton="true" navButtonPress="onNavSMSBack"  title="{i18n>SMSTemplate}">
+		<content>
+			<VBox>
+				<f:SimpleForm id="participantFormID" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>sTemplates}" />
+						<ComboBox placeholder="{i18n>sPleaseSelectSMSTemplates}" id = "smstemplates" items="{path: 'SMSTemplatesTypes>/value'}" selectedKey="{SMSTemplateModel>/U_TemplateType}" selectionChange="onChange"   enableBusyIndicator= "true">
+							<core:Item key="{SMSTemplatesTypes>Code}" text="{SMSTemplatesTypes>Name}" />
+						</ComboBox>
+						<core:Title/>
+						<Label text="{i18n>sTemplateStatus}"/>
+						<Select id="SMSStatus"  items="{path: 'BaseModel>/seasonState'}" selectedKey="{SMSTemplateModel>/U_Status}">
+							<items>
+								<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+							</items>
+						</Select>
+					</f:content>
+				</f:SimpleForm>
+				<f:SimpleForm  layout="ResponsiveGridLayout" id = "smsTemplateview" editable="true">
+					<core:Title text="SMS Template" />
+					<html:textarea  contenteditable="true" id="SMSTemplateContent"  value="{sTemplates>/U_Template}" rows="4" cols="50" name="editor1" ></html:textarea>
+				</f:SimpleForm>
+			</VBox>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="saveSMSCreate" icon="sap-icon://save" visible="false" press="OnSaveSMS" tooltip="Create"/>
+					<Button id="saveSMSUpdate" visible="false" icon="sap-icon://save" tooltip="Update" press="onPressUpdateSMSTemplate"/>
+					<Button id="clearSmsBtn" visible="false" tooltip="Clear" icon="sap-icon://sys-cancel-2" press="onPressCancelSMS"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,94 @@
+<mvc:View
+ controllerName="com.ss.app.StryxSports.controller.details.create.CreateInvoice"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="{i18n>CreateInvoice}"  title="Stryx Sports" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<Panel width="auto">
+				<f:SimpleForm 	editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false" >
+					<f:content>
+						<core:Title />
+						<Label id="ciMemberName" text="{i18n>i_MemberName}"/>
+						<Text text="{InvoiceDetailsModel>/CardName}"/>
+						<core:Title />
+						<Label text="{i18n>i_Date}" />
+						<Text id="ciMemberDate"  text="{InvoiceDetailsModel>/DocDueDate}"/>
+					</f:content>
+				</f:SimpleForm>
+			</Panel>
+			<Panel width="auto">
+				<Table  items="{InvoiceDetailsModel>/DocumentLines}">
+					<columns>
+						<Column width="12em">
+							<Text text="Service"/>
+						</Column>
+						<Column width="12em"  hAlign="Center">
+							<Text text="Quantity"/>
+						</Column>
+						<Column  width="12em" hAlign="End" >
+							<Text text="Unit Price"/>
+						</Column>
+						<Column	width="12em" hAlign="Center" >
+							<Text text="Price After VAT"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{InvoiceDetailsModel>ItemDescription}"/>
+								<Text text="{InvoiceDetailsModel>Quantity}" />
+								<Text text="{InvoiceDetailsModel>Currency} 
+								{
+                				path: 'InvoiceDetailsModel>UnitPrice',
+                				type: 'sap.ui.model.type.Float',
+                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}"/>
+								<Text text="{InvoiceDetailsModel>Currency} 
+								{
+                				path: 'InvoiceDetailsModel>PriceAfterVAT',
+                				type: 'sap.ui.model.type.Float',
+                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+			<Panel width="auto">
+				<VBox alignItems="End" justifyContent="Center">
+					<HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+						<Label text="Total Without Tax : " width="9em"/>
+						<Text  text="{InvoiceDetailsModel>/DocCurrency} {
+        				path: 'InvoiceDetailsModel>/TotalItemPrice',
+        				type: 'sap.ui.model.type.Float',
+        				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+					</HBox>
+					<HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+						<Label text="VAT :" width="3em"/>
+						<Text    text="{InvoiceDetailsModel>/DocCurrency} {
+        				path: 'InvoiceDetailsModel>/VatSum',
+        				type: 'sap.ui.model.type.Float',
+        				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+					</HBox>
+					<HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+						<Label text="Total :" width="3em" />
+						<Text  text="{InvoiceDetailsModel>/DocCurrency} {
+        				path: 'InvoiceDetailsModel>/DocTotalSys',
+        				type: 'sap.ui.model.type.Float',
+        				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+					</HBox>
+				</VBox>
+			</Panel>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button press="onPrint"  icon="sap-icon://print"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

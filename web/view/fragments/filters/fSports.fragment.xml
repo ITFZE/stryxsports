@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List items="{SportFilter>/SportsFilterData}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonSports">
+			<StandardListItem title="{SportFilter>txt_SportsFilter}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button id="confirmSportsBtn" text="Confirm" visible="false" press="onPressSelectedFilter"/>
+			<Button text="Close" press="dialogSportsCloseFilter"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

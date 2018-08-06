@@ -1,0 +1,82 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="com.ss.app.StryxSports.controller.details.EventD"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="paymentDetails" title="{i18n>edCreateEvent}" showNavButton="false" navButtonPress="onBack">
+		<content>
+			<f:SimpleForm 
+			editable="true" 
+			layout="ResponsiveGridLayout" 
+			labelSpanXL="12" 
+			labelSpanL="12" 
+			labelSpanM="12" 
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="3"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="true">
+				<f:content>
+					<Label text="{i18n>edTitle}"/>
+					<Input id="inputSportName" placeholder="{i18n>edPleaseEnterTheTitle}" 
+			           value="{
+			           path : 'CreateEvent>/Title',
+			           type : 'sap.ui.model.type.String', 
+			           constraints : { minLength : 1, maxLength : 50 } }"/>
+					<Label text="{i18n>edStartAndEndDate}"/>
+					<DatePicker
+					  value="{CreateEvent>/StartDate}"
+			          valueFormat="yyyy-MM-DD" displayFormat="short"
+		          	/>
+					<DatePicker
+					value="{CreateEvent>/EndDate}"
+			         valueFormat="yyyy-MM-DD" displayFormat="short"
+			         />
+					<Label text="{i18n>edStartAndEndTime}"/>
+					<TimePicker
+					 value="{CreateEvent>/StartTime}"
+			         valueFormat="HH:mm" displayFormat="hh:mm a"
+			         change="handleChange" placeholder="Please Enter Start Time"/>
+					<TimePicker
+					value="{CreateEvent>/EndTime}"
+					valueFormat="HH:mm"
+					displayFormat="hh:mm a"
+					change="handleChange"
+					placeholder="Please Enter Start Time"/>
+					<Label text="{i18n>edLocation}"/>
+					<ComboBox 
+					 placeholder="{i18n>edSelectLocation}"
+					 selectedKey="{CreateEvent>/Location}" 
+					 id="edAddLocation" 
+					 items="{path: 'mdlLocation>/value',sorter: { path: 'Name' }}">
+						<core:Item key="{mdlLocation>Code}" text="{mdlLocation>Name}" />
+					</ComboBox>
+					<Label text="{i18n>edContent}"/>
+				</f:content>
+			</f:SimpleForm>
+			<Panel>
+				<Label text="{i18n>edContent}:" />
+				<TextArea height="110px" width="100%"
+				value="{CreateEvent>/Notes}"
+				placeholder="{i18n>edPleaseEnterContent}"
+			/>
+			</Panel>
+			<FlexBox
+					height="30px"
+					alignItems="Center"
+					justifyContent="Center">
+				<items>
+					<Button  text="{i18n>ed_Create}" press="onPressCreateEvent"  />
+				</items>
+			</FlexBox>
+		</content>
+	</Page>
+</mvc:View>

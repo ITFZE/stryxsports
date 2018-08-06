@@ -1,0 +1,21 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns="sap.m"
+ xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="{i18n>em}" showNavButton="true" navButtonPress="onNavBack">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchEvents" placeholder="{i18n>emPleaseEnterTheEvents}" 
+					width="100%" showRefreshButton="{}"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+		
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add-filter" text="{i18n>i_AddParts}" press="onPressInvoiceFilter"></OverflowToolbarButton>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

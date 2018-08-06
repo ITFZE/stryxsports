@@ -1,0 +1,6 @@
+description = "SMSGlobal httpS connection";
+host = "api.smsglobal.com";
+port = 443;
+authType = none;
+useSSL = true;
+timeout = 0;

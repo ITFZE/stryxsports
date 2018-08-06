@@ -1,0 +1,59 @@
+<core:FragmentDefinition
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:unified="sap.ui.unified"
+	xmlns="sap.m">
+	<Dialog title="Team Calendar">
+		<content>
+			<VBox class="sapUiSmallMargin" id="planningCalenderVBox">
+				<PlanningCalendar
+        			id=""
+        			viewKey="Month"
+        			rows=""
+        			appointmentsVisualization="Filled"
+        			appointmentSelect="handleAppointmentSelect"
+        			showEmptyIntervalHeaders="false"
+        			showWeekNumbers="true">
+					<rows>
+						<PlanningCalendarRow id=""
+        					icon="sap-icon://employee-pane"
+        					title=""
+        					text=""
+        					appointments="{path : '', templateShareable: 'true'}"
+        					intervalHeaders="{path: '', templateShareable: 'true'}">
+							<customData>
+								<core:CustomData key="emp-name" 
+								value="" 
+								writeToDom="true"/>
+							</customData>
+							<appointments>
+								<unified:CalendarAppointment
+								    title="{path : ''}"
+								    key=""
+        							startDate="{parts: [{path : ''}, {path :''}],formatter:'.planningCalenderDate'}"
+                					endDate="{parts: [{path : ''}, {path :''}],formatter:'.planningCalenderDate'}"
+        							icon="sap-icon://appointment-2"
+        							type="Type03"
+        							text="{} "
+        							tentative="true">
+        						</unified:CalendarAppointment>
+							</appointments>
+							<intervalHeaders>
+								<unified:CalendarAppointment
+        							startDate=""
+        							endDate=""
+        							icon=""
+        							title=""
+        							text=""
+        							type=""></unified:CalendarAppointment>
+							</intervalHeaders>
+						</PlanningCalendarRow>
+					</rows>
+				</PlanningCalendar>
+			</VBox>
+		</content>
+		<endButton>
+			<Button text="Close" press="handleTimeCalendarClose" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

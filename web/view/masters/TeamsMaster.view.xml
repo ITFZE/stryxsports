@@ -1,0 +1,34 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.TeamsMaster" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="{i18n>tTeamsMaster}" showNavButton="true" navButtonPress="onBack">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchTeamsMaster" placeholder="{i18n>tPleaseEnterTeamName}" search="onSearchTeams" />
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="TeamsMasterList" items="{TeamsList>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250" enableBusyIndicator="true"
+				noDataText="{i18n>tNoitems}">
+				<items>
+					<ObjectListItem press="onPressTeamMastersList" type="Active" title="{i18n>tTeamName}: {TeamsList>Name}">
+						<secondStatus>
+						    <ObjectStatus text="{path: 'TeamsList>U_Status', formatter: '.setStatus'}" state="{ path: 'TeamsList>U_Status', formatter: '.sportStatus' }"/>
+						</secondStatus>
+						<attributes>
+							<ObjectAttribute text="{i18n>tStartDate}: {TeamsList>U_StartDate}"/>
+							<ObjectAttribute text="{i18n>tEndDate}: {TeamsList>U_EndDate}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton tooltip="Add" icon="sap-icon://add" visible="{checkPhoneModel>/CheckPhone}" text="{i18n>TAddTeams}" press="onPressAddTeams"/>
+				<OverflowToolbarButton tooltip="Filter" icon="sap-icon://add-filter" text="{i18n>TAddSports}" press="onPressFilterTeams"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

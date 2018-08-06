@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog  title="Add Coach" search="handleSearch" confirm="onEditCoachToTeam"
+		cancel="handleCloseTableDialog" items="{CoachsMaster>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="No items">
+		<ColumnListItem>
+			<cells>
+				<Text text="{CoachsMaster>FirstName} {CoachsMaster>LastName}"/>
+				<Text text="{CoachsMaster>eMail}"/>
+				<Text text="{CoachsMaster>MobilePhone}"/>
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column hAlign="Left">
+				<Text text="Coach Name"/>
+			</Column>
+			<Column hAlign="Center">
+				<Text text="Email"/>
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Right">
+				<Text text="Contact Number"/>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

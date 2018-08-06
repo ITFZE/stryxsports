@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List id="membershipFilterData" items="{/membershipFilterData}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonMembership">
+			<StandardListItem id="MembershipStandardList" title="{filterName}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" press="onPressSelectedMembershipFilter"/>
+			<Button text="Close" press="onSearchDialogsCloseMembership"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

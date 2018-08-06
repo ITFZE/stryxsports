@@ -1,0 +1,318 @@
+<core:View 
+    height="100%"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	controllerName="com.ss.app.StryxSports.controller.details.create.SelectServices"
+	xmlns:m="sap.m"
+	xmlns:a="sap.f"
+	xmlns:c="sap.suite.ui.commons"
+	xmlns:f="sap.ui.layout.form">
+	<m:Page  title="{i18n>ssSelectService}" showNavButton="true" navButtonPress="onBack" showHeader="true">
+		<m:content>
+			<ObjectPageLayout id="selectServiceObjectPageLayout" enableLazyLoading="false" showTitleInHeaderContent="true" showHeaderContent="true">
+				<headerTitle>
+					<ObjectPageHeader 
+					       objectImageURI="sap-icon://customer"
+							objectTitle="{LeadsDetails>/CardName} {path: 'LeadsDetails>/U_SS_MEMBER_TYPE', formatter: '.childAdultFormatter'}"
+							objectImageShape="Circle"
+							objectImageAlt="{LeadsDetails>/CardName}"
+    						isObjectIconAlwaysVisible="false"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false"
+							objectSubtitle=""/>
+				</headerTitle>
+				<headerContent>
+					<l:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop sapUiSmallMarginEnd" text="{LeadsDetails>/Cellular}"/>
+						<m:Link class="sapUiTinyMarginTop sapUiSmallMarginEnd" text="{LeadsDetails>/EmailAddress}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout>
+						<m:Label/>
+						<m:Label class="sapUiTinyMarginTop sapUiSmallMarginEnd" text="{LeadsDetails>/U_School}"/>
+						<m:Label class="sapUiTinyMarginTop sapUiSmallMarginEnd" text="{LeadsDetails>/U_Nationality}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout id="emgPanleId" visible="false">
+						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
+						<m:HBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/2/Name}"/>
+								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{LeadsDetails>/ContactEmployees/2/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/0/Name}"/>
+								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{LeadsDetails>/ContactEmployees/0/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/1/Name}"/>
+								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{LeadsDetails>/ContactEmployees/1/MobilePhone}"/>
+							</m:VBox>
+						</m:HBox>
+					</l:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="goalsSection" title="{i18n>ssSelectService}" class="marginTop-SelectServiceHeader">
+						<subSections>
+							<ObjectPageSubSection >
+								<blocks>
+									<m:VBox 
+                    					width="100%">
+										<m:VBox width="100%"
+									    alignItems="Center"  
+									    justifyContent="Center">
+											<m:FlexBox width="100%" alignItems="Center"  justifyContent="Center" >
+												<m:SegmentedButton id="sbItemType" selectedKey="admission" class="sapUiSmallMarginBottom" selectionChange="onSelectSType">
+													<m:items>
+														<m:SegmentedButtonItem  id="admissionBtn" class="sapUiContentPadding" width="auto" icon="sap-icon://sales-order" text="Admission" key="admission" />
+														<m:SegmentedButtonItem width="auto" icon="sap-icon://course-book" text="Subscriptions" key="subscriptions" />
+														<m:SegmentedButtonItem width="auto" icon="sap-icon://sales-order-item" text="Items" key="items" />
+													</m:items>
+												</m:SegmentedButton>
+											</m:FlexBox>
+										</m:VBox>
+										<m:VBox>
+											<f:SimpleForm id="frmSubDetails" visible="false"  editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+        									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+        									singleContainerFullSize="false" >
+												<f:content>
+													<core:Title text="{i18n>ssSelectSeason}"/>
+													<m:Label text="{i18n>ssSeason}"/>
+													<m:ComboBox
+            										id="sSeason" selectionChange="getSelectedSeason"
+            										placeholder="{i18n>ssPleaseSelectSeason}"
+            								       items="{path: 'mSeasonsList>/value', sorter: { path: 'Name' }}">
+														<core:Item text="{mSeasonsList>Name}" key="{mSeasonsList>Code}"/>
+													</m:ComboBox>
+													<m:Label text="{i18n>ssLocation}"/>
+													<m:ComboBox enabled="false"
+            										id="memberLocations" selectionChange="getSelectedLocation"
+            										 placeholder="{i18n>ssPleaseSelectLocation}"
+            								         items="{path: 'LocationsList>/value',sorter: { path: 'Name' }}">
+														<core:Item key="{LocationsList>Code}" text="{LocationsList>Name}" />
+													</m:ComboBox>
+													<m:Label text="{i18n>ssTeam}"/>
+													<m:ComboBox
+            										id="memberTeamName" enabled="false" selectionChange="getSelectedTeam"
+            										placeholder="{i18n>ssPleaseSelectTeam}"
+            								        items="{path: 'TeamsList>/value', sorter: { path: 'Name' }}">
+														<core:Item text="{TeamsList>Name}" key="{TeamsList>Code}"/>
+													</m:ComboBox>
+													<core:Title/>
+													<m:Label text="{i18n>ssSportCategory} "/>
+													<m:Input value="{TeamModel>/U_SS_CATEGORY/Name}" placeholder="{i18n>ssPleaseEnterSportCategory}"  id="memberSportCategory" editable="false" enabled="true" />
+													<m:Label text="{i18n>ssSports}"/>
+													<m:Input value="{TeamModel>/U_SS_SPORT/Name}" placeholder="{i18n>ssPleaseEnterSport}" id="memberSportsName" editable="false" enabled="true" />
+													<m:Label text="{i18n>ssStartDate}"/>
+													<m:DatePicker id="memberStartDate"  displayFormat="dd-MM-yyyy"  placeholder="{i18n>ssPleaseEnterDate}" change="handleDatePickerChange"/>
+												</f:content>
+											</f:SimpleForm>
+											<f:SimpleForm id="frmAdItems"  editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+        									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+        									singleContainerFullSize="false" >
+												<f:content>
+													<core:Title  text="{i18n>ssSelectService}" />
+													<m:Label text="{i18n>ssItem}"/>
+													<m:ComboBox
+										          id="memberService"  enabled="false" selectionChange="getSelectedServiceItem"
+										          placeholder="{i18n>ssPleaseSelectService}"
+								      	          items="{ path: 'ItemsList>/value', sorter: { path: 'ItemName' } }">
+														<core:Item text="{ItemsList>ItemName}" key="{ItemsList>ItemCode}"/>
+													</m:ComboBox>
+													<m:Label text = "{i18n>ssRemarks}" />
+													<m:TextArea id="memberRemarks"  placeholder="{i18n>ssPleaseEnterAdditionalInformation}"  
+													value="" growing="true" class="width-full"/>
+													<core:Title/>
+													<m:Label text="{i18n>ssDurationTime}"/>
+													<m:Input value="{path: 'ItemDetails>/U_Duration' }" placeholder="{i18n>ssPleaseEnterDuration}"  id="memberMonths" editable="false" enabled="true" />
+													<m:Input value="{ItemDetails>/U_Time}" placeholder="{i18n>ssPleaseEnterTime}"  id="memberPeriods" editable="false" enabled="true" />
+													<m:Label text="{i18n>ssQuantity}"/>
+													<m:Input id="memberQuantity" type="Number" placeholder="{i18n>ssPleaseEnterQuantity}" value="{ItemDetails>/Quantity}" />
+													<m:Label text="{i18n>ssPrice}"/>
+													<m:Input id="memberPrices" placeholder="{i18n>ssPleaseEnterPrice}" editable="false" enabled="true"  
+												     value="{parts:[{path:'ItemDetails>/ItemPrices/0/Price'},{path:'ItemDetails>/ItemPrices/0/Currency'}],formatter: '.toCurrencyAddPrice' }" />
+													<m:Input id="memberTotalPrices" placeholder="{i18n>ssPleaseEnterPrice}" editable="false" enabled="true"  
+												     value="{parts:[{path:'ItemDetails>/Quantity'},{path:'ItemDetails>/ItemPrices/0/Price'},{path:'ItemDetails>/ItemPrices/0/Currency'}],formatter: '.toTotalPrice' }"/>
+												</f:content>
+											</f:SimpleForm>
+											<!--<m:Panel width="auto" class="sapUiResponsiveMargin" id="toSelectMemberCalendar" visible="false">
+												<m:headerToolbar>
+													<m:Toolbar>
+														<m:Title text="Select Timings" />
+														<m:ToolbarSpacer />
+														<m:Button icon="sap-icon://show" text="Existing Schedule" type="Ghost" press="handleExistingSchedulePress" />
+													</m:Toolbar>
+												</m:headerToolbar>
+												<m:content>
+													<m:ScrollContainer height="100%"
+                                                		width="100%"
+                                                		horizontal="true"
+                                                		vertical="true"
+                                                		focusable="true">
+														<m:Table id="" inset="false">
+															<m:columns>
+																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin"></m:Column>
+																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+																	<m:Text text="Start Time"/>
+																</m:Column>
+																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+																	<m:Text text="End Time"/>
+																</m:Column>
+																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+																	<m:Text text="Timings"/>
+																</m:Column>
+															</m:columns>
+															<m:items>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Sunday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Monday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Tuesday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Wednesday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Thursday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Friday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+																<m:ColumnListItem>
+																	<m:cells>
+																		<m:CheckBox text="Saturday" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:Input value="" enabled="true" editable="false" />
+																		<m:TimePicker
+                                                        				valueFormat="HH:mm"
+                                                        				displayFormat="HH:mm"
+                                                        				change="handleChange"
+                                                        				placeholder="Choose your time"/>
+																	</m:cells>
+																</m:ColumnListItem>
+															</m:items>
+														</m:Table>
+													</m:ScrollContainer>
+												</m:content>
+											</m:Panel>-->
+											<m:HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMarginBottom">
+												<m:Button  id="btnAddService" enabled="false" text="{i18n>ssAddService}"  press="addServiceItems"/>
+											</m:HBox>
+											<m:Table id="serviceTableID" items="{MemberServices>/DocumentLines}" growing="true" growingThreshold="10" inset="false">
+												<m:columns>
+													<m:Column width="12em">
+														<m:Text text="{i18n>ssService}"/>
+													</m:Column>
+													<m:Column width="12em">
+														<m:Text text="{i18n>ssDuration}"/>
+													</m:Column>
+													<m:Column  hAlign="Center" >
+														<m:Text text="{i18n>ssStartDate}"/>
+													</m:Column>
+													<m:Column	hAlign="Center" >
+														<m:Text text="{i18n>ssQuantity}"/>
+													</m:Column>
+													<m:Column hAlign="Center">
+														<m:Text text="{i18n>ssPrice}"/>
+													</m:Column>
+													<m:Column hAlign="Center">
+														<m:Text text="{i18n>ssTotalPrice}"/>
+													</m:Column>
+													<m:Column hAlign="End"/>
+												</m:columns>
+												<m:items>
+													<m:ColumnListItem>
+														<m:cells>
+															<m:Text text="{MemberServices>Item/ItemName}"/>
+															<m:Text text="{MemberServices>Item/U_Duration}"/>
+															<m:Text text="{MemberServices>StartDate}"/>
+															<m:Text text="{MemberServices>Quantity}" />
+															<m:Text text=" {MemberServices>Item/ItemPrices/0/Currency}	{ path: 'MemberServices>UnitPrice', type: 'sap.ui.model.type.Float', formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+															<m:Text text="{parts:[{path:'MemberServices>Quantity'},{path:'MemberServices>UnitPrice'},{path:'MemberServices>Item/ItemPrices/0/Currency'}],formatter: '.toTotalPrice'}" />
+															<m:Button icon="sap-icon://sys-cancel-2" press="onPressDeleteServiceItems"/>
+														</m:cells>
+													</m:ColumnListItem>
+												</m:items>
+											</m:Table>
+											<m:VBox alignItems="Center" justifyContent="Center" class="sapUiTinyMarginTop">
+												<m:Button id="btnCreateOrder" enabled="false" text="Create Order" press="onCreateOrder"/>
+											</m:VBox>
+										</m:VBox>
+									</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<!--<ObjectPageSection  id="caActivities" title="{i18n>ssServicesView}"><subSections><ObjectPageSubSection ><m:VBox width="100%"><m:Table id="tbServicesView" items="{ServiceDetails>/value}" growing="true" growingThreshold="10" inset="false"><m:columns><m:Column width="12em"><m:Text text="{i18n>ssService}"/></m:Column><m:Column  hAlign="Center" ><m:Text text="{i18n>ssStartDate}"/></m:Column><m:Column	hAlign="Center" ><m:Text text="{i18n>ssQuantity}"/></m:Column><m:Column hAlign="Center"><m:Text text="{i18n>ssPrice}"/></m:Column><m:Column hAlign="Center"><m:Text text="{i18n>ssTotalPrice}"/></m:Column></m:columns><m:items><m:ColumnListItem><m:cells><m:Text text="{ServiceDetails>ItemDescription}"/><m:Text text="{ServiceDetails>ShipDate}"/><m:Text text="{ServiceDetails>Quantity}" /><m:Text text=" {ServiceDetails>Currency} { path: 'ServiceDetails>UnitPrice',
+					  type: 'sap.ui.model.type.Float', formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+					  <m:Text text="{parts:[{path:'ServiceDetails>Quantity'},{path:'ServiceDetails>UnitPrice'},{path:'ServiceDetails>Currency'}],formatter: '.toTotalPrice'}" />
+					  </m:cells></m:ColumnListItem></m:items></m:Table></m:VBox></ObjectPageSubSection></subSections></ObjectPageSection>-->
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+	</m:Page>
+</core:View>

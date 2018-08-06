@@ -1,0 +1,33 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.InvoicePaymentMaster" xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="{i18n>InvoicePaymentMaster}" showNavButton="true" navButtonPress="onNavBack">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchInvoicePayment" placeholder="{i18n>PleaseEnterTheLocationName}" liveChange="searchInvoicePayment"
+					width="100%" showRefreshButton="{}"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<PullToRefresh id="pullPaymentRefresh" refresh="handdleInvoiceRefresh"/>
+			<List id="InvoiceMasterList"  growing="true" growingThreshold="5" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>i_Noitems}" items="{/membership}">
+				<ObjectListItem title="{i18n>i_location} : {Location}" type="Active" press="onListItemPressPaymentList">
+					<attributes>
+						<ObjectAttribute text="{i18n>i_DOB} : {DOB}"/>
+						<ObjectAttribute text="{i18n>i_FullName} : {firstName}{lastName}"/>
+						<ObjectAttribute text="{i18n>i_Mobile} : {MotherMobile}"/>
+						<ObjectAttribute text="{i18n>i_Email} : {FatherEmail}"/>
+						<ObjectAttribute text="{i18n>i_Activity} : {Activity}"/>
+					</attributes>
+				</ObjectListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add-filter" text="{i18n>i_AddParts}" press="onPressInvoiceFilter"></OverflowToolbarButton>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

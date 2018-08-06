@@ -1,0 +1,339 @@
+/* Enter your custom styles here */
+
+.page-bg {
+	background: url("../images/login_background.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.e-dialog-width {
+	width: 80%;
+}
+.margin-r {
+	margin-left: 3%;
+}
+.height-CD {
+	height: 140px !important;
+}
+.size1 {
+	font-size: 3rem;
+}
+.exactCenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-moz-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	width: 310px;
+	border: 1px solid #2135504f;
+	border-radius: 5px;
+	background-color: #2135504f;
+}
+.delete-color {
+	background-color: red;
+	color: red;
+}
+.delete-column-status {
+	width: 20px;
+}
+.table-header-column-txt {
+	font-weight: bold;
+	font-size: 33px;
+}
+.txt-color {
+	color: #FFFFFF !important;
+}
+.width-full {
+	width: 100% !important;
+}
+.c-align {
+	text-align: center;
+}
+.text-align-left {
+	text-align: left;
+}
+.img-log-width {
+	width: 100%;
+}
+.txt-align-center {
+	text-align: center;
+}
+.circle-log {
+	border: 1px solid #ed7d19;
+	padding: 8px;
+	width: 85px;
+	height: 85px;
+	border-radius: 100px;
+	display: block;
+	margin-top: -33%;
+	z-index: 2;
+	margin-right: 32%;
+	margin-left: 29%;
+	position: absolute;
+	background-color: #253a5785;
+}
+.txt-login-font-size {
+	font-size: 33px;
+	font-family: monospace;
+}
+.txt-margin-right {
+	margin-right: 75%;
+	color: #FFF !important;
+}
+.btn-border {
+	border: 1px solid #FFF !important;
+	border-radius: 3px !important;
+}
+.btn-margin-top {
+	margin-top: 6%;
+}
+.btn-margin-l {
+	margin-left: 10%;
+}
+.txt-stryx {
+	color: #ee7e1a !important;
+	font-size: 20px !important;
+}
+.txt-sports {
+	color: #253a57 !important;
+	font-size: 20px !important;
+}
+html.sap-desktop::-webkit-scrollbar-thumb {
+	background-color: #2f3c48;
+}
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 2px #3f5161;
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+}
+html.sap-desktop::-webkit-scrollbar {
+	width: 8px;
+	background-color: #3f5161;
+}
+html.sap-desktop::-webkit-scrollbar-thumb {
+	background-color: #3f5161 !important;
+}
+html.sap-desktop::-webkit-scrollbar-corner {
+	background-color: #3f5161;
+}
+html.sap-desktop::-webkit-scrollbar {
+	background-color: #3f5161;
+}
+.sapMLabel {
+	color: rgb(15, 11, 11);
+	font-size: 0.85rem;
+	font-family: "72-Web", italic, Helvetica, sans-serif;
+	font-weight: normal;
+}
+.sapMITBHead {
+	font-size: 0.95rem;
+	padding: 1px 1px 0 1px;
+}
+.img-team-width {
+	height: auto;
+	max-width: 100%;
+	width: 1024px;
+}
+.txt-area-height {
+	height: 90px !important;
+}
+.title-padding {
+	padding: 0px 0px 100px 0px !important;
+}
+.table-leads-padding {
+	padding: 0px 0px 0px 0px !important;
+}
+.title-bg {
+	background-color: #eff4f9;
+}
+.padding-top-membership-label {
+	padding-top: 10px;
+}
+.map-width {
+	width: 50% !important;
+	height: 100%;
+	margin: auto;
+}
+.width-table {
+	height: 30%;
+}
+.bg-color-table {
+	background-color: #eff4f9;
+}
+.margin-left-edit-cancel-membership {
+	margin-left: 2%;
+	margin-bottom: 2%;
+}
+.trials-width-search {
+	width: 20% !important;
+}
+.add-coach-table {
+	margin-top: 2%;
+}
+.add-coach-btn {
+	margin-left: 2%;
+}
+.trials-Table-font-size {
+	font-size: 13px !important;
+}
+.createMembershipPadding {
+	margin-left: 5%;
+}
+.css_paddingLeft_email {
+	margin-left: 12px;
+}
+/* Start of DashBoard */
+
+.css-logo {
+	position: relative !important;
+	margin: auto !important;
+	height: 35px;
+}
+/* .css-bg-color{
+	background: #dcebef;
+} */
+
+/ .css-settings {
+	position: absolute;
+	left: 140px;
+}
+/* PRINT STYLES */
+
+@media print {
+	/* usage of !important hard overwrites, because UI5 uses inline style directives (style="width:990px")  */
+	/* define print page default settings */
+	@page {
+		size: portrait;
+		margin: 1.5cm 1cm;
+	}
+	/* scale content to fit print page */
+	html,
+	body {
+		width: 100% !important;
+		height: auto !important;
+	}
+	/* reset body */
+	body {
+		margin: 0;
+		padding: 0;
+		float: none;
+		color: #000;
+	}
+	/* helper class to allow selective hiding elements from printing (ex print button)  */
+	.uoNoPrint {
+		display: none;
+	}
+	/* fix overflow scrolling */
+	* {
+		overflow-x: visible !important;
+		overflow-y: visible !important;
+	}
+	/* auto expand collapsed panel contents */
+	.sapMPanelExpandablePart {
+		display: block !important;
+	}
+}
+.password_Icon_style {
+	font-size: 2.5rem;
+	position: relative;
+	top: 2px;
+	right: 45px;
+}
+/* End of DashBoard */
+
+/*Start Timeline Title Style*/
+
+.size3 {
+	font-size: 2rem !important;
+}
+.size4 {
+	font-size: 1.5rem !important;
+	float: right;
+}
+.bg_color-viewAccountPage {
+	background-color: #eff4f9;
+	margin-right: 2%;
+}
+.font-size-viewAccount-page {
+	font-size: 1.2rem;
+}
+.font-size-Color_Account-page {
+	font-size: 1.2rem;
+	color: red !important;
+}
+/*End Timeline Title Style*/
+
+.EditActBtn {
+	float: right !important;
+}
+.ViewAccount-Page-IconSet {
+	padding-right: 8px!important;
+}
+.ViewAccount-Icon-Size {
+	font-size: 3rem;
+	position: relative;
+	opacity: 0.7;
+}
+.activity-Page-HeaderMargin {
+	margin-top: -3% ! important;
+}
+div[id*='frmCreateActivity'] div h5 {
+	display: none !important;
+}
+div[id*='createActivitySubjectFrom'] {
+	margin-top: -6% ! important;
+	margin-left: -6.5% ! important;
+}
+.activity-Panel-HeaderMargin {
+	margin-top: -4% ! important;
+}
+.activity-TextArea-padding {
+	padding-left: 16% ! important;
+}
+.activity-Label-Padding {
+	padding-left: 10% ! important;
+}
+.payment-ToHeader {
+	margin-top: -6% ! important;
+}
+div[id*='simpleFromNewTeamDetails'] div h5 {
+	display: none !important;
+}
+.page-Header-TopMargin-Payment {
+	margin-top: -5% !important;
+}
+.form-MarginLeft-Payment {
+	margin-left: 10% ! important;
+}
+.marginTop-ViewInvoice-Header {
+	margin-top: -6% !important;
+}
+.text-padding-InvoiceBottom {
+	padding-top: 2% !important;
+}
+.create-Assessment-Page-TopMargin {
+	margin-top: -4% !important;
+}
+.marginTop-SelectServiceHeader {
+	margin-top: 10px !important;
+}
+.size5 {
+	font-size: 1.5rem !important;
+	position: absolute;
+	top: 145px;
+	right: 18px;
+}
+/*Begin - SearchLeadAccount Styling*/
+
+.slaHBoxStyle {
+	position: relative;
+	left: 215px;
+}
+/*End - SearchLeadAccount Styling*/
+/*
+.sapMPanelContent {
+	padding: 10rem;                                                       // This will change the border height
+	border-bottom: 1px solid #e5e5e5;
+}*/

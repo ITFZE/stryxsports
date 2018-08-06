@@ -1,0 +1,225 @@
+<core:View
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:c="sap.suite.ui.commons"
+	controllerName="com.ss.app.StryxSports.controller.details.create.NewPayment"
+	xmlns:f="sap.ui.layout.form">
+	<m:Page id="newPaymnetPage" title="Payment" showNavButton="true" navButtonPress="onBack">
+		<m:content>
+			<ObjectPageLayout id="newPaymentObjectPageLayout" showTitleInHeaderContent="true">
+				<headerTitle>
+					<ObjectPageHeader 
+					       objectImageURI="sap-icon://customer"
+							objectTitle="{LeadsDetails>/CardName} {path: 'LeadsDetails>/U_SS_MEMBER_TYPE', formatter: '.childAdultFormatter'}"
+							objectImageShape="Circle"
+							objectImageAlt="{LeadsDetails>/CardName}"
+    						isObjectIconAlwaysVisible="false"
+    						objectImageDensityAware="true"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false"
+							isActionAreaAlwaysVisible="true"/>
+				</headerTitle>
+				<headerContent>
+					<l:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop" text="{LeadsDetails>/Cellular}"/>
+						<m:Link class="sapUiTinyMarginTop" text="{LeadsDetails>/EmailAddress}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout>
+						<m:Label/>
+						<m:Label class="sapUiTinyMarginTop" text="{LeadsDetails>/U_School}"/>
+						<m:Label class="sapUiTinyMarginTop" text="{LeadsDetails>/U_Nationality}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout id="emgPaneId" visible="false">
+						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
+						<m:HBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd"  text="{LeadsDetails>/ContactEmployees/2/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd" text="{LeadsDetails>/ContactEmployees/2/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd"  text="{LeadsDetails>/ContactEmployees/0/Name}"/>
+								<m:Link class=" sapUiSmallMarginEnd" text="{LeadsDetails>/ContactEmployees/0/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd"  text="{LeadsDetails>/ContactEmployees/1/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd" text="{LeadsDetails>/ContactEmployees/1/MobilePhone}"/>
+							</m:VBox>
+						</m:HBox>
+					</l:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="objectPageServiceDetailsID"  >
+						<subSections>
+							<ObjectPageSubSection title="Invoice Details" >
+								<blocks >
+									<l:VerticalLayout id="containerLayout" width="100%"  >
+										<m:VBox>
+											<m:Table class="width-full bg-color-table" items="{InvoiceDetailsModel>/DocumentLines}">
+												<m:columns>
+													<m:Column width="12em">
+														<m:Text text="Services"/>
+													</m:Column>
+													<m:Column width="12em"  hAlign="Center">
+														<m:Text text="{i18n>i_Quantity}"/>
+													</m:Column>
+													<m:Column  width="12em" hAlign="End" >
+														<m:Text text="{i18n>i_UnitPrice}"/>
+													</m:Column>
+													<m:Column  width="12em" hAlign="End" >
+														<m:Text text="{i18n>i_LineTotal}"/>
+													</m:Column>
+													<m:Column  width="12em" hAlign="End" >
+														<m:Text text="Vat"/>
+													</m:Column>
+													<m:Column  width="12em" hAlign="End" >
+														<m:Text text="Total Price"/>
+													</m:Column>
+												</m:columns>
+												<m:items>
+													<m:ColumnListItem>
+														<m:cells>
+															<m:Text text="{InvoiceDetailsModel>ItemDescription}"/>
+															<m:Text text="{InvoiceDetailsModel>Quantity}" />
+															<m:Text text="{parts:[{path:'InvoiceDetailsModel>UnitPrice'},{path:'InvoiceDetailsModel>Currency'}],formatter: '.toCurrencyAddPrice'} "/>
+															<m:Text text="{parts:[{path:'InvoiceDetailsModel>LineTotal'},{path:'InvoiceDetailsModel>Currency'}],formatter: '.toCurrencyAddPrice'} "/>
+															<m:Text text="{parts:[{path:'InvoiceDetailsModel>NetTaxAmount'},{path:'InvoiceDetailsModel>Currency'}],formatter: '.toCurrencyAddPrice'}"/>
+															<m:Text text="{parts:[{path:'InvoiceDetailsModel>Currency'},{path:'InvoiceDetailsModel>Quantity'},{path:'InvoiceDetailsModel>UnitPrice'},{path:'InvoiceDetailsModel>NetTaxAmount'}],formatter: '.toTotalAmount' }"/>
+														</m:cells>
+													</m:ColumnListItem>
+												</m:items>
+											</m:Table>
+											<m:VBox alignItems="End" justifyContent="Center">
+												<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+													<m:Label text="{i18n>i_TotalWithoutTax}" width="9em"/>
+													<m:Input  editable="false" textDirection="RTL" enabled="true" value="{InvoiceDetailsModel>/DocCurrency} {
+                                			               	path: 'InvoiceDetailsModel>/TotalItemPrice',
+                                				            type: 'sap.ui.model.type.Float',
+                                				            formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+												</m:HBox>
+												<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+													<m:Label text="{i18n>i_VAT}" width="3em"/>
+													<m:Input  editable="false" enabled="true" textDirection="RTL" value="{InvoiceDetailsModel>/DocCurrency} {
+                                				            path: 'InvoiceDetailsModel>/VatSum',
+                                				            type: 'sap.ui.model.type.Float',
+                                				            formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+												</m:HBox>
+												<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+													<m:Label text="{i18n>i_Total}" width="3em" />
+													<m:Input editable="false" enabled="true" textDirection="RTL" value="{InvoiceDetailsModel>/DocCurrency} {
+                                				           path: 'InvoiceDetailsModel>/DocTotalSys',
+                                				           type: 'sap.ui.model.type.Float',
+                                				           formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+												</m:HBox>
+												<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+													<m:Label text="Total Paid" width="5em" />
+													<m:Input editable="false" enabled="true" textDirection="RTL" value="{InvoiceDetailsModel>/DocCurrency} {mReturnBalance>/PaidAmount}" />
+												</m:HBox>
+												<m:HBox alignItems="Center" class="sapUiTinyMarginTop" justifyContent="Center">
+													<m:Label text="Balance Amount" width="8em" />
+													<m:Input id="balAmt" editable="false" enabled="true" textDirection="RTL" value="{InvoiceDetailsModel>/DocCurrency} {mWallet>/inWallet}" />
+												</m:HBox>
+											</m:VBox>
+										</m:VBox>
+										<m:VBox width="100%"
+									    alignItems="Center"  
+									    justifyContent="Center">
+											<m:FlexBox
+											     width="100%" 
+											     alignItems="Center"  
+									             justifyContent="Center" >
+												<m:SegmentedButton id="btnPayType" selectedKey="Checks" selectionChange="onPressSelectin">
+													<m:items>
+														<m:SegmentedButtonItem  width="150px"  press="onPressCheq" key="Checks" icon="sap-icon://official-service" text="Cheque" />
+														<m:SegmentedButtonItem  width="150px"  press="onPressCash" key="Cash" icon="sap-icon://money-bills" text="Cash" />
+														<m:SegmentedButtonItem  width="150px"  press="onPressOnline" key="Online" icon="sap-icon://world" text="Online Payment" />
+													</m:items>
+												</m:SegmentedButton>
+											</m:FlexBox>
+										</m:VBox>
+										<m:VBox class="sapUiMediumMarginTop form-MarginLeft-Payment ">
+											<f:SimpleForm id="cheqSimpleFrom"  editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								            	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									            singleContainerFullSize="false" >
+												<f:content>
+													<m:Label text="Cheque Number" />
+													<m:Input id="txtChequeNo" placeholder="{i18n>vpEnterCardNumber}" value="{InvoiceDetailsModel>/CheckNumber}" />
+													<m:Label text="{i18n>npAccountNumber}" />
+													<m:Input id="inputAccounttNum" placeholder="{i18n>npPleaseEnterAccountNumber}" value="{InvoiceDetailsModel>/AccounttNum}" />
+													<m:Label text="{i18n>npAmount} ({InvoiceDetailsModel>/DocCurrency})" />
+													<m:Input id="chequeAmt" placeholder="{i18n>npPleaseEnterTheAmount}" textDirection="RTL" value="{
+                                        				path: 'InvoiceDetailsModel>/DocTotalSys',
+                                        				type: 'sap.ui.model.type.Float',
+                                        				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+												</f:content>
+											</f:SimpleForm>
+											<f:SimpleForm id="cashSimpleFrom" visible="false" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								            	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									            singleContainerFullSize="false" >
+												<f:content>
+													<m:Label text="{i18n>npAmount} ({InvoiceDetailsModel>/DocCurrency})" />
+													<m:Input id="cashAmount" placeholder="{i18n>npPleaseEnterTheAmount}" textDirection="RTL" value="{
+                                				path: 'InvoiceDetailsModel>/DocTotalSys',
+                                				type: 'sap.ui.model.type.Float',
+                                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+												</f:content>
+											</f:SimpleForm>
+											<f:SimpleForm  id="creditCardTypeSimpleFrom" visible="false" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								            	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									            singleContainerFullSize="false" >
+												<f:content>
+													<m:Label text="Credit Card Types"/>
+													<m:ComboBox
+            										id="nPCreditCardType" selectionChange="getSelectedCreditCardType"
+            									     	placeholder="Please The Credit Card Name"
+            								           items="{path: 'CreditCardDetails>/value', sorter: { path: 'CreditCardName' }}">
+														<core:Item text="{CreditCardDetails>CreditCardName}" key="{CreditCardDetails>CreditCardCode}"/>
+													</m:ComboBox>
+													<m:Label text="Credit Card No"/>
+													<m:MaskInput id="CreditCardNo" mask = "CCCC"  placeholder ="Please The Credit Card" >
+														<m:rules>
+															<m:MaskInputRule maskFormatSymbol = "C" regex = "[A-Z0-9]"/>
+														</m:rules>
+													</m:MaskInput>
+													<m:Label text="Card Valid"/>
+													<m:DatePicker
+													    valueFormat="MM/YY" 
+													    displayFormat="MM/YY"
+			                                            id="vCardValid"
+			                                            placeholder="Please Select The Date"
+			                                            change="handleChange"
+			                                            class="sapUiSmallMarginBottom"/>
+													<!--	<m:MaskInput mask = "CC-CC" placeholder ="Please The Credit Valid" ><m:rules><m:MaskInputRule maskFormatSymbol = "C" regex = "[A-Z0-9]"/></m:rules></m:MaskInput> -->
+													<m:Label text="Voucher No" />
+													<m:Input id="voucherNo" type="Number" placeholder="Please Enter The Voucher No" />
+													<m:Label text="{i18n>npAmount} ({InvoiceDetailsModel>/DocCurrency})" />
+													<m:Input id="onlineAmt" placeholder="{i18n>npPleaseEnterTheAmount}" textDirection="RTL" value="{
+                                				path: 'InvoiceDetailsModel>/DocTotalSys',
+                                				type: 'sap.ui.model.type.Float',
+                                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
+												</f:content>
+											</f:SimpleForm>
+											<m:HBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
+												<m:Button width="200px" text="Pay" press="payment"/>
+											</m:HBox>
+										</m:VBox>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+	</m:Page>
+</core:View>

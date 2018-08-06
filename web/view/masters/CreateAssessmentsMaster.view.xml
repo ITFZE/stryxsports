@@ -1,0 +1,38 @@
+<mvc:View controllerName="com.ss.app.StryxSports.controller.masters.CreateAssessmentsMaster" xmlns="sap.m" xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="createAssessmentMasterPage" title="{i18n>crA_Assessments}" showNavButton="true" navButtonPress="handleCancelCreateAssementPress">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="assessmentsSearchField" placeholder="{i18n>crA_PleaseEnterTheLead}" liveChange="onSearchAssessments" width="100%"
+					showRefreshButton="{}"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="assessmentList" type="Active" growing="true" growingThreshold="5" busyIndicatorDelay="250" enableBusyIndicator="true"
+				noDataText="No items" items="{path: '/assessments'}">
+				<ObjectListItem title="{i18n>crA_Lead}: {lead/name}" press="handleObjListItemPress" type="Active">
+					<firstStatus>
+						<ObjectStatus text="{i18n>crA_Date}: {scheduleDate}"/>
+					</firstStatus>
+					<attributes>
+						<ObjectAttribute text="{i18n>crA_Time}: {scheduleTime}{ampm}"/>
+						<ObjectAttribute text="{i18n>crA_Team}: {team/name}"/>
+						<ObjectAttribute text="{i18n>crA_Location}: {team/location/name}"/>
+					</attributes>
+				</ObjectListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add-filter" text="{i18n>crA_AddFilter}" press="handleFilterPress">
+					<customData>
+						<core:CustomData key="multi" value="true"/>
+						<core:CustomData key="remember" value="true"/>
+					</customData>
+				</OverflowToolbarButton>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
