@@ -1,1 +1,1 @@
-# stryxsportsgit
+# Stryx Sports Development
