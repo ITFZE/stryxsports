@@ -1,0 +1,284 @@
+<mvc:View height="100%" controllerName="com.ss.app.StryxSports.controller.details.create.LeadsMemnewCreate"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m">
+	<NavContainer id="membershipWizard">
+		<pages>
+			<Page id="pageCreateLeads" title="{i18n>leadCreateLeads}" showNavButton="true" navButtonPress="onBack" showHeader="true" complete="completedHandler" >
+				<content>
+					<Wizard id="createWizardParent" complete="OptionalInformationID" 
+				  	showNextButton="false" stepActivate="onNextStep" width="100%" enableBranching="true" >
+						<WizardStep id="ParticipantDetailsID"  title="{i18n>ParticipantDetails}" 
+						validated="false" icon="sap-icon://money-bills" 
+						   subsequentSteps="ParentDetailsID,OptionalInformationID">
+							<f:SimpleForm editable="true" 
+			                   layout="ResponsiveGridLayout" 
+			                   labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+			                   labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" 
+			                   emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" 
+			                   columnsL="2" columnsM="2" singleContainerFullSize="false">
+								<f:content>
+									<core:Title/>
+									<Label text="{i18n>leadType}"/>
+									<ComboBox
+					                    id="lmType" placeholder="{i18n>leadSelectType}"
+					                    selectedKey="{createMembershipModel>/U_SS_MEMBER_TYPE}"
+					                    selectionChange="selectedType"
+					                    items="{/SelectType_Date}">
+										<core:Item key="{key}" text="{ST_Txt}" />
+									</ComboBox>
+									<Label text="{i18n>leadName}" />
+									<Input id="lmcName" value="{createMembershipModel>/CardName}" placeholder="{i18n>leadPleaseEnterTheName}" />
+									<Label text="{i18n>leadDOB}"/>
+									<DatePicker  value="{createMembershipModel>/U_Dob}" id="lmcNameDOB" placeholder="{i18n>leadPleaseEnterDate}"  displayFormat="dd-MM-yyyy" />
+									<Label text="{i18n>leadEmail}"/>
+									<Input id="lmcInputEmail" type="Email" value="{createMembershipModel>/EmailAddress}"  placeholder="{i18n>leadPleaseEnterEmail}"/>
+									<Label id="lmcPhone" text="{i18n>leadPhone/Mobile}"/>
+									<Input id="lmcEmergencyMobile"  type="Number" value="{createMembershipModel>/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+									<core:Title/>
+									<Label text="{i18n>leadNationality}"/>
+									<ComboBox 
+					                     id="lmcNationality" 
+					                     placeholder="{i18n>leadSelectCountry}"
+					                     selectedKey="{createMembershipModel>/U_Nationality}"
+					                     items="{path: 'MembershipCountry>/value', sorter: { path: 'Name' }}">
+										<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+									</ComboBox>
+									<Label text="{i18n>leadGender}"/>
+									<Select id="participantGender" selectedKey="{createMembershipModel>/U_Gender}" items="{/gender_Data}">
+										<core:Item text="{txtGender}" key="{txtGender}"/>
+									</Select>
+									<Label text="{i18n>leadHowDidYouHearAboutUs}"/>
+									<ComboBox
+					                    id="lncHowdid"
+					                    placeholder="{i18n>leadPleaseEnterTheHowdid}"
+					                    selectedKey="{createMembershipModel>/U_Ref}"
+					                    items="{path: '/Howdidyouhearaboutus',sorter: {path: 'Name' }}">
+										<core:Item key="{key}" text="{selectTxt}" />
+									</ComboBox>
+									<Label text="{i18n>leadSchoolName}"/>
+									<ComboBox
+					                  id = "lmcSchoolName" 
+					                  placeholder = "{i18n>leadPleaseSelectSchool}" 
+					                  selectedKey = "{createMembershipModel>/U_School}" 
+					                  items="{path: 'SchoolName>/value',sorter: {path: 'Name' }}">
+										<core:Item key="{SchoolName>Name}" text = "{SchoolName>Name}" />
+									</ComboBox>
+									<Label  id="lmcAdditional" text="{i18n>leadAdditionalInformation}"/>
+									<TextArea  id="lmcAdditionlInformaion" growing="true" width="100%" value="{createMembershipModel>/FreeText}" 
+					                   placeholder="{i18n>leadPleaseEnterAdditionalInformation}" class="width-full"/>
+								</f:content>
+							</f:SimpleForm>
+							<Panel width="auto"  id="addSportsCategoryTable"  class="sapUiResponsiveMargin" >
+								<headerToolbar>
+									<Toolbar height="3rem">
+										<Title text="{i18n>scAddSports}"/>
+										<ToolbarSpacer/>
+										<Button id="tableAddSport" icon="sap-icon://add" press="onPressAddSportNameTable"/>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<Table inset="false" items="{createMembershipModel>/sports}">
+										<columns>
+											<Column>
+												<Text text="{i18n>scSportsName}"/>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<Text text="{i18n>scSportsDescriptions}"/>
+											</Column>
+											<Column minScreenWidth="Desktop" demandPopin="true">
+												<Text text="{i18n>scSportsStatus}"/>
+											</Column>
+											<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+												<Text/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text text="{createMembershipModel>Name}"/>
+													<Text text="{createMembershipModel>U_SportsDescription}"/>
+													<ObjectStatus text="{ path: 'createMembershipModel>U_Status', formatter: '.setStatus' }" state="{ path: 'createMembershipModel>U_Status', formatter: '.sportStatus' }"/>
+													<Button type="{path: 'createMembershipModel>rec_status', formatter: '.colorFormatter' }" icon="{path: 'createMembershipModel>rec_status', formatter: '.iconFormatter' }" press="onDeleteCatSport"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</Panel>
+							
+							<Panel width="auto"  id="plAddLocation"  class="sapUiResponsiveMargin" >
+								<headerToolbar>
+									<Toolbar height="3rem">
+										<Title text="{i18n>leadLAdd}"/>
+										<ToolbarSpacer/>
+										<Button id="btnAddLocation" icon="sap-icon://add" press="onPressAddLocation"/>
+									</Toolbar>
+								</headerToolbar>
+								<content>
+									<Table inset="false" items="{createMembershipModel>/locations}">
+										<columns>
+											<Column>
+												<Text text="{i18n>leadLName}"/>
+											</Column>
+											<Column minScreenWidth="Tablet" demandPopin="true">
+												<Text text="{i18n>leadLDescriptions}"/>
+											</Column>
+											<Column minScreenWidth="Desktop" demandPopin="true">
+												<Text text="{i18n>leadLStatus}"/>
+											</Column>
+											<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+												<Text/>
+											</Column>
+										</columns>
+										<items>
+											<ColumnListItem>
+												<cells>
+													<Text text="{createMembershipModel>Name}"/>
+													<Text text="{createMembershipModel>U_Description}"/>
+													<ObjectStatus text="{ path: 'createMembershipModel>U_Status', formatter: '.setStatus' }" state="{ path: 'createMembershipModel>U_Status', formatter: '.sportStatus' }"/>
+													<Button type="{path: 'createMembershipModel>rec_status', formatter: '.colorFormatter' }" icon="{path: 'createMembershipModel>rec_status', formatter: '.iconFormatter' }" press="onDeleteCatSport"/>
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</content>
+							</Panel>
+							<HBox alignItems="Center" justifyContent="Center">
+								<Button id="btnLCSav"  text="Create" press="onPressSaveLeadCreate"/>
+								<Button id="btnLCCreateActivity" visible="false" class="sapUiSmallMargin"  text="Create Activity" press="onPressCreateActivity"/>
+								<Button id="btnMNext" class="sapUiSmallMargin" enabled="false" text="Next >>" press="enableParents"/>
+								<Button id="btnLCBack" visible="false" text="Finished" press="onPressFinish"/>
+							</HBox>
+						</WizardStep>
+						<WizardStep id="ParentDetailsID" visiable="false" validated="true" activate="additionalInfoValidation" title="{i18n>ParentDetails}">
+							<IconTabBar
+			            	id="tabParents" expanded="{device>/isNoPhone}" >
+								<items>
+									<IconTabFilter size="5rem" id="tabFather" key="Father" class="sapUiMediumMargin" text="Father" icon="sap-icon://employee">
+										<f:SimpleForm id="ParentFatherDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								                     	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+								                  	columnsL="2" columnsM="2" singleContainerFullSize="false">
+											<f:toolbar>
+												<Toolbar>
+													<Title text="{i18n>leadFatherDetails}" level="H4" titleStyle="H4"/>
+													<ToolbarSpacer />
+													<Button text="Existing" icon="sap-icon://employee-lookup" press="onPressSearchExisting"/>
+												</Toolbar>
+											</f:toolbar>
+											<f:content>
+												<core:Title/>
+												<Label text="{i18n>leadName}"/>
+												<Input id="ParentFirstName" value="{createMembershipModel>/Father/CardName}" placeholder="{i18n>leadPleaseEnterFirstName}"/>
+												<Label text="{i18n>leadPhone/Mobile}"/>
+												<Input id="ParentMobile" type="number" value="{createMembershipModel>/Father/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+												<Label text="{i18n>leadEmail}"/>
+												<Input id="ParentEmail" value="{createMembershipModel>/Father/EmailAddress}"  placeholder="{i18n>leadPleaseEnterEmail}"/>
+												<core:Title/>
+												<Label text="{i18n>leadNationality}"/>
+												<ComboBox placeholder="{i18n>leadSelectCountry}"  
+									           selectedKey="{createMembershipModel>/Father/U_Nationality}"   
+									           id="ParentNationality"
+                                				items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+													<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+												</ComboBox>
+												<Label text="{i18n>leadOccupation}"/>
+												<Input id="ParentOccupation" value="{createMembershipModel>/Father/Notes}" placeholder="{i18n>leadPleaseEnterOccupation}"/>
+											</f:content>
+										</f:SimpleForm>
+										<HBox alignItems="Center" justifyContent="Center">
+											<Button id="btnCFat" text="Save" press="onPressSaveFatherCreate"/>
+											<Button id="btnLCFCreateActivity" class="sapUiSmallMargin"  visible="false" text="Create Activity" press="onPressCreateActivity"/>
+											<Button text="Finished "  class="sapUiSmallMargin"  press="onPressFinish"/>
+										</HBox>
+									</IconTabFilter>
+									<IconTabFilter key="Mother" id="tabMother" text="Mother" icon="sap-icon://person-placeholder">
+										<f:SimpleForm id="ParentMotherDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								                     	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+								                  	columnsL="2" columnsM="2" singleContainerFullSize="false">
+											<f:toolbar>
+												<Toolbar>
+													<Title text="{i18n>leadMotherDetails}" level="H4" titleStyle="H4"/>
+													<ToolbarSpacer />
+													<Button text="Existing" icon="sap-icon://employee-lookup" press="onPressSearchExisting" />
+												</Toolbar>
+											</f:toolbar>
+											<f:content>
+												<core:Title/>
+												<Label text="{i18n>leadName}"/>
+												<Input id="motherFirstName" value="{createMembershipModel>/Mother/CardName}" placeholder="{i18n>leadPleaseEnterFirstName}"/>
+												<Label text="{i18n>leadPhone/Mobile}"/>
+												<Input id="motherPhone" type="number" value="{createMembershipModel>/Mother/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+												<Label text="{i18n>leadEmail}"/>
+												<Input id="motherEmail" value="{createMembershipModel>/Mother/EmailAddress}" placeholder="{i18n>leadPleaseEnterEmail}"/>
+												<core:Title/>
+												<Label text="{i18n>leadNationality}"/>
+												<ComboBox placeholder="{i18n>leadSelectCountry}" 
+									                  selectedKey="{createMembershipModel>/Mother/U_Nationality}" 
+									                  id="motherNationality" 
+                                			items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+													<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+												</ComboBox>
+												<Label text="{i18n>leadOccupation}"/>
+												<Input id="motherOccupation" value="{createMembershipModel>/Mother/Notes}" placeholder="{i18n>leadPleaseEnterOccupation}"/>
+											</f:content>
+										</f:SimpleForm>
+										<HBox alignItems="Center" justifyContent="Center">
+											<Button  id="btnCMot"  text="Save" press="onPressSaveMotherCreate"/>
+											<Button id="btnLCMCreateActivity" visible="false"   text="Create Activity" press="onPressCreateActivity"/>
+											<Button  text="Finished"  class="sapUiSmallMargin"  press="onPressFinish"/>
+										</HBox>
+									</IconTabFilter>
+									<IconTabFilter key="Guardian" id="tabGuardian" text="Guardian" 	icon="sap-icon://employee">
+										<f:SimpleForm id="ParentGuardianDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								                     	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+								                  	columnsL="2" columnsM="2" singleContainerFullSize="false">
+											<f:toolbar>
+												<Toolbar>
+													<Title text="{i18n>leadGuardianDetails}" level="H4" titleStyle="H4"/>
+													<ToolbarSpacer />
+													<Button text="Existing"  icon="sap-icon://employee-lookup" press="onPressSearchExisting"/>
+												</Toolbar>
+											</f:toolbar>
+											<f:content>
+												<core:Title/>
+												<Label text="{i18n>leadName}"/>
+												<Input id="guardianFirstName" value="{createMembershipModel>/Guardian/CardName}" placeholder="{i18n>leadPleaseEnterFirstName}"/>
+												<Label text="{i18n>leadPhone/Mobile}"/>
+												<Input id="guardianPhone" type="number" value="{createMembershipModel>/Guardian/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+												<Label text="{i18n>leadEmail}"/>
+												<Input  id="guardianEmail" value="{createMembershipModel>/Guardian/EmailAddress}" placeholder="{i18n>leadPleaseEnterEmail}"/>
+												<core:Title/>
+												<Label text="{i18n>leadNationality}"/>
+												<ComboBox placeholder="{i18n>leadSelectCountry}" 
+								                   	selectedKey="{createMembershipModel>/Guardian/U_Nationality}"   id="guardianNationlaity" 
+                                			          items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+													<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+												</ComboBox>
+												<Label text="{i18n>leadOccupation}"/>
+												<Input id="guardianOccupation" value="{createMembershipModel>/Guardian/Notes}" placeholder="{i18n>leadPleaseEnterOccupation}"/>
+											</f:content>
+										</f:SimpleForm>
+										<HBox alignItems="Center" justifyContent="Center">
+											<Button id="btnCGem" text="Save" press="onPressSaveGuardianCreate"/>
+											<Button id="btnLGMCreateActivity" visible="false"   text="Create Activity" press="onPressCreateActivity"/>
+											<Button  text="Finished"  class="sapUiSmallMargin" press="onPressFinish"/>
+										</HBox>
+									</IconTabFilter>
+								</items>
+							</IconTabBar>
+						</WizardStep>
+						<WizardStep id="OptionalInformationID" activate="pricingActivate" complete="pricingComplete" validated="true" title="{i18n>OptionalInformation}"></WizardStep>
+					</Wizard>
+				</content>
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>

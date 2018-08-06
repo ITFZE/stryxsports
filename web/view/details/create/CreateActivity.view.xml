@@ -1,0 +1,222 @@
+<core:View
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:c="sap.suite.ui.commons"
+	controllerName="com.ss.app.StryxSports.controller.details.create.CreateActivity"
+	xmlns:f="sap.ui.layout.form">
+	<m:Page id="CreateActivityPage" showNavButton="true" navButtonPress="onBack">
+		<m:content>
+			<ObjectPageLayout enableLazyLoading="false" showTitleInHeaderContent="true" showHeaderContent="true">
+				<headerTitle >
+					<ObjectPageHeader objectImageURI="sap-icon://customer"
+							  objectImageShape="Circle"
+							  objectTitle="{LeadsDetails>/CardName} {path: 'LeadsDetails>/U_SS_MEMBER_TYPE', formatter: '.childAdultFormatter'}"
+							  objectImageAlt="{i18n>caSeniorUIDeveloper}"
+							  id="ObjectPageLayoutHeaderTitle"
+							  isObjectIconAlwaysVisible="false"
+							  isObjectTitleAlwaysVisible="false"
+							  showPlaceholder="true"/>
+				</headerTitle>
+				<headerContent>
+					<layout:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop" text="{LeadsDetails>/Cellular}"/>
+						<m:Link class="sapUiTinyMarginTop" text="{LeadsDetails>/EmailAddress}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout>
+						<m:Label/>
+						<m:ObjectStatus text="{LeadsDetails>/U_School}"/>
+						<m:Label class="sapUiTinyMarginTop" text="{LeadsDetails>/U_Nationality}"/>
+					</layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout></layout:VerticalLayout>
+					<layout:VerticalLayout id="emgPanelHeader" visible="false">
+						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
+						<m:HBox>
+							<m:VBox>
+								<m:Label  class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/2/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{LeadsDetails>/ContactEmployees/2/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label  class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/0/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{LeadsDetails>/ContactEmployees/0/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label  class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/1/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/1/MobilePhone}"/>
+							</m:VBox>
+						</m:HBox>
+					</layout:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="goalsSection" title="{i18n>caCreateActivity}">
+						<subSections>
+							<ObjectPageSubSection title="" id="editActivitySubSection">
+								<blocks>
+									<m:VBox>
+										<f:SimpleForm 
+    									id="frmCreateActivity"
+		                                editable="true" 
+		                                layout="ResponsiveGridLayout" 
+		                                labelSpanXL="4" labelSpanL="4"
+		                                labelSpanM="4"  labelSpanS="12" 
+		                                adjustLabelSpan="false" 
+		                                emptySpanXL="0" emptySpanL="0" 
+		                                emptySpanM="0" emptySpanS="0"
+		                                columnsXL="3" columnsL="2"
+		                                columnsM="2" singleContainerFullSize="false">
+											<f:content>
+												<core:Title/>
+												<m:Label text="{i18n>caActivity}" />
+												<m:ComboBox
+												id="caSlectActivity"
+												selectedKey="{createActivityModel>/Activity}"
+											    selectionChange="selectedActivity"
+					                            placeholder="{i18n>caPleaseEnterActivity}"
+						                        items="{path: '/SelectActivity'}">
+													<core:Item text = "{SA_Txt}" key="{key}" />
+												</m:ComboBox>
+												<m:Label text="{i18n>caStartandEndDate}"/>
+												<m:DateRangeSelection
+                                            	id="caStartDateAndTime"
+                                            	displayFormat="M/d/yy"
+                                                valueFormat="M/d/yy"
+                                                value="{createActivityModel>/StartDate} - {createActivityModel>/EndDueDate}"
+                                                placeholder="{i18n>caPleaseEnterStartDateTime}"
+                                            	change="onChangeDateTimePicker"/>
+												<m:Label text="{i18n>caType}" />
+												<m:ComboBox
+					                            id="caType"
+					                            selectedKey="{createActivityModel>/ActivityType}"
+					                            placeholder="{i18n>caPleaseEnterType}"
+						                        items="{path: 'ActivityTypesLists>/value'}">
+													<core:Item text = "{ActivityTypesLists>Name}" key = "{ActivityTypesLists>Code}" />
+												</m:ComboBox>
+												<core:Title/>
+												<m:Label text="{i18n>caHandledBy}" />
+												<m:ComboBox
+					                            id="caHandledBy"
+				                                selectedKey="{createActivityModel>/HandledByEmployee}"
+					                            placeholder="{i18n>caPleaseEnterHandledBy}"
+						                        items="{path: 'EmployeesList>/value'}">
+													<core:Item text = "{EmployeesList>FirstName} {EmployeesList>LastName}" key = "{EmployeesList>EmployeeID}" />
+												</m:ComboBox>
+												<m:Label text="{i18n>caEndDateTime}"/>
+												<m:TimePicker
+                                			    id="caStartTime"
+                                				value="{createActivityModel>/StartTime}"
+                                				valueFormat="HH:mm"
+                                				displayFormat="hh:mm a"
+                                				change="handleChange"
+                                				placeholder="Please Enter Start Time"/>
+												<m:TimePicker
+                                				id="caEndTime"
+                                				value="{createActivityModel>/EndTime}"
+                                				valueFormat="HH:mm"
+                                				displayFormat="hh:mm a"
+                                				change="handleChange"
+                                				placeholder="Please Enter The End Time"/>
+												<m:Label text="{i18n>caSubject}" />
+												<m:TextArea id="caSubject"   placeholder="{i18n>caPleaseEnterSubject}" value="{createActivityModel>/Details}"
+													growing="true" growingMaxLines="7" />
+											<!--	<core:Title id="caTAddress" text="{i18n>caAddress}"/>
+												<m:Label id="caLStreet" text="{i18n>caStreet}" />
+												<m:Input id="caIStreet" value="{createActivityModel>/Street}"  placeholder="{i18n>caPleaseEnterStreet}" />
+												<m:Label id="caLCity" text="{i18n>caCity}" />
+												<m:Input id="caICity" value="{createActivityModel>/City}"  placeholder="{i18n>caPleaseEnterCity}" />
+												<m:Label id="caLRoom" text="{i18n>caRoom}" />
+												<m:Input id="caIRoom" value="{createActivityModel>/Room}" placeholder="{i18n>caPleaseEnterRoom}" />
+												<core:Title/>
+												<m:Label id="caLState"  text="{i18n>caState}" />
+												<m:Input id="caIState"  value="{createActivityModel>/State}" placeholder="{i18n>caPleaseEnterState}"  />
+												<m:Label id="caLCountry"  text="{i18n>caCountry}" />
+												<m:ComboBox id="caICountry" placeholder="{i18n>caPleaseEntertheCountry}"  selectedKey="{createActivityModel>/Country}"
+        											  items="{path: 'countryList>/value',sorter: { path: 'Name' }}">
+													<core:Item key="{countryList>Name}" text="{countryList>Name}" />
+												</m:ComboBox>
+												<m:Label id="caLLocation"  text="{i18n>caMeetingLocation}" />
+												<m:ComboBox  id="caILocation" placeholder="{i18n>caPleaseEnterLocation}"  selectedKey="{createActivityModel>/Location}"
+        											  items="{path: 'LocationList>/value',sorter: { path: 'Name' }}">
+													<core:Item key="{LocationList>Code}" text="{LocationList>Name}" />
+												</m:ComboBox> -->
+												<core:Title/>
+											</f:content>
+										</f:SimpleForm>
+										<m:Panel class="activity-Panel-HeaderMargin">
+											<m:Label text="{i18n>caContent}:" class="activity-Label-Padding"/>
+											<m:TextArea height="110px" width="100%"
+											    value="{createActivityModel>/Notes}"
+						                        id="caContent" 
+					                            placeholder="{i18n>caPleaseEnterTheContent}" 
+					                            class="activity-TextArea-padding"/>
+										</m:Panel>
+										<m:HBox alignItems="Center" justifyContent="Center">
+											<m:Button id="btnSave"  class="sapUiSmallMarginEnd" press="onPressSaveCreateActivity"/>
+											<m:Button id="btnFollowUp" visible="false" text="FollowUp" class="sapUiSmallMarginEnd" press="onPressFollowUpCreateActivity"/>
+											<m:Button id="btnCancel"  text="{i18n>caCancel}" press="onBack"/>
+										</m:HBox>
+									</m:VBox>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection class="activity-Page-HeaderMargin" id="caActivities" title="{i18n>caActivities}">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks>
+									<layout:VerticalLayout id="TimelineContainer" width="100%">
+										<core:Icon
+                            			src="sap-icon://edit"
+                            			color="#1C4C98" hoverColor="red" class="size4" visible="false" tooltip="edit" press="editActivities" />
+										<c:Timeline
+                            			id="caTimeline"
+                            			groupByType="Day"
+                            			groupBy="ActivityDate"
+                            			growingThreshold="0"
+                            			enableScroll="false"
+                            			showHeaderBar="false"
+                            			enableDoubleSided="true"
+                            			sortOldestFirst="true"
+                            			content="{mActivities>/value}"
+                                		noDataText="No Data">
+											<c:content>
+												<c:TimelineItem
+                                					id="idTemplateItem"
+                                					dateTime="{mActivities>ActivityDate} {mActivities>ActivityTime}"
+                                					userNameClickable="true"
+                                					title="{mActivities>ActivityType2/Name}"
+                                					icon="{path : 'mActivities>Activity', formatter: '.changeIcon'}"
+                                					userName="{mActivities>EmployeeInfo/FirstName} {mActivities>EmployeeInfo/LastName}">
+													<c:embeddedControl>
+														<m:Panel>
+															<m:content>
+																<m:VBox>
+																	<m:Text text="{mActivities>Details}"/>
+																	<m:Text text="{mActivities>Notes}"/>
+																</m:VBox>
+															</m:content>
+														</m:Panel>
+													</c:embeddedControl>
+												</c:TimelineItem>
+											</c:content>
+										</c:Timeline>
+									</layout:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+		<!--<m:footer><m:Bar><m:contentRight><m:Button id="btnSave"  press="onPressSaveCreateActivity"/><m:Button id="btnCancel" text="{i18n>caCancel}" press="onBack"/></m:contentRight></m:Bar></m:footer>-->
+	</m:Page>
+</core:View>

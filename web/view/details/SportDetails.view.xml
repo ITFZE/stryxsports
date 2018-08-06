@@ -1,0 +1,48 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.SportDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="sportsDetails" title="{i18n>sCreateSport}" >
+		<content>
+			<l:Grid defaultSpan="L8 M12 S12" class="sapUiSmallMarginTop">
+				<l:content>
+					<f:SimpleForm id="frmSports" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label text="{i18n>sSportName}"/>
+							<Input id="inputSportName" placeholder="{i18n>sPleaseEnterTheSportName}" value="{ 
+                                  path : 'SportsModel>/Name', 
+                                  type : 'sap.ui.model.type.String', 
+                                  constraints : { 
+                                      minLength : 1, 
+                                      maxLength : 50 
+                                  }
+                              }"/>
+							<Label text="{i18n>sSportDescription}"/>
+							<TextArea id="inputSportDescription" placeholder="{i18n>sPleaseEnterTheSportDescription}" maxLength="1500" value="{SportsModel>/U_SportsDescription}"/>
+							<Label text="{i18n>sSportStatus}"/>
+							<Select id="addSportStatus" selectedKey="{SportsModel>/U_Status}" items="{path: 'BaseModel>/seasonState'}">
+								<items>
+									<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+								</items>
+							</Select>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="save" icon="sap-icon://save" press="onPressSaveAddSports"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressCloseSports"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

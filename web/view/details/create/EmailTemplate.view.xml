@@ -1,0 +1,47 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.details.create.EmailTemplate"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" height="100%">
+	<Page id="emailDetails" showNavButton="true" navButtonPress="onNavEmailBack"  title="{i18n>EmailTemplate}">
+		<content>
+			<VBox>
+				<f:SimpleForm id="participantFormID" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>eTemplates}" />
+						<ComboBox placeholder="{i18n>ePleaseSelectEmailTemplate}" id="templatesEmail" items="{path: 'EmailTemplatesTypes>/value'}" selectedKey="{EmailTemplateModel>/U_TemplateType}"  enableBusyIndicator= "true" selectionChange="onChange">
+							<core:Item key="{EmailTemplatesTypes>Code}" text="{EmailTemplatesTypes>Name}" />
+						</ComboBox>
+						<core:Title/>
+						<Label text="{i18n>eTemplateStatus}"/>
+						<Select id="emailStatus" items="{path: 'BaseModel>/seasonState'}" selectedKey="{EmailTemplateModel>/U_Status}">
+							<items>
+								<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"	/>
+							</items>
+						</Select>
+					</f:content>
+				</f:SimpleForm>
+				<form:SimpleForm id="htmlSimpleTemplate" layout="ResponsiveGridLayout" editable="true">
+					<core:Title text="{i18n>EmailTemplate}" />
+					<html:textarea id="emailEditor" value="{mTemplates>/U_Template}" maxlength="10" rows="4" cols="50" name="editor1"/>
+				</form:SimpleForm>
+			</VBox>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="saveEmailCreat" visible="false" icon="sap-icon://save" tooltip="Create" press="onPressEmailTemplateSave"/>
+					<Button id="saveEmailUpdate" visible="false" icon="sap-icon://save" tooltip="Update" press="onPressUpdateEmailTemplate"/>
+					<Button id="clearEmailBtn" visible="false" tooltip="Clear" icon="sap-icon://sys-cancel-2" press="onPressCancelEmail"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

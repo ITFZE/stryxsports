@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog title = "Information">
+		<f:SimpleForm 
+			   editable="true" 
+			   layout="ResponsiveGridLayout" 
+			   labelSpanXL="4" labelSpanL="4"
+			   labelSpanM="4"  labelSpanS="12" 
+			   adjustLabelSpan="false" 
+			   emptySpanXL="0" emptySpanL="0" 
+			   emptySpanM="0" emptySpanS="0"
+			   columnsXL="3" columnsL="2"
+			   columnsM="2" singleContainerFullSize="false">
+			<f:content>
+				<!--	<Label text="Activity"/><Text id="iaActivityType"  editable="false" enabled="true"/> -->
+				<Label  text="Start Date"/>
+				<Text id="iaStartDate"  editable="false" enabled="true"/>
+				<Label  text="End Date"/>
+				<Text id="iaEndDate"  editable="false" enabled="true"/>
+				<Label text="Subject"/>
+				<Text id="iaSubject"  editable="false" enabled="true"/>
+				<Label text="Note"/>
+				<Text id="iaNotes"  editable="false" enabled="true"/>
+			</f:content>
+		</f:SimpleForm>
+		<buttons>
+			<Button  text="Edit" press="onPressDialogEditActivityEA"/>
+			<!-- <Button  text="Close Activity" press="onPressDialogSaveEA"/> -->
+			<Button  text="Cancel" press="onPressDialogCloseEA"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

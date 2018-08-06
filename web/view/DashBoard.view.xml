@@ -1,0 +1,289 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:tnt="sap.tnt"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:l="sap.ui.layout" 
+	displayBlock="true"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
+	controllerName="com.ss.app.StryxSports.controller.DashBoard">
+	<Page showHeader="false">
+		<content>
+			<tnt:ToolPage id="toolPage" sideExpanded="false">
+				<tnt:header>
+					<tnt:ToolHeader>
+						<Button icon="sap-icon://menu2" tooltip="Menu" type="Transparent" press="handleMenuPress">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
+						<Image src="./images/stryx-new-logo-x2.png" alt="Stryx Sports" class="css-logo"/>
+						<Button id="userPopOver" tooltip="User Profile" icon="sap-icon://customer" type="Transparent" press="onPressUserProflie">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
+						<Button id="logoutBtn" tooltip="Logout" icon="sap-icon://log" type="Transparent" press="handleLogoutPress">
+							<layoutData>
+								<OverflowToolbarLayoutData priority="NeverOverflow"/>
+							</layoutData>
+						</Button>
+					</tnt:ToolHeader>
+				</tnt:header>
+				<tnt:sideContent>
+					<tnt:SideNavigation expanded="false" itemSelect="onItemSelect">
+						<tnt:NavigationList items="{path: '/sideNavigation', templateShareable:false}">
+							<tnt:NavigationListItem text="{path:'title', templateShareable:false}" icon="{path:'icon', templateShareable:false}" expanded="{path:'expanded', templateShareable:false}" items="{path:'items', templateShareable:false}" key="{path:'key', templateShareable:false}">
+								<tnt:NavigationListItem text="{path:'title', templateShareable:false}" key="{path:'key', templateShareable:false}"></tnt:NavigationListItem>
+							</tnt:NavigationListItem>
+						</tnt:NavigationList>
+					</tnt:SideNavigation>
+				</tnt:sideContent>
+				<tnt:mainContents>
+					<NavContainer id="pageContainer">
+						<!--Main content -->
+						<Page showHeader="false" id="dashBoard">
+							<content>
+								<l:BlockLayout>
+									<!-- Start Generic tiles-->
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="{i18n>dashLeadsAccountsandTeam}">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashLeads}" app:route="Leads"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://leads" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashAccountsandActivities}" app:route="SearchMembership"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://account" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashTeam}"  app:route = "TeamsDetail" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://group" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashActivities}" app:route="SearchActivity" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://activity-individual" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashInvoiceandPayment}" app:route="SearchInvoice" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://money-bills" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="{i18n>dashAssessments}">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCreateAssessment}" app:route="SearchLeads"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://add-activity" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCoachAssessment}" app:route="CoachAssessment"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://activities" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashAssessmentFeedback}" app:route="AssessmentFeedbackDetail"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://feed" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+									
+								<!--	<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="{i18n>dashEvents}">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCreateEvents}" app:route="CreateEvent"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://add-activity" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSendEmail}" app:route="SendEmail"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://arobase" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSendSMS}" app:route="SendSMS"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://paper-plane" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+										-->
+									
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="{i18n>dashTemplates}">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashEmail}" app:route="EmailTemplate"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://arobase" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSMS}" app:route="SMSTemplate"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://paper-plane" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="{i18n>dashMasters}">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSports}" app:route="Sports" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://soccor" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSportsCategory}" app:route="SportsCategory"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://citizen-connect" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<!-- Here view for Location -->
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashLocations}" app:route="Location" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://functional-location" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<!-- Here view for seasons -->
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSeasons}" app:route="Seasons" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://activity-2" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<!-- Here view for Cocach -->
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCoaches}" app:route="CoachesDetail" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://manager" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<!-- Here view for Teams -->
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashTeams}" app:route="Teams" press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://group" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="{i18n>dashUserManagement}">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashUsers}" app:route="UserManagementDetail"
+												press="onTilePress">
+												<tileContent>
+													<TileContent >
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://employee-pane" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
+									<!-- End Generic tiles-->
+								</l:BlockLayout>
+							</content>
+						</Page>
+					</NavContainer>
+				</tnt:mainContents>
+			</tnt:ToolPage>
+		</content>
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Text class="sapUiContentPadding" text="{i18n>PoweredByInflexiontechFZE}"/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

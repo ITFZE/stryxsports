@@ -1,0 +1,34 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.UserManagementMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="{i18n>umUserMaster}" showNavButton="true" navButtonPress="onNavBackUser">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchUserManagement" placeholder="{i18n>umPleaseEnterTheName}"
+					search="onSearchCoachesListMasterPage" />
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listUserManagementMaster" items="{UserManagement>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>umNoItems}">
+				<items>
+					<ObjectListItem title="{i18n>umUserName}: {UserManagement>FirstName} {UserManagement>LastName}" type="Active" press="onListItemPressCoachesList" >
+						<attributes>
+							<ObjectAttribute text="{i18n>umContactNumber}: {UserManagement>MobilePhone}"/>
+							<ObjectAttribute text="{i18n>umEmail}: {UserManagement>eMail}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton tooltip="Filter" icon="sap-icon://add-filter" press="onPressAddFilter"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

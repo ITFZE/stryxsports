@@ -1,0 +1,282 @@
+<core:View
+    controllerName="com.ss.app.StryxSports.controller.details.ViewAccount"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:m="sap.m"
+	xmlns:unified="sap.ui.unified"
+	xmlns:c="sap.suite.ui.commons">
+	<m:Page id="viewAccountPage" showHeader="true" title="{i18n>vaViewAccount}" showNavButton="true" navButtonPress="onNavBackPress">
+		<m:content>
+			<ObjectPageLayout id="activityObjectPageLayout" enableLazyLoading="false" showTitleInHeaderContent="true" 
+			showEditHeaderButton="true" editHeaderButtonPress="OnPressEditAccount">
+				<headerTitle>
+					<ObjectPageHeader id="headerPageId" isActionAreaAlwaysVisible="true" 
+            				objectImageURI="sap-icon://customer"
+							objectTitle="{mLeadDetails>/CardName} {path: 'mLeadDetails>/U_SS_MEMBER_TYPE', formatter: '.childAdultFormatter'}"
+							objectImageShape="Circle"
+							objectImageAlt="{mLeadDetails>/CardName}"
+    						isObjectIconAlwaysVisible="false"
+    						objectImageDensityAware="true"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false"
+							objectSubtitle=""/>
+				</headerTitle>
+				<headerContent>
+					<l:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop" text="{mLeadDetails>/Cellular}"/>
+						<m:Link class="sapUiTinyMarginTop" text="{mLeadDetails>/EmailAddress}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout>
+						<m:Label/>
+						<m:Label class="sapUiTinyMarginTop" text="{mLeadDetails>/U_School}"/>
+						<m:Label class="sapUiTinyMarginTop" text="{mLeadDetails>/U_Nationality}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout id="viewAccountEmgPanel" visible="true">
+						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
+						<m:HBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/2/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/2/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{mLeadDetails>/ContactEmployees/0/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/0/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{mLeadDetails>/ContactEmployees/1/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/1/MobilePhone}"/>
+							</m:VBox>
+						</m:HBox>
+					</l:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="parentsPageInformation" title="{i18n>vaPersonalInformation}">
+						<subSections>
+							<ObjectPageSubSection title="">
+								<blocks>
+									<l:VerticalLayout id="containerLayout" width="100%">
+										<l:BlockLayout>
+											<l:BlockLayoutRow accentCells="Accent1" visible="false" id="personalBloclOut">
+												<l:BlockLayoutCell id="blcFather" width="25%" titleAlignment="Left" class="bg_color-viewAccountPage " title="Father Details" >
+													<l:HorizontalLayout>
+														<core:Icon height="90px"
+                                                			src="sap-icon://family-protection"  class="ViewAccount-Icon-Size ViewAccount-Page-IconSet"
+                                                			color="#1C4C98"/>
+														<l:VerticalLayout  class="css_paddingLeft_email">
+															<m:Text class="font-size-viewAccount-page" text="{mLeadDetails>/Father/CardName}"/>
+															<m:Link class="sapUiTinyMarginTop"  text="{mLeadDetails>/Father/Cellular}"/>
+															<m:Link class="sapUiTinyMarginTop" text="{mLeadDetails>/Father/EmailAddress}" />
+															<m:Text class="sapUiTinyMarginTop" text="{mLeadDetails>/Father/U_Nationality}"/>
+														</l:VerticalLayout>
+													</l:HorizontalLayout>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell  id="blcMother" width="25%" titleAlignment="Left" titleLevel="h5" class="bg_color-viewAccountPage" title="Mother Details">
+													<l:HorizontalLayout >
+														<core:Icon height="90px"
+                                                			src="sap-icon://family-protection"  class="ViewAccount-Icon-Size ViewAccount-Page-IconSet"
+                                                			color="#1C4C98"></core:Icon>
+														<l:VerticalLayout  class="css_paddingLeft_email">
+															<m:Text class="font-size-viewAccount-page" text="{mLeadDetails>/Mother/CardName}"/>
+															<m:Link class="sapUiTinyMarginTop" text="{mLeadDetails>/Mother/Cellular}"/>
+															<m:Link  class="sapUiTinyMarginTop" text="{mLeadDetails>/Mother/EmailAddress}"/>
+															<m:Text  class="sapUiTinyMarginTop" text="{mLeadDetails>/Mother/U_Nationality}"/>
+														</l:VerticalLayout>
+													</l:HorizontalLayout>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell  id="blcGuardian" width="25%" titleAlignment="Left" class="bg_color-viewAccountPage" title="Guardian Details">
+													<l:HorizontalLayout >
+														<core:Icon height="90px"
+                                                			src="sap-icon://family-protection" class="ViewAccount-Icon-Size ViewAccount-Page-IconSet"
+                                                			color="#1C4C98"/>
+														<l:VerticalLayout   class="css_paddingLeft_email">
+															<m:Text class="font-size-viewAccount-page" text="{mLeadDetails>/Guardian/CardName}"></m:Text>
+															<m:Link  class="sapUiTinyMarginTop" text="{mLeadDetails>/Guardian/Cellular}"/>
+															<m:Link  class="sapUiTinyMarginTop" text="{mLeadDetails>/Guardian/EmailAddress}"/>
+															<m:Text class="sapUiTinyMarginTop" text="{mLeadDetails>/Guardian/U_Nationality}"></m:Text>
+														</l:VerticalLayout>
+													</l:HorizontalLayout>
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+											<l:BlockLayoutRow id="adultInfoBRow" accentCells="Accent1" visible="false" >
+												<l:BlockLayoutCell titleAlignment="Center" class="bg_color-viewAccountPage width-full" title="No Record"></l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+										</l:BlockLayout>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection id="serviceObjectPage" title="{i18n>vaService}">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks>
+									<l:VerticalLayout id="serviceVerticalLayoaut" width="100%">
+										<m:Panel expandable="false" expanded="fasle" width="auto">
+											<m:headerToolbar>
+												<m:Toolbar height="3rem">
+													<m:Button class="EditActBtn" id="timelineEditActBtn"
+                                                       icon="sap-icon://edit" type="Transparent" visible="false"
+                                                       tooltip="Edit" press="onPressActEditBtn" />
+													<m:ToolbarSpacer />
+													<m:Button icon="sap-icon://add"  press="onPressSelectServiceView"/>
+												</m:Toolbar>
+											</m:headerToolbar>
+											<m:Table id="tbsSelectService" class="width-full bg-color-table"
+											growing="true" growingThreshold="10"
+											items="{OrderDetails>/value}">
+												<m:columns >
+													<m:Column width="20em"  hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Service"/>
+													</m:Column>
+													<m:Column width="12em"  hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Date"/>
+													</m:Column>
+													<m:Column width="12em"  vAlign="Center" hAlign="Right"  minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Price"/>
+													</m:Column>
+													<m:Column width="12em"  vAlign="Center" hAlign="Right"  minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Total"/>
+													</m:Column>
+													<m:Column hAlign="End" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text=""/>
+													</m:Column>
+												</m:columns>
+												<m:items>
+													<m:ColumnListItem>
+														<m:cells>
+															<m:Text text="{OrderDetails>Orders/Comments}"/>
+															<m:Text text="{OrderDetails>Orders/CreationDate}"/>
+															<m:Text text="{
+															parts:[{path:'OrderDetails>Orders/VatSum'},{path:'OrderDetails>Orders/DocCurrency'}],formatter: '.toCurrencyAddPrice' }
+                				                                 "/>
+															<m:Text text="
+															{parts:[{path:'OrderDetails>Orders/DocTotalSys'},{path:'OrderDetails>Orders/DocCurrency'}],formatter: '.toCurrencyAddPrice' }"/>
+															<m:Button width="10em" icon="{ path: 'OrderDetails>U_SS_MEM_SERVICES/U_Status', formatter: '.setInvoiceIcons'}"  text="{ path: 'OrderDetails>U_SS_MEM_SERVICES/U_Status', formatter: '.setCreateInvoice'}"  press="navTOCreateInvoice" />
+														</m:cells>
+													</m:ColumnListItem>
+												</m:items>
+											</m:Table>
+										</m:Panel>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection id="opsTeams" title="{i18n>vaTeams}">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks>
+									<l:VerticalLayout  width="100%">
+										<m:Panel expandable="false" expanded="fasle" width="auto">
+											<m:headerToolbar>
+												<m:Toolbar height="3rem">
+													<m:ToolbarSpacer />
+													<m:Button icon="sap-icon://add"  press="navToTeams"/>
+												</m:Toolbar>
+											</m:headerToolbar>
+											<m:Table  class="width-full bg-color-table"
+											growing="true" growingThreshold="10"
+											items="{TeamsDetails>/value}">
+												<m:columns >
+													<m:Column   width="20em"  hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+														<m:Text textAlign="Left" text="Team Names"/>
+													</m:Column>
+													<m:Column   width="12em"  hAlign="Center"  minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="Start Date"/>
+													</m:Column>
+													<m:Column  width="12em"  hAlign="Center"   minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text="End Date"/>
+													</m:Column>
+													<m:Column   hAlign="End"   minScreenWidth="Desktop" demandPopin="true">
+														<m:Text text=""/>
+													</m:Column>
+												</m:columns>
+												<m:items>
+													<m:ColumnListItem >
+														<m:cells>
+															<m:Text text="{TeamsDetails>U_SS_TEAMS/Name}"/>
+															<m:Text text="{TeamsDetails>U_SS_TEAMS/U_StartDate}"/>
+															<m:Text text="{TeamsDetails>U_SS_TEAMS/U_EndDate}"/>
+															<m:Button  tooltip="View Team" icon="sap-icon://customer-view" press="navToTeamDetails"/>
+														</m:cells>
+													</m:ColumnListItem>
+												</m:items>
+											</m:Table>
+										</m:Panel>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection id="activityObjectPage" title="{i18n>vaActivity}">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks>
+									<l:VerticalLayout id="TimelineContainer" width="100%">
+										<m:Panel expandable="false" expanded="false" width="auto" >
+											<m:headerToolbar>
+												<m:Toolbar height="3rem">
+													<m:ToolbarSpacer />
+													<m:Button class="EditActBtn" id="timelineVAEditActBtn" icon="sap-icon://edit" type="Transparent" visible="false" tooltip="Edit" press="onPressVAActEditBtn" />
+													<m:Button icon="sap-icon://add" press="onPressActivityView"/>
+												</m:Toolbar>
+											</m:headerToolbar>
+											<core:Icon
+                            			src="sap-icon://edit" class="size4"
+                            			color="#1C4C98" hoverColor="red" visible="false" tooltip="edit" press="editActivities" />
+											<c:Timeline
+                            			id="idTimeline"
+                            			groupByType="Day"
+                            			groupBy="ActivityDate"
+                            			growingThreshold="0"
+                            			enableScroll="false"
+                            			showHeaderBar="false"
+                            			enableDoubleSided="true"
+                            			sortOldestFirst="true"
+                            			content="{mActivities>/value}"
+                                		noDataText="No Data"
+                                		select="onPressVATimelinePost">
+												<c:content>
+													<c:TimelineItem
+                                					id="idTemplateItem"
+                                					text="{mActivities>ActivityCode}"
+                                					dateTime="{mActivities>ActivityDate} {mActivities>ActivityTime}"
+                                					title="{mActivities>ActivityType2/Name}"
+                                						userNameClickable="true"
+                                						icon="{path : 'mActivities>Activity', formatter: '.changeIcon'}"
+                                					userName="{mActivities>EmployeeInfo/FirstName} {mActivities>EmployeeInfo/LastName}">
+														<c:embeddedControl>
+															<m:Panel>
+																<m:content>
+																	<m:VBox>
+																		<m:Text id="activityCode" visible="false" text="{mActivities>ActivityCode}"/>
+																		<m:Text text="{mActivities>Details}"/>
+																		<m:Text text="{mActivities>Notes}"/>
+																	</m:VBox>
+																</m:content>
+															</m:Panel>
+														</c:embeddedControl>
+													</c:TimelineItem>
+												</c:content>
+											</c:Timeline>
+										</m:Panel>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+	</m:Page>
+</core:View>

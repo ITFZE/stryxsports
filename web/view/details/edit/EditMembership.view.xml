@@ -1,0 +1,153 @@
+<mvc:View controllerName="com.ss.app.StryxSports.controller.details.edit.EditMembership" xmlns="sap.m" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:vk="sap.ui.vk" xmlns:vbm="sap.ui.vbm"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="editMembershipPage" title="{i18n>EditMembership}">
+		<content>
+				<VBox class="sapUiSmallrgin">
+				<f:SimpleForm visible="true" id="SimpleFormFirstEdit" editable="true" layout="ResponsiveGridLayout"  labelSpanXL="4" 
+					labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="true">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>Sport Category}"/>
+						<Select id="MembershipLocation" class="width-full" items="{ path: '/sportsCategory', sorter: { path: 'sportsCategoryName' } }">
+							<core:Item text="{sportsCategoryName}" key="{sportsCategoryName}"/>
+						</Select>
+						<Label text="{i18n>Sports}"/>
+						<Select id="MembershipSports" class="width-full" items="{ path: '/sports_Data', sorter: { path: 'sportName' } }">
+							<core:Item text="{sportName}"  key="{sportName}"/>
+						</Select>
+						<Label text="{i18n>Services}"/>
+						<Select id="MembrershipServices" class="width-full" items="{ path: '/membership_Services', sorter: { path: 'servicesName' } }">
+							<core:Item text="{servicesName}" key="{servicesName}"/>
+						</Select>
+							<Label text="{i18n>Price}"/>
+						<Input type="Text" id="Prices" value="1000 AED" placeholder="Please Enter Price"/>
+						<core:Title/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox class="sapUiSmallrgin">
+				<f:SimpleForm id="SimpleFormSecondEdit" editable="true" layout="ResponsiveGridLayout" title="{i18n>mParticipantDetails}" labelSpanXL="4"
+					labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+					columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="true">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>mFirstName}"/>
+						<Input type="Text" id="editStudentFName" value="{firstName}"/>
+						<Label text="{i18n>mLastName}"/>
+						<Input type="Text" id="editStudentLName" value="{lastName}"/>
+						<Label text="{i18n>mClothingSize}"/>
+						<Input type="Text" id="editClothingSize" value="{clothingSize}"/>
+						<core:Title/>
+						<Label text="{i18n>mDOB}"/>
+						<DatePicker id="editDob" value="{DateTime}" change="handleDatePickerChange"/>
+						<Label text="{i18n>mNationality}"/>
+						<Input type="Text" id="editNationality" value="{nationalatiy}"/>
+						<Label text="{i18n>mGender}"/>
+						<RadioButtonGroup id="editRadio" columns="5" valueState="Success" editable="true">
+							<buttons>
+								<RadioButton id="editMale" text="{i18n>Male}"/>
+								<RadioButton id="editFemale" text="{i18n>Female}"/>
+							</buttons>
+						</RadioButtonGroup>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm id="SimpleFormDisplay480_ThirdTrialEdit" editable="true" layout="ResponsiveGridLayout" title="{i18n>mParentDetails}"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+					emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="true">
+					<f:content>
+						<core:Title text="{i18n>mFatherDetails}"/>
+						<Label text="{i18n>mFirstName}"/>
+						<Input type="Text" id="editFatherFirstName" value="{FaterFirstName}"/>
+						<Label text="{i18n>mLastName}"/>
+						<Input type="Text" id="editFatherLastName" value="{FatherLastName}"/>
+						<Label text="{i18n>mNationality}"/>
+						<Input type="Text" id="editFatherNationality" value="{FatherNationalatiy}"/>
+						<Label text="{i18n>Occupation}"/>
+						<Input type="Text" id="editOccupation" value="{FatherOccuption}"/>
+						<Label text="{i18n>mEmail}"/>
+						<Input type="Text" id="editFatherEmail" value="{FatherEmail}"/>
+						<Label text="{i18n>mMobile}"/>
+						<Input type="Text" id="editFatherMobile" value="{FatherMobile}"/>
+						<core:Title text="{i18n>MotherDetails}"/>
+						<Label text="{i18n>mFirstName}"/>
+						<Input type="Text" id="editMotherFirstName" value="{MotherFirstName}"/>
+						<Label text="{i18n>mLastName}"/>
+						<Input type="Text" id="editMotherLastName" value="{MotherLastName}"/>
+						<Label text="{i18n>mNationality}"/>
+						<Input type="Text" id="editMotherNationality" value="{MotherNationalatiy}"/>
+						<Label text="{i18n>mOccupation}"/>
+						<Input type="Text" id="editMotherOccupation" value="{MotherOccuption}"/>
+						<Label text="{i18n>mEmail}"/>
+						<Input type="Text" id="editMotherEmail" value="{MotherEmail}"/>
+						<Label text="{i18n>mMobile}"/>
+						<Input type="Text" id="editMotherMobile" value="{MotherMobile}"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm id="SimpleFormADDDetaisFourthaddtional" editable="true" layout="ResponsiveGridLayout" title="{i18n>PICKUPMYCHILDFROMCLASSARE}"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+					emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="true">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>Person1}"/>
+						<Input type="Text" id="editPerson1" value="{person1}"/>
+						<Label text="{i18n>Person2}"/>
+						<Input type="Text" id="editPerson2" value="{person2}"/>
+						<core:Title/>
+						<Label text="{i18n>mMobile} "/>
+						<Input type="Text" id="editPerson1Mobile" value="{person1Mobile}"/>
+						<Label text="{i18n>Mobile}"/>
+						<Input type="Text" id="editPerson2Mobile" value="{person2Mobile}"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm id="SimpleFormADDDetaisEmpersaFifthEdit" editable="true" layout="ResponsiveGridLayout" title="{i18n>EMERGENCYCONTACT}"
+					labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0"
+					emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2" singleContainerFullSize="true">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>mName}"/>
+						<Input type="Text" id="editEmergencyName" value="{EmergencyName}"/>
+						<Label text="{i18n>mMobile} "/>
+						<Input type="Text" id="editEmergencyMobile" value="{EmergencyMobile}"/>
+						<Label text="Additional Information"/>
+						<TextArea value="Becoming a Member" placeholder="Please Enter Additional Information" growing="true" class="width-full"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<VBox class="sapUiSmallMargin">
+				<f:SimpleForm editable="true" layout="ResponsiveGridLayout" title="{i18n>ClassInformation}" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+					labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+					singleContainerFullSize="true">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>mlocation}"/>
+						<Select id="editLocation" class="width-full" items="{ path: '/locations_Data', sorter: { path: 'locationName' } }">
+							<core:Item text="{locationName}"  key="{locationName}"/>
+						</Select>
+						<Label text="{i18n>mActivity} "/>
+						<Select id="editActivity" class="sapUiSmallMarginBottom" selectedKey="{Activity}" editable="true" enabled="true">
+							<items>
+								<core:Item text="{i18n>Cricket}" key="Cricket"/>
+								<core:Item text="{i18n>Hockey}" key="Hockey"/>
+								<core:Item text="{i18n>Tennis}" key="Tennis"/>
+								<core:Item text="{i18n>Football}" key="Football"/>
+								<core:Item text="{i18n>Volleyball}" key="Volleyball"/>
+							</items>
+						</Select>
+						<Label text="{i18n>mDateAndTime}"/>
+						<DateTimePicker id="editDateTime"  value="{DOB}" change="handleChange"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+			<Button class="margin-left-edit-cancel-membership" text="{i18n>Save}" press="onPressSaveEditSaveMembership"/>
+			<Button class="margin-left-edit-cancel-membership" text="{i18n>Cancel}" press="onPressAddCanelMembership"/>
+		</content>
+	</Page>
+</mvc:View>

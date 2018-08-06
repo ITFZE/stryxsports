@@ -1,0 +1,33 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.SportCategoryMaster" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="{i18n>scSportsCategoryMaster}" showNavButton="true" navButtonPress="onNavBackCategory">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchSportsCategoryMaster" placeholder="{i18n>scPleaseEnterSportCategoryName}" search="onSearchSportsCategory"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listSportsCategoryMaster" items="{SportsCategoryMaster>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>scNoitems}">
+				<items>
+					<ObjectListItem press="onPressSportsCategory" type="Active" title="{i18n>scCategoryName}: {SportsCategoryMaster>Name}">
+						<secondStatus>
+							<ObjectStatus text="{ path: 'SportsCategoryMaster>U_Status', formatter: '.setStatus'}" state="{ path: 'SportsCategoryMaster>U_Status', formatter: '.sportStatus' }"/>
+						</secondStatus>
+						<attributes>
+							<ObjectAttribute text="{i18n>scCategoryDescription}: {SportsCategoryMaster>U_CatDescpriction}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton tooltip="Add"  icon="sap-icon://add" visible="{checkPhoneModel>/CheckPhone}" text="{i18n>scAddSportsCategory}" press="onPressAddSportsCategory"/>
+				<OverflowToolbarButton tooltip="Filter"  icon="sap-icon://add-filter" text="{i18n>scAddSports}" press="onPressFilterSportsCategory"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

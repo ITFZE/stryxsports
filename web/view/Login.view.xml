@@ -1,0 +1,34 @@
+<mvc:View controllerName="com.ss.app.StryxSports.controller.Login"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout" height="100%" class="sapUiSizeCompact">
+	<Page showHeader="false" class="page-bg">
+		<l:BlockLayout class="exactCenter box">
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell class="txt-align-center">
+					<Image class="circle-log " src="./images/stryx_logo.jpg"/>
+					<Label class="txt-login-font-size txt-stryx" text="{i18n>STRYX}"/>
+					<Label class="txt-login-font-size txt-sports" text="{i18n>SPORTS}"/>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow visible="true" id="blockLayoutRowlogin">
+				<l:BlockLayoutCell class="txt-color">
+					<Label class="txt-color" text="{i18n>UserName}"/>
+					<Input id="inputUserName" value="{LoginModel>/U_UserName}" type="Text" placeholder="{i18n>PleaseEnterTheUserName}" onClick = "doSomething" />
+					<Label class="txt-color" text="{i18n>Password}"/>
+					<Input 
+					    id="inputPassword" 
+					    type="Password"
+					value="{LoginModel>/U_UserPwd}" placeholder="{i18n>PleaseEnterThePassword}" />
+					<core:Icon id="showHideIcon" class="size5" src="sap-icon://hide" useIconTooltip="false"  press="onPressShowHide"/>
+					<Button class="width-full btn-margin-top " id = "loginbutton" text="{i18n>Login}" press="onPressLogin"/>
+					<ToolbarSpacer/>
+					<!--<Link class="width-full c-align" emphasized="true" text="{i18n>Forgetpassword}" press="onPressForgetPassword"/>-->
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+	</Page>
+</mvc:View>

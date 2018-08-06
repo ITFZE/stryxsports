@@ -1,0 +1,85 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.create.SearchInvoice"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="searchInvoicePage" title="{i18n>si_SearchInvoice}" showNavButton="true" navButtonPress="onSearchBack">
+		<content>
+			<Panel width="auto">
+				<f:SimpleForm editable="true" 
+				layout="ResponsiveGridLayout" 
+				labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" 
+				emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+				columnsL="2" columnsM="2" singleContainerFullSize="false">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>si_InvoiceType}"/>
+						<Select id="searchInvoiceType" items="{/InvoiceStatusType}" change="getSelectedSearchType">
+							<core:Item text="{selectTxt}" key="{key}"/>
+						</Select>
+						<core:Title/>
+						<Label text="{i18n>si_MemberName}"/>
+						<Input id="sIMemberName" placeholder="{i18n>si_PleaseEnterTheMemberName}"  type="Text"/>
+					</f:content>
+				</f:SimpleForm>
+				<FlexBox
+					height="30px"
+					alignItems="Center"
+					justifyContent="Center">
+					<items>
+						<Button  text="{i18n>si_Search}" press="onPressSearchInvoice"  />
+					</items>
+				</FlexBox>
+			</Panel>
+			<Panel width="auto" visible="false" id="searchInvoiceTable">
+				<Table id="tblInvoiceTable"  class="width-full bg-color-table" growing="true" growingThreshold="10" items="{InvoicesList>/value}" >
+					<headerToolbar>
+						<Toolbar>
+							<content>
+								<Title id="invoicePanel" text="" />
+							</content>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+					  <!--  <Column width="12em" minScreenWidth="Desktop" demandPopin="true">
+							<Text text="Document Entry"/>
+						</Column>
+						<Column width="12em" minScreenWidth="Desktop" demandPopin="true">
+							<Text text="Document Number"/>
+						</Column> -->
+						<Column width="24em"  minScreenWidth="Desktop" demandPopin="true">
+							<Text text="Name"/>
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" >
+							<Text text="Price Total"/>
+						</Column>
+						<Column	width="8em" hAlign="End" minScreenWidth="Desktop" demandPopin="true" >
+							<Text/>
+						</Column>
+						<Column	width="0.3em" hAlign="End" minScreenWidth="Desktop" demandPopin="true" >
+							<Text/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+							   <!-- <Text text="{InvoicesList>Orders/DocEntry}"/>
+								<Text text="{InvoicesList>Orders/DocNum}"/> -->
+								<Text text="{InvoicesList>Orders/CardName}"/>
+								<Text text="AED {
+								path: 'InvoicesList>Orders/DocTotal',
+                				type: 'sap.ui.model.type.Float',
+                				formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}	"/>
+								<Button icon="{ path: 'InvoicesList>Orders/U_Status', formatter: '.setInvoiceIcons'}"  text="{ path: 'InvoicesList>Orders/U_Status', formatter: '.setCreateInvoice'}"  press="onPressListSelectedIteam" />
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

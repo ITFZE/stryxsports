@@ -1,0 +1,56 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.UserManagementDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="userDetilasPage" title="{i18n>umUserDetails}" showNavButton="{device>/system/phone}" navButtonPress="onBackUserManagement">
+		<content>
+			<VBox>
+				<f:SimpleForm id="Usermana"
+            			editable="true"
+            			layout="ResponsiveGridLayout"
+            			labelSpanXL="4"
+            			labelSpanL="4"
+            			labelSpanM="12"
+            			labelSpanS="12"
+            			adjustLabelSpan="false"
+            			emptySpanXL="0"
+            			emptySpanL="0"
+            			emptySpanM="0"
+            			emptySpanS="0"
+            			columnsXL="2"
+            			columnsL="2"
+            			columnsM="2"
+            			singleContainerFullSize="false" >
+					<f:content>
+						<core:Title />
+						<Label text="{i18n>umUserName}"/>
+						<Input value=" {mUserProfile>/FirstName} {mUserProfile>/LastName}" id="setUserName" editable="false" enabled="true"/>
+						<Label text="{i18n>umEmail}"/>
+						<Input value="{mUserProfile>/eMail}" id="setUserEmail" editable="false" enabled="true"/>
+						<Label text="{i18n>umNewPassword}"/>
+						<Input id="setUserNewPassword" placeholder="{i18n>umPleaseEnterTheNew}" type="Password" editable="true" enabled="true"/>
+						<core:Title />
+						<Label text="{i18n>umJobTitle}"/>
+						<Input value="{mUserProfile>/JobTitle}" id="setUserJobTitle" editable="false" enabled="true"/>
+						<Label text="{i18n>umContactNumber}"/>
+						<Input value="{mUserProfile>/MobilePhone}" id="setUserContactNumber" editable="false" enabled="true"/>
+						<Label text="{i18n>umConfirmPassword}"/>
+						<Input  id="setUserConfirmPassword" placeholder="{i18n>umPleaseEnterTheConfirm}" value="{userInfoModel>/U_Password}" type="Password" icon="sap-icon://show"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onUserProfileSave"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="OnUserProfileCancel"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

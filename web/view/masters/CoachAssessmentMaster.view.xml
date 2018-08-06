@@ -1,0 +1,36 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.CoachAssessmentMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="{i18n>caCoachAssessment}" showNavButton="true" navButtonPress="onNavBackAssessment">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="CoachAssessmentSearch" placeholder="{i18n>caPleaseEnterLeadName}" search="onSearchCoachAssessment"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listCoachAssessmentMaster" items="{AssessmentsList>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>caNoAssessmentItems}">
+				<items>
+					<ObjectListItem title="{i18n>caLeadName}: {AssessmentsList>Name}" type="Active" press="onListItemPressAssementList" >
+						<attributes>
+							<ObjectAttribute text="{i18n>caScheduleStartDate}: {AssessmentsList>U_ScheduleSDate}"/>
+							<ObjectAttribute text="{i18n>caScheduleEndTime}: {AssessmentsList>U_ScheduleETime}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add-filter" press="onPressAddCoachAssessmentFilter"></OverflowToolbarButton>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

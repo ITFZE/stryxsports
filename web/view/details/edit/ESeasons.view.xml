@@ -1,0 +1,55 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.edit.EditSeason"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page showHeader="true" id="editSeasonsPage" title="{i18n>sea_SeasonEdit}">
+		<content>
+			<l:Grid defaultSpan="L8 M12 S12" class="sapUiSmallMarginTop">
+				<l:content>
+					<f:SimpleForm id="efrmSeason" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label text="{i18n>sea_SeasonName}"/>
+							<Input id="editSeasons" 
+							value="{ 
+                                  path : 'SeasonEdit>/Name', 
+                                  type : 'sap.ui.model.type.String', 
+                                  constraints : { 
+                                      minLength : 1, 
+                                      maxLength : 50 
+                                  } }" placeholder="{i18n>sea_PleaseEnterSeasonName}"/>
+							<Label text="{i18n>sea_SeasonStartEndDate}"/>
+							<DateRangeSelection id="editSeasonsStartEndDates" 
+							value = "{SeasonEdit>/U_StartDate} - {SeasonEdit>/U_EndDate}"
+							valueFormat="yyyy-MM-DD" displayFormat="short" delimiter="-"
+							placeholder="{i18n>sea_PleaseEnterDate}" 
+							change="handleChange" />
+							<Label text="{i18n>sea_SeasonDescription}"/>
+							<TextArea id="editDescription" value="{SeasonEdit>/U_Description}" maxLength="1500" placeholder="{i18n>sea_PleaseEnterDescription}"/>
+							<Label text="{i18n>sea_SeasonStatus}"/>
+							<Select id="editSeasonsStatus" selectedKey="{SeasonEdit>/U_Status}" items="{path: 'BaseModel>/seasonState'}" >
+								<items>
+									<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+								</items>
+							</Select>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+			<l:Grid defaultSpan="L4 M12 S12" class="sapUiSmallMarginTop"></l:Grid>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressEditSaveSeasons"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressEditCancelSeasons"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

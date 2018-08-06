@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List  items="{TeamsFilter>/teamsFilterData}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonTeams">
+			<StandardListItem  title="{TeamsFilter>txt_teamsFilter}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" id="confirmTeamsfilter" visible="false"  press="onPressTeamsFilter"/>
+			<Button text="Close" press="dialogTeamsCloseFilter"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List  items="{CoachAssessmentFilter>/cassessment_filter}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonCoaAssessment">
+			<StandardListItem  title="{CoachAssessmentFilter>txt_Filter}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" id="CoachAssessmentfilter" visible="false" press="onPressSelectedAssessmentFilter"/>
+			<Button text="Close" press="onSearchDialogsCloseAssessmentMasterPage"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

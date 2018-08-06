@@ -1,0 +1,67 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog title = "Existing Parents">
+		<l:BlockLayout>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell>
+					<Label text="Name"/>
+					<Input id="pLeadName" placeholder="Please Enter The Name" class="width-full " type="Text"/>
+					<Label text="Mobile"/>
+					<Input id="pLeadMobile" placeholder="Please Enter The MobileNumber" class="width-full" type="Number"/>
+					<Button text="Search" press="onPressSearchParents"  />
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell>
+					<Label text="Email"/>
+					<Input id="pLeadEmail" placeholder="PleaseEnterTheEmail" class="width-full" type="Email"/>
+					<Label text="DOB"/>
+					<DatePicker id="pLeadDOB" change="handleChange" type="Number"/>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell id="shParentBlockLayoutCellTable">
+					<ScrollContainer  height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+						<Table id="tblPList" mode="SingleSelectLeft"  select="onPressSelectConfirm"  class="width-full bg-color-table" growing="true" growingThreshold="60" inset="false" items="{ParentExistingList>/value}">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title text="Parents" />
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Name"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Contact Number"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Email"/>
+								</Column>
+							</columns>
+							<items visible="false" id="pLParentNameTable">
+								<ColumnListItem>
+									<cells>
+										<Text text="{ParentExistingList>CardName}"/>
+										<Text text="{ParentExistingList>Cellular}"/>
+										<Text text="{ParentExistingList>EmailAddress}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+		<buttons>
+			<Button id="pLDialogConfirm" enabled="false" text="Confirm" press="onPressDialogConfirm"/>
+			<Button text="Close" press="onPressDialogClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

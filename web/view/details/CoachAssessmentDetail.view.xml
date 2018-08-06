@@ -1,0 +1,52 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.CoachAssessmentDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="CoachesAssessmentDetail" title="{i18n>caCoachAssessmentDetails}" showNavButton="{device>/system/phone}" navButtonPress="onBackCoachAssessment">
+		<content>
+			<f:SimpleForm id="SimpleFormCoacheAssessmentDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3"
+						labelSpanM="3" labelSpanS="12" emptySpanXL="3" emptySpanL="3" emptySpanM="3" emptySpanS="12" columnsXL="12"
+						columnsL="12" columnsM="2" singleContainerFullSize="true">
+				<f:content>
+					<Label text="{i18n>caLeadName}"/>
+					<Input type="Text" value="{CreateAssessments>/Name}" id="coachLeadName" editable="false" enabled="true"/>
+					<Label text="{i18n>caScheduleDateAndTime}"/>
+					<Input value="{CreateAssessments>/U_ScheduleSDate} To {CreateAssessments>/U_ScheduleEDate}" id="coachScheduleDate" enabled="true" editable="false"/>
+					<Input value="{CreateAssessments>/U_ScheduleSTime} To {CreateAssessments>/U_ScheduleETime}" id="coachScheduleTime" enabled="true" editable="false"/>
+					<Label text="{i18n>caComments}"/>
+					<TextArea groowing="true" 
+					value="{ 
+                                  path : 'CreateAssessments>/U_Comments', 
+                                  type : 'sap.ui.model.type.String', 
+                                  constraints : { 
+                                      minLength : 1, 
+                                      maxLength : 1500 
+                                  }
+                              }" placeholder="{i18n>PleaseEnterComment}" id="coachAssessmentComments" growingMaxLines="7"/>
+					<Label text="{i18n>caAssessmentFeesback}"/>
+					<Select id="coachFeedback" items="{AssessmentScoreList>/value}"
+					selectedKey="{
+					path: 'CreateAssessments>/U_AssessmentScore',
+					type: 'sap.ui.model.type.Integer', 
+					constraints : { minimum : 1 }}" change="selectedFeedback" >
+						<items >
+							<core:Item text="{AssessmentScoreList>Name}" key="{AssessmentScoreList>Code}"/>
+						</items>
+					</Select>
+				</f:content>
+			</f:SimpleForm>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="save" icon="sap-icon://save" press="onPressSaveCoachAssessment"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressCloseCoachAss"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

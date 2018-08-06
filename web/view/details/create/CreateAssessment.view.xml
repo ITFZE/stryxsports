@@ -1,0 +1,174 @@
+<core:View
+  controllerName="com.ss.app.StryxSports.controller.details.create.CreateAssessment"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:unified="sap.ui.unified"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:c="sap.suite.ui.commons">
+	<m:Page showNavButton="true" navButtonPress="onBack" id="createAssessmentPAGE" showHeader="true" title="{i18n>crA_CreateAssessment}">
+		<m:content>
+			<ObjectPageLayout id="createAssessmentObjectPageLayout" enableLazyLoading="false" showTitleInHeaderContent="true">
+				<headerTitle>
+					<ObjectPageHeader id="headerPageId" isActionAreaAlwaysVisible="true" 
+            				objectImageURI="sap-icon://customer"
+							objectTitle="{CreateAssessmentModel>/CardName} {path: 'CreateAssessmentModel>/U_SS_MEMBER_TYPE', formatter: '.childAdultFormatter'}"
+							objectImageShape="Circle"
+							objectImageAlt="{CreateAssessmentModel>/CardName}"
+    						isObjectIconAlwaysVisible="false"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false"
+							objectSubtitle=""/>
+				</headerTitle>
+				<headerContent>
+					<l:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop" text="{CreateAssessmentModel>/Cellular}"/>
+						<m:Link class="sapUiTinyMarginTop" text="{CreateAssessmentModel>/EmailAddress}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout>
+						<m:Label/>
+						<m:Label class="sapUiTinyMarginTop" text="{CreateAssessmentModel>/U_School}"/>
+						<m:Label class="sapUiTinyMarginTop" text="{CreateAssessmentModel>/U_Nationality}"/>
+					</l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout id="createAssessmetEmgHid" visible="false">
+						<m:Label id="creatEmergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
+						<m:HBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd " text="{CreateAssessmentModel>/ContactEmployees/1/Name}"/>
+								<m:Link class=" sapUiMediumMarginEnd" text="{CreateAssessmentModel>/ContactEmployees/1/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd " text="{CreateAssessmentModel>/ContactEmployees/2/Name}"/>
+								<m:Link class=" sapUiMediumMarginEnd" text="{CreateAssessmentModel>/ContactEmployees/2/MobilePhone}"/>
+							</m:VBox>
+							<m:VBox>
+								<m:Label class="sapUiSmallMarginEnd " text="{CreateAssessmentModel>/ContactEmployees/0/Name}"/>
+								<m:Link class=" sapUiMediumMarginEnd" text="{CreateAssessmentModel>/ContactEmployees/0/MobilePhone}"/>
+							</m:VBox>
+						</m:HBox>
+					</l:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection id="personalInformation" class="create-Assessment-Page-TopMargin">
+						<subSections>
+							<ObjectPageSubSection id="createObjectPage"  >
+								<blocks>
+									<l:VerticalLayout id="createAssessmentcontainerLayout" width="100%">
+										<l:BlockLayout>
+											<l:BlockLayoutRow>
+												<l:BlockLayoutCell>
+													<m:Label text="{i18n>crA_Lead}"/>
+													<m:Input id="createAssessmentLead" value="{CreateAssessments>/Name}" type="Text" placeholder = "{i18n>crA_PleaseEnterTheLead}" />
+													<m:Label text="{i18n>crA_Location}"/>
+													<m:ComboBox 
+                        							id="createAssessmentLocation" 
+                        							selectionChange="selectedLocation" 
+                        							placeholder="{i18n>crA_SelectLocation}"
+                        							class="width-full"
+                        							items="{path: 'LocationsList>/value',sorter: { path: 'Name' }}">
+														<core:Item key="{LocationsList>Code}" text="{LocationsList>Name}" />
+													</m:ComboBox>
+													<m:Label text="{i18n>crA_Team}"/>
+													<m:ComboBox 
+                    					            enabled="false"
+                        							id="createAssessmentTeam" 
+                        							selectionChange="selectedTeam"
+                        							placeholder="{i18n>crA_SelectTeamName}"
+                        							class="width-full"
+                        							items="{path: 'TeamsList>/value',sorter: { path: 'Name' }}">
+														<core:Item key="{TeamsList>Code}" text="{TeamsList>Name}" />
+													</m:ComboBox>
+													<m:Label text="{i18n>crA_CoachName}"/>
+													<m:ComboBox 
+                            						id="createAssessmentCoach"  
+                            						enabled="false"
+                            						placeholder="{i18n>crA_SelectCoachName}"
+                            						class="width-full" 
+                            						selectedKey="{CreateAssessments>/U_TeamCoachCode}" 
+                            						items="{CoachsList>/Coaches}" selectionChange="getCoachSchedule">
+														<core:Item text="{CoachsList>FirstName}" key="{CoachsList>tcCode}"/>
+													</m:ComboBox>
+												</l:BlockLayoutCell>
+												<l:BlockLayoutCell>
+													<m:Label text="{i18n>crA_AssessmentStartDate}"/>
+													<m:DateRangeSelection id="createAssessmentDate" placeholder="{i18n>crA_PleaseAssessmentStartDate}"	displayFormat="short" delimiter="-" />
+													<m:Label text = "{i18n>crA_AssessmentStartTime}"/>
+													<m:TimePicker minutesStep="15" class="width-full" id="cAStartTime" value="{CreateAssessments>/U_ScheduleSTime}" valueFormat="hh:mm a"  displayFormat="hh:mm a" />
+													<m:Label text = "{i18n>crA_AssessmentEndTime}"/>
+													<m:TimePicker minutesStep="15" class="width-full" id="cAEndTime" value="{CreateAssessments>/U_ScheduleETime}" valueFormat="hh:mm a"  displayFormat="hh:mm a"  />
+												</l:BlockLayoutCell>
+											</l:BlockLayoutRow>
+										</l:BlockLayout>
+										<m:VBox class="sapUiSmallMargin" id="planningCalenderVBox">
+											<m:PlanningCalendar
+                                			id="PC1"
+                                			startDate="{mCalenderSdate>/U_calenderSDate}"
+                                			viewKey="Day"
+                                			rows="{path: 'mcSchedule>/U_Coaches'}"
+                                			appointmentsVisualization="Filled"
+                                			appointmentSelect="handleAppointmentSelect"
+                                			showEmptyIntervalHeaders="false"
+                                			showWeekNumbers="true">
+												<m:toolbarContent>
+													<m:Title text="Coach Schedule" titleStyle="H4"/>
+												</m:toolbarContent>
+												<m:rows>
+													<m:PlanningCalendarRow
+                            					icon="sap-icon://employee-pane"
+                            					title="{mcSchedule>U_CoachName}"
+                            					text="Coach"
+                            					appointments="{path : 'mcSchedule>U_Schedules', templateShareable: 'true'}"
+                            					intervalHeaders="{path: '', templateShareable: 'true'}">
+														<m:customData>
+															<core:CustomData key="emp-name" value="{mcSchedule>U_CoachName}" writeToDom="true"/>
+														</m:customData>
+														<m:appointments>
+															<unified:CalendarAppointment
+                    							startDate="{parts: [{path : 'mcSchedule>U_ScheduleSDate'}, {path :'mcSchedule>U_ScheduleSTime'}],formatter:'.planningCalenderDate'}"
+                            					endDate="{parts: [{path : 'mcSchedule>U_ScheduleEDate'}, {path :'mcSchedule>U_ScheduleETime'}],formatter:'.planningCalenderDate'}"
+                    							icon="sap-icon://appointment-2"
+                    							title="{mcSchedule>Name}"
+                    							text="Assessment"
+                    							type="Type03"
+                    							tentative="false"></unified:CalendarAppointment>
+														</m:appointments>
+														<m:intervalHeaders>
+															<unified:CalendarAppointment
+                    							startDate=""
+                    							endDate=""
+                    							icon=""
+                    							title=""
+                    							type=""></unified:CalendarAppointment>
+														</m:intervalHeaders>
+													</m:PlanningCalendarRow>
+												</m:rows>
+											</m:PlanningCalendar>
+										</m:VBox>
+									</l:VerticalLayout>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+		<m:footer>
+			<m:Bar>
+				<m:contentRight>
+					<m:Button tooltip="Save" icon="sap-icon://save" press="handleSaveCreateAssementPress"/>
+					<m:Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="handleCancelCreateAssementPress"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:footer>
+	</m:Page>
+</core:View>

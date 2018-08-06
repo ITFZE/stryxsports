@@ -1,0 +1,135 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m"
+	xmlns:m="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.details.SendEmail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form" height="100%">
+	<Page id="emailDetails" showNavButton="true" navButtonPress="onNavEmailBack"  title="{i18n>EmailTemplate}">
+		<content>
+			<VBox>
+				<f:SimpleForm id="participantFormID" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false">
+					<f:content>
+						<core:Title/>
+						<Label text="{i18n>eTemplates}" />
+						<ComboBox placeholder="{i18n>ePleaseSelectEmailTemplate}" id="templatesEmail" items="{path: 'EmailTemplatesTypes>/value'}" 
+						selectedKey="{EmailTemplateModel>/U_TemplateType}"  enableBusyIndicator= "true" selectionChange="onChange">
+							<core:Item key="{EmailTemplatesTypes>Code}" text="{EmailTemplatesTypes>Name}" />
+						</ComboBox>
+						<!--	<core:Title/><Label text="{i18n>eTemplateStatus}"/><Select id="emailStatus" items="{path: 'BaseModel>/seasonState'}" selectedKey="{EmailTemplateModel>/U_Status}"><items><core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"	/></items></Select> -->
+					</f:content>
+				</f:SimpleForm>
+				<form:SimpleForm id="htmlSimpleTemplate" layout="ResponsiveGridLayout" editable="true">
+					<core:Title text="{i18n>EmailTemplate}" />
+					<html:textarea id="emailEditor" value="{mTemplates>/U_Template}" maxlength="10" rows="4" cols="50" name="editor1"/>
+				</form:SimpleForm>
+			</VBox>
+		</content>
+		<IconTabBar id="tabParents" expanded="{device>/isNoPhone}" >
+			<items>
+				<IconTabFilter id="tabTeams" key="Email" text="Teams" icon="sap-icon://employee">
+					<ScrollContainer height="100%"
+                    		width="100%"
+                    		horizontal="true"
+                    		vertical="true"
+                    		focusable="true">
+						<l:BlockLayout>
+							<l:BlockLayoutRow>
+								<l:BlockLayoutCell></l:BlockLayoutCell>
+								<l:BlockLayoutCell>
+									<Label text="Team Name :"/>
+									<Input id="inTeam" placeholder="Please Enter The Name" class="width-full" type="Text"/>
+									<Button text="Search" press="onPressSearchTeam"  />
+								</l:BlockLayoutCell>
+								<l:BlockLayoutCell></l:BlockLayoutCell>
+							</l:BlockLayoutRow>
+							<l:BlockLayoutRow>
+								<l:BlockLayoutCell id="BLCTableView">
+									<Table  mode="MultiSelect" title="Add Coach" search="handleSearch" confirm="onAddCoachToTeam"
+                                		cancel="handleCloseTableDialog" items="{mTeamList>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+                                				enableBusyIndicator="true" noDataText="No items">
+										<ColumnListItem>
+											<cells>
+												<Text text="{mTeamList>Name}"/>
+												<Text text="{mTeamList>U_StartDate}"/>
+												<Text text="{mTeamList>U_EndDate}"/>
+											</cells>
+										</ColumnListItem>
+										<columns>
+											<Column hAlign="Left">
+												<Text text="Team Name"/>
+											</Column>
+											<Column hAlign="Center">
+												<Text text="Start Date"/>
+											</Column>
+											<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Right">
+												<Text text="End Date"/>
+											</Column>
+										</columns>
+									</Table>
+								</l:BlockLayoutCell>
+							</l:BlockLayoutRow>
+						</l:BlockLayout>
+					</ScrollContainer>
+				</IconTabFilter>
+				<IconTabFilter id="tabMembers" key="Members" text="Members" icon="sap-icon://person-placeholder">
+					<ScrollContainer height="100%"
+                    		width="100%"
+                    		horizontal="true"
+                    		vertical="true"
+                    		focusable="true">
+						<l:BlockLayout>
+							<l:BlockLayoutRow>
+								<l:BlockLayoutCell></l:BlockLayoutCell>
+								<l:BlockLayoutCell>
+									<Label text="Member Name :"/>
+									<Input placeholder="Please Enter The Name" class="width-full" type="Text"/>
+									<Button text="Search" press=""  />
+								</l:BlockLayoutCell>
+								<l:BlockLayoutCell></l:BlockLayoutCell>
+							</l:BlockLayoutRow>
+							<l:BlockLayoutRow>
+								<l:BlockLayoutCell id="BLCMemberTableView">
+									<Table  title="Add Member"
+                                		cancel="handleCloseTableDialog" items="{TeamsList>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+                                				enableBusyIndicator="true" noDataText="No items">
+										<ColumnListItem>
+											<cells>
+												<CheckBox  />
+												<Text text="{mTeamList>Name}"/>
+												<Text text="{mTeamList>U_StartDate}"/>
+												<Text text="{mTeamList>U_EndDate}"/>
+											</cells>
+										</ColumnListItem>
+										<columns>
+											<Column hAlign="Left">
+												<Text text="Member Code"/>
+											</Column>
+											<Column hAlign="Center">
+												<Text text="Member Name"/>
+											</Column>
+										</columns>
+									</Table>
+								</l:BlockLayoutCell>
+							</l:BlockLayoutRow>
+						</l:BlockLayout>
+					</ScrollContainer>
+				</IconTabFilter>
+			</items>
+		</IconTabBar>
+		<l:BlockLayout>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell></l:BlockLayoutCell>
+				<l:BlockLayoutCell>
+					<Button text="Send" press=""  />
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell></l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+	</Page>
+</mvc:View>

@@ -1,0 +1,66 @@
+<mvc:View controllerName="com.ss.app.StryxSports.controller.details.CreateAssessmentsDetail"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="createAssessmentDetailPage" showHeader="true" title="{i18n>crA_SearchLeads}" showNavButton="true" navButtonPress="onNavBack">
+		<content>
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<Label text="{i18n>crA_FirstName}"/>
+						<Input id="sLeadName" placeholder="{i18n>crA_PleaseEnterTheName}" class="width-full " type="Text"/>
+						<Label text="{i18n>crA_Mobile}"/>
+						<Input id="sLeadMobile" placeholder="{i18n>crA_PleaseEnterTheMobileNumber}" class="width-full" type="Number"/>
+						<Button text="{i18n>crA_SearchLeads}" press="onPressSearchLeads"  />
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell>
+						<Label text="{i18n>crA_Email}"/>
+						<Input id="sLeadEmail" placeholder="{i18n>crA_PleaseEnterTheEmail}" class="width-full" type="Email"/>
+						<Label text="{i18n>crA_DOB}"/>
+						<DatePicker id="sLeadDOB" placeholder="{i18n>crA_PleaseEnteDate}" change="handleChange" type="Number"/>
+						<Button text="{i18n>crA_SearchInactiveMembers}" class = "createassessmentspadding" press="onPressSearchInactiveMembers" />
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+				<l:BlockLayoutRow class="table-leads-padding" visible="false" id="tableAssessmentBlockLayoutRow">
+					<l:BlockLayoutCell class="table-leads-padding">
+						<Table class="width-full bg-color-table" growing="true" growingThreshold="10" inset="false" items="{AssessmentList>/value}">
+							<headerToolbar>
+								<Toolbar>
+									<content>
+										<Title id="AssessmentPanel" text="Lead" />
+									</content>
+								</Toolbar>
+							</headerToolbar>
+							<columns>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>crA_LastName}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>crA_ContactNumber}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>crA_Email}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End"></Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{AssessmentList>CardName}"/>
+										<Text text="{AssessmentList>Cellular}"/>
+										<Text text="{AssessmentList>EmailAddress}"/>
+										<Button icon="sap-icon://add" press="handleEditDetailAssessmentPress"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+		</content>
+	</Page>
+</mvc:View>

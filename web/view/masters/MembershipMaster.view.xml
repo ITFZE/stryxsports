@@ -1,0 +1,37 @@
+<mvc:View xmlns:core="sap.ui.core" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns:l="sap.ui.layout" 
+xmlns:f="sap.ui.layout.form"
+xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
+xmlns="sap.m"
+controllerName="com.ss.app.StryxSports.controller.masters.MembershipMaster" 
+xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="{i18n>MembershipMaster}" showNavButton="true" navButtonPress="onNavBack">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchMembershipMaster" type="Number" placeholder="{i18n>PleaseEnterLocation }" liveChange="onSearchCoachesMembershipMasterPage"
+					width="100%" showRefreshButton="{}"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="membershipListData" type="Active" delete="handleDelete" growing="true" growingThreshold="5" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>mNoitems}" items="{/membership}">
+				<ObjectListItem title="{i18n>mlocation} : {Location}" type="Active" press="onListItemPressMembershipList">
+					<attributes>
+						<ObjectAttribute text="{i18n>mDOB} : {DOB}"/>
+						<ObjectAttribute text="{i18n>mFullName} : {firstName}{lastName}"/>
+						<ObjectAttribute text="{i18n>mMobile} : {MotherMobile}"/>
+						<ObjectAttribute text="{i18n>mEmail} : {FatherEmail}"/>
+						<ObjectAttribute text="{i18n>mActivity} : {Activity}"/>
+					</attributes>
+				</ObjectListItem>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton icon="sap-icon://add-filter" text="{i18n>AddParts}" press="onPressAddCoachMembershipFilter"></OverflowToolbarButton>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

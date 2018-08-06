@@ -1,0 +1,644 @@
+{
+	"sideNavigation": [{
+			"title": "Home",
+			"icon": "sap-icon://home",
+			"expanded": false,
+			"key": "DashBoard"
+
+	}, {
+			"title": "Leads, Accounts, Teams & Invoice",
+			"icon": "sap-icon://accounting-document-verification",
+			"expanded": false,
+			"key": "DashBoard",
+			"items": [
+
+				{
+					"title": "Leads",
+					"key": "Leads"
+		},
+				{
+					"title": "Accounts",
+					"key": "SearchMembership"
+		},
+				{
+					"title": "Teams",
+					"key": "TeamsDetail"
+		},
+				{
+					"title": "Activities",
+					"key": "SearchActivity"
+		},
+				{
+					"title": "Invoice and Payment",
+					"key": "SearchInvoice"
+		}]
+	},
+		{
+			"title": "Assessments",
+			"icon": "sap-icon://activity-assigned-to-goal",
+			"expanded": false,
+			"key": "DashBoard",
+			"items": [{
+				"title": "Create Assessment",
+				"key": "SearchLeads"
+		}, {
+				"title": "Coach Assessment",
+				"key": "CoachAssessment"
+		}, {
+				"title": "Assessment Feedback",
+				"key": "AssessmentFeedbackDetail"
+		}]
+	},
+	
+	{
+			"title": "Events",
+			"icon": "sap-icon://appointment",
+			"expanded": false,
+			"key": "Events",
+			"items": [{
+				"title": "Create Evnet",
+				"key": "CreateEvnet"
+		}]
+	
+	},
+		{
+			"title": "Templates",
+			"icon": "sap-icon://database",
+			"expanded": false,
+			"key": "DashBoard",
+			"items": [{
+				"title": "Email",
+				"key": "EmailTemplate"
+		}, {
+				"title": "SMS",
+				"key": "SMSTemplate"
+		}]
+	},
+		{
+			"title": "Masters",
+			"icon": "sap-icon://gantt-bars",
+			"expanded": false,
+			"key": "DashBoard",
+			"items": [{
+				"title": "Sports",
+				"key": "Sports"
+		}, {
+				"title": "Sports Category",
+				"key": "SportsCategory"
+		}, {
+				"title": "Locations",
+				"key": "Location"
+		}, {
+				"title": "Seasons",
+				"key": "Seasons"
+		}, {
+				"title": "Coaches",
+				"key": "CoachesDetail"
+		}, {
+				"title": "Teams",
+				"key": "Teams"
+		}]
+	},
+		{
+			"title": "User Management",
+			"icon": "sap-icon://employee-pane",
+			"expanded": false,
+			"key": "DashBoard",
+			"items": [{
+				"title": "Users",
+				"key": "UserManagement"
+		}]
+	}
+	],
+
+	"gender_Data": [
+		{
+			"txtGender": "Male"
+	    },
+		{
+			"txtGender": "Female"
+	    }
+	    ],
+
+	"seasonState": [{
+		"selectTxt": "Active",
+		"keyStatus": "1"
+	}, {
+		"selectTxt": "Inactive",
+		"keyStatus": "2"
+	}],
+	"addSportStatus": [{
+		"selectTxt": "Active",
+		"keyStatus": "1"
+	}, {
+		"selectTxt": "Inactive",
+		"keyStatus": "2"
+	}],
+
+	"Howdidyouhearaboutus": [
+		{
+			"selectTxt": "Word of Mouth",
+			"key": "Word of Mouth"
+	}, {
+			"selectTxt": "Employee Referral",
+			"key": "Employee Referral"
+	},
+		{
+			"selectTxt": "Information from school",
+			"key": "Information from school"
+	},
+		{
+			"selectTxt": "Social Media",
+			"key": "Social Media"
+	},
+		{
+			"selectTxt": "Advertisement on google",
+			"key": "Advertisement on google"
+	},
+		{
+			"selectTxt": "Flyer",
+			"key": "Flyer"
+	},
+		{
+			"selectTxt": "Newspaper",
+			"key": "Newspaper"
+	},
+		{
+			"selectTxt": "Emailing",
+			"key": "Emailing"
+	}
+
+	],
+
+	"SportsFilterData": [
+		{
+			"txt_SportsFilter": "Sport Name"
+	}, {
+			"txt_SportsFilter": "Sport Description"
+	}],
+	"sportsCategoryFilterData": [{
+		"txt_SportsCategoryFilter": "Sport Category Name"
+	}, {
+		"txt_SportsCategoryFilter": "Sport Category Description"
+	}],
+	"userManagementFilterData": [
+		{
+			"txt_UserManagementFilter": "User First Name"
+	}, {
+			"txt_UserManagementFilter": "User Last Name"
+	}, {
+			"txt_UserManagementFilter": "User Email"
+	},
+		{
+			"txt_UserManagementFilter": "Contact Number"
+	}],
+	"teamsFilterData": [{
+		"txt_teamsFilter": "Team Name"
+	}, {
+		"txt_teamsFilter": "Start Date"
+	}, {
+		"txt_teamsFilter": "End Date"
+	}],
+
+	"locationsData": [{
+		"txt_LocationsFilter": "Location Name"
+	}, {
+		"txt_LocationsFilter": "Location Admin"
+	}, {
+		"txt_LocationsFilter": "Location Responsible"
+	}],
+	"coachesFilterData": [{
+		"txt_CoachesFilter": "Coach First Name"
+	}, {
+		"txt_CoachesFilter": "Coach Last Name"
+	}, {
+		"txt_CoachesFilter": "Contact Number"
+	}, {
+		"txt_CoachesFilter": "Coach Email"
+	}],
+	"seasonsFilterData": [{
+			"filterName": "Season Name"
+	},
+		{
+			"filterName": "Season Start Date"
+	},
+		{
+			"filterName": "Season End Date"
+	},
+		{
+			"filterName": "Season Description"
+	}],
+
+	"cassessment_filter": [{
+		"txt_Filter": "Lead Name"
+	}, {
+		"txt_Filter": "Schedule Date"
+	}, {
+		"txt_Filter": "Schedule Time"
+	}],
+	"assessment_filter_data": [{
+		"assessment_filter": "Assessment Name"
+	}, {
+		"assessment_filter": "Comments"
+	}],
+	"assessment_Status_Data": [{
+		"assessment_Status": "Passed",
+		"activeType": "Success"
+	}, {
+		"assessment_Status": "Failed",
+		"activeType": "Error"
+	}],
+	"locations_Data": [{
+		"locationName": "Amity-Abu Dhabi"
+	}, {
+		"locationName": "British Columbia"
+	}, {
+		"locationName": "DAA"
+	}, {
+		"locationName": "DBS - JP"
+	}, {
+		"locationName": "Dubai Sports City"
+	}],
+	"membershipFilterData": [{
+			"filterName": "Location"
+		}, {
+			"filterName": "Activity"
+		},
+
+		{
+			"filterName": "DOB"
+		}, {
+			"filterName": "Gendar"
+		}, {
+			"filterName": "Father Mobile"
+		}, {
+			"filterName": "Father Email"
+		}, {
+			"filterName": "Mother Mobile"
+		}, {
+			"filterName": "Mother Email"
+		}, {
+			"filterName": "Nationality"
+		}, {
+			"filterName": "Father Occupation"
+		}
+	],
+	"membership_Services": [{
+		"servicesName": "FCB at Foremarke"
+	}, {
+		"servicesName": "RG - REGENT - One time per week - Full Price - Term 1"
+	}, {
+		"servicesName": "Born to Move at SISD - 13 sessions"
+	}, {
+		"servicesName": "FCB ASA at SISD - 16 sessions"
+	}, {
+		"servicesName": "1 DAY CAMP - AED 200"
+	}],
+	"membership": [{
+		"membershipID": 0,
+		"firstName": "Vinoth",
+		"lastName": "Kumar",
+		"DOB": "05/04/2000",
+		"Gender": "Male",
+		"Activity": "Cricket",
+		"Location": "Amity-Abu Dhabi",
+		"DateTime": "Apr 9, 2018, 6:51:18 PM",
+		"clothingSize": "XXS",
+		"nationalatiy": "UAE",
+		"FaterFirstName": "Tom ",
+		"FatherLastName": "Cruise",
+		"FatherOccuption": "Model",
+		"FatherNationalatiy": "UAE",
+		"FatherEmail": "TomCruise@gmail.com",
+		"FatherMobile": "9412115468",
+		"MotherFirstName": "Jennifer ",
+		"MotherLastName": "Morrison",
+		"MotherOccuption": "House Wife",
+		"MotherNationalatiy": "UAE",
+		"MotherEmail": "Jennifer@gmail.com",
+		"MotherMobile": "8056235687",
+		"person1": "Mani",
+		"person1Mobile": "99451236589",
+		"person2": "Joel Jeeva Kumar",
+		"person2Mobile": "7512456852",
+		"EmergencyName": "Tom Crusise",
+		"EmergencyMobile": "9884121154"
+	}],
+
+	"createMemType": [
+		{
+			"text": "Select Type",
+			"key": -1
+	}, {
+			"text": "Lead",
+			"key": "1"
+	}, {
+			"text": "Account",
+			"key": "2"
+
+	    }
+	 ],
+	"InvoiceStatusType": [
+		{
+			"selectTxt": "Select Invoice Status Type",
+			"key": -1
+	},
+		{
+			"selectTxt": "Pending Invoice Creation",
+			"key": "1"
+	},
+		{
+			"selectTxt": "Pending Payment",
+			"key": "2"
+	},
+		{
+			"selectTxt": "Payment Done",
+			"key": "3"
+	}
+	     ],
+	"SearchLeadsTypeData": [
+		{
+			"selectTxt": "Select Type",
+			"key": -1
+
+		}, {
+			"selectTxt": "Leads",
+			"key": "1"
+
+		},
+		{
+			"selectTxt": "Inactive Accounts",
+			"key": "2"
+
+		}
+		],
+	"SearchActivity_Data": [
+		{
+			"CardCode": "LD0001",
+			"ActivityDate": "2018-05-25",
+			"ActivityTime": "16:32:00",
+			"StartDate": "2018-05-25",
+			"Subject": "Tennis",
+			"StartTime": "16:32:00",
+			"EndTime": "16:47:00",
+			"icon": "sap-icon://customer",
+			"info": "info"
+        },
+		{
+			"CardCode": "CH005093",
+			"ActivityDate": "2018-05-30",
+			"ActivityTime": "11:44:00",
+			"StartDate": "2018-05-30",
+			"Subject": "Squash",
+			"StartTime": "11:44:00",
+			"EndTime": "11:59:00",
+			"icon": "sap-icon://customer"
+        },
+		{
+			"CardCode": "CH005094",
+			"ActivityDate": "2018-05-30",
+			"ActivityTime": "11:54:00",
+			"StartDate": "2018-05-30",
+			"Subject": "Holiday Camp",
+			"StartTime": "11:30:00",
+			"EndTime": "11:45:00",
+			"icon": "sap-icon://customer"
+        },
+		{
+			"CardCode": "CH005094",
+			"ActivityDate": "2018-05-30",
+			"ActivityTime": "11:55:00",
+			"StartDate": "2018-06-07",
+			"Subject": "FCB",
+			"StartTime": "11:55:00",
+			"EndTime": "12:10:00",
+			"icon": "sap-icon://customer"
+        },
+		{
+			"CardCode": "CH000001",
+			"ActivityDate": "2018-06-01",
+			"ActivityTime": "11:07:00",
+			"StartDate": "2018-06-01",
+			"Subject": "Cricket",
+			"StartTime": "11:07:00",
+			"EndTime": "11:22:00",
+			"icon": "sap-icon://customer"
+        }
+		],
+	"SelectActivity": [
+		{
+			"SA_Txt": "Select The Activity",
+			"key": -1,
+			"icon": "sap-icon://physical-activity"
+		    },
+		{
+			"SA_Txt": "Phone Call",
+			"key": "cn_Conversation",
+			"icon": "sap-icon://call"
+		    },
+		{
+			"SA_Txt": "Meeting",
+			"key": "cn_Meeting",
+			"icon": "sap-icon://manager"
+		    },
+		{
+			"SA_Txt": "Task",
+			"key": "cn_Task",
+			"icon": "sap-icon://activities"
+		    },
+		{
+			"SA_Txt": "Note",
+			"key": "cn_Note",
+			"icon": "sap-icon://notes"
+		    },
+		{
+			"SA_Txt": "Campaign",
+			"key": "cn_Campaign",
+			"icon": "sap-icon://marketing-campaign"
+		    },
+		{
+			"SA_Txt": "Other",
+			"key": "cn_Other",
+			"icon": "sap-icon://sys-find-next"
+		    }
+		    ],
+	"SelectBusinessPartners": [
+		{
+			"CardName": "Select The Business Partner",
+			"CardCode": -1
+	    },
+		{
+			"CardCode": "CH001829",
+			"CardName": "Yousef Wazni"
+        },
+		{
+			"CardCode": "AD006939",
+			"CardName": "Father 108"
+        },
+		{
+			"CardCode": "CH001832",
+			"CardName": "Rosalie Holmes"
+        },
+		{
+			"CardCode": "CH001833",
+			"CardName": "Ayda Johnston"
+        },
+		{
+			"CardCode": "CH001834",
+			"CardName": "Mackenzie Price"
+        },
+		{
+			"CardCode": "CH001835",
+			"CardName": "Jayden Nguyen-Lazarus"
+        },
+		{
+			"CardCode": "CH001836",
+			"CardName": "Chysaila Petrids"
+        },
+		{
+			"CardCode": "CH001837",
+			"CardName": "Maggie Prkin"
+        },
+		{
+			"CardCode": "CH001838",
+			"CardName": "Spencer Bagnall"
+        },
+		{
+			"CardCode": "CH001839",
+			"CardName": "Alisa Emelianova"
+        },
+		{
+			"CardCode": "CH003656",
+			"CardName": "Seif Tantawy"
+        },
+		{
+			"CardCode": "CH001841",
+			"CardName": "Petros Petrids"
+        },
+		{
+			"CardCode": "CH001842",
+			"CardName": "Michaila Arnat"
+        },
+		{
+			"CardCode": "CH001843",
+			"CardName": "Hanna Surber"
+        },
+		{
+			"CardCode": "CH001844",
+			"CardName": "Arlie Winkler"
+        },
+		{
+			"CardCode": "CH001846",
+			"CardName": "Omar Abdelmoneim"
+        },
+		{
+			"CardCode": "CH001847",
+			"CardName": "Sabella Sirany"
+        },
+		{
+			"CardCode": "CH001848",
+			"CardName": "Thomas Whitt"
+        },
+		{
+			"CardCode": "CH001849",
+			"CardName": "Soraya Sirany"
+        },
+		{
+			"CardCode": "CH001850",
+			"CardName": "Arianna Gamba"
+        }
+        ],
+	"SelectType": [
+		{
+			"ST_Txt": "Select The Type",
+			"key": -1
+        },
+		{
+			"ST_Txt": "General",
+			"key": 1
+        }
+            ],
+	"SelectSubject": [
+		{
+			"ST_Txt": "Select The Subject",
+			"key": -1
+        },
+		{
+			"ST_Txt": "Sports",
+			"key": 1
+        }
+            ],
+	"SelectType_Date": [
+		{
+			"ST_Txt": "Select The Type",
+			"key": -1
+        },
+		{
+			"ST_Txt": "Child",
+			"key": 1
+        },
+		{
+			"ST_Txt": "Adult",
+			"key": 2
+        }
+    ],
+	"timelineList": [
+		{
+			"HireDate": "18/06/2018",
+			"JobTitle": "Junior Software Developer",
+			"Photo": "",
+			"JobResponsibilities": "Google is my dream company",
+			"Name": "Sreeharsha G V",
+			"Icon": "sap-icon://employee"
+        },
+		{
+			"HireDate": "17/06/2018",
+			"JobTitle": "Software Developer",
+			"Photo": "",
+			"JobResponsibilities": "HP is my dream company",
+			"Name": "Vinoth Kumar",
+			"Icon": "sap-icon://employee"
+        },
+		{
+			"HireDate": "16/06/2018",
+			"JobTitle": "Senior Software Developer",
+			"Photo": "",
+			"JobResponsibilities": "Oracle is my dream company",
+			"Name": "Harish R",
+			"Icon": "sap-icon://employee"
+        },
+		{
+			"HireDate": "15/06/2018",
+			"JobTitle": "Technical Architect",
+			"Photo": "",
+			"JobResponsibilities": "Apple is my dream company",
+			"Name": "Gopi A",
+			"Icon": "sap-icon://employee"
+        },
+		{
+			"HireDate": "14/06/2018",
+			"JobTitle": "CTO",
+			"Photo": "",
+			"JobResponsibilities": "Samsung is my dream company",
+			"Name": "Anish Romario",
+			"Icon": "sap-icon://employee"
+        }],
+	"SelectItemType": [
+		{
+			"ST_Txt": "Select The Type",
+			"key": -1
+        },
+		{
+			"ST_Txt": "Items",
+			"key": 1
+        },
+		{
+			"ST_Txt": "Labor",
+			"key": 2
+        },
+		{
+			"ST_Txt": "Travel",
+			"key": 3
+        }
+    ]
+}

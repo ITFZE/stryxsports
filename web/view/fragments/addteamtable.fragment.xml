@@ -1,0 +1,68 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog title = "Existing Leads">
+		<l:BlockLayout>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell>
+					<Label text="Name"/>
+					<Select id="pLeadSelectType" change="getSelectedType"  class="width-full" selectedKey="{SportsModel>/U_Status}">
+						<items>
+							<core:Item text="Select The Type" key="-1"/>
+							<core:Item text="Members" key="1"/>
+							<core:Item text="Leads" key="2"/>
+						</items>
+					</Select>
+					<Label text="Name"/>
+					<Input id="pLeadName" placeholder="Please Enter The Name" class="width-full" type="Text"/>
+					<Button text="Search" press="onPressSearchLead"  />
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell>
+					<Label text="Email"/>
+					<Input id="pLeadEmail" placeholder="PleaseEnterTheEmail" class="width-full" type="Email"/>
+					<Label text="Mobile"/>
+					<Input id="pLeadMobile" placeholder="Please Enter The MobileNumber" class="width-full" type="Number"/>
+					<!--	<Label text="DOB"/><DatePicker enabled="false" id="pLeadDOB" change="handleChange" type="Number"/> !-->
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell id="BLCTableView">
+					<ScrollContainer  height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+						<Table  id="tblPList" mode="SingleSelectLeft"  select="onPressSelectConfirm"  class="width-full bg-color-table" growing="true" growingThreshold="60" inset="false" items="{ExistingLeadList>/value}">
+						
+							<columns>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Name"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Contact Number"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Email"/>
+								</Column>
+							</columns>
+							<items visible="false" id="pLParentNameTable">
+								<ColumnListItem>
+									<cells>
+										<Text text="{createTeamModel>Name}"/>
+										<Text text="{createTeamModel>U_Location}"/>
+										<Text text="{createTeamModel>U_Status}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+		<!-- <buttons>
+			<Button id="pLDialogConfirm" enabled="false" text="Confirm" press="onPressDialogConfirm"/>
+			<Button text="Close" press="onPressDialogClose"/> 
+		</buttons> -->
+	</Dialog>
+</core:FragmentDefinition>

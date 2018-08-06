@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List items="{UserFilter>/userManagementFilterData}" mode="SingleSelectLeft"  includeItemInSelection="true" select="getViewonCoachs">
+			<StandardListItem  title="{UserFilter>txt_UserManagementFilter}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button id="confirmDialogUserBtn" visible="false" text="Confirm" press="onPressFilterConfirm"/>
+			<Button text="Close" press="onPressDialogClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,93 @@
+<mvc:View
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.details.Payment"
+	xmlns="sap.m">
+	<Page showNavButton="true" title="Payment" showHeader="true" navButtonPress="onBack">
+		<content>
+			<VBox
+			 alignItems="Center"
+			 justifyContent="Center"
+			 width="100%">
+				<SegmentedButton class="btn-margin-top" id="PTSegmentedButton" selectedKey="Credit Card"  select="getSelectedItem">
+					<items>
+						<SegmentedButtonItem key="1"  icon="sap-icon://credit-card" text="Credit Card" />
+						<SegmentedButtonItem key="2" icon="sap-icon://official-service" text="Bank Transfer" />
+						<SegmentedButtonItem key="3" icon="sap-icon://money-bills" text="Cash On Delivery" />
+					</items>
+				</SegmentedButton>
+			</VBox>
+			<Panel  class="btn-margin-top"  width="auto" id="card" >
+				<headerToolbar>
+					<Toolbar height="0rem">
+						<Title text=""/>
+					</Toolbar>
+				</headerToolbar>
+				<f:SimpleForm 	editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false" >
+					<f:content>
+						<Label text="Name on card" required="true" />
+						<Input value="{/CreditCard/Name}" liveChange="checkCreditCardStep" valueLiveUpdate="true" />
+						<Label text="Card number"/>
+						<Input value="{/CardNumber}" />
+						<Label text="Security code" />
+						<Input value="{/CreditCard/SecurityCode}" />
+						<Label text="Expiration date" />
+						<DatePicker value="{/CreditCard/Expire}" />
+					</f:content>
+				</f:SimpleForm>
+			</Panel>
+			<Panel width="auto"  class="btn-margin-top"  id="Bank" visible="false">
+				<headerToolbar>
+					<Toolbar height="0rem">
+						<Title text=""/>
+					</Toolbar>
+				</headerToolbar>
+				<l:Grid
+										defaultSpan="L6 M6 S10"
+										hSpacing="2">
+					<Label text="Beneficiary Name" design="bold" />
+					<Label text="Singapore Hardware e-Commerce LTD" />
+					<Label text="Beneficiary Bank" design="bold" />
+					<Label text="CITY BANK, SINGAPORE BRANCH" />
+					<Label text="Beneficiary Account Number" design="bold" />
+					<Label text="06110702027218" />
+					<Label text="Bank Phone Number" design="bold" />
+					<Label text="+65-6224-2622" />
+					<Label text="Bank Email Address" design="bold" />
+					<Label text="customerservice@citybank.com" />
+				</l:Grid>
+			</Panel>
+			<Panel width="auto"  class="btn-margin-top"  id="Cash" visible="false">
+				<headerToolbar>
+					<Toolbar height="0rem">
+						<Title text=""/>
+					</Toolbar>
+				</headerToolbar>
+				<f:SimpleForm 	editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false" >
+					<f:content>
+						<Label text="First Name" required="true" />
+						<Input value="{/CashOnDelivery/FirstName}" liveChange="checkCashOnDeliveryStep" valueLiveUpdate="true" />
+						<Label text="Last Name" />
+						<Input value="{/CashOnDelivery/LastName}" />
+						<Label text="Phone Number" />
+						<Input value="{/CashOnDelivery/Phone Number}" />
+						<Label text="Email address" />
+						<Input value="{/CashOnDelivery/Email}" />
+					</f:content>
+				</f:SimpleForm>
+			</Panel>
+			<HBox alignItems="Center" justifyContent="Center">
+				<Button text="Save" press="onBack"/>
+			</HBox>
+		</content>
+	</Page>
+</mvc:View>
+	

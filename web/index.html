@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+		<meta http-equiv="cache-control" content="no-cache" />
+		<title>StryxSports</title>
+		<link href="images/stryx_logo.jpg" rel="stryxsports icon" type="image/x-icon" />
+		<script id="sap-ui-bootstrap"
+		src="https://sapui5.hana.ondemand.com/1.54.5/resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-language="en"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-xx-bindingSyntax="complex"
+			data-sap-ui-preload="auto"
+			data-sap-ui-resourceroots='{"com.ss.app.StryxSports": "./"}'>
+		</script>
+		
+		<script>
+		window.addEventListener("popstate", function(e) {
+		      // window.history.forward();
+		      //window.history.go(1);
+		      //window.history.back(1);
+		});
+	
+        // var CKEDITOR_BASEPATH = '/client/stryx-sports-ui/WebContent';
+        
+		</script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "com.ss.app.StryxSports",
+						propagateModel: true
+					})
+				}).placeAt("content");
+			});
+			function showLoading(status)
+        	{
+            	//alert("hello" + this._dialog + status);
+        		if (!this._dialog) {
+        			this._dialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.Dialogs.BusyDialog", this);
+        			//this.getView().addDependent(this._dialog);
+        		}
+        		if(status)
+        		{
+        			this._dialog.open();
+        		}
+        		else
+        		{
+        			
+        			jQuery.sap.delayedCall(200, this, function () {
+        				this._dialog.close();
+        			});}
+
+        	}
+		</script>
+	</head>
+	<body class="sapUiBody" role="application" id="content">
+	</body>
+</html>

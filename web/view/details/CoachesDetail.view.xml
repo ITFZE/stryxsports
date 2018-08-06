@@ -1,0 +1,80 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.CoachesDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="CoachesDetail" title="{i18n>cCoachDetails}" showNavButton="{checkPhoneModel>/CheckPhone}" navButtonPress="onBackCoaches">
+		<content>
+				<f:SimpleForm id="SimpleFormCoacheDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+						<core:Title/>
+							<Label text="{i18n>cFirstName}"/>
+							<Input value="{CoachDetail>/FirstName}" id="setCoachName" editable="false" enabled="true"/>
+							<Label text="{i18n>cJobTitle}"/>
+							<Input value="{ path: 'CoachDetail>/Position', formatter: '.setPosition'}" id="setJobTitle" editable="false" enabled="true"/>
+							<Label text="{i18n>cEmail}"/>
+							<Input value="{CoachDetail>/eMail}" id="setEmail" editable="false" enabled="true"/>
+							<core:Title/>
+							<Label text = "{i18n>cLastName}"/>
+							<Input value = "{CoachDetail>/LastName}" editable = "false" enabled = "true"/>
+							<Label text="{i18n>cContactNumber}"/>
+							<Input value="{CoachDetail>/MobilePhone}" id="setContactNumber" editable="false" enabled="true"/>
+							<Label text="{i18n>cActive}"/>
+							<Input value=" { path: 'CoachDetail>/Active', formatter: '.checkEmployeeStatusText' }" id="setActive" editable="false" enabled="true"/>
+						</f:content>
+					</f:SimpleForm>
+	        <Panel width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<Title text="{i18n>cAddSports}"/>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://add" press="editSportsCoachesTable"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<ScrollContainer height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+						<Table id="addSportCoachesNameTable" inset="false" items="{CoachDetail>/CoachSports}">
+							<columns>
+								<Column>
+									<Text text="{i18n>cSportsName}"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="{i18n>cSportsDescriptions}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="{i18n>cSportsStatus}"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+									<Text/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{CoachDetail>sports/Name}"/>
+										<Text text="{CoachDetail>sports/U_SportsDescription}"/>
+										<ObjectStatus text="{ path: 'CoachDetail>sports/U_Status', formatter: '.setStatus' }" state="{ path: 'CoachDetail>U_Status', formatter: '.sportStatus' }"/>
+										<Button type="{path: 'CoachDetail>rec_status', formatter: '.colorFormatter' }" icon="{path: 'CoachDetail>rec_status', formatter: '.iconFormatter' }" press="onDeleteCatSport"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressSaveAddSportsCoaches"/>
+				<!--	<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressAddCancelSportsCategory"/>-->
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

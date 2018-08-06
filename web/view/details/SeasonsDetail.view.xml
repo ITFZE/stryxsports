@@ -1,0 +1,57 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.SeasonsDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page id="addSeasonsPage" title="{i18n>sea_CreateSeason}">
+		<content>
+			<l:Grid defaultSpan="L8 M12 S12" class="sapUiSmallMarginTop">
+				<l:content>
+					<f:SimpleForm id="frmSeason" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12"
+						adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label text="{i18n>sea_SeasonName}"/>
+							<Input id="addSeasons" placeholder="{i18n>sea_PleaseEnterSeasonName}" 
+							    value="{ 
+                                  path : 'createSeasonModel>/Name', 
+                                  type : 'sap.ui.model.type.String', 
+                                  constraints : { 
+                                      minLength : 1, 
+                                      maxLength : 50 
+                                  }}"/>
+							<Label text="{i18n>sea_SeasonStartEndDate}"/>
+							<DateRangeSelection id="addSeasonsStartEndDates"  placeholder="{i18n>sea_PleaseEnterDate}"
+							valueFormat="yyyy-MM-DD" displayFormat="short"
+								dateValue="{path: '/dateValueDRS2'}"
+                    			secondDateValue="{path:'/secondDateValueDRS2'}"
+                    			minDate="{path:'/dateMinDRS2'}"
+                    			maxDate="{path:'/dateMaxDRS2'}"
+							change="handleChange" />
+							<Label text="{i18n>sea_SeasonDescription}"/>
+							<TextArea id="addDescription" value="{createSeasonModel>/U_Description}" placeholder="{i18n>sea_PleaseEnterDescription}" class="width-full" showExceededText="true"/>
+							<Label text="{i18n>sea_SeasonStatus}"/>
+							<Select id="addSeasonsStatus" selectedKey="{createSeasonModel>/U_Status}" items="{path: 'BaseModel>/seasonState'}">
+								<items>
+									<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+								</items>
+							</Select>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+			<l:Grid defaultSpan="L4 M12 S12" class="sapUiSmallMarginTop"></l:Grid>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressAddSaveSeasons"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressAddCanelSeasons"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

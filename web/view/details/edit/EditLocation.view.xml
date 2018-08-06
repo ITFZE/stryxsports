@@ -1,0 +1,71 @@
+<mvc:View controllerName="com.ss.app.StryxSports.controller.details.edit.EditLocation"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:vk="sap.ui.vk"
+	xmlns:vbm="sap.ui.vbm"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="editPageDetails" title="{i18n>lEditLocation}">
+		<content>
+			<l:Grid defaultSpan="L8 M12 S12" class="sapUiSmallMarginTop">
+				<l:content>
+					<f:SimpleForm id="frmLocationedit" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label text="{i18n>lLocationName}"/>
+							<Input id="editlocationName" 
+							value="{
+								path : 'LocationsModel>/Name', 
+                                  type : 'sap.ui.model.type.String', 
+                                  constraints : { 
+                                      minLength : 1, 
+                                      maxLength : 50 
+                                  }}" placeholder="{i18n>lPleaseEnterLocationTheName}" />
+							<Label text="{i18n>lLocationAdmin}"/>
+							<ComboBox placeholder="{i18n>lPleaseSelectTheLocationAdmin}" id="editlocationAdmin"
+								selectedKey="{path: 'LocationsModel>/U_LocationAdmin',
+                    					type: 'sap.ui.model.type.Integer', 
+                    					constraints : { minimum : 1 }}" 
+							items="{ path: 'mLocAdmins>/value'}">
+								<items>
+								<core:Item text="{mLocAdmins>FirstName} {mLocAdmins>LastName}" key="{path: 'mLocAdmins>EmployeeID', formatter: '.returnAdmin'}"/>
+						        	</items>
+							</ComboBox>
+							<Label text="{i18n>lLocationResponsible}"/>
+							<ComboBox placeholder="{i18n>lPleaseSelectTheLocationResponsible}" id="editlocationResponsible"
+							selectedKey="{path: 'LocationsModel>/U_LocationResponsible',
+                    					type: 'sap.ui.model.type.Integer', 
+                    					constraints : { minimum : 1 }}"
+								items="{ path: 'mLocResponsible>/value'}">
+								<items>
+								<core:Item text="{mLocResponsible>FirstName} {mLocResponsible>LastName}" key="{ path: 'mLocResponsible>EmployeeID', formatter: '.returnRes'}"/>
+								</items>
+							</ComboBox>
+							<Label text="{i18n>lLocationDescription}"/>
+							<TextArea id="editlocationDescription" value="{LocationsModel>/U_Description}" width="100%" showExceededText="true"
+								placeholder="{i18n>lPleaseEnterTheLocationDescription}"/>
+							<Label text="{i18n>lStatusLocatinon}"/>
+							<Select id="editLocationStatus" change="selectedLanguage" selectedKey="{LocationsModel>/U_Status}" class="width-full"  items="{path: 'BaseModel>/seasonState'}">
+								<items>
+									<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+								</items>
+							</Select>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+			<l:Grid defaultSpan="L4 M12 S12" class="sapUiSmallMarginTop"></l:Grid>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressSaveEditLocation"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressCloseEditLocation"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

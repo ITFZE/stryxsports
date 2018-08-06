@@ -1,0 +1,279 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.edit.ETeamDetails"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page title="{i18n>tEditTeam}">
+		<content>
+			<f:SimpleForm id="SimpleFormTeamsAdd" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+				labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+				singleContainerFullSize="true">
+				<f:content>
+					<core:Title/>
+					<Label text="{i18n>tTeamName}"/>
+					<Input id="addTeamName" type="Text" placeholder="{i18n>tPleaseEnterTeamName}" 
+					value="{createTeamModel>/Name}"/>
+					<Label text="{i18n>tSeason}"/>
+					<ComboBox placeholder="{i18n>tPleaseSelectTheSeason}" id="addTeamSeason" items="{path: 'mTeamSeasons>/value'}" 
+            			selectedKey="{createTeamModel>/U_Season}">
+						<items>
+							<core:Item text="{mTeamSeasons>Name}" key="{ path: 'mTeamSeasons>Code', formatter: '.returnSeason'}"/>
+						</items>
+					</ComboBox>
+					<Label text="{i18n>tTeamStartDate}"/>
+					<DateRangeSelection id="addStartEndAndDate" 
+					  value = "{createTeamModel>/U_StartDate} - {createTeamModel>/U_EndDate}"
+							valueFormat="yyyy-MM-DD" displayFormat="short" delimiter="-"
+					  placeholder="{i18n>tPleaseSelectStartAndEnd}"
+							change="handleChange" />
+					<Label text="{i18n>tSportCategory}"/>
+					<ComboBox placeholder="{i18n>tPleaseSelectTheSportCategory}" id="addSportsCategory" items="{path: 'mTeamCategory>/value'}" 
+						change="getCatSports"
+							selectedKey="{mTeamCategory>/Name}">
+						<items>
+							<core:Item key="{path:'mTeamCategory>Code', formatter: '.returnCategory'}" text="{mTeamCategory>Name}"/>
+						</items>
+					</ComboBox>
+					<Label text="{i18n>tSportName}"/>
+					<ComboBox placeholder="{i18n>tPleaseSelectTheSports}" id="addSportName" items="{getSportsModel>/sports}" 
+					selectedKey="{createTeamModel>/U_CategorySports}">
+						<items>
+							<core:Item key="{ path: 'getSportsModel>catCode', formatter: '.returnSports'}" text="{getSportsModel>Name}"/>
+						</items>
+					</ComboBox>
+					<core:Title/>
+					<Label text="{i18n>tlocation}"/>
+					<ComboBox placeholder="{i18n>tPleaseSelectTheLocation}" id="addTeamLocation" items="{mTeamLocations>/value}"
+					selectedKey="{createTeamModel>/U_Location}">
+						<items>
+							<core:Item key="{ path: 'mTeamLocations>Code', formatter: '.returnLocation'}" text="{mTeamLocations>Name}"/>
+						</items>
+					</ComboBox>
+					<Label text="{i18n>tClassMinimum}"/>
+					<Input id="addTeamClassMin" type="Number" liveChange="liveChangePlayers" placeholder="{i18n>tPleaseEnterPlayersMin}"
+					value="{createTeamModel>/U_SizeMin}"/>
+					<Label text="{i18n>tClassMaximum}"/>
+					<Input id="addTeamClassMax" type="Number" liveChange="liveChangePlayers" placeholder="{i18n>tPleaseEnterPlayersMax}" 
+					value="{createTeamModel>/U_SizeMax}"/>
+					<Label text="{i18n>tTeamStatus}"/>
+					<Select id="addTeamStatus" selectedKey="{createTeamModel>/U_Status}" items="{path: 'BaseModel>/seasonState'}" forceSelection="true">
+						<items>
+							<core:Item text="{BaseModel>selectTxt}" key="{BaseModel>keyStatus}"/>
+						</items>
+					</Select>
+					<Label text="{i18n>tClassTotal}"/>
+					<Input id="addTeamClassTotal" editable="false" enabled="true"/>
+				</f:content>
+			</f:SimpleForm>
+			<IconTabBar
+                  id="tabTeams"
+                  expanded="{device>/isNoPhone}" select="onSelectChanged">
+				<items>
+					<IconTabFilter id="tabCoach" key="TeamCoaches" size="8rem" class="sapUiMediumMargin" text="Coaches">
+						<Toolbar height="3rem">
+							<Title text="{i18n>tAddCoaches}"/>
+							<ToolbarSpacer/>
+							<Button id="tableAddCoach" icon="sap-icon://add" press="onPressAddCoachTable"/>
+						</Toolbar>
+						<content>
+							<ScrollContainer height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+								<Table id="addCoachTable" inset="false" items="{createTeamModel>/Coaches}">
+									<columns>
+										<Column hAlign="Begin">
+											<Text text="{i18n>tCoachName}"/>
+										</Column>
+										<Column hAlign="Begin">
+											<Text text="{i18n>tEmail}"/>
+										</Column>
+										<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin">
+											<Text text="{i18n>tContactNumber}"/>
+										</Column>
+										<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+											<Text/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<Text text="{createTeamModel>FirstName} {createTeamModel>LastName}"/>
+												<Text text="{createTeamModel>eMail}"/>
+												<Text text="{createTeamModel>MobilePhone}"/>
+												<Button type="{path: 'createTeamModel>rec_status', formatter: '.colorFormatter' }" icon="{path: 'createTeamModel>rec_status', formatter: '.iconFormatter'}" press="onDeleteCoachEntry"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</ScrollContainer>
+						</content>
+					</IconTabFilter>
+					<IconTabFilter id="tabMember" key="TeamMembers" size="8rem" class="sapUiMediumMargin" text="{i18n>tMembers}">
+						<ScrollContainer height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+							<Table id="addMember" inset="false" items="{MembersList>/value}">
+								<columns>
+									<Column hAlign="Begin">
+										<Text text="{i18n>tCode}"/>
+									</Column>
+									<Column hAlign="Begin">
+										<Text text="{i18n>tName}"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{MembersList>BusinessPartners/CardCode}"/>
+											<Text text="{MembersList>BusinessPartners/CardName}"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ScrollContainer>
+					</IconTabFilter>
+					<!--<IconTabFilter id="editTabCalendar" key="editTeamCalendar" size="8rem" class="sapUiMediumMargin" text="Calendar">
+						<ScrollContainer height="100%"
+                    		width="100%"
+                    		horizontal="true"
+                    		vertical="true"
+                    		focusable="true">
+							<Table id="" inset="false">
+								<columns>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin"></Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+										<Text text="Start Time"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+										<Text text="End Time"/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Sunday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Monday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Tuesday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Wednesday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Thursday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Friday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<CheckBox text="Saturday" />
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter start time"/>
+											<TimePicker
+                            				valueFormat="HH:mm"
+                            				displayFormat="HH:mm"
+                            				change="handleChange"
+                            				placeholder="Enter end time"/>
+										</cells>
+									</ColumnListItem>
+									<ColumnListItem>
+										<cells>
+											<Input visible="false" />
+											<Button text="Edit Calendar" press="handleCreateCalendarPress" />
+											<Input visible="false" />
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</ScrollContainer>
+					</IconTabFilter>-->
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="onPressSaveEditTeams"/>
+					<Button tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="handleCancelEditPress"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

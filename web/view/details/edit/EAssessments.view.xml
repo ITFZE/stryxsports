@@ -1,0 +1,108 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.edit.EditAssessment"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:unified="sap.ui.unified">
+	<Page id="createAssessmentPAGE" showHeader="true" title="{i18n>CreateAssessment}">
+		<content>
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<Label text="{i18n>crA_Lead}"/>
+						<Input id="createAssessmentLead" value="{CreateAssessments>/Name}" type="Text" placeholder = "{i18n>PleaseEnterTheLead}" />
+						<Label text="{i18n>crA_Team}"/>
+						<Select id="createAssessmentTeam" change="selectedTeam" selectedKey="{CreateAssessments>/U_TeamCoachCode}"  class="width-full" items="{TeamsList>/value}">
+							<items>
+								<core:Item text="{TeamsList>Name}" key="{path:'TeamsList>Code', formatter: '.returnTeam'}"/>
+							</items>
+						</Select>
+						<Label text="{i18n>crA_Location}"/>
+						<Input id="createAssessmentLocation" value="{LocationsList>/Name}" editable="false" enabled="true" class="width-full" type="Text" />
+						<Label text="{i18n>CoachName}"/>
+						<Select id="createAssessmentCoach" class="width-full" items="{CoachsList>/Coaches}" change="getCoachSchedule">
+							<core:Item text="{CoachsList>FirstName}" key="{CoachsList>EmployeeID}"/>
+						</Select>
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell>
+						<Label text="{i18n>crA_StartDate}"/>
+						<DateRangeSelection id="createAssessmentDate" placeholder="{i18n>AssessmentStartDate}"
+							dateValue="{
+							    path: 'CreateAssessments>/U_ScheduleSDate',
+							    formatter: '.dateFormat'
+							}" 
+							
+							secondDateValue="{
+							    path: 'CreateAssessments>/U_ScheduleEDate',
+							    formatter: '.dateFormat'
+							}" 
+							valueFormat="yyyy-MM-DD" displayFormat="short" delimiter="-"
+							change="handleChange" />
+						<Label text = "{i18n>AssessmentStartTime}"/>
+						<TimePicker  class="width-full" id="cAStartTime" value="{CreateAssessments>/U_ScheduleSTime}" valueFormat="hh:mm:ss" displayFormat="hh:mm:ss" />
+						<Label text = "{i18n>AssessmentEndTime}"/>
+						<TimePicker  class="width-full" id="cAEndTime" value="{CreateAssessments>/U_ScheduleETime}" valueFormat="hh:mm:ss"  displayFormat="hh:mm:ss"  />
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+			<VBox class="sapUiSmallMargin">
+				<PlanningCalendar
+                			id="PC1"
+                			rows="{path: 'mSchedules>/value'}"
+                			appointmentsVisualization="Filled"
+                			appointmentSelect="handleAppointmentSelect"
+                			showEmptyIntervalHeaders="false"
+                			showWeekNumbers="true">
+					<toolbarContent>
+						<Title text="Coach Schedule" titleStyle="H4"/>
+					</toolbarContent>
+					<rows>
+						<PlanningCalendarRow
+                                    icon="sap-icon://employee"
+                					title="{mSchedules>Name}"
+                					appointments="{path : 'appointments', templateShareable: 'true'}"
+                					intervalHeaders="{path: 'headers', templateShareable: 'true'}">
+							<customData>
+								<core:CustomData key="emp-name" value="{mSchedules>Name}" writeToDom="true"/>
+							</customData>
+							<appointments>
+								<unified:CalendarAppointment
+                							startDate="{mSchedules>U_ScheduleSDate}"
+                							endDate="{mSchedules>U_ScheduleEDate}"></unified:CalendarAppointment>
+							</appointments>
+							<intervalHeaders>
+								<unified:CalendarAppointment
+                							startDate="{mSchedules>U_ScheduleSDate}"
+                							endDate="{mSchedules>U_ScheduleEDate}"></unified:CalendarAppointment>
+							</intervalHeaders>
+						</PlanningCalendarRow>
+					</rows>
+				</PlanningCalendar>
+				<html:br />
+				<MultiComboBox
+                				selectionFinish="handleSelectionFinish"
+                				width="230px"
+                				placeholder="Choose built-in views">
+					<items>
+						<core:Item key="Hour" text="Hour" />
+						<core:Item key="Day" text="Day" />
+						<core:Item key="Month" text="Month" />
+						<core:Item key="Week" text="1 week" />
+						<core:Item key="One Month" text="1 month" />
+					</items>
+				</MultiComboBox>
+			</VBox>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button icon="sap-icon://save" press="handleSaveCreateAssementPress"/>
+					<Button icon="sap-icon://sys-cancel-2" press="handleCancelCreateAssementPress"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

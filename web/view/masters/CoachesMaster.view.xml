@@ -1,0 +1,38 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.CoachesMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="{i18n>cCoachMasters}" showNavButton="true" navButtonPress="onNavBackCoach">
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchCoachesMasterPage" placeholder="{i18n>cPleaseEnterTheCoachName}"
+					search="onSearchCoachesListMasterPage" />
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listCoachsMaster" items="{CoachsMaster>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="{i18n>cNoItems}">
+				<items>
+					<ObjectListItem title="{i18n>cCoachName}: {CoachsMaster>FirstName} {CoachsMaster>LastName}" type="Active" press="onListItemPressCoachesList" >
+						<attributes>
+							<ObjectAttribute text="{i18n>cEmail}: {CoachsMaster>eMail}"/>
+							<ObjectAttribute/>
+							<ObjectAttribute text="{i18n>cContactNumber}: {CoachsMaster>MobilePhone}"/>
+						</attributes>
+						<secondStatus>
+							<ObjectStatus text=" { path: 'CoachsMaster>Active', formatter: '.checkEmployeeStatusText' }" state="{ path: 'CoachsMaster>Active', formatter: '.checkEmployeeStatus' }"/>
+						</secondStatus>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton tooltip="Filter" icon="sap-icon://add-filter" text="{i18n>cAddParts}" press="onPressAddFilter"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,27 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.InvoicePaymentDetail" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Page id="paymentDetails" title="{i18n>InvoicePaymentDetail}" showNavButton="false" navButtonPress="onBack">
+		<content>
+			<l:VerticalLayout class="width-full">
+				<l:BlockLayout>
+					<l:BlockLayoutRow>
+						<l:BlockLayoutCell>
+							<Label text="{i18n>i_FullName}"/>
+							<Input id="addFirstName" placeholder="{i18n>PleaseEnterTheName}" class="width-full sapUiSmallMarginBottom" type="Text"/>
+							<Label text="{i18n>i_Mobile}"/>
+							<Input id="addLastName" placeholder="{i18n>PleaseEnterTheMobileNumber}" class="width-full sapUiSmallMarginBottom" type="Number"/>
+							<Button text="{i18n>SearchLeads}" press="onPressSearchLeads"/>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell>
+							<Label text="{i18n>i_LastName}"/>
+							<Input id="addStLastName" placeholder="{i18n>PleaseEnterTheLastName}" class="width-full sapUiSmallMarginBottom" type="Text"/>
+							<Label text="{i18n>i_DOB}"/>
+							<DatePicker id="addDOB" placeholder="{i18n>sPleaseEnteDate}" change="handleChange"  class="sapUiSmallMarginBottom"/>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+				</l:BlockLayout>
+			</l:VerticalLayout>
+		</content>
+	</Page>
+</mvc:View>

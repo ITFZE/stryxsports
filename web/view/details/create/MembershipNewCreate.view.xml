@@ -1,0 +1,221 @@
+<mvc:View height="100%" controllerName="com.ss.app.StryxSports.controller.details.create.MembershipNewCreate"
+	xmlns:form="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m">
+	<NavContainer id="membershipWizard">
+		<pages>
+			<Page id="membershipHeadPage" title="{i18n>mncCreateMembership}" showNavButton="true" navButtonPress="onBack" showHeader="true">
+				<content>
+					<Wizard id="createWizardParent" complete="OptionalInformationID" 
+					showNextButton="false" stepActivate="onNextStep" width="100%" enableBranching="true" >
+						<WizardStep id="ParticipantDetailsID"  title="{i18n>ParticipantDetails}" 
+						validated="false" icon="sap-icon://money-bills" 
+						subsequentSteps="ParentDetailsID, OptionalInformationID">
+							<f:SimpleForm id="participantFormID" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false">
+								<f:content>
+									<core:Title/>
+									<Label text="{i18n>mncleadType}"/>
+									<ComboBox
+					                     id="lmType" placeholder="{i18n>mncleadSelectType}"
+					                     selectedKey="{createMembershipModel>/U_SS_MEMBER_TYPE}"
+					                     selectionChange="selectedType"
+					                     items="{/SelectType_Date}">
+										<core:Item key="{key}" text="{ST_Txt}" />
+									</ComboBox>
+									<Label text="{i18n>mncName}" />
+									<Input id="participantFitstName"  value="{createMembershipModel>/CardName}" placeholder="{i18n>mncPleaseEnterFirstName}" />
+									<Label text="{i18n>mncDOB}"/>
+									<DatePicker  value="{createMembershipModel>/U_Dob}" id="participantDob" placeholder="{i18n>mncPleaseEnterDate}"  displayFormat="dd-MM-yyyy" />
+									<Label id="lmLEmail"  text="{i18n>mncleadEmail}"/>
+									<Input id="lmIEmail"  type="Email" value="{createMembershipModel>/EmailAddress}"  placeholder="{i18n>mncleadPleaseEnterEmail}"/>
+									<Label id="lmLPhone" text="{i18n>mncPhoneMobile}"/>
+									<Input id="lmIPhone" type="Number" value="{createMembershipModel>/Cellular}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+									<core:Title/>
+									<Label text="{i18n>mncNationality}"/>
+									<ComboBox placeholder="{i18n>mncSelectCountry}" selectedKey="{createMembershipModel>/U_Nationality}"   id="participantNationality" 
+                                				items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+										<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+									</ComboBox>
+									<Label text="{i18n>mncGender}"/>
+									<Select id="participantGender"  selectedKey="{createMembershipModel>/U_Gender}" items="{/gender_Data}">
+										<core:Item text="{txtGender}" key="{txtGender}"/>
+									</Select>
+									<Label text="{i18n>mncHowDidYouHearAboutUs}"/>
+									<ComboBox placeholder="{i18n>mncPleaseEnterTheHowdid}"  id="participantHowdid" selectedKey="{createMembershipModel>/U_Ref}"
+                                				items="{path: '/Howdidyouhearaboutus',
+                                					sorter: { path: 'selectTxt' }}">
+										<core:Item key="{key}" text="{selectTxt}" />
+									</ComboBox>
+									<Label text="{i18n>mncSchoolName}"/>
+									<ComboBox placeholder = "{i18n>mncSelectSchool}" selectedKey = "{createMembershipModel>/U_School}"  id = "participantSchoolName" 
+									items="{path: 'SchoolName>/value',
+									sorter: {path: 'Name' }}">
+										<core:Item key="{SchoolName>Name}" text = "{SchoolName>Name}" />
+									</ComboBox>
+									<Label visiable="false" id="lmLAdditionlInformaion" text="{i18n>mncAdditionalInformation}"/>
+									<TextArea visiable="false" id="lmIAdditionlInformaion" growing="true" width="100%" value="{createMembershipModel>/FreeText}" 
+					                     placeholder="{i18n>mncPleaseEnterAdditionalInformation}"  class="width-full"/>
+								</f:content>
+							</f:SimpleForm>
+							<HBox alignItems="Center" justifyContent="Center">
+								<Button id="btnCMem" text="{i18n>mncCreate}" press="validateMemberDeatils"/>
+								<Button  id="btnMemNext" class="sapUiSmallMargin" enabled="false" text="{i18n>mncNext} >>" press="enableParents"/>
+							</HBox>
+						</WizardStep>
+						<WizardStep id="ParentDetailsID" visiable="false" validated="true" activate="additionalInfoValidation" title="{i18n>mncParentDetails}">
+							<IconTabBar
+		                       id="tabParents"
+		                          expanded="{device>/isNoPhone}" >
+								<items>
+									<IconTabFilter id="tabFather" key="Father" size="8rem" class="sapUiMediumMargin" text="Father" icon="sap-icon://employee">
+										<f:SimpleForm id="ParentFatherDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								                     	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+								                  	columnsL="2" columnsM="2" singleContainerFullSize="false">
+											<f:toolbar>
+												<Toolbar>
+													<Title text="{i18n>mncFatherDetails}" level="H4" titleStyle="H4"/>
+													<ToolbarSpacer />
+													<Button text="{i18n>mncExisting}" icon="sap-icon://employee-lookup" press="onPressSearchExisting"/>
+												</Toolbar>
+											</f:toolbar>
+											<f:content>
+												<core:Title/>
+												<Label text="{i18n>mncName}"/>
+												<Input id="ParentFirstName" value="{createMembershipModel>/Father/CardName}" placeholder="{i18n>mncPleaseEnterFirstName}"/>
+												<Label text="{i18n>mncPhoneMobile}"/>
+												<Input id="ParentMobile" type="Number" value="{createMembershipModel>/Father/Cellular}"   placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+												<Label text="{i18n>mncleadEmail}"/>
+												<Input id="ParentEmail" value="{createMembershipModel>/Father/EmailAddress}"  placeholder="{i18n>mncleadPleaseEnterEmail}"/>
+												<core:Title/>
+												<!--<Label text="{i18n>LastName}"/><Input id="ParentLastName" value="{createMembershipModel>/Father/U_LastName}" placeholder="{i18n>PleaseEnterLastName}"/>-->
+												<Label text="{i18n>mncNationality}"/>
+												<ComboBox placeholder="{i18n>mncSelectCountry}"  selectedKey="{createMembershipModel>/Father/U_Nationality}"   id="ParentNationality" 
+                                				items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+													<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+												</ComboBox>
+												<Label text="{i18n>mncOccupation}"/>
+												<Input id="ParentOccupation" value="{createMembershipModel>/Father/Notes}" placeholder="{i18n>mncPleaseEnterOccupation}"/>
+											</f:content>
+										</f:SimpleForm>
+										<HBox alignItems="Center" justifyContent="Center">
+											<Button id="btnFather" text="{i18n>mncFatherSave}" press="onPressFatherValidGroup"/>
+											<Button id="btnFNext" class="sapUiSmallMargin" text="{i18n>mncNext} >>" enabled="false" press="enableOptional"/>
+										</HBox>
+									</IconTabFilter>
+									<IconTabFilter key="Mother" text="{i18n>mncMother}" icon="sap-icon://person-placeholder">
+										<f:SimpleForm id="ParentMotherDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								                     	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+								                  	columnsL="2" columnsM="2" singleContainerFullSize="false">
+											<f:toolbar>
+												<Toolbar>
+													<Title text="{i18n>mncMotherDetails}" level="H4" titleStyle="H4"/>
+													<ToolbarSpacer />
+													<Button text="{i18n>mncExisting}" icon="sap-icon://employee-lookup" press="onPressSearchExisting" />
+												</Toolbar>
+											</f:toolbar>
+											<f:content>
+												<core:Title/>
+												<Label text="{i18n>mncName}"/>
+												<Input id="motherFirstName" value="{createMembershipModel>/Mother/CardName}" placeholder="{i18n>mncPleaseEnterFirstName}"/>
+												<Label text="{i18n>mncPhoneMobile}"/>
+												<Input id="motherPhone" type="Number" value="{createMembershipModel>/Mother/Cellular}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+												<Label text="{i18n>mncleadEmail}"/>
+												<Input id="motherEmail" value="{createMembershipModel>/Mother/EmailAddress}" placeholder="{i18n>mncleadPleaseEnterEmail}"/>
+												<core:Title/>
+												<!--<Label text="{i18n>LastName}"/><Input  value="{createMembershipModel>/Mother/U_LastName}" placeholder="{i18n>PleaseEnterLastName}"/>-->
+												<Label text="{i18n>Nationality}"/>
+												<ComboBox placeholder="{i18n>mncSelectCountry}" selectedKey="{createMembershipModel>/Mother/U_Nationality}"   id="motherNationality" 
+                                				items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+													<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+												</ComboBox>
+												<Label text="{i18n>mncOccupation}"/>
+												<Input id="motherOccupation" value="{createMembershipModel>/Mother/Notes}" placeholder="{i18n>mncPleaseEnterOccupation}"/>
+											</f:content>
+										</f:SimpleForm>
+										<HBox alignItems="Center" justifyContent="Center">
+											<Button id="btnMother" text="{i18n>mncFatherSave}" press="onPressMotherGroup"/>
+											<Button id="btnMNext" class="sapUiSmallMargin" text="{i18n>mncNext} >>" enabled="false" press="enableOptional"/>
+										</HBox>
+									</IconTabFilter>
+									<IconTabFilter key="Guardian" text="{i18n>mncGuardian}" 	icon="sap-icon://employee">
+										<f:SimpleForm id="ParentGuardianDetails" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+								                     	labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3"
+								                  	columnsL="2" columnsM="2" singleContainerFullSize="false">
+											<f:toolbar>
+												<Toolbar>
+													<Title text="{i18n>mncGuardianDetails}" level="H4" titleStyle="H4"/>
+													<ToolbarSpacer />
+													<Button text="{i18n>mncExisting}"  icon="sap-icon://employee-lookup" press="onPressSearchExisting"/>
+												</Toolbar>
+											</f:toolbar>
+											<f:content>
+												<core:Title/>
+												<Label text="{i18n>mncName}"/>
+												<Input id="guardianFirstName" value="{createMembershipModel>/Guardian/CardName}" placeholder="{i18n>mncPleaseEnterFirstName}"/>
+												<Label text="{i18n>mncPhoneMobile}"/>
+												<Input id="guardianPhone" type="Number" value="{createMembershipModel>/Guardian/Cellular}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+												<Label text="{i18n>mncleadEmail}"/>
+												<Input  id="guardianEmail" value="{createMembershipModel>/Guardian/EmailAddress}" placeholder="{i18n>mncleadPleaseEnterEmail}"/>
+												<core:Title/>
+												<!--<Label text="{i18n>LastName}"/><Input  value="{createMembershipModel>/Guardian/U_LastName}" placeholder="{i18n>PleaseEnterLastName}"/>-->
+												<Label text="{i18n>Nationality}"/>
+												<ComboBox placeholder="{i18n>mncSelectCountry}" selectedKey="{createMembershipModel>/Guardian/U_Nationality}"   id="guardianNationlaity" 
+                                				items="{path: 'MembershipCountry>/value',
+                                					sorter: { path: 'Name' }}">
+													<core:Item key="{MembershipCountry>Name}" text="{MembershipCountry>Name}" />
+												</ComboBox>
+												<Label text="{i18n>mncOccupation}"/>
+												<Input id="guardianOccupation" value="{createMembershipModel>/Guardian/Notes}" placeholder="{i18n>mncPleaseEnterOccupation}"/>
+											</f:content>
+										</f:SimpleForm>
+										<HBox alignItems="Center" justifyContent="Center">
+											<Button id="btnGuardian" text="{i18n>mncFatherSave}" press="onPressGuardian"/>
+											<Button id="btnGNext" class="sapUiSmallMargin" text="{i18n>mncNext} >>" enabled="false" press="enableOptional"/>
+										</HBox>
+									</IconTabFilter>
+								</items>
+							</IconTabBar>
+						</WizardStep>
+						<WizardStep id="OptionalInformationID" activate="pricingActivate" complete="pricingComplete" validated="true" title="{i18n>mncOptionalInformation}">
+							<f:SimpleForm   editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+									singleContainerFullSize="false">
+								<f:content>
+									<core:Title text="{i18n>mncAllowedToPickUpMyChildFromClassAre}"/>
+									<Label text="{i18n>mncPerson1}"/>
+									<Input id="optionalPerson1" value="{createMembershipModel>/ContactEmployees/0/Name}"  placeholder="{i18n>mncPleaseEnterPerson1}"/>
+									<Label text="{i18n>mncPhoneMobile}"/>
+									<Input id="person1Mobile" value="{createMembershipModel>/ContactEmployees/0/MobilePhone}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+									<Label text="{i18n>mncPerson2}"/>
+									<Input id="optionalPerson2" value="{createMembershipModel>/ContactEmployees/1/Name}"  placeholder="{i18n>mncPleaseEnterPerson2}"/>
+									<Label text="{i18n>mncPhoneMobile}"/>
+									<Input id="perosn2Mobile" value="{createMembershipModel>/ContactEmployees/1/MobilePhone}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+									<core:Title text="{i18n>mncEmergencyContact}"/>
+									<Label text="{i18n>mncName}"/>
+									<Input id="emergencyName" value="{createMembershipModel>/ContactEmployees/2/Name}"  placeholder="{i18n>mncPleaseEnterFirstName}"></Input>
+									<Label text="{i18n>mncPhoneMobile}"/>
+									<Input id="EmergencyMobile" value="{createMembershipModel>/ContactEmployees/2/MobilePhone}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"></Input>
+									<Label text="{i18n>mncAdditionalInformation}"/>
+									<TextArea id="additionlInformaion" value="{createMembershipModel>/Website}" placeholder="{i18n>mncPleaseEnterAdditionalInformation}"  growing="true" class="width-full"/>
+								</f:content>
+							</f:SimpleForm>
+							<HBox alignItems="Center" justifyContent="Center">
+								<Button id="btnContact" text="{i18n>mncFatherSave}" press="onPressOptional"/>
+								<Button id="btnOptional" visible="true" class="sapUiSmallMargin" text="Finished" press="enableService"/>
+							</HBox>
+						</WizardStep>
+					</Wizard>
+				</content>
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>
