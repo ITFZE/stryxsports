@@ -2,7 +2,7 @@ var baseURL = "/b1s/v1";
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("stryx.services.destination", "Connection");
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		var header = "";
 		if (method === $.net.http.PATCH) {
@@ -13,6 +13,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 		if (method === $.net.http.GET) {
 			req.headers.set("Prefer", "odata.maxpagesize=1000");
 		}
+		
 		if (header !== "") {
 			req.headers.set("X-HTTP-Method-Override", "PATCH");
 			req.headers.set("B1S-CaseInsensitive","true");

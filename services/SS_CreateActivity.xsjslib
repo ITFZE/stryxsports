@@ -24,6 +24,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 		if (sessionID) {
 			req.cookies.set("B1SESSION", sessionID);
 		}
+		
 		if (routeID) {
 			req.cookies.set("ROUTEID", routeID);
 		}

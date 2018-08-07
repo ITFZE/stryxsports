@@ -1,9 +1,10 @@
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("stryx.services.destination", "SMSGlobal");
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "SMSGlobal");
 		var client = new $.net.http.Client();
 		//var cSession = $.Session();
 		var header = "";
+		
 		if (method === $.net.http.PATCH) {
 			method = $.net.http.POST;
 			header = "X-HTTP-Method-Override: PATCH";

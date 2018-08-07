@@ -4,7 +4,7 @@ var baseURL = "/b1s/v1"
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("stryx.services.destination", "Connection");
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		var header = "";
 		if (method === $.net.http.PATCH) {
@@ -25,6 +25,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 		if (sessionID) {
 			req.cookies.set("B1SESSION", sessionID);
 		}
+		
 		if (routeID) {
 			req.cookies.set("ROUTEID", routeID);
 		}

@@ -2,7 +2,7 @@ var baseURL = "/b1s/v1";
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("stryx.services.destination", "Connection");
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		//var cSession = $.Session();
 		var header = "";
@@ -10,6 +10,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 			method = $.net.http.POST;
 			header = "X-HTTP-Method-Override: PATCH";
 		}
+		
 		var req = new $.web.WebRequest(method, path);
 		if (method === $.net.http.GET) {
 			req.headers.set("Prefer", "odata.maxpagesize=1000");

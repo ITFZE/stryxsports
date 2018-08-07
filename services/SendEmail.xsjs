@@ -12,6 +12,7 @@ function sendEmail12() {
 	//var getEndTime = getBody.U_ScheduleETime;
 	//var setMessages = getMessages.replace("[[SC_Firstname]]", getName);
 
+
 	var sendMailResponse = "Welcome to stryx Sports";
 
 	var mail = new $.net.Mail({
