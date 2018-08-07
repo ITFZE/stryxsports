@@ -1,12 +1,4 @@
-/*$.import("stryxsports.client.services.B1SLLib", "b1Lib");
-$.import("stryxsports.client.services.SS_Coach", "coachLib");
-$.import("stryxsports.client.services.SS_TeamLib", "teamLib");
-$.import("stryxsports.client.services.SS_MemberLib", "memberLib");
-$.import("stryxsports.client.services.SS_LeadCreate", "leadCreate");
-$.import("stryxsports.client.services.SS_CreateActivity", "activityCreate");
-$.import("stryxsports.client.services.EmailNotification", "emailNotifyLib");
-$.import("stryxsports.client.services.SMSGlobal", "SMSGlobalLib");*/
-var libPath = "/stryx/services/";
+var libPath = "/ITSFZE/Development/stryxsports/services/destination/";
 var cmnLib = $.import(libPath + "CommonLib.xsjslib");
 var B1LIB = $.import(libPath + "B1SLLib.xsjslib");
 var coachLib = $.import(libPath + "SS_Coach.xsjslib");
