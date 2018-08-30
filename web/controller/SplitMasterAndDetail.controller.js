@@ -18,11 +18,12 @@ sap.ui.define([
 	"com/ss/app/StryxSports/controller/sal/AssessmentFeedbackSAL",
 	"com/ss/app/StryxSports/controller/sal/EmailTemplateSAL",
 	"com/ss/app/StryxSports/controller/sal/AuthenticationSAL",
-	 "com/ss/app/StryxSports/controller/sal/UserProfileSAL"
+	 "com/ss/app/StryxSports/controller/sal/UserProfileSAL",
+	 "com/ss/app/StryxSports/controller/sal/HolidaySAL"
 	],
 	function(JSONModel, Dialog, Button, Text, History, BaseController, SportsSAL, SeasonSAL, SportCategorySAL, LocationsSAL, TeamsSAL,
 		CoachsSAL, AssessmentSAL,
-		CreateAssessmentsSAL, CoachAssessmentScoreSAL, SMSTemplateSAL, AssessmentFeedbackSAL, EmailTemplateSAL, AuthenticationSAL, UserProfileSAL
+		CreateAssessmentsSAL, CoachAssessmentScoreSAL, SMSTemplateSAL, AssessmentFeedbackSAL, EmailTemplateSAL, AuthenticationSAL,HolidaySAL, UserProfileSAL
 	) {
 		"use strict";
 		return BaseController.extend("com.ss.app.StryxSports.controller.SplitMasterAndDetail", {
@@ -286,10 +287,30 @@ sap.ui.define([
 							that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
 						});
 						break;
-
-					default:
-						this.getRouter().navTo(item.getKey());
-						break;
+						
+				case 'ViewCalendar':
+                    that.showLoading(false);
+					that.getRouter().navTo(item.getKey());
+					break;
+					
+				case 'HolidayListMaster':
+                   that.showLoading(true);
+					var holiSAL = new HolidaySAL();
+					var holiModel = "$orderby=Code%20desc";
+					holiSAL.fetchHolidayList(this, holiModel).done(function(getResponse) {
+						sap.ui.getCore().setModel(getResponse, "HolidayListModel");
+						sap.ui.getCore().getModel("HolidayListModel").refresh(true);
+						that.showLoading(false);
+						that.getRouter().navTo(item.getKey());
+					}).fail(function(err) {
+						that.showLoading(false);
+						that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
+					});
+					break;
+					
+				default:
+					this.getRouter().navTo(item.getKey());
+					break;
 				}
 
 			},

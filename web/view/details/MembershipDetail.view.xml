@@ -92,7 +92,7 @@
     								<Button id="addViewButton" class="sapUiSmallMarginBegin" tooltip="Select Service"  icon="sap-icon://sales-order" press="navToOrder"/>
 								</HBox>
 								<Button id="btnLeadView" tooltip="View Lead" icon="sap-icon://customer-view" press="onPressViewLead"/>
-								<Button id="btnCreateAcc" tooltip="Create Account"  icon="sap-icon://sys-add" press="onPressCreateMembership"/>
+								<Button id="btnCreateAcc" tooltip="Create Account"  icon="sap-icon://sys-add" press="onPressCreateLeadToMembership"/>
 								<Button id="btnActivity" tooltip="Add Acitivity" icon="sap-icon://write-new" press="onPressMemCreateActivity"/>
 								<Button id="btnAssessment" tooltip="Add Assessment" icon="sap-icon://add" press="onPressCreateAssessment"/>
 							</cells>

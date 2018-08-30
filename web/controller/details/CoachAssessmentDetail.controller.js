@@ -61,9 +61,15 @@ sap.ui.define([
 			return CoachAssessment;
 		},
 		onPressSaveCoachAssessment: function() {
-			var validator = new Validator();
-			var retVal = validator.validate(this.byId("SimpleFormCoacheAssessmentDetails"));
-			if (retVal) {
+		    var getEle = this.getVariables();
+			if (getEle.comments.getValue() == "") {
+			    getEle.comments.setValueState("Error");
+			}else if(getEle.feedBack.getSelectedKey() == "-1") {
+			    getEle.comments.setValueState("None");
+			    getEle.feedBack.setValueState("Error");
+			}else{   
+			    getEle.comments.setValueState("None");
+			    getEle.feedBack.setValueState("None");
 				this.createFeedback();
 			}
 		},
@@ -87,22 +93,22 @@ sap.ui.define([
 		},
 		fetchAssessmentDetail: function(getID) {
 			var that = this;
-			var coachAssessementId = this.getVariables();
+		//	var coachAssessementId = this.getVariables();
 			var leadDetail = new JSONModel();
 			this.fetchAssessmentById(leadDetail, getID).done(function(getResponse) {
 				that.getView().setModel(getResponse, "CreateAssessments");
 				var getCreateAssessmentsModel = that.getView().getModel("CreateAssessments");
 				getCreateAssessmentsModel.setProperty("/U_AssessmentCode", getID);
 				that.getView().setBusy(false);
-				var selFeed = that.getView().byId("coachFeedback");
-				var oItem = new sap.ui.core.Item({
-					text: "Select Feedback",
-					key: -1
-				});
-				selFeed.insertItem(oItem, 0);
-				selFeed.setSelectedItem(oItem);
-				coachAssessementId.feedBack.setValueState("None");
-				selFeed.setBusy(false);
+				// var selFeed = that.getView().byId("coachFeedback");
+				// var oItem = new sap.ui.core.Item({
+				// 	text: "Select Feedback",
+				// 	key: -1
+				// });
+				// selFeed.insertItem(oItem, 0);
+				// selFeed.setSelectedItem(oItem);
+				// coachAssessementId.feedBack.setValueState("None");
+			//	selFeed.setBusy(true);
 			}).fail(function(err) {
 				that.getView().setBusy(false);
 				that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
@@ -113,7 +119,14 @@ sap.ui.define([
 			that.setSelBusy(true);
 			this.fetchAssessmentScore(that, filterAssessments).done(function(getResponseScore) {
 				sap.ui.getCore().setModel(getResponseScore, "AssessmentScoreList");
-				that.setSelBusy(false);
+				var selFeed = that.getView().byId("coachFeedback");
+				var oItem = new sap.ui.core.Item({
+					text: "Select Feedback",
+					key: -1
+				});
+				selFeed.insertItem(oItem, 0);
+				selFeed.setSelectedItem(oItem);
+				that.setSelBusy(true);
 			}).fail(function(err) {
 				that.setSelBusy(false);
 				that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");

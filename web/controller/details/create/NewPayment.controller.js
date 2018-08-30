@@ -26,6 +26,7 @@ sap.ui.define([
 		_onRouteMatched: function(oEvt) {
 			var filter = "";
 			var that = this;
+			this.getView().byId("voucherNo").setValue("");
 			this._getInvoiceID = oEvt.getParameter("arguments").InvoiceID;
 			this._getPageID = oEvt.getParameter("arguments").PageID;
 			that.showLoading(true);
@@ -89,6 +90,7 @@ sap.ui.define([
 			this.getView().byId("CreditCardNo").setValueState("None");
 			this.getView().byId("vCardValid").setValueState("None");
 			this.getView().byId("onlineAmt").setValueState("None");
+			this.getView().byId("chequeAmt").setValueState("None");
 			nPCreditCardType.setVisible(false);
 		},
 		onPressCash: function() {
@@ -123,6 +125,7 @@ sap.ui.define([
 			this.getView().byId("inputAccounttNum").setValueState("None");
 			this.getView().byId("chequeAmt").setValueState("None");
 			this.getView().byId("cashAmount").setValueState("None");
+			this.getView().byId("voucherNo").setValue("");
 			nPCreditCardType.setVisible(true);
 		},
 
@@ -245,12 +248,12 @@ sap.ui.define([
 			var payTypesKey = that.byId("btnPayType").getSelectedKey();
 			var getChequeValue = that.getView().byId("txtChequeNo").getValue();
 			var getAccountNumValue = that.getView().byId("inputAccounttNum").getValue();
-			var getChqueTotalAmount = that.getView().byId("chequeAmt").getValue();
-			var getCashValue = that.getView().byId("cashAmount").getValue();
+			var getChqueTotalAmount = that.getView().byId("chequeAmt").getValue().replace(/\,/g,'');
+			var getCashValue = that.getView().byId("cashAmount").getValue().replace(/\,/g,'');
 			var getSelcetValue = that.getView().byId("nPCreditCardType");
 			var getCreditCardNumber = that.getView().byId("CreditCardNo").getValue();
 			var getCardValidValue = that.getView().byId("vCardValid").getValue();
-			var getTotalAmtValue = that.getView().byId("onlineAmt").getValue();
+			var getTotalAmtValue = that.getView().byId("onlineAmt").getValue().replace(/\,/g,'');
 			var voucherNo = that.getView().byId("voucherNo").getValue();
 			var balAmount = that.getView().byId("balAmt").getValue();
 			let balance = balAmount.split(" ");
@@ -484,7 +487,7 @@ sap.ui.define([
 			var getModleId = this.getView().getModel("LeadsDetails");
 			var emgLabel = that.getView().byId("emergencyContailLabel");
 			var emgPanel = that.getView().byId("emgPaneId");
-			if (getModleId.oData.ContactEmployees.length == "") {
+			if (getModleId.oData.ContactEmployees.length == "0") {
 				emgLabel.setVisible(false);
 				emgPanel.setVisible(false);
 			} else {

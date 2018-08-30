@@ -1,4 +1,7 @@
 /* Enter your custom styles here */
+.margin-left-checkbox{
+    margin-left:9px;
+}
 
 .page-bg {
 	background: url("../images/login_background.jpg");
@@ -11,6 +14,9 @@
 }
 .margin-r {
 	margin-left: 3%;
+}
+.padding-Vbox {
+    	padding: 10px 10px 0 10px;
 }
 .height-CD {
 	height: 140px !important;
@@ -71,6 +77,9 @@
 	margin-left: 29%;
 	position: absolute;
 	background-color: #253a5785;
+}
+.txt-margin-right{
+	padding: 0px 0px 0 15px;
 }
 .txt-login-font-size {
 	font-size: 33px;
@@ -331,6 +340,17 @@ div[id*='simpleFromNewTeamDetails'] div h5 {
 	position: relative;
 	left: 215px;
 }
+.cmbHeight {
+    height:25px !important;
+}
+.clr-txt-lbl {
+    font-size: 20px;
+}
+.clr-txt-Date {
+    color: #4286f4 !important;
+    font-size: 20px;
+}
+
 /*End - SearchLeadAccount Styling*/
 /*
 .sapMPanelContent {

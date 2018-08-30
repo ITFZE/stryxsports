@@ -1,0 +1,119 @@
+<core:View
+    controllerName="com.ss.app.StryxSports.controller.details.Attendance"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.uxap"
+	xmlns:l="sap.ui.layout"
+	xmlns:layout="sap.ui.layout"
+	xmlns:m="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:c="sap.suite.ui.commons">
+	<m:Page id="viewAccountPage" showHeader="true" title="Attendance" showNavButton="true" navButtonPress="onNavBack">
+		<m:content>
+			<ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="false" showTitleInHeaderContent="true"
+			showEditHeaderButton="false" editHeaderButtonPress="OnPressEditLead">
+				<headerTitle>
+					<ObjectPageHeader id="headerPageId" isActionAreaAlwaysVisible="true"
+            				objectImageURI="sap-icon://customer"
+							objectTitle="{mUserProfile>/FirstName} {mUserProfile>/LastName}"
+							objectImageShape="Circle"
+							objectImageAlt="{mUserProfile>/CardName}"
+    						isObjectIconAlwaysVisible="false"
+							isObjectTitleAlwaysVisible="false"
+							isObjectSubtitleAlwaysVisible="false"
+							objectSubtitle=""/>
+				</headerTitle>
+				<headerContent>
+					<layout:VerticalLayout>
+						<m:Link class="sapUiTinyMarginTop" text="{mUserProfile>/eMail}"/>
+						<m:Link class="sapUiTinyMarginTop" text="{mUserProfile>/MobilePhone}"/>
+					</layout:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout><l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout><l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout></l:VerticalLayout><l:VerticalLayout></l:VerticalLayout><l:VerticalLayout></l:VerticalLayout><l:VerticalLayout></l:VerticalLayout>
+					<l:VerticalLayout visible="true">
+						<m:VBox>
+						    <m:HBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="Teams:"/>
+								<m:ComboBox width="300px" placeholder="Please Select The Team Name" id="idTeamName" class="sapUiSmallMarginEnd sapUiTinyMarginTop" change="onGetTeamDetailsList" items="{TeamsName>/value}">
+								    <m:items>
+    							        <core:Item key="{ path: 'TeamsName>Code'}" text="{TeamsName>Name}"/>
+            						</m:items>
+            					</m:ComboBox>
+							</m:HBox>
+							<m:HBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="Location:"/>
+								<m:Link class=" sapUiMediumMarginEnd sapUiTinyMarginTop" text="{TeamsDetails>/U_SS_LOCATION/Name}"/>
+							</m:HBox>
+							<m:HBox>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="Sports:"/>
+								<m:Link class="sapUiMediumMarginEnd sapUiTinyMarginTop" text="{TeamsDetails>/U_SS_SPORT/Name}"/>
+							</m:HBox>
+						</m:VBox>
+					</l:VerticalLayout>
+				</headerContent>
+				<sections>
+					<ObjectPageSection title="Session">
+						<subSections>
+							<ObjectPageSubSection id="StepOne">
+							<blocks>
+							<m:VBox>
+							    <m:HBox>
+								<m:Label class="clr-txt-lbl sapUiTinyMarginTop sapUiSmallMarginEnd" text="Date:"/>
+								<m:Text class="clr-txt-Date sapUiTinyMarginTop" id="txtDate"/>
+								</m:HBox>
+							</m:VBox>
+							<m:VBox>
+							    <m:HBox>
+								<m:Label class="clr-txt-lbl sapUiTinyMarginTop sapUiSmallMarginEnd" text="Start Time:"/>
+								<m:Text />
+								</m:HBox>
+							</m:VBox>
+							<m:VBox>
+							    <m:HBox>
+								<m:Label class="clr-txt-lbl sapUiTinyMarginTop sapUiSmallMarginEnd" text="End Time:"/>
+								<m:Text text=""/>
+						    	</m:HBox>
+							</m:VBox>
+							</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>		
+					<ObjectPageSection id="memberObjectPage" title="Member Details">
+						<subSections>
+							<ObjectPageSubSection id="StepTwo">
+								<blocks>
+									<m:Panel width="auto">
+										<m:Table class="sapUiSizeCompact" growing="true" growingThreshold="10" items="{MembersList>/value}">
+											<m:columns>
+												<m:Column minScreenWidth="Desktop" demandPopin="true">
+													<m:Text text="Member Name"/>
+												</m:Column>
+												<m:Column hAlign="Center" minScreenWidth="Desktop" demandPopin="true">
+													<m:Text text="Present/Absent"/>
+												</m:Column>
+											</m:columns>
+											<m:items>
+												<m:ColumnListItem>
+													<m:cells>
+														<m:Text text="{MembersList>BusinessPartners/CardName}"/>
+												    	<m:CheckBox />
+													</m:cells>
+												</m:ColumnListItem>
+											</m:items>
+										</m:Table>
+									</m:Panel>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:content>
+	</m:Page>undefined
+
+</core:View>

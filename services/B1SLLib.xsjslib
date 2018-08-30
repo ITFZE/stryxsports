@@ -38,6 +38,8 @@ function createSS(path, method, body, sessionID, routeID) {
 			} else {
 				cmnLib.getResponseWithBody(resp, mybody);
 			}
+		} else {
+		    cmnLib.getResponseWithBody(resp, mybody);
 		}
 	} catch (e) {
 		$.trace.warning("callServiceLayer Exception: " + e.message);

@@ -33,7 +33,7 @@ CKEDITOR.editorConfig = function(config) {
 		maxCharCount: -1
 	};
 	
-	config.extraPlugins = 'richcombo,placeholder_select,wordcount,notification';
+	config.extraPlugins = 'richcombo,placeholder_select,wordcount,notification,image2';
 
 	config.removePlugins = 'forms';
 };

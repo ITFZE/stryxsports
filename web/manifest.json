@@ -10,8 +10,10 @@
 				"placeholders": [],
 				"format": "[[%placeholder%]]"
 			},
-			"extraPlugins": "richcombo,placeholder_select",
-			"removePlugins": "forms"
+			"extraPlugins": "richcombo,placeholder_select,image2",
+			"removePlugins": "forms",
+			"filebrowserUploadUrl": "/ITSFZE/Development/stryxsports/services/UploadFiles.xsjs",
+			"uploadURL": "https://hxehost:4390/ITSFZE/Development/stryxsports/services/UploadFiles.xsjs"
 		},
 		"1": {
 			"placeholder_select": {
@@ -655,6 +657,18 @@
 					"viewLevel": 68
 				},
 				{
+					"name": "EventEdit",
+					"pattern": "EventEdit/{EventID}",
+					"target": ["EventsDetails", "EventsMaster"],
+					"viewLevel": 71
+				},
+				{
+					"name": "InviteMembers",
+					"pattern": "InviteMembers/{EventID}",
+					"target": "InviteMembers",
+					"viewLevel": 75
+				},
+				{
 					"name": "SendEmail",
 					"pattern": "SendEmail",
 					"target": ["SendEmail"],
@@ -665,11 +679,43 @@
 					"pattern": "SendSMS",
 					"target": ["SendSMS"],
 					"viewLevel": 70
+				}, {
+					"name": "ViewCalendar",
+					"pattern": "ViewCalendar",
+					"target": "ViewCalendar",
+					"viewLevel": 80
+				}, {
+					"name": "HolidayListMaster",
+					"pattern": "HolidayListMaster",
+					"target": ["HolidayListDetail", "HolidayListMaster"],
+					"viewLevel": 81
+				},
+				{
+					"name": "EditHolidayListDetail",
+					"pattern": "EditHolidayListDetail/{holidayID}",
+					"target": ["HolidayListMaster", "HolidayListDetail"],
+					"viewLevel": 82
+				},
+				{
+					"name": "Attendance",
+					"pattern": "Attendance",
+					"target": "Attendance",
+					"viewLevel": 83
+				},
+				{
+					"name": "ViewTeamCalendar",
+					"pattern": "ViewTeamCalendar/{accountID}/{teamID}/{PageID}",
+					"target": "ViewCalendar",
+					"viewLevel": 84
+				},
+				{
+					"name": "ViewTeamSchedules",
+					"pattern": "ViewTeamSchedules/{teamID}/{scheduleName}/{PageID}",
+					"target": "ViewCalendar",
+					"viewLevel": 85
 				}
 
-
-
-			],
+				],
 			"targets": {
 				"splitMasterAndDetail": {
 					"viewName": "view.SplitMasterAndDetail"
@@ -976,8 +1022,34 @@
 				},
 				"SendSMS": {
 					"viewName": "view.details.SendSMS"
+				},
+				"ViewCalendar": {
+					"viewName": "view.details.ViewCalendar"
+				},
+				"InviteMembers": {
+					"viewName": "view.details.InviteMembers"
+				},
+				"HolidayListMaster": {
+					"viewName": "view.masters.HolidayListMaster",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "masterPages"
+				},
+				"HolidayListDetail": {
+					"viewName": "view.details.HolidayListDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"EHolidayListDetail": {
+					"viewName": "view.details.edit.EHolidayListDetail",
+					"parent": "splitMasterAndDetail",
+					"controlId": "splitContainerControl",
+					"controlAggregation": "detailPages"
+				},
+				"Attendance": {
+					"viewName": "view.details.Attendance"
 				}
-
 			}
 		}
 	}

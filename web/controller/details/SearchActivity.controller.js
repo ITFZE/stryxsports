@@ -9,7 +9,7 @@ sap.ui.define([
 	"use strict";
 	return CreateAssessmentsSAL.extend("com.ss.app.StryxSports.controller.details.SearchActivity", {
 		onInit: function() {
-		    this._getActivityID = "";
+			this._getActivityID = "";
 			var oRouter = this.getRouter();
 			oRouter.getRoute("SearchActivity").attachMatched(this._onRouteMatched, this);
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
@@ -170,9 +170,9 @@ sap.ui.define([
 		},
 		onPressDialogEditActivityEA: function() {
 			this._dialogEditActivity.close();
-				this.getOwnerComponent().getRouter().navTo("EditActivity", {
+			this.getOwnerComponent().getRouter().navTo("EditActivity", {
 				ActivityID: this._getActivityID,
-				PageID:51
+				PageID: 51
 			});
 		},
 
@@ -249,7 +249,7 @@ sap.ui.define([
 		onPressDialogConfirm: function() {
 			var oTable = sap.ui.getCore().byId("tblPList");
 			var selItem = oTable.getSelectedItem();
-			if (selItem !== null) {
+				if (selItem !== null) {
 				var ctx = selItem.getBindingContext("ExistingLeadList");
 				var obj = ctx.getObject();
 				this.clearVariablesbValue();
@@ -258,7 +258,9 @@ sap.ui.define([
 					PageID: 52
 				});
 				this._dialogLeadExistingTable.close();
+				sap.ui.getCore().byId("pLDialogConfirm").setEnabled(false);
 			}
+			//this._dialogLeadExistingTable.close();
 		},
 
 		getVariablesLeadsExisting: function() {

@@ -1,0 +1,27 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog contentWidth="400px" class="sapUiSizeCompact" title = "Edit Holiday">
+		<l:BlockLayout>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell>
+					<Label text="Name" class="sapUiTinyMarginTop" />
+					<Input id="editHolidayName" placeholder="Please Enter The Name"/>
+					<Label text="Start Date" class="sapUiTinyMarginTop"/>
+					<DatePicker displayFormat="short" valueFormat="yyyy-MM-dd" id="editHolidayStartDate" placeholder="Please Enter The Start Date"/>
+					<Label text="End Date" class="sapUiTinyMarginTop" />
+					<DatePicker displayFormat="short" valueFormat="yyyy-MM-dd" id="editHolidayEndDate" placeholder="Please Enter The End Date"/>
+			    </l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			</l:BlockLayout>
+		<buttons>
+			<Button text="Confirm" press="onPressEditDialogConfirm"/>
+			<Button text="Close" press="onPressEditDialogClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

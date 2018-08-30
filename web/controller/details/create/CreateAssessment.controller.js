@@ -299,6 +299,7 @@ sap.ui.define([
 					}
 					caSal.fetchCoachSchedule(csFilter).done(function(resp) {
 						if (resp.oData.value.length > 0) {
+						    that.showLoading(true);
 							getPlanningCalender.setVisible(true);
 							var mcSchedule = new JSONModel();
 							mcSchedule.setProperty('/U_Coaches', []);
@@ -318,7 +319,7 @@ sap.ui.define([
 							that.getView().setModel(mCalenderSdate, "mCalenderSdate");
 							that.showLoading(false);
 						} else {
-							that.showLoading(false);
+							that.showLoading(true);
 							getPlanningCalender.setVisible(true);
 							getPlanningCalender.setNoDataText("No Schedules, Coach Available.");
 						}

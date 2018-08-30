@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Dialog title="Create Calendar" id="editTeamCalFrg" >
+		<VBox>
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<Label text="Team Calendar Title :"/>
+						<Input  id="inputTeamCalendarTitle" width="100%" placeholder="Please Enter The Calendar Title" />
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell>
+						<Label text="Select Holiday Calendar :"/>
+						<ComboBox  width="100%"
+					 placeholder="Select The Holiday :"
+					 selectionChange="selecteCreateCalSeleHolidayList"
+					 id="createCalSeleHolidayListID"
+					 items="{path: 'HolidayListMDL>/value',sorter: { path: 'Name' }}">
+							<core:Item key="{HolidayListMDL>Code}" text="{HolidayListMDL>Name}" />
+						</ComboBox>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+			<Table
+	           id="createCalTabDialog"
+		       noDataText="No Data"
+		       title="Select Calendar"
+		       mode="MultiSelect"
+		       selectionChange="seleCreateTaemCalList"
+		       items="{path : 'MDLStartAndEnTime>/'}">
+				<ColumnListItem>
+					<cells>
+						<Text text="{MDLStartAndEnTime>Name}" />
+						<TimePicker id="calTeamStartTime"
+							minutesStep="30"
+                           valueFormat="HH:mm"  displayFormat="hh:mm a"
+                           placeholder="Enter start time"
+                           value="{MDLStartAndEnTime>StartTime}"
+                           />
+						<TimePicker id="calTeamEndTime"
+							minutesStep="30"
+                         valueFormat="HH:mm" displayFormat="hh:mm a"
+                         placeholder="Enter end time"
+                          value="{MDLStartAndEnTime>EndTime}"
+                          />
+						<Label id="lblWeekend" text="{MDLStartAndEnTime>IsWeekend}"/>
+					</cells>
+				</ColumnListItem>
+				<columns>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Left">
+						<Text text="Days"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Start Time"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="End Time"/>
+					</Column>
+					<Column width="0em" >
+						<Text text=""/>
+					</Column>
+				</columns>
+			</Table>
+		</VBox>
+		<buttons>
+			<Button text="Save" id="btnDCreateTeamCalender" enabled="false" press="handleCreateCalendarConfirm"/>
+			<Button text="Close" press="btnPressCreateCalTabDialogClose" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

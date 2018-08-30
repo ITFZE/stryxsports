@@ -42,9 +42,9 @@
 							valueFormat="yyyy-MM-DD" displayFormat="short" delimiter="-"
 							change="handleChange" />
 						<Label text = "{i18n>AssessmentStartTime}"/>
-						<TimePicker  class="width-full" id="cAStartTime" value="{CreateAssessments>/U_ScheduleSTime}" valueFormat="hh:mm:ss" displayFormat="hh:mm:ss" />
+						<TimePicker  class="width-full" minutesStep="30" id="cAStartTime" value="{CreateAssessments>/U_ScheduleSTime}" valueFormat="hh:mm:ss" displayFormat="hh:mm:ss" />
 						<Label text = "{i18n>AssessmentEndTime}"/>
-						<TimePicker  class="width-full" id="cAEndTime" value="{CreateAssessments>/U_ScheduleETime}" valueFormat="hh:mm:ss"  displayFormat="hh:mm:ss"  />
+						<TimePicker  class="width-full" minutesSte="30" id="cAEndTime" value="{CreateAssessments>/U_ScheduleETime}" valueFormat="hh:mm:ss"  displayFormat="hh:mm:ss"  />
 					</l:BlockLayoutCell>
 				</l:BlockLayoutRow>
 			</l:BlockLayout>

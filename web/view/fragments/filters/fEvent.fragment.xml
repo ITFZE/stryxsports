@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List items="{EventFilter>/eventFilterList}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonEvent">
+			<StandardListItem title="{EventFilter>event_Items}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" id="confirmEventBtn" visible="false" press="onPressEventSelectFilter"/>
+			<Button text="Close" press="dialogEvntCloseFilter"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

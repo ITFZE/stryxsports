@@ -1,20 +1,35 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
-	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns="sap.m"
- xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
-	<Page title="{i18n>em}" showNavButton="true" navButtonPress="onNavBack">
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.masters.EventsM"
+	xmlns:html="http://www.w3.org/1999/xhtml" height="100%">
+	<Page title="Event Master" showNavButton="true" navButtonPress="onNavBack">
 		<subHeader>
 			<Toolbar>
-				<SearchField id="searchEvents" placeholder="{i18n>emPleaseEnterTheEvents}" 
-					width="100%" showRefreshButton="{}"/>
+				<SearchField id="eventMasterSearch" placeholder="Please Enter The Lead Name" search="onSearchEvent"/>
 			</Toolbar>
 		</subHeader>
 		<content>
-		
+			<List id="listCoachAssessmentMaster" items="{eventsLists>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				enableBusyIndicator="true" noDataText="No Event Items">
+				<items>
+					<ObjectListItem title="{i18n>caLeadName}: {eventsLists>U_Title}" type="Active" press="onListItemPressEventList" >
+						<attributes>
+							<ObjectAttribute text="{i18n>caScheduleStartDate}: {eventsLists>U_StartDate}"/>
+							<ObjectAttribute text="{i18n>caScheduleEndTime}: {eventsLists>U_StartTime}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
 		</content>
 		<footer>
 			<Toolbar>
 				<ToolbarSpacer/>
-				<OverflowToolbarButton icon="sap-icon://add-filter" text="{i18n>i_AddParts}" press="onPressInvoiceFilter"></OverflowToolbarButton>
+					<OverflowToolbarButton tooltip="Filter" icon="sap-icon://add-filter" press="onPressFilterEvent"/>
 			</Toolbar>
 		</footer>
 	</Page>

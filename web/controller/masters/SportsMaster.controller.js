@@ -34,7 +34,6 @@ sap.ui.define([
 				sap.ui.getCore().getModel("SportsList").refresh(true);
 			}
 		},
-		
 		fetchSportsList: function(filt) {
 		   	var that = this;
 		//	var filt = "$top=6";

@@ -1,0 +1,71 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	height="250px"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<Dialog >
+		<l:BlockLayout>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell>
+					<Label text="Type"/>
+					<Select id="selectSearchTypes"  class="width-full" selectedKey="{SportsModel>/U_Status}">
+						<items>
+							<core:Item text="Select The Type" key="-1"/>
+							<core:Item text="Members" key="1"/>
+							<core:Item text="Leads" key="2"/>
+						</items>
+					</Select>
+					<Label text="Mobile"/>
+					<Input id="inputIMMobile" placeholder="Please Enter The MobileNumber" class="width-full" type="Number"/>
+					<Button text="Search" press="fetchIviteMembers"  />
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell>
+					<Label text="Name"/>
+					<Input id="inputIMName" placeholder="Please Enter The Name" class="width-full " type="Text"/>
+					<Label text="Email"/>
+					<Input id="inputIMEmail" placeholder="PleaseEnterTheEmail" class="width-full" type="Email"/>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow >
+				<l:BlockLayoutCell>
+					<ScrollContainer  height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+						<Table id="tblPList"  mode="MultiSelect"  select="onPressSelectConfirm" class="width-full bg-color-table" growing="true" growingThreshold="60" inset="false" items="{mMembersList>/value}">
+							<columns>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Name"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Contact Number"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="Email"/>
+								</Column>
+							</columns>
+							<items visible="false" id="pLParentNameTable">
+								<ColumnListItem>
+									<cells>
+										<Text text="{mMembersList>CardName}"/>
+										<Text text="{mMembersList>Cellular}"/>
+										<Text text="{mMembersList>EmailAddress}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+					<FlexBox
+									height="30px"
+									alignItems="Center"
+									justifyContent="Center">
+						<items>
+							<Button id="eButtonInviteMembers" text="Add Invite" press="onPressDialogConfirm"  />
+						</items>
+					</FlexBox>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+		<buttons>
+			<Button text="Close" press="onPressDialogMembersClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

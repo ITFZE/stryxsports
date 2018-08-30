@@ -1,6 +1,9 @@
 var greetingPrefix = "Hello, ";
 var greetingSuffix = "!";
 var baseURL = "/b1s/v1";
+var libPath = "/ITSFZE/Development/stryxsports/services/";
+var cmnLib = $.import(libPath + "CommonLib.xsjslib");
+var mCalSchLib = $.import(libPath + "SS_MCalScheduleLib.xsjslib");
 var generalResp;
 
 function memberModel() {
@@ -91,7 +94,7 @@ function mapJSON(source, dest) {
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("stryx.services.destination", "Connection");
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		var header = "";
 		if (method === $.net.http.PATCH) {
@@ -392,7 +395,7 @@ function createPayment(path, method, body, sessionID, routeID) {
 
 		var iResponse = createRequest(iPath, $.net.http.GET, JSON.stringify(iTempBody), sessionID, routeID);
 		var iORet = getResponseJson(iResponse);
-	//	var bPath = "/b1s/v1/PaymentCalculationService_GetPaymentAmount";
+		//	var bPath = "/b1s/v1/PaymentCalculationService_GetPaymentAmount";
 
 		if (iORet.DocumentStatus !== "bost_Close") {
 			var bTempBody = {
@@ -409,7 +412,7 @@ function createPayment(path, method, body, sessionID, routeID) {
 
 			};
 			memService.U_Status = "2";
-/*			var bResponse = createRequest(bPath, method, JSON.stringify(bTempBody), sessionID, routeID);
+			/*			var bResponse = createRequest(bPath, method, JSON.stringify(bTempBody), sessionID, routeID);
 			var bORet = getResponseJson(bResponse);
 
 			if (bORet.PaymentAmountParamsCollection.length > 0) {
@@ -422,7 +425,8 @@ function createPayment(path, method, body, sessionID, routeID) {
 		if (mybody.DocNum !== null && mybody.DocNum !== undefined) {
 			var upTmpBody = JSON.parse(body);
 			var msPath = "/b1s/v1/U_SS_MEM_SERVICES";
-			var gPath = msPath + encodeURI("?$filter=U_InvoiceID  eq " +mybody.PaymentInvoices[0].DocEntry.toString() + " and U_CardCode eq '" + upTmpBody.CardCode +
+			var gPath = msPath + encodeURI("?$filter=U_InvoiceID  eq " + mybody.PaymentInvoices[0].DocEntry.toString() + " and U_CardCode eq '" +
+				upTmpBody.CardCode +
 				"'");
 			var getSSMem = createRequest(gPath, $.net.http.GET, body, sessionID, routeID);
 			var soRet = getResponseJson(getSSMem);
@@ -916,4 +920,74 @@ function fetchOrder(path, method, body, sessionID, routeID) {
 	}
 	getValue.value = arrFinal;
 	getResponseWithBody(foResp, getValue);
+}
+
+function createMemberCalendar(path, method, body, sessionID, routeID) {
+	try {
+		var newTMPBody = [];
+		var getTeamCalender;
+		var getMemberId;
+		var getTeamId;
+		var gPath = path;
+		gPath += "?$top=1&$orderby=Code%20desc";
+		var tmpBody = JSON.parse(body);
+		if (tmpBody.value.length > 0) {
+			var getNewMemCode;
+			getTeamCalender = tmpBody.value[0].Name;
+			getMemberId = tmpBody.value[0].U_MemberId;
+			getTeamId = tmpBody.value[0].U_TeamId;
+			var sPath = encodeURI(baseURL + "/U_SS_MEMBER_CALENDAR");
+			for (var i = 0; i < tmpBody.value.length; i++) {
+				var memberObj = new Object();
+				if (i === 0) {
+					var upPath = sPath + "?$top=1&$orderby=Code%20desc";
+					getNewMemCode = cmnLib.getNewCode(upPath, $.net.http.GET, body, sessionID, routeID);
+					memberObj.Code = getNewMemCode;
+				} else {
+					memberObj.Code = getNewMemCode;
+				}
+				memberObj.Name = tmpBody.value[i].Name;
+				memberObj.U_Days = tmpBody.value[i].U_Days;
+				memberObj.U_MemberId = tmpBody.value[i].U_MemberId;
+				memberObj.U_SchStatus = tmpBody.value[i].U_SchStatus;
+				memberObj.U_StartTime = tmpBody.value[i].U_StartTime;
+				memberObj.U_EndTime = tmpBody.value[i].U_EndTime;
+				newTMPBody.push(memberObj);
+			}
+
+			if (newTMPBody.length > 0) {
+
+				var batchCnt = "--batch_myBatch001" + "\r\n" +
+					"Content-Type: application/http" + "\r\n" +
+					"Content-Transfer-Encoding: binary" + "\r\n\r\n";
+				for (var j = 0; j < newTMPBody.length; j++) {
+					var m = j + 1;
+					batchCnt += "--changeset_myChangeset001" + "\r\n" +
+						"Content-Type: application/http\r\nContent-Transfer-Encoding: binary\r\nContent-ID:" + m + "\r\n\r\n" +
+						"POST /U_SS_MEMBER_CALENDAR HTTP/1.1" + "\r\n" +
+						"Accept: application/json" + "\r\n\r\n";
+					batchCnt += JSON.stringify(newTMPBody[j]) + "\r\n\r\n";
+				}
+				batchCnt += "--changeset_myChangeset001--" + "\r\n" + "--batch_myBatch001--";
+				cmnLib.sendTeamRequest("", $.net.http.POST, batchCnt, sessionID, routeID);
+				var chPath = encodeURI(baseURL + "/U_SS_MEMBER_CALENDAR?$filter=Name eq '" + getTeamCalender + "'");
+				var response = cmnLib.createRequest(chPath, $.net.http.GET, body, sessionID, routeID);
+				var tcBody = cmnLib.getResponseJson(response);
+				if (tcBody.value.length > 0) {
+					var setBody = {
+						"teamCalName": getTeamCalender,
+						"teamID": getTeamId,
+						"cardCode": getMemberId
+					};
+					mCalSchLib.createMCalSchedule(path, $.net.http.POST, JSON.stringify(setBody), sessionID, routeID);
+				}
+			}
+		}
+	} catch (e) {
+		$.trace.warning("callServiceLayer Exception: " + e.message);
+		$.response.contentType = "application/json";
+		$.response.setBody(JSON.stringify({
+			"error": e.message
+		}));
+	}
 }

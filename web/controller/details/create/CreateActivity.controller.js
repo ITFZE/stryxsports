@@ -38,7 +38,7 @@ sap.ui.define([
 			getEle.getPage.setTitle("Edit Activity");
 			that.getView().byId("editActivitySubSection").setTitle("EDIT ACTIVITY");
 			getEle.caSave.setText("Save");
-		//	this.clearVariablesAddress();
+			//	this.clearVariablesAddress();
 			this.clearModels();
 			$.when(that.fetchTypes()).then(function() {
 				$.when(that.fetchNationality()).then(function() {
@@ -57,7 +57,7 @@ sap.ui.define([
 		_onRouteMatched: function(oEvent) {
 			var that = this;
 			this.clearModels();
-	//		this.clearVariablesAddress();
+			//		this.clearVariablesAddress();
 			this._AccountID = oEvent.getParameter("arguments").LeadID;
 			this._getPageID = oEvent.getParameter("arguments").PageID;
 			var getEles = oEvent.getParameters();
@@ -140,7 +140,7 @@ sap.ui.define([
 				getModle.setProperty("/ActivityTime", startTime);
 				getModle.setProperty("/SeriesStartDate", getStartDate);
 
-			/*	if (getEle.caFirstActivity.getSelectedKey() === "cn_Meeting") {
+				/*	if (getEle.caFirstActivity.getSelectedKey() === "cn_Meeting") {
 					var getElement = this.getVariablesAddress();
 					var getStreet = getElement.addIStreet.getValue();
 					var getCity = getElement.addICity.getValue();
@@ -156,7 +156,7 @@ sap.ui.define([
 					getModle.setProperty("/Country", getCountry);
 					getModle.setProperty("/Location", getLocation);*/
 
-			//	}
+				//	}
 				getModle.setProperty("/CardCode", this._AccountID);
 				that.showLoading(true);
 				if (getMDLData.ActivityCode !== "" && getMDLData.ActivityCode !== undefined) {
@@ -208,7 +208,7 @@ sap.ui.define([
 				this.clearVariablesAddress();
 			}
 		},*/
-	/*	clearVariablesAddress: function() {
+		/*	clearVariablesAddress: function() {
 			var getEle = this.getVariablesAddress();
 			var getVarItems = this.getVariables();
 			getEle.addTAddress.setText("");
@@ -253,14 +253,14 @@ sap.ui.define([
 				addLRoom: this.getView().byId("caLRoom"),
 				addLState: this.getView().byId("caLState"),
 				addLCountry: this.getView().byId("caLCountry"),
-				addLMeetingLocation: this.getView().byId("caLLocation"),
-				addIStreet: this.getView().byId("caIStreet"),
+				addLMeetingLocation: this.getView().byId("caLLocation")
+			/*	addIStreet: this.getView().byId("caIStreet"),
 				addICity: this.getView().byId("caICity"),
 				addIRoom: this.getView().byId("caIRoom"),
 				addIState: this.getView().byId("caIState"),
 				addICountry: this.getView().byId("caICountry"),
 				addIMeetingLocation: this.getView().byId("caILocation"),
-				addTAddress: this.getView().byId("caTAddress")
+				addTAddress: this.getView().byId("caTAddress")*/
 
 			};
 			return items;
@@ -465,7 +465,7 @@ sap.ui.define([
 					getModle.setProperty("/ActivityTime", getStarTime);
 					getModle.setProperty("/SeriesStartDate", getStartDate);
 
-				/*	if (getEle.caFirstActivity.getSelectedKey() === "cn_Meeting") {
+					/*	if (getEle.caFirstActivity.getSelectedKey() === "cn_Meeting") {
 						that.showLoading(true);
 						var getElement = this.getVariablesAddress();
 						var getStreet = getElement.addIStreet.getValue();
@@ -481,8 +481,8 @@ sap.ui.define([
 						getModle.setProperty("/State", getState);
 						getModle.setProperty("/Country", getCountry);
 						getModle.setProperty("/Location", getLocation);*/
-						// 		getModle.setProperty("/CardCode", this._AccountID);
-				//	}
+					// 		getModle.setProperty("/CardCode", this._AccountID);
+					//	}
 
 					getModle.setProperty("/CardCode", this._AccountID);
 					getMDLData.PreviousActivity = getMDLData.ActivityCode;

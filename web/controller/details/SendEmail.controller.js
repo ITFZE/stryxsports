@@ -261,6 +261,24 @@ sap.ui.define([
 				that.getView().setBusy(false);
 				that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
 			});
+		},
+			onPressSendEmail: function() {
+			var URL = "/ITSFZE/Development/stryxsports/services/TestEmail.xsjs";
+			var obj = new Object();
+			obj.Name = "Harish";
+			obj.Password = "Pass12345";
+			$.ajax({
+				type: 'POST',
+				url: URL,
+				data: JSON.stringify(obj),
+				crossDomain: true,
+				success: function(response) {
+
+				},
+				error: function(xhr, status, error) {
+
+				}
+			});
 		}
 	});
 });

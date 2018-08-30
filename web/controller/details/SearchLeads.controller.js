@@ -17,7 +17,7 @@ sap.ui.define([
 			this.clearVariablesbValue();
 			var getEles = oEvt.getParameters();
 			this._setViewLevel = getEles.config.viewLevel;
-			/*		    var getSessionData = this.getContext();
+			/*	var getSessionData = this.getContext();
 			if(getSessionData.SessionData.sessionID == '' || getSessionData.SessionData.sessionID == '')
 			{
                 this.fetchMessageOk("", "", "Unauthorized" , "Login");

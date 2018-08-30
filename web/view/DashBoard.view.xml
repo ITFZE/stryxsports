@@ -53,7 +53,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashLeads}" app:route="Leads"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://leads" />
 														</content>
@@ -63,7 +63,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashAccountsandActivities}" app:route="SearchMembership"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://account" />
 														</content>
@@ -72,7 +72,7 @@
 											</GenericTile>
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashTeam}"  app:route = "TeamsDetail" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://group" />
 														</content>
@@ -81,7 +81,7 @@
 											</GenericTile>
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashActivities}" app:route="SearchActivity" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://activity-individual" />
 														</content>
@@ -90,7 +90,7 @@
 											</GenericTile>
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashInvoiceandPayment}" app:route="SearchInvoice" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://money-bills" />
 														</content>
@@ -104,7 +104,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCreateAssessment}" app:route="SearchLeads"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://add-activity" />
 														</content>
@@ -114,7 +114,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCoachAssessment}" app:route="CoachAssessment"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://activities" />
 														</content>
@@ -124,7 +124,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashAssessmentFeedback}" app:route="AssessmentFeedbackDetail"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://feed" />
 														</content>
@@ -133,8 +133,7 @@
 											</GenericTile>
 										</l:BlockLayoutCell>
 									</l:BlockLayoutRow>
-									
-								<!--	<l:BlockLayoutRow>
+									<l:BlockLayoutRow>
 										<l:BlockLayoutCell title="{i18n>dashEvents}">
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCreateEvents}" app:route="CreateEvent"
 												press="onTilePress">
@@ -168,14 +167,46 @@
 											</GenericTile>
 										</l:BlockLayoutCell>
 									</l:BlockLayoutRow>
-										-->
-									
+									<l:BlockLayoutRow>
+										<l:BlockLayoutCell title="Schedules">
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Holidays" app:route="HolidayListMaster"
+												press="onTilePress">
+												<tileContent>
+													<TileContent>
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://appointment" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="View Schedule" app:route="ViewCalendar"
+												press="onTilePress">
+												<tileContent>
+													<TileContent>
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://check-availability" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Attendance" app:route="Attendance"
+												press="onTilePress">
+												<tileContent>
+													<TileContent>
+														<content>
+															<NumericContent value="5" valueColor="Good" icon="sap-icon://calendar" />
+														</content>
+													</TileContent>
+												</tileContent>
+											</GenericTile>
+										</l:BlockLayoutCell>
+									</l:BlockLayoutRow>
 									<l:BlockLayoutRow>
 										<l:BlockLayoutCell title="{i18n>dashTemplates}">
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashEmail}" app:route="EmailTemplate"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://arobase" />
 														</content>
@@ -185,7 +216,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSMS}" app:route="SMSTemplate"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://paper-plane" />
 														</content>
@@ -198,7 +229,7 @@
 										<l:BlockLayoutCell title="{i18n>dashMasters}">
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSports}" app:route="Sports" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://soccor" />
 														</content>
@@ -208,7 +239,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSportsCategory}" app:route="SportsCategory"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://citizen-connect" />
 														</content>
@@ -218,7 +249,7 @@
 											<!-- Here view for Location -->
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashLocations}" app:route="Location" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://functional-location" />
 														</content>
@@ -228,7 +259,7 @@
 											<!-- Here view for seasons -->
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashSeasons}" app:route="Seasons" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://activity-2" />
 														</content>
@@ -238,7 +269,7 @@
 											<!-- Here view for Cocach -->
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashCoaches}" app:route="CoachesDetail" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://manager" />
 														</content>
@@ -248,7 +279,7 @@
 											<!-- Here view for Teams -->
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashTeams}" app:route="Teams" press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://group" />
 														</content>
@@ -262,7 +293,7 @@
 											<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="{i18n>dashUsers}" app:route="UserManagementDetail"
 												press="onTilePress">
 												<tileContent>
-													<TileContent >
+													<TileContent>
 														<content>
 															<NumericContent value="5" valueColor="Good" icon="sap-icon://employee-pane" />
 														</content>

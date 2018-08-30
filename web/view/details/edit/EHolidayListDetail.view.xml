@@ -1,0 +1,101 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	controllerName="com.ss.app.StryxSports.controller.details.edit.EHolidayListDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<Page  title="{i18n>EditHoliday}">
+		<content>
+			<l:Grid defaultSpan="L8 M12 S12" class="sapUiSmallMarginTop">
+				<l:content>
+					<f:SimpleForm id="editHolidayList" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4"
+						labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
+						singleContainerFullSize="true">
+						<f:content>
+							<Label text="{i18n>Name}"/>
+							<Input id="holidayListname" value="{HolidayListModel>/Name}" placeholder="{i18n>PleaseEnterTheName}"/>
+							<Label text="{i18n>Description}" />
+							<TextArea value="{HolidayListModel>/U_Description}" placeholder="{i18n>PleaseEnterTheDescription}"/>
+							<Label text="{i18n>Weekend}" />
+							<HBox class="sapUiSmallMarginTop">
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Mon"/>
+							<CheckBox id="idMon" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Tue"/>
+							<CheckBox id="idTus" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Wed"/>
+							<CheckBox id="idWed" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Thu"/>
+							<CheckBox id="idThu" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Fri"/>
+							<CheckBox id="idFri" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Sat"/>
+							<CheckBox id="idSat" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							<VBox>
+							<Label class="sapUiSmallMarginEnd" text="Sun"/>
+							<CheckBox id="idSun" class="sapUiSmallMarginEnd"/>
+							</VBox>
+							</HBox>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+			<Panel width="auto">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<Title text="Add Holiday"/>
+						<ToolbarSpacer/>
+						<Button id="editHoliday" icon="sap-icon://add" press="onPressEditHoliday"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<ScrollContainer height="200px" width="100%" horizontal="true" vertical="true" focusable="true">
+						<Table id="addHolidayTable" inset="false" items="{HolidaysModel>/value}">
+							<columns>
+								<Column>
+									<Text text="Holiday Name"/>
+								</Column>
+								<Column minScreenWidth="Tablet" demandPopin="true">
+									<Text text="Start Date"/>
+								</Column>
+								<Column minScreenWidth="Desktop" demandPopin="true">
+									<Text text="End Date"/>
+								</Column>
+							</columns>
+							<items>
+							<ColumnListItem>
+									<cells>
+										<Text text="{HolidaysModel>Name}"/>
+										<Text text="{HolidaysModel>U_SDate}"/>
+										<Text text="{HolidaysModel>U_EDate}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="btnSaveCreate" tooltip="Save" icon="sap-icon://save" press="onPressEditSaveHoliday"/>
+					<Button id="btnSaveCancel" tooltip="Cancel" icon="sap-icon://sys-cancel-2" press="onPressEHolidayCancel"/>
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

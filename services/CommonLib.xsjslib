@@ -3,7 +3,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		//var cSession = $.Session();
-		
+
 		var header = "";
 		if (method === $.net.http.PATCH) {
 			method = $.net.http.POST;
@@ -145,6 +145,154 @@ function getResponseJson(resp) {
 			}
 		}
 		return myBody;
+	} catch (e) {
+		$.trace.warning("callServiceLayer Exception: " + e.message);
+		$.response.contentType = "application/json";
+		$.response.setBody(JSON.stringify({
+			"error": e.message
+		}));
+	}
+}
+
+function getNewCode(path, method, body, sessionID, routeID) {
+	try {
+		var resp = createRequest(path, method, body, sessionID, routeID);
+		var myBody = getResponseJson(resp);
+		var code = 0;
+		if (myBody.value.length > 0) {
+			code = myBody.value[0].Code;
+		} else {
+			code = code;
+		}
+		return code;
+	} catch (e) {
+		$.trace.warning("callServiceLayer Exception: " + e.message);
+		$.response.contentType = "application/json";
+		$.response.setBody(JSON.stringify({
+			"error": e.message
+		}));
+	}
+}
+
+function sendTeamRequest(path, method, body, sessionID, routeID) {
+
+	try {
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
+		var client = new $.net.http.Client();
+		var req = new $.net.http.Request($.net.http.POST, "/b1s/v1/$batch");
+		req.headers.set("Content-Type", "multipart/mixed;charset=utf-8;boundary=batch_myBatch001");
+		req.cookies.set("B1SESSION", sessionID);
+		req.setBody(body.toString());
+		client.request(req, destination);
+		var response = client.getResponse();
+		return response;
+	} catch (e) {
+		$.trace.warning("callServiceLayer Exception: " + e.message);
+		$.response.contentType = "application/json";
+		$.response.setBody(JSON.stringify({
+			"error": e.message
+		}));
+	}
+}
+
+function sendBatchRequest(path, method, body, sessionID, routeID) {
+
+	try {
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
+		var client = new $.net.http.Client();
+		var req = new $.net.http.Request($.net.http.POST, "/b1s/v1/$batch");
+		req.headers.set("Content-Type", "multipart/mixed;charset=utf-8;boundary=batch_myBatch001");
+		req.cookies.set("B1SESSION", sessionID);
+		req.setBody(body.toString());
+		client.request(req, destination);
+		var response = client.getResponse();
+
+		//Variables for response handling
+		var myCookies = [],
+			myHeader = [],
+			myBody = null,
+			myEntityBody = null;
+
+		//Cookies  
+		for (var c in response.cookies) {
+			myCookies.push(response.cookies[c]);
+		}
+
+		//Headers  
+		for (var h in response.headers) {
+			myHeader.push(response.headers[h]);
+		}
+
+		// Body  
+		if (response.body)
+			try {
+				myBody = JSON.parse(response.body.asString());
+			} catch (e) {
+				$.trace.warning("callServiceLayer Exception: " + e.message);
+				$.response.contentType = "application/json";
+				$.response.setBody(JSON.stringify({
+					"error": e.message
+				}));
+			}
+	} catch (e) {
+		$.trace.warning("callServiceLayer Exception: " + e.message);
+		$.response.contentType = "application/json";
+		$.response.setBody(JSON.stringify({
+			"error": e.message
+		}));
+	}
+}
+
+function getBatchRequest(path, method, body, sessionID, routeID) {
+
+	try {
+		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
+		var client = new $.net.http.Client();
+		var req = new $.net.http.Request($.net.http.POST, "/b1s/v1/$batch");
+		req.headers.set("Content-Type", "multipart/mixed;charset=utf-8;boundary=batch_myBatch001");
+		req.cookies.set("B1SESSION", sessionID);
+		req.setBody(body);
+		client.request(req, destination);
+		var response = client.getResponse();
+		return response;
+	/*	//Variables for response handling
+		var myCookies = [],
+			myHeader = [],
+			myBody = null,
+			myEntityBody = null;
+
+		//Cookies  
+		for (var c in response.cookies) {
+			myCookies.push(response.cookies[c]);
+		}
+
+		//Headers  
+		for (var h in response.headers) {
+			myHeader.push(response.headers[h]);
+		}
+
+		// Body  
+		if (response.body)
+			try {
+				myBody = JSON.parse(response.body.asString());
+			} catch (e) {
+				$.trace.warning("callServiceLayer Exception: " + e.message);
+				$.response.contentType = "application/json";
+				$.response.setBody(JSON.stringify({
+					"error": e.message
+				}));
+			}
+
+		//Entities Body 
+		for (var w in response.entities) {
+			if (response.entities[w].body) {
+				try {
+					myEntityBody = JSON.parse(response.entities[w].body.asString());
+				} catch (e) {
+					myEntityBody = response.entities[w].body.asString();
+				}
+			}
+		}*/
 	} catch (e) {
 		$.trace.warning("callServiceLayer Exception: " + e.message);
 		$.response.contentType = "application/json";

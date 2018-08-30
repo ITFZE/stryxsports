@@ -5,8 +5,9 @@
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	controllerName="com.ss.app.StryxSports.controller.details.EventD"
 	xmlns:l="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
 	xmlns:f="sap.ui.layout.form">
-	<Page id="paymentDetails" title="{i18n>edCreateEvent}" showNavButton="false" navButtonPress="onBack">
+	<Page id="eventPageDetails" title="{i18n>edCreateEvent}" showNavButton="false" navButtonPress="onBack">
 		<content>
 			<f:SimpleForm 
 			editable="true" 
@@ -26,57 +27,108 @@
 			singleContainerFullSize="true">
 				<f:content>
 					<Label text="{i18n>edTitle}"/>
-					<Input id="inputSportName" placeholder="{i18n>edPleaseEnterTheTitle}" 
+					<Input id="eInputTitle" placeholder="{i18n>edPleaseEnterTheTitle}" 
 			           value="{
-			           path : 'CreateEvent>/Title',
+			           path : 'CreateEvent>/U_Title',
 			           type : 'sap.ui.model.type.String', 
 			           constraints : { minLength : 1, maxLength : 50 } }"/>
 					<Label text="{i18n>edStartAndEndDate}"/>
 					<DatePicker
-					  value="{CreateEvent>/StartDate}"
-			          valueFormat="yyyy-MM-DD" displayFormat="short"
+					  value="{CreateEvent>/U_StartDate}"
+			          displayFormat="dd-MM-yyyy"
+			          id="eDatePickerStartDate"
 		          	/>
 					<DatePicker
-					value="{CreateEvent>/EndDate}"
-			         valueFormat="yyyy-MM-DD" displayFormat="short"
+					value="{CreateEvent>/U_EndDate}"
+			        displayFormat="dd-MM-yyyy"
+			         id="eDatePickerEndDate"
 			         />
 					<Label text="{i18n>edStartAndEndTime}"/>
 					<TimePicker
-					 value="{CreateEvent>/StartTime}"
+						minutesStep="30"
+					 value="{CreateEvent>/U_StartTime}"
+					  id="eTimePickerStartTime"
 			         valueFormat="HH:mm" displayFormat="hh:mm a"
 			         change="handleChange" placeholder="Please Enter Start Time"/>
 					<TimePicker
-					value="{CreateEvent>/EndTime}"
+						minutesStep="30"
+					value="{CreateEvent>/U_EndTime}"
 					valueFormat="HH:mm"
+				   id="eTimePickerEndTime"
 					displayFormat="hh:mm a"
 					change="handleChange"
 					placeholder="Please Enter Start Time"/>
 					<Label text="{i18n>edLocation}"/>
 					<ComboBox 
 					 placeholder="{i18n>edSelectLocation}"
-					 selectedKey="{CreateEvent>/Location}" 
-					 id="edAddLocation" 
+					 selectedKey="{CreateEvent>/U_Location}" 
+					 id="eComboBoxLocation"
 					 items="{path: 'mdlLocation>/value',sorter: { path: 'Name' }}">
 						<core:Item key="{mdlLocation>Code}" text="{mdlLocation>Name}" />
 					</ComboBox>
-					<Label text="{i18n>edContent}"/>
 				</f:content>
 			</f:SimpleForm>
-			<Panel>
-				<Label text="{i18n>edContent}:" />
-				<TextArea height="110px" width="100%"
-				value="{CreateEvent>/Notes}"
-				placeholder="{i18n>edPleaseEnterContent}"
-			/>
-			</Panel>
-			<FlexBox
+			<VBox>
+				<IconTabBar  class="sapUiResponsiveContentPadding" select="onSelectChanged" id="tabEvant" expanded="{device>/isNoPhone}" >
+					<items>
+						<IconTabFilter text="Email" key="tabEmail" icon="sap-icon://email">
+							<html:textarea id="emailEditor" maxlength="10" rows="4" cols="50" name="editor1"/>
+						</IconTabFilter>
+						<IconTabFilter text="SMS" key="tabSMS" icon="sap-icon://post">
+							<TextArea height="150px" value="{CreateEvent>/U_SMSContent}" width="100%" placeholder="{i18n>edPleaseEnterContent}" />
+						</IconTabFilter>
+						<IconTabFilter id="IconTabFilterInvite" visible="false"  text="Invite" key="tabInviteMembers" icon="sap-icon://account">
+							<Table class="bg-color-table" inset="false" items="{SelectedMemberLists>/value}">
+								<headerToolbar>
+									<Toolbar>
+										<content>
+											<Title text="Invited Members"/>
+											<ToolbarSpacer />
+											<Button  icon="sap-icon://add-product"  tooltip="Add Teams" press="selecteTeamMemberList"/>
+											<Button  icon="sap-icon://add-employee" tooltip="Add Members" press="selecteMemberList"/>
+										</content>
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<Column width="12em" >
+										<Text text="Name"/>
+									</Column>
+									<Column width="12em" >
+										<Text text="Phone Number"/>
+									</Column>
+									<Column width="12em" >
+										<Text text="Email"/>
+									</Column>
+									<Column width="12em" hAlign="End">
+										<Text text=""/>
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<Text text="{SelectedMemberLists>BusinessPartners/CardName}"/>
+											<Text text="{SelectedMemberLists>BusinessPartners/Cellular}"/>
+											<Text text="{SelectedMemberLists>BusinessPartners/EmailAddress}"/>
+											<Button icon="sap-icon://sys-cancel-2" press="onPressDeleteMemberListItems"/>
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+				<FlexBox
 					height="30px"
 					alignItems="Center"
 					justifyContent="Center">
-				<items>
-					<Button  text="{i18n>ed_Create}" press="onPressCreateEvent"  />
-				</items>
-			</FlexBox>
+					<items>
+						<Button id="eButtonCreate" text="{i18n>ed_Create}" press="onPressCreateEvent"  />
+						<Button id="eButtonCancel" visible="true" class="sapUiSmallMargin" text="Cancel" press="onPressSaveCancelEvent"  />
+						<Button id="eUpdateButtonCancel" class="sapUiSmallMargin" text="Cancel" visible="false" press="onPressUpdateCancelEvent"  />
+						<Button id="eButtonInviteMembers"  enabled="false" visible="false"  text="Save Members" press="onPressSaveInvitedMembers"  />
+					</items>
+				</FlexBox>
+			</VBox>
 		</content>
 	</Page>
 </mvc:View>

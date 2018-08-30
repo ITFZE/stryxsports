@@ -98,10 +98,6 @@ sap.ui.define([
 				data: jModel.getJSON(),
 				crossDomain: true,
 				success: function() {
-					//getThis.MessageToastShow("Update Successfull");
-					//getThis.fetchSports(getThis);
-					var jm = new JSONModel();
-					getThis.getView().setModel(jm, "SportsModel");
 					deferred.resolve(0);
 				},
 				error: function(xhr, status, error) {

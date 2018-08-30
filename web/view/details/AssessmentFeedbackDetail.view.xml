@@ -20,11 +20,7 @@
 					<Label text="{i18n>afComments}"/>
 					<TextArea groowing="true" value="{AssessmentFeedbackDetail>/U_SS_ASSESS_FEEDBACK/U_Comments}" id="coachAssessmentComments" growingMaxLines="7" editable="false" enabled="true"/>
 					<Label text="{i18n>afAssessmentFeesback}"/>
-					<Select enabled="false" id="coachFeedback" items="{AssessmentScoreList>/value}" selectedKey="{AssessmentFeedbackDetail>/U_SS_ASSESS_FEEDBACK/U_AssessmentScore}"  change="selectedFeedback"  >
-						<items >
-							<core:Item text="{AssessmentScoreList>Name}" key="{AssessmentScoreList>Name}"/>
-						</items>
-					</Select>
+					<Input editable="false" enabled="true" value="{AssessmentFeedbackDetail>/U_SS_ASSESS_FEEDBACK/U_AssessmentScore}"/>
 					<Label/>
 					<Button	text="{i18n>afCreateMembership}" press="onPressCreateMembership"/>
 				</f:content>

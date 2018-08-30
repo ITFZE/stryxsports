@@ -19,21 +19,39 @@ sap.ui.define([
 	"com/ss/app/StryxSports/controller/sal/AssessmentFeedbackSAL",
 	"com/ss/app/StryxSports/controller/sal/EmailTemplateSAL",
 	"com/ss/app/StryxSports/controller/sal/AuthenticationSAL",
-		"com/ss/app/StryxSports/controller/sal/ViewAccountSAL"
+	"com/ss/app/StryxSports/controller/sal/ViewAccountSAL",
+	"com/ss/app/StryxSports/controller/sal/ScheduleSAL",
+	"com/ss/app/StryxSports/controller/sal/HolidaySAL"
 
 ], function(JSONModel, Dialog, Button, Text, History, BaseController, SportsSAL, SeasonSAL, SportCategorySAL, LocationsSAL, TeamsSAL,
-	CoachsSAL, AssessmentSAL,
-	UserProfileSAL, CreateAssessmentsSAL, CoachAssessmentScoreSAL, SMSTemplateSAL, AssessmentFeedbackSAL, EmailTemplateSAL,
-	AuthenticationSAL, ViewAccountSAL
-) {
+	CoachsSAL, AssessmentSAL, UserProfileSAL, CreateAssessmentsSAL, CoachAssessmentScoreSAL, SMSTemplateSAL, AssessmentFeedbackSAL, EmailTemplateSAL,
+	AuthenticationSAL, ViewAccountSAL, ScheduleSAL,HolidaySAL) {
 	"use strict";
 
 	return BaseController.extend("com.ss.app.StryxSports.controller.DashBoard", {
 		onInit: function() {
 			this._setViewLevel = "";
+			var oRouter = this.getRouter();
+			oRouter.getRoute("DashBoard").attachMatched(this._onRouteMatched, this);
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 		},
-
+        
+        _onRouteMatched: function(evt){
+/*            var scheduleSal = new ScheduleSAL();
+            // Moment
+            scheduleSal.getMoment().done(function(response){
+                var res = response;
+            }).fail(function(error){
+                var err = error;
+            });
+            // LaterJS
+            scheduleSal.getLater().done(function(response){
+                var res = response;
+            }).fail(function(error){
+                var err = error;
+            });*/
+        },
+        
 		handleMenuPress: function(oEvent) {
 			var viewId = this.getView().getId();
 			var toolPage = sap.ui.getCore().byId(viewId + "--toolPage");
@@ -133,9 +151,10 @@ sap.ui.define([
 						that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
 					});
 					break;
-					/*				case 'Location':
-					this.getRouter().navTo(item.getKey());
-					break;*/
+					
+				/*	case 'Location':
+				this.getRouter().navTo(item.getKey());
+				break;*/
 
 				case 'Teams':
 					var TeamSal = new TeamsSAL();
@@ -302,26 +321,43 @@ sap.ui.define([
 							that.showLoading(false);
 							that.fetchMessageOk("Note", "Warning", "No Data ", "DashBoard");
 						}
-						// 		that.showLoading(false);
-						// 					var getCoachs = sap.ui.getCore().getModel("UserManagement");
-						// 					var createfilterModel = getCoachs.oData.value[0];
-						// 					sap.ui.getCore().setModel(createfilterModel, "filterMaster");
-						// 					that.getOwnerComponent().getRouter()
-						// 						.navTo(item.getKey(), {
-						// 							EmployeeID: getCoachs.oData.value[0].EmployeeID
-						// 						});
+    						/*that.showLoading(false);
+    						var getCoachs = sap.ui.getCore().getModel("UserManagement");
+    						var createfilterModel = getCoachs.oData.value[0];
+    						sap.ui.getCore().setModel(createfilterModel, "filterMaster");
+    						that.getOwnerComponent().getRouter()
+    							.navTo(item.getKey(), {
+    								EmployeeID: getCoachs.oData.value[0].EmployeeID
+    							});*/
 					}).fail(function(err) {
 						that.showLoading(false);
 						that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
 					});
 					break;
-				case 'CreateEvnet':
+				case 'CreateEvent':
 					that.getOwnerComponent().getRouter()
-						.navTo("CreateEvnet", {
+						.navTo("CreateEvent", {
 							PageID: 2
 						});
 					break;
-
+				case 'ViewCalendar':
+                    that.showLoading(false);
+					that.getRouter().navTo(item.getKey());
+					break;
+				case 'HolidayListMaster':
+                   that.showLoading(true);
+					var holiSAL = new HolidaySAL();
+					var holiModel = "$orderby=Code%20desc";
+					holiSAL.fetchHolidayList(this, holiModel).done(function(getResponse) {
+						sap.ui.getCore().setModel(getResponse, "HolidayListModel");
+						sap.ui.getCore().getModel("HolidayListModel").refresh(true);
+						that.showLoading(false);
+						that.getRouter().navTo(item.getKey());
+					}).fail(function(err) {
+						that.showLoading(false);
+						that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
+					});
+					break;
 				default:
 					this.getRouter().navTo(item.getKey());
 					break;
@@ -342,7 +378,6 @@ sap.ui.define([
 					sportSal.fetchSports(this, filt).done(function(obj) {
 						jModel = obj;
 						sap.ui.getCore().setModel(jModel, "SportsList");
-						console.log("setModel Name SportsList in DashBoard ");
 						sap.ui.getCore().getModel("SportsList").refresh(true);
 						that.showLoading(false);
 						that.getRouter().navTo(getPages);
@@ -479,7 +514,6 @@ sap.ui.define([
 										.navTo(getPages, {
 											assessmentID: getAssessmentsID
 										});*/
-
 								}
 
 							}).fail(function(err) {
@@ -594,6 +628,24 @@ sap.ui.define([
 						.navTo("CreateEvent", {
 							PageID: 2
 						});
+					break;
+				case 'ViewCalendar':
+                    that.showLoading(false);
+					that.getRouter().navTo(getPages);
+					break;
+				case 'HolidayListMaster':
+					var hfilter = "$orderby=Code%20desc";
+					that.showLoading(true);
+					var holidaySAL = new HolidaySAL();
+					holidaySAL.fetchHoliday(this, hfilter).done(function(getResponse) {
+						sap.ui.getCore().setModel(getResponse, "HolidayListModel");
+						sap.ui.getCore().getModel("HolidayListModel").refresh(true);
+						that.showLoading(false);
+						that.getRouter().navTo(getPages);
+					}).fail(function(err) {
+						that.showLoading(false);
+						that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
+					});
 					break;
 				default:
 					this.getRouter().navTo(getPages);

@@ -103,9 +103,9 @@
 													<m:Label text="{i18n>crA_AssessmentStartDate}"/>
 													<m:DateRangeSelection id="createAssessmentDate" placeholder="{i18n>crA_PleaseAssessmentStartDate}"	displayFormat="short" delimiter="-" />
 													<m:Label text = "{i18n>crA_AssessmentStartTime}"/>
-													<m:TimePicker minutesStep="15" class="width-full" id="cAStartTime" value="{CreateAssessments>/U_ScheduleSTime}" valueFormat="hh:mm a"  displayFormat="hh:mm a" />
+													<m:TimePicker minutesStep="30" class="width-full" id="cAStartTime" value="{CreateAssessments>/U_ScheduleSTime}" valueFormat="hh:mm a"  displayFormat="hh:mm a" />
 													<m:Label text = "{i18n>crA_AssessmentEndTime}"/>
-													<m:TimePicker minutesStep="15" class="width-full" id="cAEndTime" value="{CreateAssessments>/U_ScheduleETime}" valueFormat="hh:mm a"  displayFormat="hh:mm a"  />
+													<m:TimePicker minutesStep="30" class="width-full" id="cAEndTime" value="{CreateAssessments>/U_ScheduleETime}" valueFormat="hh:mm a"  displayFormat="hh:mm a"  />
 												</l:BlockLayoutCell>
 											</l:BlockLayoutRow>
 										</l:BlockLayout>

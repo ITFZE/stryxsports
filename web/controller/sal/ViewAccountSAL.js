@@ -123,6 +123,50 @@ sap.ui.define([
 				}
 			});
 			return deferred.promise();
+		},
+		fetchTeamsCreateCalendar: function(filter) {
+			var deferred = $.Deferred();
+			var getThis = this;
+			var context = getThis.getContext();
+			var jModel = new JSONModel();
+			var URL = context.baseURL + "?cmd=Get" + "&actionUri=U_SS_TEAM_CALENDAR" + "&sessionID=" + context.SessionData.sessionID +
+				"&routeID=" + context.SessionData.routeID + "&filter=" + filter;
+			$.ajax({
+				type: 'GET',
+				url: URL,
+				headers: {
+					'Prefer': 'odata.maxpagesize=1000'
+				},
+				crossDomain: true,
+				success: function(response) {
+					jModel.setData(response.body);
+					deferred.resolve(jModel);
+				},
+				error: function(xhr, status, error) {
+					deferred.reject(error);
+				}
+			});
+			return deferred.promise();
+		},
+		fecthMemberCalendar: function(jModel) {
+			var getThis = this;
+			var deferred = $.Deferred();
+			var context = getThis.getContext();
+			var URL = context.baseURL + "?cmd=Add&sstype=U_SS_MEMBER_CALENDAR&memType=CREATE_MEMBER_CALENDAR&actionUri=U_SS_MEMBER_CALENDAR&sessionID=" +
+				context.SessionData.sessionID + "&routeID=" + context.SessionData.routeID;
+			$.ajax({
+				type: 'POST',
+				url: URL,
+				data: jModel.getJSON(),
+				crossDomain: true,
+				success: function(response) {
+					deferred.resolve(response.body);
+				},
+				error: function(xhr, status, error) {
+					deferred.reject(error);
+				}
+			});
+			return deferred.promise();
 		}
 
 	});

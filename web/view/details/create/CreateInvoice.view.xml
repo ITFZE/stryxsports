@@ -119,8 +119,9 @@
 											</m:HBox>
 										</m:VBox>
 										<m:HBox alignItems="Center" justifyContent="Center">
+										    <m:Button id="btnCreateSchedule" class="sapUiSmallMargin" text="Create Schedule" press="onPressCreateSchedule"/>
 											<m:Button id="btnGenerateInvoice" class="sapUiSmallMargin" text="Generate Invoice" press="createGenerateInvoice"/>
-											<m:Button id="btnGenerateInvoiceLater"  text="Generate Invoice Later" press="onBack"/>
+											<m:Button id="btnGenerateInvoiceLater" class="sapUiSmallMargin" text="Generate Invoice Later" press="onBack"/>
 										</m:HBox>
 									</m:VBox>
 								</blocks>

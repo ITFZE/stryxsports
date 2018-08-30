@@ -126,7 +126,7 @@
 			<l:BlockLayoutRow>
 				<l:BlockLayoutCell></l:BlockLayoutCell>
 				<l:BlockLayoutCell>
-					<Button text="Send" press=""  />
+					<Button text="Send" press="onPressSendEmail"  />
 				</l:BlockLayoutCell>
 				<l:BlockLayoutCell></l:BlockLayoutCell>
 			</l:BlockLayoutRow>

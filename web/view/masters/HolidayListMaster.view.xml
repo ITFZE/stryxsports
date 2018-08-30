@@ -1,0 +1,35 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.masters.HolidayListMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Page title="{i18n>HolidayMaster}" showNavButton="true" navButtonPress="onHolidayNavBack" >
+		<subHeader>
+			<Toolbar>
+				<SearchField id="searchHolidayMaster" search="onSearchHoliday" placeholder="{i18n>PleaseEntertheholiday}"/>
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="listHolidayMaster" items="{HolidayModel>/value}" busyIndicatorDelay="250" growing="true" growingThreshold="5"
+				enableBusyIndicator="true" noDataText="{i18n>sNoitems}">
+				<items>
+					<ObjectListItem press="onPressHolidayList" type="Active" title="{i18n>Name}:  {HolidayModel>Name}">
+						<attributes>
+							<ObjectAttribute text="{i18n>Description}: {HolidayModel>U_Description}"/>
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<OverflowToolbarButton tooltip="Add" icon="sap-icon://add" visible="{checkPhoneModel>/CheckPhone}" press="onPressAddHoliday"/>
+				<OverflowToolbarButton tooltip="Filter" icon="sap-icon://add-filter" press="onPressFilterHoliday"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

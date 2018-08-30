@@ -39,16 +39,7 @@ sap.ui.define([
 			//var getVariables = this.getVariables();
 			//getVariables.sportAddTable.setVisible(false);
 		},
-		onAfterRendering: function() {
-			var txt = this.getView().byId("addSportsCategoryName");
 
-			txt.addDelegate({
-				onsapenter: function(e) {
-					var view = this.getView();
-					view.getController().onClick();
-				}
-			});
-		},
 		onPressAddSportNameTable: function() {
 			var setThis = this;
 			this.showLoading(true);

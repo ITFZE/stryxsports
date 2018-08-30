@@ -318,10 +318,15 @@ sap.ui.define([
 			getThis = this;
 			return MessageToast.show(getMessages);
 		},
-
 		checkDateFormat: function(getGetTime) {
 			var oFormat = sap.ui.core.format.DateFormat.getInstance({
 				pattern: "yyyy-MM-dd"
+			});
+			return oFormat.format(getGetTime);
+		},
+		checkTimeFormat: function(getGetTime) {
+			var oFormat = sap.ui.core.format.DateFormat.getInstance({
+				pattern: "HH:mm:ss"
 			});
 			return oFormat.format(getGetTime);
 		},
@@ -345,10 +350,10 @@ sap.ui.define([
 					text: 'Ok',
 					press: function() {
 						getThis.getRouter().navTo(getRouteName);
-						//  		getThis.getView().byId("addSportsCategoryName").setValue("");
-						//  		getThis.getView().byId("addSportsCategoryDescription").setValue("");
-						//  		getThis.getView().byId("addSportCategoryStatus").setSelectedKey("Active");
-						// 		logoutDialog.close();
+						//  getThis.getView().byId("addSportsCategoryName").setValue("");
+						//  getThis.getView().byId("addSportsCategoryDescription").setValue("");
+						//  getThis.getView().byId("addSportCategoryStatus").setSelectedKey("Active");
+						logoutDialog.close();
 					}
 
 				}),
@@ -690,7 +695,7 @@ sap.ui.define([
 				that.fetchMessageOk("Error", "Error", err.toString(), "Location");
 			});
 		},*/
-	/*	getCommunicaitonModel: function(body, templateType, templateValues, forComType) {
+		/*	getCommunicaitonModel: function(body, templateType, templateValues, forComType) {
 			var that = this;
 			var conf = that.getOwnerComponent().getManifestEntry("stryx.placeholder");
 			var ph = conf[parseInt(templateType)];
@@ -719,7 +724,7 @@ sap.ui.define([
 			mailObj.subject = "";
 			return mailObj;
 		},*/
-/*		sendEmail: function(body, templateType, templateValues) {
+		/*		sendEmail: function(body, templateType, templateValues) {
 		    var that = this;
 			var emailObj = this.getCommunicaitonModel(body, templateType, templateValues, "email");
 		    //var mData = new JSONModel();
@@ -735,7 +740,7 @@ sap.ui.define([
             //For testing purposes
 			that.sendNotifyEmail(arg);
 		},*/
-/*		sendSMS: function(body, templateType, templateValues) {
+		/*		sendSMS: function(body, templateType, templateValues) {
 		    var that = this;
 			var smsObj = this.getCommunicaitonModel(body, templateType, templateValues, "sms");
 		    //var mData = new JSONModel();
@@ -751,7 +756,7 @@ sap.ui.define([
             //For testing purposes
 			that.sendNotifySMS(arg);
 		},*/
-/*		fetchTemplate: function(filter) {
+		/*		fetchTemplate: function(filter) {
 		    var that = this;
 			var deferred = $.Deferred();
 			var context = that.getContext();
@@ -771,8 +776,8 @@ sap.ui.define([
 			return deferred.promise();
 		},*/
 		sendNotifyEmail: function(mailObj) {
-		    let _data = JSON.stringify(mailObj);
-/*		    var that = this;
+			let _data = JSON.stringify(mailObj);
+			/*		    var that = this;
 			var deferred = $.Deferred();
 			var context = that.getContext();
 			var URL = context.baseURL + "?cmd=Add&sstype=NotifyEmail&memType=SendMail" + "&sessionID=" +
@@ -792,8 +797,8 @@ sap.ui.define([
 			return deferred.promise();*/
 		},
 		sendNotifySMS: function(oData) {
-		    let _data = JSON.stringify(oData);
-/*			var that = this;
+			let _data = JSON.stringify(oData);
+			/*			var that = this;
 			var deferred = $.Deferred();
 			var context = that.getContext();
 			var URL = context.baseURL + "?cmd=NotifyEmail&sstype=SendSMS&sessionID=" + context.SessionData.sessionID + "&routeID=" +
@@ -811,6 +816,61 @@ sap.ui.define([
 				}
 			});
 			return deferred.promise();*/
+		},
+		getScheduleCheckboxState: function(status) {
+			if (status == "true") {
+				return true;
+			} else {
+				return "false";
+			}
+		},
+		getAllDatesOfYear: function(date, day) {
+			var d = new Date(date),
+				year = d.getYear(),
+				dates = [];
+
+			d.setDate(1);
+
+			// Get the first Monday in the month
+			while (d.getDay() !== day) {
+				d.setDate(d.getDate() + 1);
+			}
+
+			// Get all the other Mondays in the month
+			while (d.getYear() === year) {
+				var pushDate = new Date(d.getTime());
+				dates.push(pushDate.getDate() + '-' + (pushDate.getMonth() + 1) + '-' + pushDate.getFullYear());
+				d.setDate(d.getDate() + 7);
+			}
+
+			return dates;
+		},
+		setBusinessPartnersStatusText: function(setStatus) {
+			if (setStatus === "tYES") {
+				return "Active";
+			} else if (setStatus === "tNO") {
+				return "Inactive";
+			} else {
+				return "None";
+			}
+		},
+		setBusinessPartnersStatus: function(getStatus) {
+			if (getStatus === "tYES") {
+				return "Success";
+			} else {
+				return "Error";
+			}
+		},
+		hours_am_pm: function(time) {
+			var hours = time[0] + time[1];
+			var min = time[2] + time[3];
+			if (hours < 12) {
+				return hours + ':' + min + ' AM';
+			} else {
+				hours = hours - 12;
+				hours = (hours.length < 10) ? '0' + hours : hours;
+				return hours + ':' + min + ' PM';
+			}
 		}
 	});
 });

@@ -1,0 +1,5 @@
+{
+    "description": "Event send mail and sms as started invited members",
+    "action": "ITSFZE.Development.stryxsports.services:NewSendEmail.xsjs::sendEmail",
+    "schedules": []
+}

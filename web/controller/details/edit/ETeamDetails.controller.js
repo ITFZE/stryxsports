@@ -5,10 +5,17 @@ sap.ui.define([
 	"com/ss/app/StryxSports/controller/sal/SportCategorySAL",
 	"com/ss/app/StryxSports/controller/sal/CoachsSAL",
 	"sap/ui/model/json/JSONModel",
-		"sap/ui/model/Filter",
-	 "sap/ui/core/ValueState",
-    "com/ss/app/StryxSports/controller/util/Validator"
-], function(TeamsSAL, LocationsSAL, SeasonSAL, SportCategorySAL, CoachsSAL, JSONModel, Filter, ValueState, Validator) {
+	"sap/ui/model/Filter",
+	"sap/ui/core/ValueState",
+	"com/ss/app/StryxSports/controller/util/Validator",
+	'sap/m/MessageToast',
+	'sap/m/MessageBox',
+	"com/ss/app/StryxSports/controller/sal/HolidaySAL",
+	  'sap/m/Button',
+     'sap/m/Dialog',
+	 'sap/m/Text'
+], function(TeamsSAL, LocationsSAL, SeasonSAL, SportCategorySAL, CoachsSAL, JSONModel, Filter, ValueState, Validator, MessageToast,
+	MessageBox, HolidaySAL, Button, Dialog, Text) {
 	"use strict";
 	return TeamsSAL.extend("com.ss.app.StryxSports.controller.details.edit.ETeamDetails", {
 		onInit: function() {
@@ -21,13 +28,54 @@ sap.ui.define([
 			var oRouter = this.getRouter();
 			oRouter.getRoute("EditTeam").attachMatched(this._onRouteMatched, this);
 			oRouter.getRoute("EditTeamDetail").attachMatched(this._onRouteEditTeamDetailMatched, this);
-			
+			this._dataSTARTANDENSTimes = [{
+					"Name": "Monday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Mon"
+        }, {
+					"Name": "Tuesday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Tue"
+        }, {
+					"Name": "Wednesday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Wed"
+        }, {
+					"Name": "Thursday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Thu"
+        }, {
+					"Name": "Friday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Fri"
+        }, {
+					"Name": "Saturday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Sat"
+        }, {
+					"Name": "Sunday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Sun"
+        }
+    ];
+			var setJSON = new JSONModel();
+			setJSON.setData(this._dataSTARTANDENSTimes);
+			sap.ui.getCore().setModel(setJSON, "MDLStartAndEnTime");
+
 		},
 		onAfterRendering: function() {
 			this.afRender = true;
 		},
 		_onRouteMatched: function(oEvent) {
 			var that = this;
+			that.setValueStateForId();
 			this._pageID = oEvent.getParameter("arguments").PageID;
 			var getTeamID = oEvent.getParameter("arguments").teamID;
 			this._getAccountID = oEvent.getParameter("arguments").AccountId;
@@ -68,6 +116,7 @@ sap.ui.define([
 		},
 		_onRouteEditTeamDetailMatched: function(oEvent) {
 			var that = this;
+			that.setValueStateForId();
 			this._pageID = oEvent.getParameter("arguments").PageID;
 			var getTeamID = oEvent.getParameter("arguments").TeamID;
 			this._getAccountID = oEvent.getParameter("arguments").AccountId;
@@ -353,23 +402,10 @@ sap.ui.define([
 				}
 				cModel.refresh(true);
 			}
-			// 			var getEle = this.getVariables();
-			// 			getEle.addStartEndAndDate.setValue("");
-			/*	getEle.addTeamName.setValueState("None");
-			getEle.addTeamSeason.setValueState("None");
-			getEle.addStartEndAndDate.setValueState("None");
-			getEle.addSportsCategory.setValueState("None");
-			getEle.addSportName.setValueState("None");
-			getEle.addTeamLocation.setValueState("None");
-			getEle.addTeamClassMin.setValueState("None");
-			getEle.addTeamClassMax.setValueState("None");
-			getEle.addStartEndAndDate.setValue("");
-			getEle.addSportsCategory.setValue("");
- 			this.destroyDialog();*/
 		},
 
 		handleCloseTableDialog: function() {
-			// 			this.destroyDialog();
+			// this.destroyDialog();
 		},
 
 		onDeleteCoachEntry: function(oEvent) {
@@ -400,35 +436,46 @@ sap.ui.define([
 			}
 			this.getView().getModel("createTeamModel").refresh(true);
 		},
-
+		setValueStateForId: function() {
+			var setThis = this;
+			var getEle = setThis.getVariables();
+			getEle.addTeamName.setValueState("None");
+			getEle.addTeamSeason.setValueState("None");
+			getEle.addStartEndAndDate.setValueState("None");
+			getEle.addSportsCategory.setValueState("None");
+			getEle.addSportName.setValueState("None");
+			getEle.addTeamLocation.setValueState("None");
+			getEle.addTeamClassMin.setValueState("None");
+			getEle.addTeamClassMax.setValueState("None");
+		},
 		onPressSaveEditTeams: function() {
 			var setThis = this;
 			var getEle = setThis.getVariables();
 			if (getEle.addTeamName.getValue() === "") {
 				getEle.addTeamName.setValueState("Error");
 			} else if (getEle.addTeamSeason.getValue() === "Select Season" || getEle.addTeamSeason.getValue() === "") {
-				getEle.addTeamName.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addTeamSeason.setValueState("Error");
 			} else if (getEle.addStartEndAndDate.getValue() === "") {
-				getEle.addTeamSeason.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addStartEndAndDate.setValueState("Error");
 			} else if (getEle.addSportsCategory.getValue() === "Select Sports Category" || getEle.addSportsCategory.getValue() === "") {
-				getEle.addStartEndAndDate.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addSportsCategory.setValueState("Error");
 			} else if (getEle.addSportName.getValue() === "Select Sports" || getEle.addSportName.getValue() === "") {
-				getEle.addSportsCategory.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addSportName.setValueState("Error");
 			} else if (getEle.addTeamLocation.getValue() === "Select Location" || getEle.addTeamLocation.getValue() === "") {
-				getEle.addSportName.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addTeamLocation.setValueState("Error");
 			} else if (getEle.addTeamClassMin.getValue() === "") {
-				getEle.addTeamLocation.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addTeamClassMin.setValueState("Error");
 			} else if (getEle.addTeamClassMax.getValue() === "") {
-				getEle.addTeamClassMin.setValueState("None");
+				setThis.setValueStateForId();
 				getEle.addTeamClassMax.setValueState("Error");
 			} else {
-				getEle.addTeamClassMax.setValueState("None");
+				setThis.setValueStateForId();
 				var getTeamModel = setThis.getView().getModel("createTeamModel");
 				var getFromDate = getEle.addStartEndAndDate.getFrom();
 				var getToDate = getEle.addStartEndAndDate.getTo();
@@ -457,7 +504,10 @@ sap.ui.define([
 						setThis.showLoading(true);
 						//setThis.destroyDialog();
 						var Eteamsave = setThis.oBundle("UpdatedSuccessfully");
-						setThis.fetchMessageOk("Edit Team", "Success", Eteamsave, "Teams");
+						//	setThis.fetchMessageOk("Edit Team", "Success", Eteamsave, "Teams");
+
+						//	setThis.fetchMessageOkNavTo("Edit Team", "Success", Eteamsave, setThis._getGTeamID);
+						setThis.fetchMessageOkNavToOkay("Edit Team", "Success", Eteamsave);
 						setThis.sendNotificationEmail().done(function(res) {
 							var body = res.body;
 						}).fail(function(err) {
@@ -534,7 +584,13 @@ sap.ui.define([
 					this._setSelected = true;
 					this.fetchMemberName();
 					break;
+				case "TeamCalendar":
+					this._setSelected = true;
+					getELe.addTabTeams.setBusy(false);
+					this.fetchTeamCalendars();
+					break;
 				default:
+					break;
 			}
 		},
 		// 		//Here function for Team table search 
@@ -543,7 +599,419 @@ sap.ui.define([
 			var oFilter = new Filter("FirstName", sap.ui.model.FilterOperator.Contains, sValue);
 			var oBinding = oEvent.getSource().getBinding("items");
 			oBinding.filter([oFilter]);
-		}
+		},
+		onPressEditCalendar: function(evt) {
+			var that = this;
+			if (!that._oEditCalDialog) {
+				that._oEditCalDialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.EditCalendar", that);
+			}
 
+			that.getView().addDependent(that._oEditCalDialog);
+
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that._oEditCalDialog);
+			that._oEditCalDialog.open();
+		},
+		handleCalendarDaysSearch: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter("Name", sap.ui.model.FilterOperator.Contains, sValue);
+			var oBinding = oEvent.getSource().getBinding("items");
+			oBinding.filter([oFilter]);
+		},
+		handleEditCalendarConfirm: function(oEvent) {
+			var that = this;
+			var teamModel = that.getView().getModel("createTeamModel");
+			var appointments = [];
+			var aContexts = oEvent.getParameter("selectedContexts");
+			if (aContexts && aContexts.length) {
+				aContexts.forEach(function(oCtx) {
+					let obj = {};
+					obj.Name = oCtx.getObject().Name;
+					obj.STime = oCtx.getObject().StartTime;
+					obj.ETime = oCtx.getObject().EndTime;
+					appointments.push(obj);
+					/*					var calArr = teamModel.oData.Calendar;
+					calArr.push(obj);
+					that.getView().setModel(teamModel, "createTeamModel");*/
+				});
+			}
+			// Create Team Schedule model and set as global model
+			var oModel = new JSONModel();
+			oModel.setData(appointments);
+			sap.ui.getCore().setModel(oModel, "scheduleModel");
+			sap.ui.getCore().getModel("scheduleModel").refresh(true);
+			// Create Team Calendar Model
+			var cModel = new JSONModel();
+			var teamArr = [];
+			var calendar = {};
+			calendar.appointments = appointments;
+			calendar.name = "John Miller";
+			calendar.sDate = "8/10/18";
+			calendar.eDate = "8/10/19";
+			teamArr.push(calendar);
+			cModel.setData(teamArr);
+			sap.ui.getCore().setModel(cModel, "TeamCalendarModel");
+			sap.ui.getCore().getModel("TeamCalendarModel").refresh(true);
+
+			oEvent.getSource().getBinding("items").filter([]);
+
+			MessageToast.show("Team Calendar Updated Successfully");
+		},
+		onPressViewCalendar: function(evt) {
+			// 			var that = this;
+			// 			that.getRouter().navTo("ViewCalendar");
+		},
+		onPressViewSchedules: function(evt) {
+			var that = this;
+			var oItem, oCtx;
+			oItem = evt.getSource();
+			oCtx = oItem.getBindingContext("CreateTeamCalendarsList");
+			var getName = oCtx.getProperty("Name");
+			var getTeamId = this._getGTeamID;
+			var getPageID = this._pageID;
+			that.getRouter().navTo("ViewTeamSchedules", {
+				teamID: getTeamId,
+				scheduleName: getName,
+				PageID: getPageID
+			});
+			/*	this.viewTeamSchedules(oCtx.getProperty("Name")).done(function(res) {
+			
+			}).fail(function(err) {
+				that.fetchMessageOk("Error", "Error", err.toString(), "HolidayListMaster");
+			});*/
+
+		},
+		onPressCreateCalendar: function(oEvent) {
+			var that = this;
+			if (!that._oCalDialog) {
+				that._oCalDialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.CreateCalendar", that);
+			}
+
+			that.getView().addDependent(that._oCalDialog);
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that._oCalDialog);
+			that._oCalDialog.addDelegate({
+				onAfterRendering: function() {
+					var oTable = sap.ui.getCore().byId("createCalTabDialog");
+					var header = oTable.$().find('thead');
+					var selectAllCb = header.find('.sapMCb');
+					selectAllCb.remove();
+				}
+			});
+			that.fetchMasterList();
+			// Get recent created team
+			var filter = "?$top=1&$orderby=Code%20desc";
+			that.fetchTeams(filter).done(function(res) {
+				that.teamId = res.oData.value[0].Code + 1;
+			}).fail(function(err) {
+				console.log(err);
+			});
+
+		},
+		fetchMasterList: function() {
+			var that = this;
+			var filter = "$orderby=Code%20desc";
+			var holidaySAL = new HolidaySAL();
+			that.showLoading(true);
+			that._oCalDialog.open();
+			sap.ui.getCore().byId("inputTeamCalendarTitle").setValue("");
+			sap.ui.getCore().byId("inputTeamCalendarTitle").setValueState("None");
+			var seleHolidayList = sap.ui.getCore().byId("createCalSeleHolidayListID");
+			seleHolidayList.setBusy(true);
+
+			holidaySAL.fetchHolidayList(that, filter).done(function(getResponse) {
+				var oItem = new sap.ui.core.Item({
+					text: "Select The Holiday",
+					key: -1
+				});
+				sap.ui.getCore().setModel(getResponse, "HolidayListMDL");
+				seleHolidayList.insertItem(oItem, 0);
+				seleHolidayList.setSelectedItem(oItem);
+				seleHolidayList.setBusy(false);
+				that.createModelTeamCalendar();
+				that.clearTableValueEnabled();
+				that.showLoading(false);
+			}).fail(function(err) {
+				seleHolidayList.setBusy(false);
+				that.showLoading(false);
+				that.fetchMessageOk("Error", "Error", err.toString(), "HolidayListMaster");
+			});
+		},
+		btnPressCreateCalTabDialogClose: function() {
+			var getJSON = [{
+					"Name": "Monday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Mon"
+        }, {
+					"Name": "Tuesday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Tue"
+        }, {
+					"Name": "Wednesday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Wed"
+        }, {
+					"Name": "Thursday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Thu"
+        }, {
+					"Name": "Friday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Fri"
+        }, {
+					"Name": "Saturday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Sat"
+        }, {
+					"Name": "Sunday",
+					"StartTime": "",
+					"EndTime": "",
+					"IsWeekend": "Sun"
+        }
+    ];
+			sap.ui.getCore().byId("btnDCreateTeamCalender").setEnabled(false);
+			var setJSON = new JSONModel();
+			setJSON.setData(getJSON);
+			sap.ui.getCore().setModel(setJSON, "MDLStartAndEnTime");
+			this._oCalDialog.close();
+
+		},
+		handleCreateCalendarConfirm: function(oEvent) {
+			var that = this;
+			var teamCalendarMDL = that.getView().getModel("createModelTeamCalendar");
+			var calBusy = sap.ui.getCore().byId("editTeamCalFrg");
+			var oTable = sap.ui.getCore().byId("createCalTabDialog");
+			if (teamCalendarMDL === null || teamCalendarMDL === undefined) {
+				var createTeamCalendarMDL = this.createModelTeamCalendar();
+				this.getView().setModel(createTeamCalendarMDL, "CreateTeamCalendar");
+				teamCalendarMDL = this.getView().getModel("CreateTeamCalendar");
+			}
+			var getMDLData = teamCalendarMDL.getData();
+			var getSelectedTable = sap.ui.getCore().byId("createCalTabDialog").getSelectedItems();
+
+			if (sap.ui.getCore().byId("inputTeamCalendarTitle").getValue() !== "") {
+				sap.ui.getCore().byId("inputTeamCalendarTitle").setValueState("None");
+				if (getSelectedTable.length > 0) {
+
+					getSelectedTable.forEach(function(val1) {
+						var tmpBody = {};
+						tmpBody.U_TeamId = that._getGTeamID;
+						tmpBody.Code = 0;
+						tmpBody.Name = sap.ui.getCore().byId("inputTeamCalendarTitle").getValue();
+						tmpBody.U_Days = val1.oBindingContexts.MDLStartAndEnTime.getProperty("Name");
+						tmpBody.U_SchStatus = "1";
+						tmpBody.U_StartTime = val1.oBindingContexts.MDLStartAndEnTime.getProperty("StartTime");
+						tmpBody.U_EndTime = val1.oBindingContexts.MDLStartAndEnTime.getProperty("EndTime");
+						if (sap.ui.getCore().byId("createCalSeleHolidayListID").getSelectedKey() === "-1") {
+							tmpBody.U_HolidayListID = "";
+						} else {
+							tmpBody.U_HolidayListID = sap.ui.getCore().byId("createCalSeleHolidayListID").getSelectedKey();
+						}
+
+						getMDLData.value.push(tmpBody);
+					});
+					teamCalendarMDL.setData(getMDLData);
+					teamCalendarMDL.refresh(true);
+					oTable.setBusy(true);
+					calBusy.setBusy(true);
+					var filter = "$filter=Name eq '" + sap.ui.getCore().byId("inputTeamCalendarTitle").getValue() + "'";
+					this.fetchTeamCalendarList(filter).done(function(getRes) {
+						if (getRes.oData.value.length <= 0) {
+							oTable.setBusy(false);
+							that.createCalendarTeam(teamCalendarMDL).done(function(getResponse) {
+								that.btnPressCreateCalTabDialogClose();
+								//	that.fetchErrorMessageOk("Create Calendar", "Success", "Created Team Calendar Successfully");
+								//	setThis.fetchMessageOk("Edit Team", "Success", Eteamsave, "Teams");
+								calBusy.setBusy(false);
+								that.fetchMessageOkNavTo("Create Calendar", "Success", "Updated Successfully", that._getGTeamID);
+								that.fetchTeamCalendars();
+								that.showLoading(false);
+								oTable.setBusy(false);
+								that.btnPressCreateCalTabDialogClose();
+							}).fail(function(err) {
+								that.showLoading(false);
+								oTable.setBusy(false);
+								that.fetchMessageOk("Error", "Error", err.toString(), "Create Calendar Team");
+							});
+
+						} else {
+							var inpTeamCalendarTitle = sap.ui.getCore().byId("inputTeamCalendarTitle");
+							inpTeamCalendarTitle.setValueState(sap.ui.core.ValueState.Error);
+							inpTeamCalendarTitle.setValueStateText("Entered team calendar title name already exists!");
+							oTable.setBusy(false);
+							calBusy.setBusy(false);
+							//	that.fetchMessageOk("Error", "Error", "Record already exixts", "Sports");
+						}
+
+					}).fail(function(err) {
+						that._oCalDialog.setSelBusy(false);
+						that.showLoading(false);
+						that.fetchMessageOk("Error", "Error", err.toString(), "Create Calendar Team");
+					});
+
+				} else {
+
+				}
+
+			} else {
+				sap.ui.getCore().byId("inputTeamCalendarTitle").setValueState("Error");
+			}
+
+		},
+		createModelTeamCalendar: function() {
+			var setJSONTeamCalendarMD = new JSONModel();
+			setJSONTeamCalendarMD.setProperty('/Code', 0);
+			setJSONTeamCalendarMD.setProperty('/value', []);
+			return setJSONTeamCalendarMD;
+
+		},
+		selecteCreateCalSeleHolidayList: function() {
+			var that = this;
+			var getSeleKey = sap.ui.getCore().byId("createCalSeleHolidayListID").getSelectedKey();
+			var oTable = sap.ui.getCore().byId("createCalTabDialog");
+			var holidaySAL = new HolidaySAL();
+			oTable.setBusy(true);
+			this.clearTableValueEnabled();
+			if (getSeleKey !== "-1") {
+				holidaySAL.fetchHolidayListById(getSeleKey).done(function(getResponse) {
+					var getWeekend = getResponse.getData();
+					var weekend = getWeekend.U_Weekend;
+					var weekendArr = weekend.split(",");
+					oTable.getItems().forEach(function(r) {
+						var obj = r.getBindingContext("MDLStartAndEnTime").getObject();
+						var oStatus = obj.IsWeekend;
+						var cb = r.$().find('.sapMCb');
+						var oCb = sap.ui.getCore().byId(cb.attr('id'));
+						weekendArr.forEach(function(getWeekends) {
+							if (oStatus === getWeekends) {
+								oCb.setEnabled(false);
+							}
+						});
+
+					});
+					that.showLoading(false);
+					oTable.setBusy(false);
+				}).fail(function(err) {
+					that.showLoading(false);
+					oTable.setBusy(false);
+					that.fetchMessageOk("Error", "Error", err.toString(), "HolidayListMaster");
+				});
+			} else {
+				this.clearTableValueEnabled();
+			}
+
+		},
+
+		clearTableValueEnabled: function() {
+			var oTable = sap.ui.getCore().byId("createCalTabDialog");
+			oTable.getItems().forEach(function(r) {
+				var cb = r.$().find('.sapMCb');
+				var oCb = sap.ui.getCore().byId(cb.attr('id'));
+				oCb.setEnabled(true);
+				oTable.removeSelections(true);
+			});
+
+		},
+
+		fetchTeamCalendars: function() {
+			var filter = "$apply=filter(U_TeamId eq '" + this._getGTeamID + "')/groupby((Name))";
+			var that = this;
+			var tableTeamCalendar = this.getView().byId("editTabTeamCalendar");
+			tableTeamCalendar.setBusy(true);
+			this.fetchTeamCalendarList(filter).done(function(getResponse) {
+				that.getView().setModel(getResponse, "CreateTeamCalendarsList");
+				tableTeamCalendar.setBusy(false);
+				that.showLoading(false);
+			}).fail(function(err) {
+				that.showLoading(false);
+				tableTeamCalendar.setBusy(false);
+				that.fetchMessageOk("Error", "Error", err.toString(), "HolidayListMaster");
+			});
+		},
+		////////////////////////////////////////////////////////START CREATE MESSAGES ///////////////////////////////////////////////////////
+		fetchMessageOkNavTo: function(getTitle, getState, getMessage, GetID) {
+			var that = this;
+			var getRouteName;
+			if (getMessage === "Unauthorized") {
+				getTitle = "Your Session Has Been Expired";
+				getMessage = "Please Re-Login";
+				getRouteName = "Login";
+			}
+			var messageOktDialog = new Dialog({
+				title: getTitle,
+				type: 'Message',
+				state: getState,
+				content: new Text({
+					text: getMessage
+				}),
+				beginButton: new Button({
+					text: 'Continue',
+					press: function() {
+
+						if (getTitle === "Edit Team") {
+							that.initData = false;
+							that.getOwnerComponent().getRouter().navTo("EditTeam", {
+								teamID: that._getGTeamID
+							});
+						} else {
+							that.btnPressCreateCalTabDialogClose();
+						}
+						messageOktDialog.close();
+					}
+				}),
+				endButton: new Button({
+					text: 'Create Team',
+					press: function() {
+						that.getOwnerComponent().getRouter()
+							.navTo("Teams");
+						messageOktDialog.close();
+					}
+				})
+			});
+			messageOktDialog.open();
+		},
+		fetchMessageOkNavToOkay: function(getTitle, getState, getMessage) {
+			var that = this;
+			var getRouteName;
+			if (getMessage === "Unauthorized") {
+				getTitle = "Your Session Has Been Expired";
+				getMessage = "Please Re-Login";
+				getRouteName = "Login";
+			}
+			var messageOktDialog = new Dialog({
+				title: getTitle,
+				type: 'Message',
+				state: getState,
+				content: new Text({
+					text: getMessage
+				}),
+				beginButton: new Button({
+					text: 'Create Team',
+					press: function() {
+						that.getOwnerComponent().getRouter()
+							.navTo("Teams");
+						messageOktDialog.close();
+					}
+				})
+
+			});
+			messageOktDialog.open();
+		},
+		seleCreateTaemCalList: function() {
+			var oTable = sap.ui.getCore().byId("createCalTabDialog").getSelectedItems();
+			if (oTable && oTable.length) {
+				sap.ui.getCore().byId("btnDCreateTeamCalender").setEnabled(true);
+
+			} else {
+				sap.ui.getCore().byId("btnDCreateTeamCalender").setEnabled(false);
+
+			}
+		}
 	});
 });

@@ -13,7 +13,7 @@ sap.ui.define([
 				}
 			});
 
-			/*			window.addEventListener("popstate", function(event) {
+			/*	window.addEventListener("popstate", function(event) {
 			    var url = window.location.href;
 			    var arr = url.split('/');
 			    var lastsegment = arr[arr.length-1];
@@ -90,7 +90,7 @@ sap.ui.define([
 				});
 			}
 		},
-		onPressShowHide: function() {
+/*		onPressShowHide: function() {
 			var pass = this.getView().byId("inputPassword");
 			var isIcon = this.getView().byId("showHideIcon");
 			if (pass.getType() == "Text") {
@@ -100,7 +100,7 @@ sap.ui.define([
 				pass.setType("Text");
 				isIcon.setSrc("sap-icon://show");
 			}
-		},
+		},*/
 		onPressForgetPassword: function() {
 			var that = this;
 			that.showLoading(false);

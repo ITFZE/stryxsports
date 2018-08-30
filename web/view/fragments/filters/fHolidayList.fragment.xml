@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Dialog title="Select Filter">
+		<List items="{HolidayFilter>/holidayList_filter}" mode="SingleSelectLeft" includeItemInSelection="true" select="getViewonHoliday">
+			<StandardListItem title="{HolidayFilter>holidayList_Items}" iconInset="true"/>
+		</List>
+		<buttons>
+			<Button text="Confirm" id="confirmHolidayBtn" visible="false" press="onPressHolidaySelectFilter"/>
+			<Button text="Close" press="dialogLocationCloseFilter"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

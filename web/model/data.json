@@ -1,115 +1,113 @@
 {
 	"sideNavigation": [{
-			"title": "Home",
-			"icon": "sap-icon://home",
-			"expanded": false,
-			"key": "DashBoard"
+		"title": "Home",
+		"icon": "sap-icon://home",
+		"expanded": false,
+		"key": "DashBoard"
 
 	}, {
-			"title": "Leads, Accounts, Teams & Invoice",
-			"icon": "sap-icon://accounting-document-verification",
-			"expanded": false,
-			"key": "DashBoard",
-			"items": [
-
-				{
-					"title": "Leads",
-					"key": "Leads"
-		},
-				{
-					"title": "Accounts",
-					"key": "SearchMembership"
-		},
-				{
-					"title": "Teams",
-					"key": "TeamsDetail"
-		},
-				{
-					"title": "Activities",
-					"key": "SearchActivity"
-		},
-				{
-					"title": "Invoice and Payment",
-					"key": "SearchInvoice"
+		"title": "Leads, Accounts, Teams & Invoice",
+		"icon": "sap-icon://accounting-document-verification",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Leads",
+			"key": "Leads"
+		}, {
+			"title": "Accounts",
+			"key": "SearchMembership"
+		}, {
+			"title": "Teams",
+			"key": "TeamsDetail"
+		}, {
+			"title": "Activities",
+			"key": "SearchActivity"
+		}, {
+			"title": "Invoice and Payment",
+			"key": "SearchInvoice"
 		}]
-	},
-		{
-			"title": "Assessments",
-			"icon": "sap-icon://activity-assigned-to-goal",
-			"expanded": false,
-			"key": "DashBoard",
-			"items": [{
-				"title": "Create Assessment",
-				"key": "SearchLeads"
+	}, {
+		"title": "Assessments",
+		"icon": "sap-icon://activity-assigned-to-goal",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Create Assessment",
+			"key": "SearchLeads"
 		}, {
-				"title": "Coach Assessment",
-				"key": "CoachAssessment"
+			"title": "Coach Assessment",
+			"key": "CoachAssessment"
 		}, {
-				"title": "Assessment Feedback",
-				"key": "AssessmentFeedbackDetail"
+			"title": "Assessment Feedback",
+			"key": "AssessmentFeedbackDetail"
 		}]
-	},
-	
-	{
-			"title": "Events",
-			"icon": "sap-icon://appointment",
-			"expanded": false,
-			"key": "Events",
-			"items": [{
-				"title": "Create Evnet",
-				"key": "CreateEvnet"
+	}, {
+		"title": "Events",
+		"icon": "sap-icon://appointment",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Create Event",
+			"key": "CreateEvent"
 		}]
-	
-	},
-		{
-			"title": "Templates",
-			"icon": "sap-icon://database",
-			"expanded": false,
-			"key": "DashBoard",
-			"items": [{
-				"title": "Email",
-				"key": "EmailTemplate"
+	}, {
+		"title": "Schedules",
+		"icon": "sap-icon://calendar",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Holidays",
+			"key": "HolidayListMaster"
 		}, {
-				"title": "SMS",
-				"key": "SMSTemplate"
+			"title": "View Calendar",
+			"key": "ViewCalendar"
 		}]
-	},
-		{
-			"title": "Masters",
-			"icon": "sap-icon://gantt-bars",
-			"expanded": false,
-			"key": "DashBoard",
-			"items": [{
-				"title": "Sports",
-				"key": "Sports"
+	}, {
+		"title": "Templates",
+		"icon": "sap-icon://database",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Email",
+			"key": "EmailTemplate"
 		}, {
-				"title": "Sports Category",
-				"key": "SportsCategory"
-		}, {
-				"title": "Locations",
-				"key": "Location"
-		}, {
-				"title": "Seasons",
-				"key": "Seasons"
-		}, {
-				"title": "Coaches",
-				"key": "CoachesDetail"
-		}, {
-				"title": "Teams",
-				"key": "Teams"
+			"title": "SMS",
+			"key": "SMSTemplate"
 		}]
-	},
-		{
-			"title": "User Management",
-			"icon": "sap-icon://employee-pane",
-			"expanded": false,
-			"key": "DashBoard",
-			"items": [{
-				"title": "Users",
-				"key": "UserManagement"
+	}, {
+		"title": "Masters",
+		"icon": "sap-icon://gantt-bars",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Sports",
+			"key": "Sports"
+		}, {
+			"title": "Sports Category",
+			"key": "SportsCategory"
+		}, {
+			"title": "Locations",
+			"key": "Location"
+		}, {
+			"title": "Seasons",
+			"key": "Seasons"
+		}, {
+			"title": "Coaches",
+			"key": "CoachesDetail"
+		}, {
+			"title": "Teams",
+			"key": "Teams"
 		}]
-	}
-	],
+	}, {
+		"title": "User Management",
+		"icon": "sap-icon://employee-pane",
+		"expanded": false,
+		"key": "DashBoard",
+		"items": [{
+			"title": "Users",
+			"key": "UserManagement"
+		}]
+	}],
 
 	"gender_Data": [
 		{
@@ -202,10 +200,6 @@
 
 	"locationsData": [{
 		"txt_LocationsFilter": "Location Name"
-	}, {
-		"txt_LocationsFilter": "Location Admin"
-	}, {
-		"txt_LocationsFilter": "Location Responsible"
 	}],
 	"coachesFilterData": [{
 		"txt_CoachesFilter": "Coach First Name"
@@ -241,6 +235,18 @@
 	}, {
 		"assessment_filter": "Comments"
 	}],
+	"holidayList_filter": [{
+		"holidayList_Items": "Holiday Name"
+	}],
+	"eventFilterList": [{
+			"event_Items": "Lead Name"
+	},
+		{
+			"event_Items": "Start Date"
+	}, {
+			"event_Items": "Start Time"
+	}
+	],
 	"assessment_Status_Data": [{
 		"assessment_Status": "Passed",
 		"activeType": "Success"
@@ -294,37 +300,6 @@
 	}, {
 		"servicesName": "1 DAY CAMP - AED 200"
 	}],
-	"membership": [{
-		"membershipID": 0,
-		"firstName": "Vinoth",
-		"lastName": "Kumar",
-		"DOB": "05/04/2000",
-		"Gender": "Male",
-		"Activity": "Cricket",
-		"Location": "Amity-Abu Dhabi",
-		"DateTime": "Apr 9, 2018, 6:51:18 PM",
-		"clothingSize": "XXS",
-		"nationalatiy": "UAE",
-		"FaterFirstName": "Tom ",
-		"FatherLastName": "Cruise",
-		"FatherOccuption": "Model",
-		"FatherNationalatiy": "UAE",
-		"FatherEmail": "TomCruise@gmail.com",
-		"FatherMobile": "9412115468",
-		"MotherFirstName": "Jennifer ",
-		"MotherLastName": "Morrison",
-		"MotherOccuption": "House Wife",
-		"MotherNationalatiy": "UAE",
-		"MotherEmail": "Jennifer@gmail.com",
-		"MotherMobile": "8056235687",
-		"person1": "Mani",
-		"person1Mobile": "99451236589",
-		"person2": "Joel Jeeva Kumar",
-		"person2Mobile": "7512456852",
-		"EmergencyName": "Tom Crusise",
-		"EmergencyMobile": "9884121154"
-	}],
-
 	"createMemType": [
 		{
 			"text": "Select Type",
@@ -640,5 +615,189 @@
 			"ST_Txt": "Travel",
 			"key": 3
         }
-    ]
+    ],
+
+	"CreateEvent_Data": [
+		{
+			"Code": 0,
+			"Name": "Team",
+			"U_Title": "Testing",
+			"U_StartDate": "2018-07-31",
+			"U_EndDate": "2018-08-01",
+			"U_StartTime": "01:00:00",
+			"U_EndTime": "02:00:00",
+			"U_Location": "Ajman",
+			"U_Content": "Testing"
+
+          }
+
+    ],
+	"mSelectCalendar": [{
+			"Name": "Monday",
+			"StartTime": "11:00",
+			"EndTime": "12:00",
+			"IsWeekend": "Mon"
+        }, {
+			"Name": "Tuesday",
+			"StartTime": "12:00",
+			"EndTime": "13:00",
+			"IsWeekend": "Tue"
+        }, {
+			"Name": "Wednesday",
+			"StartTime": "14:00",
+			"EndTime": "15:00",
+			"IsWeekend": "Wed"
+        }, {
+			"Name": "Thursday",
+			"StartTime": "16:00",
+			"EndTime": "17:00",
+			"IsWeekend": "Thu"
+        }, {
+			"Name": "Friday",
+			"StartTime": "17:00",
+			"EndTime": "18:00",
+			"IsWeekend": "Fri"
+        }, {
+			"Name": "Saturday",
+			"StartTime": "19:00",
+			"EndTime": "21:00",
+			"IsWeekend": "Sat"
+        }, {
+			"Name": "Sunday",
+			"StartTime": "21:00",
+			"EndTime": "22:00",
+			"IsWeekend": "Sun"
+        }
+    ],
+	"mSelectSchedule": [
+		{
+			"Name": "Sunday",
+			"Status": "true",
+			"StartTime": "11:00",
+			"EndTime": "11:30",
+			"SchSTime": "11:00",
+			"SchETime": "11:30"
+        }, {
+			"Name": "Tuesday",
+			"Status": "true",
+			"StartTime": "14:00",
+			"EndTime": "14:30",
+			"SchSTime": "14:00",
+			"SchETime": "14:30"
+        }, {
+			"Name": "Thursday",
+			"Status": "true",
+			"StartTime": "15:00",
+			"EndTime": "15:30",
+			"SchSTime": "15:00",
+			"SchETime": "15:30"
+        }, {
+			"Name": "Saturday",
+			"Status": "true",
+			"StartTime": "17:00",
+			"EndTime": "17:30",
+			"SchSTime": "17:00",
+			"SchETime": "17:30"
+        }
+    ],
+	"Team_Calendar": [
+		{
+			"CardCode": "CH005109",
+			"CardName": "Asim",
+			"Activities": {
+				"ActivityCode": 21,
+				"ActivityType": -1,
+				"Details": "Testing Subject",
+				"EndDueDate": "2018-08-04",
+				"EndTime": "16:00:00",
+				"Notes": "Testing content",
+				"StartDate": "2018-08-04",
+				"StartTime": "15:00:00",
+				"Subject": -1
+			}
+        },
+		{
+			"CardCode": "AD006889",
+			"CardName": "Kasim",
+			"Activities": {
+				"ActivityCode": 22,
+				"ActivityType": -1,
+				"Details": "Testing Subject",
+				"EndDueDate": "2018-08-05",
+				"EndTime": "11:00:00",
+				"Notes": "Testing content",
+				"StartDate": "2018-08-05",
+				"StartTime": "12:00:00",
+				"Subject": -1
+			}
+        },
+		{
+			"CardCode": "CH005109",
+			"CardName": "Mausim",
+			"Activities": {
+				"ActivityCode": 23,
+				"ActivityType": -1,
+				"Details": "Make Call To Asim",
+				"EndDueDate": "2018-08-06",
+				"EndTime": "18:00:00",
+				"Notes": null,
+				"StartDate": "2018-08-056",
+				"StartTime": "20:00:00",
+				"Subject": -1
+			}
+        }
+    ],
+	"CalendarName": [
+		{
+			"Name": "Tennis Coaching Class",
+			"BtnText": "View Calendar"
+        },
+		{
+			"Name": "BaseketBall Camp",
+			"BtnText": "View Calendar"
+        },
+		{
+			"Name": "Baseball Tournament",
+			"BtnText": "View Calendar"
+        }
+    ],
+	"EditTeamCalendarData": [
+		{
+			"Name": "Tennis Coaching Class",
+			"ViewBtnText": "View Calendar",
+			"EditBtnText": "Edit Calendar"
+        },
+		{
+			"Name": "BaseketBall Camp",
+			"ViewBtnText": "View Calendar",
+			"EditBtnText": "Edit Calendar"
+        },
+		{
+			"Name": "Baseball Tournament",
+			"ViewBtnText": "View Calendar",
+			"EditBtnText": "Edit Calendar"
+        }
+    ],
+	"Holidays": [],
+	"SubscriptionType": [
+		{
+			"text": "Session",
+			"key": "1"
+        }, {
+			"text": "Fixed",
+			"key": "2"
+        }],
+	"DurationType": [{
+		"text": "Hour",
+		"key": "1"
+    }, {
+		"text": "Day",
+		"key": "2"
+    }, {
+		"text": "Week",
+		"key": "3"
+    }, {
+		"text": "Month",
+		"key": "4"
+    }]
 }

@@ -3,14 +3,18 @@ sap.ui.define([
      "sap/ui/model/json/JSONModel",
 	 'sap/m/Button',
      'sap/m/Dialog',
-	 'sap/m/Text'
-], function(CreateInvoiceSAL, JSONModel, Button, Dialog, Text) {
+	 'sap/m/Text',
+	 'sap/m/MessageToast',
+	 'sap/ui/model/Filter',
+	 'sap/m/MessageBox'
+], function(CreateInvoiceSAL, JSONModel, Button, Dialog, Text, MessageToast, Filter, MessageBox) {
 	"use strict";
 	return CreateInvoiceSAL.extend("com.ss.app.StryxSports.controller.details.create.CreateInvoice", {
 		onInit: function() {
 			this._pageID = "";
 			this._AccountID = "";
 			this._setViewLevel = "";
+			this.sModel = "";
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 			var oRouter = this.getRouter();
 			oRouter.getRoute("CreateInvoice").attachMatched(this._onRouteMatched, this);
@@ -68,7 +72,7 @@ sap.ui.define([
 				var md = new JSONModel();
 				md.setData(obj);
 				that.showLoading(false);
-				that.fetchMessageOkNavTo("Invoice", "Success", "Created Successfully. \n Are You Want To Continue The Payment.",
+				that.fetchMessageOkNavTo("Invoice", "Success", "Created Successfully. \n Do you want to continue with the payment procedure?",
 					"NewPayment", obj.DocEntry);
 
 			}).fail(function(err) {
@@ -240,8 +244,69 @@ sap.ui.define([
 				})
 			});
 			messageOktDialog.open();
-		}
+		},
 		////////////////////////////////////////////////////////END CREATE MESSAGES /////////////////////////////////////////////////////////
+		onPressCreateSchedule: function(oEvent) {
+			var that = this;
+			if (sap.ui.getCore().getModel("scheduleModel")) {
+			    that.showLoading(true);
+				if (!that._oSchDialog) {
+					that._oSchDialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.CreateSchedule", that);
+				}
+				that.getView().addDependent(that._oSchDialog);
 
+				// toggle compact style
+				jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that._oSchDialog);
+				that.sModel = sap.ui.getCore().getModel("scheduleModel").oData; //Schedule Model
+				var sMd = new JSONModel();
+				sMd.setData(that.sModel);
+				that.getView().setModel(sMd, "sModel");
+				that.showLoading(false);
+				that._oSchDialog.open();
+			} else {
+			 var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+    			MessageBox.warning(
+    				"Team Calendar Does Not Exist",
+    				{
+    					styleClass: bCompact ? "sapUiSizeCompact" : ""
+    				}
+    			);
+			}
+		},
+		handleCalendarDaysSearch: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter("Name", sap.ui.model.FilterOperator.Contains, sValue);
+			var oBinding = oEvent.getSource().getBinding("items");
+			oBinding.filter([oFilter]);
+		},
+		handleCreateScheduleConfirm: function(oEvent) {
+			var that = this;
+			var appointments = [];
+			var aContexts = oEvent.getParameter("selectedContexts");
+			if (aContexts && aContexts.length) {
+				aContexts.forEach(function(oCtx) {
+					let obj = {};
+					obj.Name = oCtx.getObject().Name;
+					obj.STime = oCtx.getObject().STime;
+					obj.ETime = oCtx.getObject().ETime;
+					obj.SSTime = oCtx.getObject().SSTime;
+					obj.SETime = oCtx.getObject().SETime;
+					appointments.push(obj);
+    				});
+			}
+			//Create schedule model
+			var oModel = new JSONModel();
+			var scheduleArr = [];
+			var schedule = {};
+            schedule.appointments = appointments;
+            scheduleArr.push(schedule);
+			oModel.setData(scheduleArr);
+			sap.ui.getCore().setModel(oModel, "viewCalendarModel");
+			sap.ui.getCore().getModel("viewCalendarModel").refresh(true);
+			oEvent.getSource().getBinding("items").filter([]);
+			
+			// Informational message box for successfull schedule creation
+            MessageToast.show("Member Schedule Created Successfully");
+		}
 	});
 });

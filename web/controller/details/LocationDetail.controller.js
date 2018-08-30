@@ -156,9 +156,9 @@ sap.ui.define([
 							that.fetchMessageOk("Error", "Error", err.toString(), "Location");
 						});
 					} else {
-						var inpSport = that.byId("addlocationName");
-						inpSport.setValueState(sap.ui.core.ValueState.Error);
-						inpSport.setValueStateText("Entered sport name already exists!");
+						var inpLoc = that.byId("addlocationName");
+						inpLoc.setValueState(sap.ui.core.ValueState.Error);
+						inpLoc.setValueStateText("Entered sport name already exists!");
 						that.showLoading(false);
 						that.fetchMessageOk("Error", "Error", "Record already exixts", "Location");
 					}

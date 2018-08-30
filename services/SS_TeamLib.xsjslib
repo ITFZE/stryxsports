@@ -1,6 +1,9 @@
 var greetingPrefix = "Hello, ";
 var greetingSuffix = "!";
-var baseURL = "/b1s/v1"
+var baseURL = "/b1s/v1";
+var libPath = "/ITSFZE/Development/stryxsports/services/";
+var cmnLib = $.import(libPath + "CommonLib.xsjslib");
+var tCalSchLib = $.import(libPath + "SS_TCalScheduleLib.xsjslib");
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
@@ -14,7 +17,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 		var req = new $.web.WebRequest(method, path);
 		if (method === $.net.http.GET) {
 			req.headers.set("Prefer", "odata.maxpagesize=1000");
-			req.headers.set("B1S-CaseInsensitive","true");
+			req.headers.set("B1S-CaseInsensitive", "true");
 		}
 		if (header !== "") {
 			req.headers.set("X-HTTP-Method-Override", "PATCH");
@@ -25,7 +28,7 @@ function createRequest(path, method, body, sessionID, routeID) {
 		if (sessionID) {
 			req.cookies.set("B1SESSION", sessionID);
 		}
-		
+
 		if (routeID) {
 			req.cookies.set("ROUTEID", routeID);
 		}
@@ -199,6 +202,7 @@ function createTeam(path, method, body, sessionID, routeID) {
 	var tmBody = body;
 	var tmBodyJson = JSON.parse(tmBody);
 	delete tmBodyJson.Coaches;
+	delete tmBodyJson.Calendar;
 	var tmPath = path + "?$top=1&$orderby=Code%20desc";
 	var newTMCode = getNewCode(tmPath, $.net.http.GET, body, sessionID, routeID);
 	tmBodyJson.Code = newTMCode + 1;
@@ -215,16 +219,16 @@ function createTeam(path, method, body, sessionID, routeID) {
 			U_CoachCode: ""
 		};
 		tmpTMCoach.Name = teamMD.Name + '-' + teamMD.Coaches[i].FirstName;
-        tmpTMCoach.U_TeamCode = teamMD.Code.toString();
-        tmpTMCoach.U_CoachCode = teamMD.Coaches[i].EmployeeID.toString();
-        var cPath = encodeURI(baseURL + "/U_SS_TEAMS_COACHES");
-        var gPath = cPath + "?$top=1&$orderby=Code%20desc";
-        var newCode = getNewCode(gPath, $.net.http.GET, body, sessionID, routeID);
-        tmpTMCoach.Code = newCode + 1;
-        var csResp = createRequest(cPath, $.net.http.POST, JSON.stringify(tmpTMCoach), sessionID, routeID);
-        getResponseJson(csResp);
+		tmpTMCoach.U_TeamCode = teamMD.Code.toString();
+		tmpTMCoach.U_CoachCode = teamMD.Coaches[i].EmployeeID.toString();
+		var cPath = encodeURI(baseURL + "/U_SS_TEAMS_COACHES");
+		var gPath = cPath + "?$top=1&$orderby=Code%20desc";
+		var newCode = getNewCode(gPath, $.net.http.GET, body, sessionID, routeID);
+		tmpTMCoach.Code = newCode + 1;
+		var csResp = createRequest(cPath, $.net.http.POST, JSON.stringify(tmpTMCoach), sessionID, routeID);
+		getResponseJson(csResp);
 	}
-    getResponseWithBody(tmResp, tmRet);
+	getResponseWithBody(tmResp, tmRet);
 }
 
 function getTeamByID(path, method, body, sessionID, routeID) {
@@ -290,11 +294,11 @@ function updateTeamByID(path, method, body, sessionID, routeID) {
 	delete comObj.Coaches;
 	delete comObj.catID;
 	delete comObj.sptID;
-	
+
 	delete comObj.U_SS_CATEGORY;
 	delete comObj.U_SS_SPORT;
 	delete comObj.U_SS_LOCATION;
-	
+
 	/*var upCat = {};
     upCat.Code = comObj.Code;
     upCat.Name = comObj.Name;
@@ -311,11 +315,11 @@ function updateTeamByID(path, method, body, sessionID, routeID) {
 			switch (recAction) {
 				case "n":
 					var tmpTMCoach = {
-            			Code: 0,
-            			Name: "",
-            			U_TeamCode: "",
-            			U_CoachCode: ""
-            		};
+						Code: 0,
+						Name: "",
+						U_TeamCode: "",
+						U_CoachCode: ""
+					};
 					tmpTMCoach.Name = teamMD.Name + '-' + teamMD.Coaches[i].Name;
 					tmpTMCoach.U_TeamCode = teamMD.Code.toString();
 					tmpTMCoach.U_CoachCode = teamMD.Coaches[i].EmployeeID.toString();
@@ -336,4 +340,66 @@ function updateTeamByID(path, method, body, sessionID, routeID) {
 			}
 		}
 	}
+}
+
+function createTeamCalendar(path, method, body, sessionID, routeID) {
+
+	try {
+		var getTeamCalender;
+		var gPath = path;
+
+		gPath += "?$top=1&$orderby=Code%20desc";
+		var tmpBody = JSON.parse(body);
+		if (tmpBody.value.length > 0) {
+			for (var i = 0; i < tmpBody.value.length; i++) {
+				var getCode;
+				if (i === 0) {
+					getCode = cmnLib.getNewCode(gPath, $.net.http.GET, body, sessionID, routeID);
+					tmpBody.value[i].Code = getCode;
+				} else {
+					tmpBody.value[i].Code = getCode;
+				}
+			}
+
+			if (tmpBody.value.length > 0) {
+				getTeamCalender = tmpBody.value[0].Name;
+				var batchCnt = "--batch_myBatch001" + "\r\n" +
+					"Content-Type: application/http" + "\r\n" +
+					"Content-Transfer-Encoding: binary" + "\r\n\r\n";
+				for (var j = 0; j < tmpBody.value.length; j++) {
+					var m = j + 1;
+					batchCnt += "--changeset_myChangeset001" + "\r\n" +
+						"Content-Type: application/http\r\nContent-Transfer-Encoding: binary\r\nContent-ID:" + m + "\r\n\r\n" +
+						"POST /U_SS_TEAM_CALENDAR HTTP/1.1" + "\r\n" +
+						"Accept: application/json" + "\r\n\r\n";
+					batchCnt += JSON.stringify(tmpBody.value[j]) + "\r\n\r\n";
+				}
+				batchCnt += "--changeset_myChangeset001--" + "\r\n" + "--batch_myBatch001--";
+
+				cmnLib.sendTeamRequest("", $.net.http.POST, batchCnt, sessionID, routeID);
+
+				var chPath = encodeURI(baseURL + "/U_SS_TEAM_CALENDAR?$filter=Name eq '" + getTeamCalender + "'");
+				var response = cmnLib.createRequest(chPath, $.net.http.GET, body, sessionID, routeID);
+				var tcBody = cmnLib.getResponseJson(response);
+				if (tcBody.value.length > 0) {
+					var setBody = {
+						"Name": getTeamCalender
+					};
+					tCalSchLib.createTCalSchedule(path, $.net.http.POST, JSON.stringify(setBody), sessionID, routeID);
+				}
+			}
+
+			/*		var getCreateBodys = getCreateBody.toString();
+			var dateSTR = getCreateBodys.replace(/,--changeset_myChangeset001/g, "--changeset_myChangeset001");
+			cmnLib.sendBatchRequest("", $.net.http.POST, dateSTR, sessionID, routeID);*/
+		}
+
+	} catch (e) {
+		$.trace.warning("callServiceLayer Exception: " + e.message);
+		$.response.contentType = "application/json";
+		$.response.setBody(JSON.stringify({
+			"error": e.message
+		}));
+	}
+
 }

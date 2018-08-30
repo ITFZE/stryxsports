@@ -1,0 +1,65 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog
+		title = "Add Members In Event">
+		<NavContainer
+			id="navCon"
+			height="30em"
+			class="navContainerControl sapUiSmallMarginBottom">
+			<Page
+				id="p1"
+				title="Teams" >
+				<content>
+					<List
+					id="listTeamMembers"
+				       growing="true" growingThreshold="20" busyIndicatorDelay="250" 
+				       enableBusyIndicator="true" 
+				        noDataText="No Data" items="{mTeamList>/value}">
+						<StandardListItem
+						   type="Navigation"
+				           title="{mTeamList>Name}"
+				           press="handlePressInviteMembers"
+				           />
+					</List>
+				</content>
+			</Page>
+			<Page
+				id="p2"
+				showNavButton="true" 
+				navButtonPress="onBack"
+				title="Team Members">
+				<content>
+					<VBox>
+						<CheckBox id="checkBoxSelectAll" select="selectAll" class="margin-left-checkbox" text="Select All" selected="false" />
+						<List
+						   id="listSelectInviteMembers"
+						   selectionChange="listSelectMem"
+					       noDataText="No Data"
+					       mode="MultiSelect"
+					       title="Select Teams Members"
+					       items="{MembersList>/value}">
+							<StandardListItem
+					    title="{MembersList>BusinessPartners/CardName}"
+					    press="handlePressInviteMembers"/>
+						</List>
+					</VBox>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button id="btnAddInvite" enabled="false" text="Add Invite" press="onPressInviteTeamMembers"  />
+					</Toolbar>
+				</footer>
+			</Page>
+		</NavContainer>
+		<buttons>
+			<Button text="Close" press="onPressDialogClose"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

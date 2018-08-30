@@ -142,7 +142,7 @@
 							</items>
 						</Select>
 						<Label text="{i18n>mDateAndTime}"/>
-						<DateTimePicker id="editDateTime"  value="{DOB}" change="handleChange"/>
+						<DateTimePicker id="editDateTime" minutesStep="30" value="{DOB}" change="handleChange"/>
 					</f:content>
 				</f:SimpleForm>
 			</VBox>

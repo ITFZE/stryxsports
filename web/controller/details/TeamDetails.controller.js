@@ -1,20 +1,29 @@
 sap.ui.define([
+	'sap/m/MessageToast',
 	"com/ss/app/StryxSports/controller/sal/TeamsSAL",
 	"com/ss/app/StryxSports/controller/sal/LocationsSAL",
 	"com/ss/app/StryxSports/controller/sal/SeasonSAL",
 	"com/ss/app/StryxSports/controller/sal/SportCategorySAL",
 	"com/ss/app/StryxSports/controller/sal/CoachsSAL",
 	"sap/ui/model/json/JSONModel",
-		"sap/ui/model/Filter",
-		 "sap/ui/core/ValueState",
-    "com/ss/app/StryxSports/controller/util/Validator"
-], function(TeamsSAL, LocationsSAL, SeasonSAL, SportCategorySAL, CoachsSAL, JSONModel, Filter, ValueState, Validator) {
+	"sap/ui/model/Filter",
+	"sap/ui/core/ValueState",
+    "com/ss/app/StryxSports/controller/util/Validator",
+    'sap/m/MessageBox',
+    "com/ss/app/StryxSports/controller/sal/ScheduleSAL",
+    "com/ss/app/StryxSports/controller/sal/HolidaySAL",
+     'sap/m/Button',
+     'sap/m/Dialog',
+	 'sap/m/Text'
+], function(MessageToast, TeamsSAL, LocationsSAL, SeasonSAL, SportCategorySAL, CoachsSAL, JSONModel, Filter, ValueState, Validator,
+	MessageBox, ScheduleSAL,HolidaySAL,Button,Dialog,Text) {
 	"use strict";
 	var getCategoryAfter, getCategoryChange, getCode, getSports, sportsFilter = null;
 	return TeamsSAL.extend("com.ss.app.StryxSports.controller.details.TeamDetails", {
 
 		onInit: function() {
 			this._pageID = "";
+			this.bReqBody = "";
 			var oRouter = this.getRouter();
 			oRouter.getRoute("Teams").attachMatched(this._onRouteMatched, this);
 			// Attaches validation handlers
@@ -25,6 +34,7 @@ sap.ui.define([
 				oEvent.getParameter("element").setValueState(ValueState.None);
 			});
 			this.dateObj = "";
+			this.teamId = "";
 		},
 		createTeamModel: function() {
 			var teamModel = new JSONModel();
@@ -39,9 +49,11 @@ sap.ui.define([
 			teamModel.setProperty('/U_Season');
 			teamModel.setProperty('/U_Status', "1");
 			teamModel.setProperty('/Coaches', []);
+			teamModel.setProperty('/Calendar', []);
 			this.getView().setModel(teamModel, "createTeamModel");
 		},
 		_onRouteMatched: function(oEvt) {
+			this.onPressAddCancel();
 			this._pageID = oEvt.getParameter("arguments").PageID;
 			var getEle = oEvt.getParameters();
 			this._setViewLevel = getEle.config.viewLevel;
@@ -74,6 +86,7 @@ sap.ui.define([
 
 		onBeforeRendering: function() {
 			var othat = this;
+			othat.onPressAddCancel();
 			if (!this.loadingMdls) {
 				if (sap.ui.getCore().getModel("mTeamLocations") === null || sap.ui.getCore().getModel("mTeamLocations") === undefined) {
 					othat.fetchLocations();
@@ -235,18 +248,18 @@ sap.ui.define([
 			}
 		},
 		getSeleSeason: function(evt) {
-		    var that = this;
+			var that = this;
 			var seasonModel = this.getView().getModel("mTeamSeasons");
 			var teamStartEndDate = this.getView().byId("addStartEndAndDate");
 			var text = evt.getParameter("selectedItem").getText();
 			var oData = seasonModel.oData.value;
 			oData.forEach(function(ele) {
 				if (ele.Name === text) {
-				    that.dateObj = ele;
+					that.dateObj = ele;
 				}
 			});
-            teamStartEndDate.setMinDate(new Date(that.dateObj.U_StartDate));
-            teamStartEndDate.setMaxDate(new Date(that.dateObj.U_EndDate));
+			teamStartEndDate.setMinDate(new Date(that.dateObj.U_StartDate));
+			teamStartEndDate.setMaxDate(new Date(that.dateObj.U_EndDate));
 		},
 		onPressAddCoachTable: function(oEvent) {
 			var othat = this;
@@ -308,7 +321,7 @@ sap.ui.define([
 		},
 
 		destroyDialog: function() {
-			/* 			var id = sap.ui.getCore().byId("addCoachTableTeams");
+			/*var id = sap.ui.getCore().byId("addCoachTableTeams");
 			if (id !== undefined) {
 				id.destroy();
 			}*/
@@ -402,25 +415,21 @@ sap.ui.define([
 					if (ret.oData.value.length <= 0) {
 						that.createTeams(teamMdl).done(function(response) {
 							var tFilter = "$orderby=Code%20desc";
+							var getTeamCode  = response.Code;
 							that.fetchTeams(this, tFilter).done(function(obj) {
 								sap.ui.getCore().setModel(obj, "TeamsList");
 								sap.ui.getCore().getModel("TeamsList").refresh(true);
 								that.showLoading(false);
-								//that.destroyDialog();
 								that.createTeamModel();
 								var teamdetailsave = that.oBundle("CreatedSuccessfully");
-								that.fetchMessageOk("Create Teams", "Success", teamdetailsave, "Teams");
+							//	that.fetchMessageOk("Create Teams", "Success", teamdetailsave, "Teams");
+							
+								that.fetchMessageOkNavTo("Create Team", "Success", teamdetailsave,getTeamCode);
 								getEle.addTeamSeason.setValue("Select Season");
 								getEle.addSportsCategory.setValue("Select Sports Category");
 								getEle.addSportName.setValue("Select Sports");
 								getEle.addTeamLocation.setValue("Select Location");
 								getEle.addStartEndAndDate.setValue("");
-								// Email Notification code
-								that.sendNotificationEmail().done(function(res) {
-									var body = res.body;
-								}).fail(function(err) {
-									console.log(err.status + " " + err.statusText);
-								});
 							}).fail(function(err) {
 								that.showLoading(false);
 								that.fetchMessageOk("Error", "Error", err.toString(), "Teams");
@@ -431,8 +440,11 @@ sap.ui.define([
 							that.fetchMessageOk("Error", "Error", err.toString(), "Teams");
 						});
 					} else {
+						var inpTeam = that.byId("addTeamName");
+						inpTeam.setValueState(sap.ui.core.ValueState.Error);
+						inpTeam.setValueStateText("Entered sport name already exists!");
 						that.showLoading(false);
-						that.fetchMessageOk("Error", "Error", "Record already exists", "Teams");
+						that.fetchMessageOk("Error", "Error", "Record already exixts", "Teams");
 					}
 				}).fail(function(err) {
 					that.showLoading(false);
@@ -442,7 +454,7 @@ sap.ui.define([
 		},
 
 		handleCloseTableDialog: function() {
-			// 			this.destroyDialog();
+			// this.destroyDialog();
 		},
 
 		onPressAddCancel: function() {
@@ -500,25 +512,98 @@ sap.ui.define([
 			var oBinding = oEvent.getSource().getBinding("items");
 			oBinding.filter([oFilter]);
 		},
-		// Dialog for team calendar
-/*		handleCreateCalendarPress: function(evt) {
+		onPressCreateCalendar: function(oEvent) {
 			var that = this;
-			if (!that._oDialog) {
-				that._oDialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.dialogs.TeamCalendar", that);
-				that._oDialog.setModel(that.getView().getModel());
+			if (!that._oCalDialog) {
+				that._oCalDialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.CreateCalendar", that);
 			}
 
-			var tabCalendar = that.getView().byId("tabTeamCalendar");
-			var oDRS = that.getView().byId("addStartEndAndDate");
-			var teamModel = that.getView().getModel("createTeamModel");
-
+			that.getView().addDependent(that._oCalDialog);
 			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that._oDialog);
-			that._oDialog.open();
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that._oCalDialog);
+			that.fetchMasterList();
+			// Get recent created team
+			var filter = "?$top=1&$orderby=Code%20desc";
+			that.fetchTeams(filter).done(function(res) {
+				that.teamId = res.oData.value[0].Code + 1;
+			}).fail(function(err) {
+				console.log(err);
+			});
+
 		},
-		handleTimeCalendarClose: function(evt) {
+		btnPressCreateCalTabDialogClose: function() {
+			this._oCalDialog.close();
+		},
+		handleCalendarDaysSearch: function(oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter("Name", sap.ui.model.FilterOperator.Contains, sValue);
+			var oBinding = oEvent.getSource().getBinding("items");
+			oBinding.filter([oFilter]);
+		},
+		handleCreateCalendarConfirm: function(oEvent) {
+		
+// 			// Batch request to create team calendar
+// 			var schSal = new ScheduleSAL();
+// 			schSal.CreateTmCal(cal).done(function(response) {
+// 				var res = response;
+// 			}).fail(function(error) {
+// 				var err = error;
+// 			});
+// 			oEvent.getSource().getBinding("items").filter([]);
+// 			MessageToast.show("Team Calendar Created Successfully");
+		},
+		onPressViewCalendar: function(evt) {
 			var that = this;
-			that._oDialog.close();
-		}*/
+			that.getRouter().navTo("ViewCalendar");
+		},
+		fetchMasterList: function() {
+			var that = this;
+			var filter = "$orderby=Code%20desc";
+			var holidaySAL = new HolidaySAL();
+			holidaySAL.fetchHolidayList(that, filter).done(function(getResponse) {
+				sap.ui.getCore().setModel(getResponse, "HolidayListMDL");
+				that._oCalDialog.open();
+			}).fail(function(err) {
+				that.showLoading(false);
+				that.fetchMessageOk("Error", "Error", err.toString(), "HolidayListMaster");
+			});
+		},
+		
+			////////////////////////////////////////////////////////START CREATE MESSAGES ///////////////////////////////////////////////////////
+		fetchMessageOkNavTo: function(getTitle, getState, getMessage, GetID) {
+			var that = this;
+			var getRouteName;
+			if (getMessage === "Unauthorized") {
+				getTitle = "Your Session Has Been Expired";
+				getMessage = "Please Re-Login";
+				getRouteName = "Login";
+			}
+			var messageOktDialog = new Dialog({
+				title: getTitle,
+				type: 'Message',
+				state: getState,
+				content: new Text({
+					text: getMessage
+				}),
+				beginButton: new Button({
+					text: 'Continue',
+					press: function() {
+						that.getOwnerComponent().getRouter().navTo("EditTeam", {
+							teamID: GetID
+						});
+						messageOktDialog.close();
+					}
+				}),
+				endButton: new Button({
+					text: 'Create Team',
+					press: function() {
+						that.getOwnerComponent().getRouter()
+							.navTo("Teams");
+						messageOktDialog.close();
+					}
+				})
+			});
+			messageOktDialog.open();
+		}
 	});
 });

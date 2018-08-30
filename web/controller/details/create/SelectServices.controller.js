@@ -37,6 +37,11 @@ sap.ui.define([
 		_onRouteMatched: function(oEvt) {
 			var that = this;
 			var setSegamentButton = that.getView().byId("sbItemType");
+			var getToday = new Date();
+			var docDate = this.toDateFormat(getToday);
+			this.byId("memberPostingDate").setValue(docDate);
+			this.byId("memberPostingDate").setMaxDate(getToday);
+
 			var admiBtn = that.getView().byId("admissionBtn");
 			setSegamentButton.setSelectedButton(admiBtn);
 			that.showLoading(true);
@@ -54,6 +59,7 @@ sap.ui.define([
 					});
 				});
 			});
+			this.byId("durationType").setVisible(false);
 		},
 		getSelectedSeason: function(evt) {
 			var getSeleValue = evt.getParameter("selectedItem").getKey();
@@ -123,9 +129,20 @@ sap.ui.define([
 			}
 		},
 
+		onSelectDuration: function(evt) {
+			var that = this;
+			var key = evt.getParameter("selectedItem").getKey();
+			if (key == "4") {
+				that.getView().byId('memberQuantity').setEnabled(false);
+			} else {
+				that.getView().byId('memberQuantity').setEnabled(true);
+			}
+		},
+
 		addServiceItems: function() {
 			var getEle = this.getVariablesSelectService();
 			var getName = this._setSeleNameBtn;
+			var getDocDate = this.byId("memberPostingDate");
 			switch (getName) {
 				case "admission":
 					getEle.selectServiceSeason.setValueState("None");
@@ -134,7 +151,13 @@ sap.ui.define([
 					getEle.selectServiceItems.setValueState("None");
 					getEle.selectItemStartDate.setValueState("None");
 					getEle.selectItemQuantity.setValueState("None");
-					this.upDateServiceItems();
+					if (getDocDate.getValue() !== "") {
+						getDocDate.setValueState("None");
+						this.upDateServiceItems();
+					} else {
+						getDocDate.setValueState("Error");
+					}
+
 					break;
 				case "subscriptions":
 					getEle.selectItemQuantity.setValueState("None");
@@ -160,14 +183,24 @@ sap.ui.define([
 					} else if (getEle.selectItemQuantity.getValue() === "") {
 						getEle.selectItemStartDate.setValueState("None");
 						getEle.selectItemQuantity.setValueState("Error");
+					} else if (getDocDate.getValue() === "") {
+						getDocDate.setValueState("Error");
+						getEle.selectItemQuantity.setValueState("None");
 					} else {
+						getDocDate.setValueState("None");
 						getEle.selectServiceSeason.setValueState("None");
 						getEle.selectServiceLocations.setValueState("None");
 						getEle.selectServiceTeamName.setValueState("None");
 						getEle.selectServiceItems.setValueState("None");
 						getEle.selectItemStartDate.setValueState("None");
 						getEle.selectItemQuantity.setValueState("None");
-						this.upDateServiceItems();
+						if (getDocDate.getValue() !== "") {
+							getDocDate.setValueState("None");
+							this.upDateServiceItems();
+						} else {
+							getDocDate.setValueState("Error");
+						}
+
 					}
 					break;
 				case "items":
@@ -182,8 +215,8 @@ sap.ui.define([
 				default:
 					break;
 			}
-
 		},
+
 		onPressDeleteServiceItems: function(oEvent) {
 			var src = oEvent.getSource();
 			var ctx = src.getBindingContext("MemberServices");
@@ -198,8 +231,8 @@ sap.ui.define([
 		getSelectedServiceItem: function(oEvent) {
 			var getEle = this.getVariablesSelectService();
 			getEle.selectItemStartDate.setEnabled(true);
-			getEle.selectItemMonths.setBusy(true);
-			getEle.selectItemPeriods.setBusy(true);
+			//getEle.selectItemMonths.setBusy(true);
+			//getEle.selectItemPeriods.setBusy(true);
 			getEle.selectItemPrices.setBusy(true);
 			var getValueI = oEvent.getSource();
 			var getValueIndex = oEvent.getParameter("selectedItem").getKey();
@@ -210,16 +243,25 @@ sap.ui.define([
 				var oModel = getSelItem.getModel("ItemsList");
 				var itemData = oModel.getProperty(getsPath);
 				var itemMD = new sap.ui.model.json.JSONModel();
-				itemData.Quantity = 1;
+				//itemData.Quantity = 1;
 				itemMD.setData(itemData);
 				this.getView().setModel(itemMD, "ItemDetails");
-				getEle.selectItemMonths.setBusy(false);
-				getEle.selectItemPeriods.setBusy(false);
+				//getEle.selectItemMonths.setBusy(false);
+				//getEle.selectItemPeriods.setBusy(false);
+				this.getView().byId('durationType').setSelectedKey(itemMD.oData.U_Duration);
+
 				getEle.selectItemPrices.setBusy(false);
 				var addBtn = this.getView().byId("btnAddService");
 				addBtn.setEnabled(true);
+				// Set quantity field to enabled or disabled
+				if (itemMD.oData.U_Duration === "4") {
+					this.getView().byId('memberQuantity').setEnabled(false);
+				} else {
+					this.getView().byId('memberQuantity').setEnabled(true);
+				}
 			}
 		},
+
 		upDateServiceItems: function() {
 			var getEle = this.getVariablesSelectService();
 			getEle.selectServiceSeason.setValueState("None");
@@ -274,6 +316,7 @@ sap.ui.define([
 		onCreateOrder: function() {
 			var that = this;
 			var getMemberServicesMDL = this.getView().getModel("MemberServices");
+
 			if (getMemberServicesMDL !== undefined && getMemberServicesMDL !== null) {
 				that.showLoading(true);
 				this.createOrder(getMemberServicesMDL, "").done(function(obj) {
@@ -297,6 +340,7 @@ sap.ui.define([
 				that.showLoading(false);
 				that.fetchErrorMessageOk("Note", "Warning", "Please Select The Sport");
 			}
+
 		},
 		onSelectSType: function(evt) {
 			var selKey = evt.getSource().getSelectedKey();
@@ -307,8 +351,8 @@ sap.ui.define([
 					this.fetchItemDetails(104, "");
 					this.byId("frmSubDetails").setVisible(false);
 					this.byId("frmAdItems").setVisible(true);
+					this.byId("durationType").setVisible(false);
 					this._setSeleNameBtn = "admission";
-				// 	this.byId("toSelectMemberCalendar").setVisible(false);
 					break;
 				case "subscriptions":
 					getEle.selectServiceSeason.setValueState("None");
@@ -325,7 +369,7 @@ sap.ui.define([
 					this.byId("frmSubDetails").setVisible(true);
 					this.byId("frmAdItems").setVisible(true);
 					this._setSeleNameBtn = "subscriptions";
-				// 	this.byId("toSelectMemberCalendar").setVisible(true);
+					this.byId("durationType").setVisible(true);
 					break;
 				case "items":
 					this.getView().byId("memberQuantity").setValueState("None");
@@ -333,7 +377,7 @@ sap.ui.define([
 					this.byId("frmSubDetails").setVisible(false);
 					this.byId("frmAdItems").setVisible(true);
 					this._setSeleNameBtn = "items";
-				// 	this.byId("toSelectMemberCalendar").setVisible(false);
+					this.byId("durationType").setVisible(false);
 					break;
 
 			}
@@ -453,9 +497,10 @@ sap.ui.define([
 			getEle.selectServiceItems.setBusy(true);
 			if (getCatCode !== "") {
 				filter = encodeURI("$filter=U_CategorySports eq '" + getCatCode +
-					"'||$select=ItemCode,ItemName,U_Time,U_Duration,ItemPrices");
+					"' and Valid eq 'tYES' ||$select=ItemCode,ItemName,U_Time,U_Duration,ItemPrices");
 			} else {
-				filter = encodeURI("$filter=ItemsGroupCode eq " + getGroupID + "||$select=ItemCode,ItemName,U_Time,U_Duration,ItemPrices");
+				filter = encodeURI("$filter=ItemsGroupCode eq " + getGroupID +
+					" and Valid eq 'tYES' ||$select=ItemCode,ItemName,U_Time,U_Duration,ItemPrices");
 			}
 			var sItem = new sap.ui.core.Item({
 				text: "Select The Items",
@@ -525,6 +570,7 @@ sap.ui.define([
 			getEle.selectServiceTeamName.setSelectedKey("-1");
 			getEle.selectServiceLocations.setSelectedKey("-1");
 			getEle.selectItemStartDate.setValue("");
+			this.byId("memberPostingDate").setValue("");
 			getEle.selectItemStartDate.setValueState("None");
 			getEle.selectServiceSportCategory.setValue("");
 			getEle.selectItemQuantity.setValue("1");
@@ -546,8 +592,8 @@ sap.ui.define([
 				selectServiceSportsName: this.getView().byId("memberSportsName"),
 				selectServiceSeason: this.getView().byId("sSeason"),
 				selectServiceLocations: this.getView().byId("memberLocations"),
-				selectItemMonths: this.getView().byId("memberMonths"),
-				selectItemPeriods: this.getView().byId("memberPeriods"),
+				//selectItemMonths: this.getView().byId("memberMonths"),
+				//selectItemPeriods: this.getView().byId("memberPeriods"),
 				selectItemPrices: this.getView().byId("memberPrices"),
 				selectItemStartDate: this.getView().byId("memberStartDate"),
 				selectItemCreateOrder: this.getView().byId("btnCreateOrder"),
@@ -575,12 +621,16 @@ sap.ui.define([
 		////////////////////////////////////////////////////////START CREATE DATA MODELS ////////////////////////////////////////////////////
 		createServieModel: function() {
 			var serviceMD = new JSONModel();
-			var docDate = this.toDateFormat(Date.now());
+			var getDocDate = this.byId("memberPostingDate").getValue();
+			var docDate = this.toDateFormat(getDocDate);
+			var setToday = new Date();
+			var getToday = this.toDateFormat(setToday);
 			var memMD = this.getView().getModel("LeadsDetails");
 			var memData = memMD.getData();
 			serviceMD.setProperty('/CardCode', memData.CardCode);
 			serviceMD.setProperty('/CardName', memData.CardName);
-			serviceMD.setProperty('/DocDueDate', docDate);
+			serviceMD.setProperty('/DocDate', docDate);
+			serviceMD.setProperty('/DocDueDate', getToday);
 			serviceMD.setProperty('/DocumentLines', []);
 			return serviceMD;
 		},
@@ -673,7 +723,7 @@ sap.ui.define([
 			var getModleId = this.getView().getModel("LeadsDetails");
 			var emgLabel = that.getView().byId("emergencyContailLabel");
 			var emgPanel = that.getView().byId("emgPanleId");
-			if (getModleId.oData.ContactEmployees.length == "") {
+			if (getModleId.oData.ContactEmployees.length === "") {
 				emgLabel.setVisible(false);
 				emgPanel.setVisible(false);
 			} else {

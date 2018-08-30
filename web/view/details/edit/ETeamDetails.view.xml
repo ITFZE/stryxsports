@@ -92,7 +92,7 @@
 											<Text text="{i18n>tContactNumber}"/>
 										</Column>
 										<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
-											<Text/>
+											<Text text="Delete"/>
 										</Column>
 									</columns>
 									<items>
@@ -131,139 +131,42 @@
 							</Table>
 						</ScrollContainer>
 					</IconTabFilter>
-					<!--<IconTabFilter id="editTabCalendar" key="editTeamCalendar" size="8rem" class="sapUiMediumMargin" text="Calendar">
+					<IconTabFilter id="editTabCalendar" key="TeamCalendar" size="8rem" class="sapUiMediumMargin" text="Calendar">
+						<Toolbar height="3rem">
+							<Title text="Add Calendar"/>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://add" press="onPressCreateCalendar"/>
+						</Toolbar>
 						<ScrollContainer height="100%"
                     		width="100%"
                     		horizontal="true"
                     		vertical="true"
                     		focusable="true">
-							<Table id="" inset="false">
+							<Table id="editTabTeamCalendar" inset="false" 	
+							items="{path: 'CreateTeamCalendarsList>/value'}">
 								<columns>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin"></Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="Start Time"/>
+									<Column hAlign="Begin">
+										<Text text="Calendar Name"/>
 									</Column>
-									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-										<Text text="End Time"/>
+									<Column  hAlign="Center">
+										<Text text="View Schedules"/>
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+										<Text text="Delete"/>
 									</Column>
 								</columns>
 								<items>
 									<ColumnListItem>
 										<cells>
-											<CheckBox text="Sunday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<CheckBox text="Monday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<CheckBox text="Tuesday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<CheckBox text="Wednesday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<CheckBox text="Thursday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<CheckBox text="Friday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<CheckBox text="Saturday" />
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter start time"/>
-											<TimePicker
-                            				valueFormat="HH:mm"
-                            				displayFormat="HH:mm"
-                            				change="handleChange"
-                            				placeholder="Enter end time"/>
-										</cells>
-									</ColumnListItem>
-									<ColumnListItem>
-										<cells>
-											<Input visible="false" />
-											<Button text="Edit Calendar" press="handleCreateCalendarPress" />
-											<Input visible="false" />
+											<Text text="{CreateTeamCalendarsList>Name}" enabled="false" />
+											<Button icon="sap-icon://appointment" tooltip="Schedules" press="onPressViewSchedules" />
+											<Button icon="sap-icon://delete"  press="onPressViewCalendar" />
 										</cells>
 									</ColumnListItem>
 								</items>
 							</Table>
 						</ScrollContainer>
-					</IconTabFilter>-->
+					</IconTabFilter>
 				</items>
 			</IconTabBar>
 		</content>

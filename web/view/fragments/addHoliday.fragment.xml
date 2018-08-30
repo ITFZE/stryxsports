@@ -1,0 +1,61 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog contentWidth="400px" class="sapUiSizeCompact" title = "Add Holiday">
+		<l:BlockLayout>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell>
+					<Label text="Name" class="sapUiTinyMarginTop" />
+					<Input id="holidayName" placeholder="Please Enter The Name"/>
+					<Label text="Start Date" class="sapUiTinyMarginTop"/>
+					<DatePicker displayFormat="short" valueFormat="yyyy-MM-dd" id="holidayStartDate" placeholder="Please Enter The Start Date"/>
+					<Label text="End Date" class="sapUiTinyMarginTop" />
+					<DatePicker displayFormat="short" valueFormat="yyyy-MM-dd" id="holidayEndDate" placeholder="Please Enter The End Date"/>
+			    </l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			</l:BlockLayout>
+		<buttons>
+			<Button text="Confirm" press="onPressAddDialogConfirm"/>
+			<Button text="Close" press="onPressAddDialogClose"/>
+		</buttons>
+	</Dialog>
+	
+	<!--<Dialog class="sapUiSizeCompact" title = "Add Holiday">
+        <Table id="addHolidayTable" items="{/Holidays}">
+    		<headerToolbar>
+    			<Toolbar>
+    			    <Title text="Add Holiday"/>
+					<ToolbarSpacer/>
+    				<Button icon="sap-icon://add" text="Row" press="onAddRow"/>
+    				<Button icon="sap-icon://save" text="Save" press="onPressDialogConfirm"/>
+    				<Button icon="sap-icon://decline" text="Cancel" press="onPressDialogClose"/>
+    			</Toolbar>
+    		</headerToolbar>
+    		<columns>
+    			<Column>
+    				<Text text="Name" />
+    			</Column>
+    			<Column>
+    				<Text text="Start Date" />
+    			</Column>
+    			<Column>
+    				<Text text="End Date" />
+    			</Column>
+    		</columns>
+    		<items>
+    			<ColumnListItem>
+        			<cells>
+        				<Input id="holidayName" value="{Name}" />
+        				<DatePicker id="holidayStartDate" value="{SDate}" />
+        				<DatePicker id="holidayEndDate" value="{EDate}" />
+        			</cells>
+    		    </ColumnListItem>
+    		</items>
+    	</Table>
+	</Dialog>-->
+</core:FragmentDefinition>

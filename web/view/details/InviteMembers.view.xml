@@ -1,0 +1,138 @@
+<mvc:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m"
+	xmlns:m="sap.m"
+	xmlns:form="sap.ui.layout.form"
+	controllerName="com.ss.app.StryxSports.controller.details.InviteMembers"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.ui.layout.form" height="100%">
+	<Page id="emailDetails" showNavButton="true" navButtonPress="onNavBack"  title="Invite Members">
+		<content>
+			<VBox>
+				<Panel id="panelSelectTeams">
+					<Table  id="tableTeams" class="bg-color-table" title="Add Invite Members"  items="{mTeamList>/value}" growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				     enableBusyIndicator="true" noDataText="No items">
+						<headerToolbar>
+							<Toolbar>
+								<content>
+									<Title text="Add Teams"/>
+									<ToolbarSpacer />
+									<SearchField width="240px" placeholder="Please Enter The Name" />
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<ColumnListItem>
+							<cells>
+								<Text text="{mTeamList>Name}"/>
+								<Text text="{mTeamList>U_StartDate}"/>
+								<Text text="{mTeamList>U_EndDate}"/>
+								<ObjectStatus text="{ path: 'mTeamList>U_Status', formatter: '.setStatus'}" state="{ path: 'mTeamList>U_Status', formatter: '.sportStatus' }"/>
+								<Button text="Invite Members" press="selecteMemberLists"/>
+							</cells>
+						</ColumnListItem>
+						<columns>
+							<Column hAlign="Left"  width="12em">
+								<Text text="Team Name"/>
+							</Column>
+							<Column hAlign="Center"  width="12em">
+								<Text text="Start Date"/>
+							</Column>
+							<Column hAlign="Center"  width="12em">
+								<Text text="End Date"/>
+							</Column>
+							<Column hAlign="Center"  width="12em">
+								<Text text="Status"/>
+							</Column>
+							<Column hAlign="End"  width="12em">
+								<Text text=""/>
+							</Column>
+						</columns>
+					</Table>
+				</Panel>
+				<Panel id="panelSelectMembers" visible="false">
+					<Table class="bg-color-table"  title="Add Invite Members"  items="{mTeamList>/value}"  growing="true" growingThreshold="10" busyIndicatorDelay="250"
+				     enableBusyIndicator="true" noDataText="No items">
+						<headerToolbar>
+							<Toolbar>
+								<content>
+									<Title text="Add Members"/>
+									<ToolbarSpacer />
+									<SearchField width="240px" placeholder="Please Enter The Name" />
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<ColumnListItem>
+							<cells>
+								<Text text="{mTeamList>Name}"/>
+								<Text text="{mTeamList>U_StartDate}"/>
+								<Text text="{mTeamList>U_EndDate}"/>
+								<ObjectStatus text="{ path: 'mTeamList>U_Status', formatter: '.setStatus'}" state="{ path: 'mTeamList>U_Status', formatter: '.sportStatus' }"/>
+								<Button text="Invite Members" press="selecteMemberLists"/>
+							</cells>
+						</ColumnListItem>
+						<columns>
+							<Column hAlign="Left"  width="12em">
+								<Text text="Team Name"/>
+							</Column>
+							<Column hAlign="Center"  width="12em">
+								<Text text="Start Date"/>
+							</Column>
+							<Column hAlign="Center"  width="12em">
+								<Text text="End Date"/>
+							</Column>
+							<Column hAlign="Center"  width="12em">
+								<Text text="Status"/>
+							</Column>
+							<Column hAlign="End"  width="12em">
+								<Text text=""/>
+							</Column>
+						</columns>
+					</Table>
+				</Panel>
+				<Panel>
+					<Table class="bg-color-table" inset="false" items="{SelectedMemberLists>/value}">
+						<headerToolbar>
+							<Toolbar>
+								<content>
+									<Title text="Invited Members"/>
+									<ToolbarSpacer />
+									<Button  icon="sap-icon://add-employee" press="selecteMemberList"/>
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="12em" >
+								<Text text="Name"/>
+							</Column>
+							<Column width="12em" >
+								<Text text="Phone Number"/>
+							</Column>
+							<Column width="12em" >
+								<Text text="Email"/>
+							</Column>
+							<Column width="12em" hAlign="End">
+								<Text text=""/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{SelectedMemberLists>BusinessPartners/CardName}"/>
+									<Text text="{SelectedMemberLists>BusinessPartners/Cellular}"/>
+									<Text text="{SelectedMemberLists>BusinessPartners/EmailAddress}"/>
+									<Button icon="sap-icon://sys-cancel-2" press="onPressDeleteMemberListItems"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</VBox>
+			<HBox alignItems="Center" justifyContent="Center">
+				<Button id="buttonSendEmail" enabled="false"  width="7em" text="Send Email" press="selectedCreateInviteMembers"/>
+				<Button id="buttonSendSMS"  enabled="false"  width="7em" class="sapUiSmallMargin" text="Send SMS" />
+			</HBox>
+		</content>
+	</Page>
+</mvc:View>

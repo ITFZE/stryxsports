@@ -37,6 +37,11 @@ sap.ui.define([
 					AccountId: oCtx.getProperty("membershipID")
 				});
 		},
+		onPressCreateMembership: function(evt) {
+			this.getRouter().navTo("MembershipNewCreate", {
+				PageID: this._setViewLevel
+			});
+		},
 		noPressCreateCustome: function(evt) {
 			var oItem, oCtx;
 			oItem = evt.getSource();
@@ -174,12 +179,16 @@ sap.ui.define([
 				}
 			}
 		},
-		onPressCreateMembership: function(evt) {
-
-			this.getRouter().navTo("MembershipNewCreate", {
+		onPressCreateLeadToMembership: function(evt) {
+			var that = this;
+			var oItem, oCtx;
+			oItem = evt.getSource();
+			oCtx = oItem.getBindingContext("AssessmentList");
+			that.getRouter().navTo("LeadToAccount", {
+				AccountId: oCtx.getProperty("CardCode"),
 				PageID: this._setViewLevel
-			});
 
+			});
 		},
 		getVariables: function() {
 			var getSearchLeads = {

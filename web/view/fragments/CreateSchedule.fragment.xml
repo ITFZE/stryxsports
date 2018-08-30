@@ -1,0 +1,87 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<Dialog title="Create Calendar" id="createSchId">
+		<VBox>
+			<l:BlockLayout>
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell>
+						<Label class="sapUiTinyMarginTop" text="Select Team Calendars :"/>
+						<Select
+						class="sapUiSmallMarginBegin"
+						autoAdjustWidth="true"
+				     	 placeholder="Select Team Calendars"
+					     selectionChange="seleTeamCalendarList"
+					 	 id="createCalSeleMemListID"
+					 	 items="{path: 'CreateTeamCalendarsList>/value',sorter: { path: 'Name' }}">
+							<core:Item key="{CreateTeamCalendarsList>Name}"  text="{CreateTeamCalendarsList>Name}" />
+						</Select>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+			<Table
+			    id="createScheduleFragment"
+		        noDataText="No Data"
+		        contentWidth="70%"
+		        title="Select Schedule"
+		        selectionChange="selectChangeTableCreateSchedule"
+		        items="{teamCalendarsList>/value}"
+		        mode="MultiSelect">
+				<ColumnListItem>
+					<cells>
+						<Text text="{teamCalendarsList>U_Days}" />
+						<TimePicker
+			             editable="false"
+                          valueFormat="HH:mm"
+                          displayFormat="hh:mm a"
+                          	minutesStep="30"
+                          placeholder="Enter start time"
+                          value="{teamCalendarsList>U_StartTime}" />
+						<TimePicker
+					      editable="false"
+                          valueFormat="HH:mm"
+                          displayFormat="hh:mm a"
+                          	minutesStep="30"
+                          placeholder="Enter end time"
+                          value="{teamCalendarsList>U_EndTime}" />
+						<TimePicker id="memStartTime"
+                          valueFormat="HH:mm"
+                          displayFormat="hh:mm:a"
+                          change="handleChange"
+                          	minutesStep="30"
+                          value="{teamCalendarsList>StartTime}"
+                          placeholder="Enter start time"/>
+						<TimePicker id="memEndTime"
+                          valueFormat="HH:mm"
+                          displayFormat="hh:mm:a"
+                          	minutesStep="30"
+                          value="{teamCalendarsList>EndTime}"
+                          placeholder="Enter end time"/>
+					</cells>
+				</ColumnListItem>
+				<columns>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin">
+						<Text text="Days"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Team Start Time"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Team End Time"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="Start Time"/>
+					</Column>
+					<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+						<Text text="End Time"/>
+					</Column>
+				</columns>
+			</Table>
+		</VBox>
+		<buttons>
+			<Button id="btnDCreateSchedule" text="Save" enabled="false" press="handleCreateSchedule"/>
+			<Button text="Close" press="btnPressCreateCalTabDialogClose" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

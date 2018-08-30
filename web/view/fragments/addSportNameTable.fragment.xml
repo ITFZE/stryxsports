@@ -5,7 +5,7 @@
 	xmlns:core="sap.ui.core">
 	<TableSelectDialog id="addSportTableSelectDialog" title="Add Sport Name" search="handleSearch" confirm="onAddSportToCat"
 		cancel="handleClose" items="{SportsList>/value}" growing="true"  growingThreshold="10"  busyIndicatorDelay="250"
-				enableBusyIndicator="true" noDataText="{i18n>Noitems}">
+				enableBusyIndicator="true" noDataText="{i18n>Noitems}" class="sapUiSizeCompact">
 		<ColumnListItem>
 			<cells>
 				<ObjectIdentifier text=" {SportsList>Name}"/>

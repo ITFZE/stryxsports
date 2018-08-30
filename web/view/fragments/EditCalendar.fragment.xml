@@ -1,0 +1,44 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+	    id="editCalTabDialog"
+		noDataText="No Data"
+		title="Select Calendar"
+		multiSelect="true"
+		search="handleCalendarDaysSearch"
+		confirm="handleEditCalendarConfirm"
+		cancel=""
+		items="{path : '/mSelectCalendar'}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{Name}" />
+				<TimePicker
+                    valueFormat="HH:mm"
+                    displayFormat="HH:mm"
+                    change="handleChange"
+                    	minutesStep="30"
+                    placeholder="Enter start time"
+                    value="{StartTime}" />
+				<TimePicker
+                    valueFormat="HH:mm"
+                    displayFormat="HH:mm"
+                    change="handleChange"
+                    	minutesStep="30"
+                    placeholder="Enter end time"
+                    value="{EndTime}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Left">
+				<Text text="Days"/>
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+				<Text text="Start Time"/>
+			</Column>
+			<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+				<Text text="End Time"/>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

@@ -407,7 +407,7 @@ sap.ui.define([
 		onPressSaveAccountChild: function() {
 			var getEle = this.getVariablesParticipantDetails();
 			var letters = /^[\sa-zA-Z]+$/;
-			var rexMail = /^\w+[\w-+\.]*\@\w+([-\.]\w+)*\.[a-zA-Z]{2,}$/;
+			//var rexMail = /^\w+[\w-+\.]*\@\w+([-\.]\w+)*\.[a-zA-Z]{2,}$/;
 			var date = getEle.participantDOB.getValue();
 			var cEndDate = this.toDateFormat(date);
 
@@ -425,37 +425,18 @@ sap.ui.define([
 				getEle.wizardID.previousStep(getEle.StepOne);
 			} else if (!getEle.participantName.getValue().match(letters)) {
 				this.MessageToastShow("Please Enter Alphabets");
-			}
-			/* else if (date === "") {
+			} else if (date === "") {
 				getEle.participantName.setValueState("None");
 				getEle.participantDOB.setValueState("Error");
 				getEle.wizardID.previousStep(getEle.StepOne);
 
-			}*/
-			else if (givendate >= today) {
+			} else if (givendate >= today) {
 				getEle.participantDOB.setValueState("Error");
 				this.MessageToastShow("Please Enter Date less than the current Date");
-			}
-
-			/*	else if (getEle.lmIEmail.getValue() === "") {
-				getEle.participantDOB.setValueState("None");
-				getEle.lmIEmail.setValueState("Error");
-			} */
-			else if (!getEle.lmIEmail.getValue().match(rexMail)) {
-				this.MessageToastShow("Please Enter Valid Email Address");
-				//getEle.lmIEmail.setValueState("Error");
-				getEle.participantName.setValueState("None");
-				getEle.participantDOB.setValueState("None");
-				getEle.wizardID.previousStep(getEle.StepOne);
-			}
-			/* else if (getEle.lmIPhone.getValue() === "") {
-				getEle.lmIEmail.setValueState("None");
-				getEle.lmIPhone.setValueState("Error");
-				getEle.wizardID.previousStep(getEle.StepOne);
-			}*/
-			else if (getEle.participantNationality.getValue() === "Select The Nationality" || getEle.participantNationality.getValue() ===
+			} else if (getEle.participantNationality.getValue() === "Select The Nationality" || getEle.participantNationality.getValue() ===
 				"-No Country-" || getEle.participantNationality.getValue() === "") {
 				getEle.participantName.setValueState("None");
+				getEle.participantDOB.setValueState("None");
 				getEle.participantNationality.setValueState("Error");
 				getEle.wizardID.previousStep(getEle.StepOne);
 			} else if (getEle.participantHowdidUs.getValue() === "Select The How Did You Hear About Us" || getEle.participantHowdidUs.getValue() ===
@@ -471,7 +452,7 @@ sap.ui.define([
 				getEle.lmTypes.setValueState("None");
 				getEle.participantName.setValueState("None");
 				getEle.participantDOB.setValueState("None");
-				getEle.lmIEmail.setValueState("None");
+				//getEle.lmIEmail.setValueState("None");
 				getEle.lmIPhone.setValueState("None");
 				getEle.participantNationality.setValueState("None");
 				getEle.participantHowdidUs.setValueState("None");
@@ -617,6 +598,7 @@ sap.ui.define([
 
 			var getdobDate = memModel.oData.U_Dob;
 			var dobDate = this.toDateFormat(getdobDate);
+		
 			try {
 				memModel.setProperty("/U_Dob", dobDate);
 			} catch (err) {

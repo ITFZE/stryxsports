@@ -27,14 +27,14 @@
 						<DatePicker id="sLeadDOB" displayFormat="dd-MM-yyyy" placeholder="{i18n>leadPleaseEnteDate}" enabled="false" change="handleChange" type="Number"/>
 					</f:content>
 				</f:SimpleForm>
-				<FlexBox >
+				<FlexBox>
 					<items>
 						<Label text="" class="sapUiSmallMarginEnd">
 							<layoutData>
 								<FlexItemData growFactor="3" />
 							</layoutData>
 						</Label>
-						<Button width="100px" text="{i18n>leadSearch}"   press="onPressSearchLeads">
+						<Button width="100px" text="{i18n>leadSearch}" press="onPressSearchLeads">
 							<layoutData>
 								<FlexItemData growFactor="2" />
 							</layoutData>

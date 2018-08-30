@@ -39,7 +39,7 @@ sap.ui.define([
 			this.getRouter().initialize();
 			var pth = window.location.href;
 			var sPth = pth.split("index.html");
-		    window.CKEDITOR_BASEPATH = sPth[0] + "libs/";
+			window.CKEDITOR_BASEPATH = sPth[0] + "libs/";
 			var oModel = new JSONModel(jQuery.sap.getModulePath("com.ss.app.StryxSports.model", "/data.json"));
 
 			var i18nModel = new ResourceModel({
@@ -49,21 +49,19 @@ sap.ui.define([
 			// set the device model 
 			this.setModel(models.createDeviceModel(), "device");
 			// Check the mobile responsive 
-				var checkPhoneModel = new JSONModel();
+			var checkPhoneModel = new JSONModel();
 			if (sap.ui.Device.system.phone) {
 
 				checkPhoneModel.setProperty("/CheckPhone", true);
-			
+
 				//	console.log("onInit : UIComponent  in Phone");
 
 			} else {
 				checkPhoneModel.setProperty("/CheckPhone", false);
 				//console.log("onInit : UIComponent in PC");
 			}
-			this.setModel(checkPhoneModel,"checkPhoneModel");
+			this.setModel(checkPhoneModel, "checkPhoneModel");
 			this.setModel(oModel, "BaseModel");
-
-			
 			this.setModel(oModel);
 		},
 		getContentDensityClass: function() {

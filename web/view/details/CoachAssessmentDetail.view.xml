@@ -19,22 +19,12 @@
 					<Input value="{CreateAssessments>/U_ScheduleSTime} To {CreateAssessments>/U_ScheduleETime}" id="coachScheduleTime" enabled="true" editable="false"/>
 					<Label text="{i18n>caComments}"/>
 					<TextArea groowing="true" 
-					value="{ 
-                                  path : 'CreateAssessments>/U_Comments', 
-                                  type : 'sap.ui.model.type.String', 
-                                  constraints : { 
-                                      minLength : 1, 
-                                      maxLength : 1500 
-                                  }
-                              }" placeholder="{i18n>PleaseEnterComment}" id="coachAssessmentComments" growingMaxLines="7"/>
+					value="{CreateAssessments>/U_Comments}" placeholder="{i18n>PleaseEnterComment}" id="coachAssessmentComments" growingMaxLines="7"/>
 					<Label text="{i18n>caAssessmentFeesback}"/>
 					<Select id="coachFeedback" items="{AssessmentScoreList>/value}"
-					selectedKey="{
-					path: 'CreateAssessments>/U_AssessmentScore',
-					type: 'sap.ui.model.type.Integer', 
-					constraints : { minimum : 1 }}" change="selectedFeedback" >
+					selectedKey="{CreateAssessments>/U_AssessmentScore}" change="selectedFeedback" >
 						<items >
-							<core:Item text="{AssessmentScoreList>Name}" key="{AssessmentScoreList>Code}"/>
+							<core:Item text="{AssessmentScoreList>Name}" key="{AssessmentScoreList>Name}"/>
 						</items>
 					</Select>
 				</f:content>

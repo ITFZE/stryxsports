@@ -1,0 +1,36 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog title = "Information">
+		<f:SimpleForm 
+			   editable="true" 
+			   layout="ResponsiveGridLayout" 
+			   labelSpanXL="4" labelSpanL="4"
+			   labelSpanM="4"  labelSpanS="12" 
+			   adjustLabelSpan="false" 
+			   emptySpanXL="0" emptySpanL="0" 
+			   emptySpanM="0" emptySpanS="0"
+			   columnsXL="3" columnsL="2"
+			   columnsM="2" singleContainerFullSize="false">
+			<f:content>
+				<Label text="Start Date"/>
+				<Text editable="false" id="iaStartDate"/>
+				<Label text="Start Date"/>
+				<Text editable="false" id="iaEndDate"/>
+				<Label text="Start Time"/>
+				<Text editable="false" id="iaStartTime"/>
+				<Label text="End Time"/>
+				<Text editable="false" id="iaEndTime"/>
+			</f:content>
+		</f:SimpleForm>
+		<buttons>
+			<Button  text="Save" visible="false" press="onPressDialogSaveScheduleEA"/>
+			<Button  text="Cancel" press="onPressDialogCloseEA"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

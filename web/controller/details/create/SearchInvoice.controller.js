@@ -16,10 +16,6 @@ sap.ui.define([
 			var tableHide = this.getView().byId("searchInvoiceTable");
 			var getEle = oEvent.getParameters();
 			this._setViewLevel = getEle.config.viewLevel;
-
-			// 			$.when(that.fetchInvoiceDetails(that._getAccountID)).then(function() {
-			// 			});
-
 			if (!this._searchTable) {
 				tableHide.setVisible(true);
 			} else {
@@ -63,15 +59,6 @@ sap.ui.define([
 				getEle.searchType.setValueState("Error");
 				that.MessageToastShow("Please Select The Invoice Status Type");
 			}
-
-			/*if (getEle.memberName.getValue() === "") {
-				getEle.memberName.setValueState("Error");
-				that.MessageToastShow("Please Enter the Member Name");
-			} else {
-				this._filterName = getEle.memberName.getValue();
-				getEle.memberName.setValueState("None");
-			}*/
-
 		},
 
 		//Here View ID
@@ -83,22 +70,9 @@ sap.ui.define([
 			};
 			return searchInvoice;
 		},
-		// 		fetchOrdersDetails: function(getID) {
-		// 			var that = this;
-		// 			var filter = encodeURI(
-		// 				"$expand=Orders($select=DocEntry,Comments,DocNum,CardCode,CardName,DocCurrency,CreationDate,VatSum,DocTotalSys)||$filter=Orders/DocEntry eq U_SS_MEM_SERVICES/U_SalesOrderID and U_SS_MEM_SERVICES/U_CardCode eq '" +
-		// 				getID + "'||$select=U_Status,U_InvoiceID");
-		// 			//	var filter = encodeURI("$expand=Orders($select=DocEntry,Comments,DocNum,CardCode,CardName,DocCurrency,CreationDate,VatSum,DocTotalSys),Orders/DocumentLines($select=ItemCode,ItemDescription)||$filter=Orders/DocEntry eq U_SS_MEM_SERVICES/U_SalesOrderID and Orders/DocEntry eq Orders/DocumentLines/DocEntry and U_SS_MEM_SERVICES/U_CardCode eq'"+	getID + "'||$select=U_Status,U_InvoiceID");
-		// 			this.fetchOrderDetails(filter).done(function(response) {
-		// 				that.getView().setModel(response, "OrderDetails");
-		// 			}).fail(function(err) {
-		// 				that.showLoading(false);
-		// 				that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
-		// 			});
-		// 		},
 		fetchSearchInvoiceList: function(getID) {
-		    var filter;
-		    var getEle = this.getVariablesSearchInvoice();
+			var filter;
+			var getEle = this.getVariablesSearchInvoice();
 			var selceType = this.getView().byId("searchInvoiceType").getSelectedItem().getText();
 			var panelId = this.getView().byId("searchInvoiceTable");
 			var that = this;
@@ -114,36 +88,34 @@ sap.ui.define([
 			if (getID !== null && getID !== undefined) {
 				that.showLoading(true);
 				that.getView().setBusy(true);
-			
-				if(getEle.memberName.length > 0){
-				    filter = encodeURI("$expand=U_SS_MEM_SERVICES($select=U_CardCode),Orders($select=CardName,DocEntry)||$filter=U_SS_MEM_SERVICES/U_CardCode eq Orders/CardCode and contains(Orders/CardName,'+"+getEle.memberName.getValue()+"')||$apply=groupby((U_SS_MEM_SERVICES/U_CardCode,Orders/CardName,Orders/DocEntry))");
-				    
-				}else{
-				filter = encodeURI(
-				"$expand=Orders($select=DocEntry,DocNum,CardCode,CardName,DocTotal,DocCurrency)||$filter=Orders/DocEntry eq U_SS_MEM_SERVICES/U_SalesOrderID and U_SS_MEM_SERVICES/U_Status eq '" +
-				getID + "' ||$select=U_InvoiceID");
-				}
-				
-				this.fetchInvoices(filter).done(function(jMdl) {
-					var ordData = jMdl.getData();
-					for (var i = 0; i < ordData.value.length; i++) {
-						ordData.value[i].Orders.U_Status = getID;
-					}
-					jMdl.setData(ordData);
-					that.getView().setModel(jMdl, "InvoicesList");
-					that.getView().setBusy(false);
-					if (jMdl.oData.value.length > 0) {
-						that.MessageToastShow("Success");
-					} else {
-						// 		that.MessageToastShow("No Data");
-					}
-					that.getView().setBusy(false);
-					panelId.setVisible(true);
-				}).fail(function(err) {
-					that.getView().setBusy(false);
-					that.fetchErrorMessageOk("Error", "Error", err.toString());
-				});
+            var sMemberName = getEle.memberName.getValue().replace(/\s+/g, ' ');
+            var sTitleCaseMemName = this.titleCase(getEle.memberName.getValue().replace(/\s+/g, ' '));
+            //var filterMemName = "contains(Orders/CardName,'sMemberName')orcontains(Orders/CardName,'sTitleCaseMemName')" contains(Orders/CardName,'" + sMemberName + "') or contains(Orders/CardName,'" + sTitleCaseMemName + "');
+			if (sMemberName == "" || sTitleCaseMemName == "") {
+				filter = encodeURI("$expand=Orders($select=DocEntry,DocNum,CardCode,CardName,DocTotal,DocCurrency)||$filter=Orders/DocEntry eq U_SS_MEM_SERVICES/U_SalesOrderID and U_SS_MEM_SERVICES/U_Status eq '" + getID + "' ||$select=U_InvoiceID");
+			} else {
+				filter = encodeURI("$expand=Orders($select=DocEntry,DocNum,CardCode,CardName,DocTotal,DocCurrency)||$filter=(Orders/DocEntry eq U_SS_MEM_SERVICES/U_SalesOrderID and U_SS_MEM_SERVICES/U_Status eq '" + getID + "' and contains(Orders/CardName,'" + sMemberName + "') or Orders/DocEntry eq U_SS_MEM_SERVICES/U_SalesOrderID and U_SS_MEM_SERVICES/U_Status eq '" + getID + "' and contains(Orders/CardName,'" + sTitleCaseMemName + "'))||$select=U_InvoiceID");
 			}
+			this.fetchInvoices(filter).done(function(jMdl) {
+				var ordData = jMdl.getData();
+				for (var i = 0; i < ordData.value.length; i++) {
+					ordData.value[i].Orders.U_Status = getID;
+				}
+				jMdl.setData(ordData);
+				that.getView().setModel(jMdl, "InvoicesList");
+				that.getView().setBusy(false);
+				if (jMdl.oData.value.length > 0) {
+					that.MessageToastShow("Success");
+				} else {
+					// 		that.MessageToastShow("No Data");
+				}
+				that.getView().setBusy(false);
+				panelId.setVisible(true);
+			}).fail(function(err) {
+				that.getView().setBusy(false);
+				that.fetchErrorMessageOk("Error", "Error", err.toString());
+			});
+		}
 
 		},
 		getSelectedSearchType: function() {

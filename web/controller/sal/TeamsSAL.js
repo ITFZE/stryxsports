@@ -22,7 +22,7 @@ sap.ui.define([
 				},
 				crossDomain: true,
 				success: function(response) {
-					jModel.setData(response.body, "TeamsList");
+					jModel.setData(response.body);
 					//sap.ui.getCore().setModel(jModel, "TeamsList");
 					deferred.resolve(jModel);
 				},
@@ -56,7 +56,7 @@ sap.ui.define([
 			});
 			return deferred.promise();
 		},
-		fetchMember: function(filter) {
+		fetchMember: function(getCode) {
 			var deferred = $.Deferred();
 			var getThis = this;
 			var context = getThis.getContext();
@@ -65,9 +65,9 @@ sap.ui.define([
 			var setURL = encodeURI(
 				"$crossjoin(U_SS_MEM_SERVICES,U_SS_SERVICE_ITEM,BusinessPartners)");
 			var setCrossJoin = encodeURI(
-				"$expand=BusinessPartners($select=CardCode,CardName,Cellular,U_Dob,EmailAddress)||$apply=groupby((BusinessPartners/CardCode,BusinessPartners/CardName,BusinessPartners/U_Dob,BusinessPartners/Cellular,BusinessPartners/EmailAddress))||$filter=U_SS_MEM_SERVICES/Code eq U_SS_SERVICE_ITEM/U_MemSerCode and BusinessPartners/CardCode eq U_SS_MEM_SERVICES/U_CardCode and U_SS_SERVICE_ITEM/U_TeamID eq '" +
-				filter + "'");
-			var URL = context.baseURL + "?cmd=Get" + "&actionUri=" + setURL + "&sessionID=" + context.SessionData.sessionID +
+				"$expand=BusinessPartners($select=CardCode,CardName,Cellular,U_Dob,EmailAddress,Valid)||$apply=groupby((BusinessPartners/CardCode,BusinessPartners/CardName,BusinessPartners/U_Dob,BusinessPartners/Cellular,BusinessPartners/EmailAddress,BusinessPartners/Valid))||$filter=U_SS_MEM_SERVICES/Code eq U_SS_SERVICE_ITEM/U_MemSerCode and BusinessPartners/CardCode eq U_SS_MEM_SERVICES/U_CardCode and U_SS_SERVICE_ITEM/U_TeamID eq '" +
+				getCode + "'");
+			var URL = context.baseURL + "?cmd=Get&actionUri=" + setURL + "&sessionID=" + context.SessionData.sessionID +
 				"&routeID=" + context.SessionData.routeID + "&filter=" + setCrossJoin;
 			$.ajax({
 				type: 'GET',
@@ -151,7 +151,7 @@ sap.ui.define([
 			delete obj.Coaches;
 			//	tmp.setData(tmpObj);
 			//var jModel = getThis.getView().getModel("TeamsModel");
-			var URL = context.baseURL + "?cmd=Add&sstype=U_SS_TEAMS" + "&actionUri=U_SS_TEAMS" + "&sessionID=" +
+			var URL = context.baseURL + "?cmd=Add&sstype=U_SS_TEAMS&memType=CREATE_TEAM&actionUri=U_SS_TEAMS" + "&sessionID=" +
 				context.SessionData.sessionID + "&routeID=" + context.SessionData.routeID;
 			//var aData = jModel.getProperty("/teams_Data");
 			//aData = [];
@@ -160,11 +160,11 @@ sap.ui.define([
 				url: URL,
 				data: jModel.getJSON(),
 				crossDomain: true,
-				success: function() {
+				success: function(response) {
 					var jm = new JSONModel();
 					//var md = getThis.fetchTeams(getThis);
 					getThis.getView().setModel(jm, "createTeamModel");
-					deferred.resolve(0);
+					deferred.resolve(response.body);
 				},
 				error: function(xhr, status, error) {
 					deferred.reject(error);
@@ -184,6 +184,72 @@ sap.ui.define([
 				crossDomain: true,
 				success: function(response) {
 					deferred.resolve(response);
+				},
+				error: function(xhr, status, error) {
+					deferred.reject(error);
+				}
+			});
+			return deferred.promise();
+		},
+		createCalendarTeam: function(jModel) {
+			var deferred = $.Deferred();
+			var that = this;
+			var context = that.getContext();
+			var URL = context.baseURL + "?cmd=Add&sstype=U_SS_TEAMS&memType=CREATE_CALENDAR_TEAM&actionUri=U_SS_TEAM_CALENDAR" + "&sessionID=" +
+				context.SessionData.sessionID + "&routeID=" + context.SessionData.routeID;
+			$.ajax({
+				type: 'POST',
+				url: URL,
+				data: jModel.getJSON(),
+				crossDomain: true,
+				success: function() {
+					deferred.resolve(0);
+				},
+				error: function(xhr, status, error) {
+					deferred.reject(error);
+				}
+			});
+			return deferred.promise();
+		},
+		fetchTeamCalendarList: function(filter) {
+			var deferred = $.Deferred();
+			var getThis = this;
+			var jModel = new JSONModel();
+			var context = getThis.getContext();
+			var URL = context.baseURL + "?cmd=Get&actionUri=U_SS_TEAM_CALENDAR&sessionID=" +
+				context.SessionData.sessionID + "&routeID=" + context.SessionData.routeID +"&filter=" + filter;
+			$.ajax({
+				type: 'GET',
+				url: URL,
+				crossDomain: true,
+				success: function(response) {
+					jModel.setData(response.body);
+					deferred.resolve(jModel);
+				},
+				error: function(xhr, status, error) {
+					deferred.reject(error);
+				}
+			});
+			return deferred.promise();
+		},
+		viewTeamSchedules: function(Data) {
+			var deferred = $.Deferred();
+			var getThis = this;
+			var jModel = new JSONModel();
+			var context = getThis.getContext();
+			var obj ={
+			    "Name":Data
+			};
+			var URL = context.baseURL + "?cmd=Add&sstype=U_SS_TCAL_SCHEDULE&actionUri=U_SS_TEAM_CALENDAR&sessionID=" +
+				context.SessionData.sessionID + "&routeID=" + context.SessionData.routeID;
+			$.ajax({
+				type: 'POST',
+				url: URL,
+				data: JSON.stringify(obj),
+				crossDomain: true,
+				success: function(response) {
+					jModel.setData(response.body);
+					deferred.resolve(jModel);
 				},
 				error: function(xhr, status, error) {
 					deferred.reject(error);

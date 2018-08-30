@@ -44,16 +44,16 @@
 						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
 						<m:HBox>
 							<m:VBox>
-								<m:Label class="sapUiSmallMarginEnd"  text="{LeadsDetails>/ContactEmployees/2/Name}"/>
-								<m:Link class="sapUiSmallMarginEnd" text="{LeadsDetails>/ContactEmployees/2/MobilePhone}"/>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{LeadsDetails>/ContactEmployees/2/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/2/MobilePhone}"/>
 							</m:VBox>
 							<m:VBox>
-								<m:Label class="sapUiSmallMarginEnd"  text="{LeadsDetails>/ContactEmployees/0/Name}"/>
-								<m:Link class=" sapUiSmallMarginEnd" text="{LeadsDetails>/ContactEmployees/0/MobilePhone}"/>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{LeadsDetails>/ContactEmployees/0/Name}"/>
+								<m:Link class=" sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/0/MobilePhone}"/>
 							</m:VBox>
 							<m:VBox>
-								<m:Label class="sapUiSmallMarginEnd"  text="{LeadsDetails>/ContactEmployees/1/Name}"/>
-								<m:Link class="sapUiSmallMarginEnd" text="{LeadsDetails>/ContactEmployees/1/MobilePhone}"/>
+								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop"  text="{LeadsDetails>/ContactEmployees/1/Name}"/>
+								<m:Link class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{LeadsDetails>/ContactEmployees/1/MobilePhone}"/>
 							</m:VBox>
 						</m:HBox>
 					</l:VerticalLayout>

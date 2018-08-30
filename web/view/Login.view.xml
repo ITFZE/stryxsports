@@ -23,7 +23,7 @@
 					    id="inputPassword" 
 					    type="Password"
 					value="{LoginModel>/U_UserPwd}" placeholder="{i18n>PleaseEnterThePassword}" />
-					<core:Icon id="showHideIcon" class="size5" src="sap-icon://hide" useIconTooltip="false"  press="onPressShowHide"/>
+					<!--<core:Icon id="showHideIcon" class="size5" src="sap-icon://hide" useIconTooltip="false"  press="onPressShowHide"/>-->
 					<Button class="width-full btn-margin-top " id = "loginbutton" text="{i18n>Login}" press="onPressLogin"/>
 					<ToolbarSpacer/>
 					<!--<Link class="width-full c-align" emphasized="true" text="{i18n>Forgetpassword}" press="onPressForgetPassword"/>-->

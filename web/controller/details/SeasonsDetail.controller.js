@@ -97,9 +97,9 @@ sap.ui.define([
 							setThis.fetchMessageOk("Error", "Error", err.toString(), "Seasons");
 						});
 					} else {
-						var inpSport = setThis.byId("addSeasons");
-						inpSport.setValueState(sap.ui.core.ValueState.Error);
-						inpSport.setValueStateText("Entered season name already exists!");
+						var inpSeason = setThis.byId("addSeasons");
+						inpSeason.setValueState(sap.ui.core.ValueState.Error);
+						inpSeason.setValueStateText("Entered season name already exists!");
 						setThis.showLoading(false);
 						setThis.fetchMessageOk("Error", "Error", "Record already exixts", "Seasons");
 					}
