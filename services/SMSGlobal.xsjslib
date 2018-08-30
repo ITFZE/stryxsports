@@ -33,7 +33,11 @@ function getAuthHeaders() {
 function createRequest(path, method, body, sessionID, routeID) {
 	var auth = getAuthHeaders();
 	try {
+<<<<<<< HEAD
 		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "SMSGlobal");
+=======
+		var destination = $.net.http.readDestination("ITSFZE.Production.stryxsports.services.destination", "SMSGlobal");
+>>>>>>> 3a56059fc9e31843dcd333475533456ec5944c8a
 		var client = new $.net.http.Client();
 		var req = new $.web.WebRequest(method, path);
 		var authStr = "MAC id=\"" + auth.id + "\",ts=\"" + auth.ts + "\",nonce=\"" + auth.nonce + "\",mac=\"" + auth.mac +"\"";

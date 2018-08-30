@@ -3,7 +3,7 @@ var generalResp;
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("ITSFZE.Development.stryxsports.services.destination", "Connection");
+		var destination = $.net.http.readDestination("ITSFZE.Production.stryxsports.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		var header = "";
 		if (method === $.net.http.PATCH) {

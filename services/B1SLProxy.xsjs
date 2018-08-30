@@ -1,4 +1,4 @@
-var libPath = "/ITSFZE/Development/stryxsports/services/";
+var libPath = "/ITSFZE/Production/stryxsports/services/";
 var cmnLib = $.import(libPath + "CommonLib.xsjslib");
 var B1LIB = $.import(libPath + "B1SLLib.xsjslib");
 var en = $.import(libPath + "SS_Events.xsjslib");
@@ -14,6 +14,9 @@ var tCalSchLib = $.import(libPath + "SS_TCalScheduleLib.xsjslib");
 var mCalSchLib = $.import(libPath + "SS_MCalScheduleLib.xsjslib");
 var viewCalLib = $.import(libPath + "SS_ViewCalendar.xsjslib");
 
+/*var emailNotifyLib = $.import(libPath + "EmailNotification.xsjslib");
+var smsGlobalLib = $.import(libPath + "SMSGlobal.xsjslib");
+*/
 function callServiceLayer(path, method, body, sessionID, routeID) {
 	//var ssLib = $.stryxsports.client.services.B1SLLib;
 	var response = cmnLib.createRequest(path, method, body, sessionID, routeID);
