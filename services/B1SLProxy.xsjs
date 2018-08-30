@@ -1,12 +1,4 @@
-/*$.import("stryxsports.client.services.B1SLLib", "b1Lib");
-$.import("stryxsports.client.services.SS_Coach", "coachLib");
-$.import("stryxsports.client.services.SS_TeamLib", "teamLib");
-$.import("stryxsports.client.services.SS_MemberLib", "memberLib");
-$.import("stryxsports.client.services.SS_LeadCreate", "leadCreate");
-$.import("stryxsports.client.services.SS_CreateActivity", "activityCreate");
-$.import("stryxsports.client.services.EmailNotification", "emailNotifyLib");
-$.import("stryxsports.client.services.SMSGlobal", "SMSGlobalLib");*/
-var libPath = "/stryx/services/";
+var libPath = "/ITSFZE/Production/stryxsports/services/";
 var cmnLib = $.import(libPath + "CommonLib.xsjslib");
 var B1LIB = $.import(libPath + "B1SLLib.xsjslib");
 var coachLib = $.import(libPath + "SS_Coach.xsjslib");
@@ -14,10 +6,9 @@ var tm = $.import(libPath + "SS_TeamLib.xsjslib");
 var mem = $.import(libPath + "SS_MemberLib.xsjslib");
 var lc = $.import(libPath + "SS_LeadCreate.xsjslib");
 var ca = $.import(libPath + "SS_CreateActivity.xsjslib");
-var emailNotifyLib = $.import(libPath + "EmailNotification.xsjslib");
+/*var emailNotifyLib = $.import(libPath + "EmailNotification.xsjslib");
 var smsGlobalLib = $.import(libPath + "SMSGlobal.xsjslib");
-
-
+*/
 function callServiceLayer(path, method, body, sessionID, routeID) {
 	//var ssLib = $.stryxsports.client.services.B1SLLib;
 	var response = cmnLib.createRequest(path, method, body, sessionID, routeID);
