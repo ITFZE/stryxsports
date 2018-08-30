@@ -13,7 +13,7 @@ sap.ui.define([
 		initContext: function() {
 
 			var config = {
-				baseURL: '/stryx_staging/services/B1SLProxy.xsjs',
+				baseURL: '/ITSFZE/Production/stryxsports/services/B1SLProxy.xsjs',
 				User: {},
 				SessionData: {
 					sessionID: '',

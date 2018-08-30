@@ -1,4 +1,4 @@
-var libPath = "/stryx_staging/services/";
+var libPath = "/ITSFZE/Production/stryxsports/services/";
 var cmnLib = $.import(libPath + "CommonLib.xsjslib");
 var B1LIB = $.import(libPath + "B1SLLib.xsjslib");
 var coachLib = $.import(libPath + "SS_Coach.xsjslib");
