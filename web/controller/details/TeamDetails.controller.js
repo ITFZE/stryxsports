@@ -5,8 +5,8 @@ sap.ui.define([
 	"com/ss/app/StryxSports/controller/sal/SportCategorySAL",
 	"com/ss/app/StryxSports/controller/sal/CoachsSAL",
 	"sap/ui/model/json/JSONModel",
-		"sap/ui/model/Filter",
-		 "sap/ui/core/ValueState",
+	"sap/ui/model/Filter",
+	"sap/ui/core/ValueState",
     "com/ss/app/StryxSports/controller/util/Validator"
 ], function(TeamsSAL, LocationsSAL, SeasonSAL, SportCategorySAL, CoachsSAL, JSONModel, Filter, ValueState, Validator) {
 	"use strict";
@@ -308,7 +308,7 @@ sap.ui.define([
 		},
 
 		destroyDialog: function() {
-			/* 			var id = sap.ui.getCore().byId("addCoachTableTeams");
+			/* var id = sap.ui.getCore().byId("addCoachTableTeams");
 			if (id !== undefined) {
 				id.destroy();
 			}*/
@@ -416,11 +416,11 @@ sap.ui.define([
 								getEle.addTeamLocation.setValue("Select Location");
 								getEle.addStartEndAndDate.setValue("");
 								// Email Notification code
-								that.sendNotificationEmail().done(function(res) {
+/*								that.sendNotificationEmail().done(function(res) {
 									var body = res.body;
 								}).fail(function(err) {
 									console.log(err.status + " " + err.statusText);
-								});
+								});*/
 							}).fail(function(err) {
 								that.showLoading(false);
 								that.fetchMessageOk("Error", "Error", err.toString(), "Teams");
@@ -442,7 +442,7 @@ sap.ui.define([
 		},
 
 		handleCloseTableDialog: function() {
-			// 			this.destroyDialog();
+		// this.destroyDialog();
 		},
 
 		onPressAddCancel: function() {
@@ -499,26 +499,6 @@ sap.ui.define([
 			var oFilter = new Filter("FirstName", sap.ui.model.FilterOperator.Contains, sValue);
 			var oBinding = oEvent.getSource().getBinding("items");
 			oBinding.filter([oFilter]);
-		},
-		// Dialog for team calendar
-/*		handleCreateCalendarPress: function(evt) {
-			var that = this;
-			if (!that._oDialog) {
-				that._oDialog = sap.ui.xmlfragment("com.ss.app.StryxSports.view.fragments.dialogs.TeamCalendar", that);
-				that._oDialog.setModel(that.getView().getModel());
-			}
-
-			var tabCalendar = that.getView().byId("tabTeamCalendar");
-			var oDRS = that.getView().byId("addStartEndAndDate");
-			var teamModel = that.getView().getModel("createTeamModel");
-
-			// toggle compact style
-			jQuery.sap.syncStyleClass("sapUiSizeCompact", that.getView(), that._oDialog);
-			that._oDialog.open();
-		},
-		handleTimeCalendarClose: function(evt) {
-			var that = this;
-			that._oDialog.close();
-		}*/
+		}
 	});
 });

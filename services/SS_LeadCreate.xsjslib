@@ -77,7 +77,7 @@ function mapJSON(source, dest) {
 
 function createRequest(path, method, body, sessionID, routeID) {
 	try {
-		var destination = $.net.http.readDestination("stryx.services.destination", "Connection");
+		var destination = $.net.http.readDestination("stryx_staging.services.destination", "Connection");
 		var client = new $.net.http.Client();
 		var header = "";
 		if (method === $.net.http.PATCH) {

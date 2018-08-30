@@ -13,7 +13,7 @@ sap.ui.define([
 		initContext: function() {
 
 			var config = {
-				baseURL: '/stryx/services/B1SLProxy.xsjs',
+				baseURL: '/stryx_staging/services/B1SLProxy.xsjs',
 				User: {},
 				SessionData: {
 					sessionID: '',
@@ -811,6 +811,13 @@ sap.ui.define([
 				}
 			});
 			return deferred.promise();*/
+		},
+			setRemoveCharacter:function(getData){
+		    if(getData !== undefined &&getData !== "" && getData !== null ){
+		    getData = getData.replace(/[+]/g , '');
+            getData = getData.replace(/[A-z]/g , '');
+		    }
+		    return getData;
 		}
 	});
 });

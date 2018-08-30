@@ -44,7 +44,7 @@
 								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/2/Name}"/>
 								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{mLeadDetails>/ContactEmployees/2/MobilePhone}"/>
 							</m:VBox>
-								<m:VBox>
+							<m:VBox>
 								<m:Label class="sapUiSmallMarginEnd sapUiTinyMarginTop" text="{mLeadDetails>/ContactEmployees/0/Name}"/>
 								<m:Link class="sapUiTinyMarginTop sapUiMediumMarginEnd" text="{mLeadDetails>/ContactEmployees/0/MobilePhone}"/>
 							</m:VBox>
@@ -61,6 +61,18 @@
 							<ObjectPageSubSection>
 								<blocks >
 									<m:VBox>
+										<m:FlexBox 
+										height="50px"	
+										alignItems="Start"
+										justifyContent="Start">
+											<m:items>
+												<m:Label class="sapUiTinyMarginTop" text="Posting Date :" width="9em"/>
+												<!-- <m:Input  width="11em" textDirection="RTL" editable="false" enabled="true" value="{InvoiceDetailsModel>/DocDate}"/> -->
+												<m:DatePicker
+												id="DatePickerPostingDate"
+											  displayFormat="dd-MM-yyyy"/>
+											</m:items>
+										</m:FlexBox>
 										<m:Table class="width-full bg-color-table" items="{InvoiceDetailsModel>/DocumentLines}">
 											<m:columns>
 												<m:Column width="12em">

@@ -35,12 +35,6 @@
 					</l:VerticalLayout>
 					<l:VerticalLayout></l:VerticalLayout>
 					<l:VerticalLayout></l:VerticalLayout>
-					<l:VerticalLayout></l:VerticalLayout>
-					<l:VerticalLayout></l:VerticalLayout>
-					<l:VerticalLayout></l:VerticalLayout>
-					<l:VerticalLayout></l:VerticalLayout>
-					<l:VerticalLayout></l:VerticalLayout>
-					<l:VerticalLayout></l:VerticalLayout>
 					<l:VerticalLayout id="viewAccountEmgPanel" visible="true">
 						<m:Label id="emergencyContailLabel" class="font-size-Color_Account-page" visible="false" text="Emergency Contact"/>
 						<m:HBox>

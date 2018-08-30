@@ -22,6 +22,7 @@ sap.ui.define([
 			this.byId("CreditCardNo").setValue(9999);
 			this.byId("vCardValid").setDateValue(new Date(2099, 11));
 			this.reqBody = {};
+				this._dpPostingDate = this.byId("DatePickerPostingDate");
 		},
 		_onRouteMatched: function(oEvt) {
 			var filter = "";
@@ -29,6 +30,13 @@ sap.ui.define([
 			this._getInvoiceID = oEvt.getParameter("arguments").InvoiceID;
 			this._getPageID = oEvt.getParameter("arguments").PageID;
 			that.showLoading(true);
+			
+				var getToday = new Date();
+			var docDate = this.toDateFormat(getToday);
+			this._dpPostingDate.setValue(docDate);
+			this._dpPostingDate.setValue(docDate);
+			this._dpPostingDate.setMaxDate(getToday);
+			
 			this.createMakePaymentModel();
 			this.fetchCreateInvoiceDetails(this._getInvoiceID, filter).done(function(jsMdl) {
 				var ordData = jsMdl.getData();
@@ -212,20 +220,26 @@ sap.ui.define([
 
 		},
 		createMakePaymentModel: function() {
+		    var getDocDate = this.byId("DatePickerPostingDate").getValue();
+			var docDate = this.toDateFormat(getDocDate);
+			
 			var chequeMD = new JSONModel();
 			chequeMD.setProperty('/CardCode');
+			chequeMD.setProperty('/DocDate',docDate);
 			chequeMD.setProperty('/PaymentInvoices', []);
 			chequeMD.setProperty('/PaymentCreditCards', []);
 			this.getView().setModel(chequeMD, "createOnlineModel");
 
 			var checks = new JSONModel();
 			checks.setProperty('/CardCode');
+			checks.setProperty('/DocDate',docDate);
 			checks.setProperty('/PaymentChecks', []);
 			checks.setProperty('/PaymentInvoices', []);
 			this.getView().setModel(checks, "createChecksModel");
 
 			var cashs = new JSONModel();
 			cashs.setProperty('/CardCode');
+			cashs.setProperty('/DocDate',docDate);
 			cashs.setProperty('/CashAccount');
 			cashs.setProperty('/PaymentInvoices', []);
 			cashs.setProperty('/CashSum');
@@ -238,6 +252,8 @@ sap.ui.define([
 		},
 		payment: function() {
 			var that = this;
+		    var getDocDate = this.byId("DatePickerPostingDate").getValue();
+			var docDate = this.toDateFormat(getDocDate);
 			var getMDLPayTypes = this.getView().getModel("PayTypesKey");
 			var getPayTypesData = getMDLPayTypes.getData();
 			var getMDLInvoiceDetail = this.getView().getModel("InvoiceDetailsModel");
@@ -245,12 +261,12 @@ sap.ui.define([
 			var payTypesKey = that.byId("btnPayType").getSelectedKey();
 			var getChequeValue = that.getView().byId("txtChequeNo").getValue();
 			var getAccountNumValue = that.getView().byId("inputAccounttNum").getValue();
-			var getChqueTotalAmount = that.getView().byId("chequeAmt").getValue();
-			var getCashValue = that.getView().byId("cashAmount").getValue();
+			var getChqueTotalAmount = that.getView().byId("chequeAmt").getValue().replace(/\,/g,'');
+			var getCashValue = that.getView().byId("cashAmount").getValue().replace(/\,/g,'');
 			var getSelcetValue = that.getView().byId("nPCreditCardType");
 			var getCreditCardNumber = that.getView().byId("CreditCardNo").getValue();
 			var getCardValidValue = that.getView().byId("vCardValid").getValue();
-			var getTotalAmtValue = that.getView().byId("onlineAmt").getValue();
+			var getTotalAmtValue = that.getView().byId("onlineAmt").getValue().replace(/\,/g,'');
 			var voucherNo = that.getView().byId("voucherNo").getValue();
 			var balAmount = that.getView().byId("balAmt").getValue();
 			let balance = balAmount.split(" ");
@@ -288,7 +304,9 @@ sap.ui.define([
 					CheckSum: chequeAmt
 				};
 				getChecksDetail.CardCode = getInvoiceDetailData.CardCode;
+				getChecksDetail.DocDate = docDate;
 				getChecksDetail.PaymentChecks.push(getOBJ);
+				
 				var getOBJs = {
 					AppliedSys: chequeAmt,
 					DocEntry: parseInt(this._getInvoiceID),
@@ -341,6 +359,7 @@ sap.ui.define([
 				};
 				that.showLoading(true);
 				getCashDetail.PaymentInvoices.push(getOBJChash);
+				getCashDetail.DocDate = docDate;
 				// API CALL TO MAKE PAYMENT
 				that.makePayment(getCashDetail).done(function(resp) {
 					that.showLoading(false);
@@ -422,7 +441,7 @@ sap.ui.define([
 				that.showLoading(true);
 				getOnlineDetail.PaymentCreditCards.push(getOBJCOnlineCC);
 				getOnlineDetail.PaymentInvoices.push(getOBJCOnlineIN);
-
+				getOnlineDetail.DocDate = docDate;
 				// API CALL TO MAKE PAYMENT
 				that.makePayment(getOnlineDetail).done(function(resp) {
 					that.showLoading(false);

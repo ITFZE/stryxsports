@@ -38,7 +38,7 @@
 									<Label text="{i18n>leadEmail}"/>
 									<Input id="lmcInputEmail" type="Email" value="{createMembershipModel>/EmailAddress}"  placeholder="{i18n>leadPleaseEnterEmail}"/>
 									<Label id="lmcPhone" text="{i18n>leadPhone/Mobile}"/>
-									<Input id="lmcEmergencyMobile"  type="Number" value="{createMembershipModel>/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+									<Input id="lmcEmergencyMobile"  type="Number"  value="{ path: 'createMembershipModel>/Cellular'}"    placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
 									<core:Title/>
 									<Label text="{i18n>leadNationality}"/>
 									<ComboBox 
@@ -175,7 +175,7 @@
 												<Label text="{i18n>leadName}"/>
 												<Input id="ParentFirstName" value="{createMembershipModel>/Father/CardName}" placeholder="{i18n>leadPleaseEnterFirstName}"/>
 												<Label text="{i18n>leadPhone/Mobile}"/>
-												<Input id="ParentMobile" type="number" value="{createMembershipModel>/Father/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+												<Input id="ParentMobile" type="number"  value="{ path: 'createMembershipModel>/Father/Cellular'}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
 												<Label text="{i18n>leadEmail}"/>
 												<Input id="ParentEmail" value="{createMembershipModel>/Father/EmailAddress}"  placeholder="{i18n>leadPleaseEnterEmail}"/>
 												<core:Title/>
@@ -213,7 +213,7 @@
 												<Label text="{i18n>leadName}"/>
 												<Input id="motherFirstName" value="{createMembershipModel>/Mother/CardName}" placeholder="{i18n>leadPleaseEnterFirstName}"/>
 												<Label text="{i18n>leadPhone/Mobile}"/>
-												<Input id="motherPhone" type="number" value="{createMembershipModel>/Mother/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+												<Input id="motherPhone" type="number"  value="{ path: 'createMembershipModel>/Mother/Cellular'}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
 												<Label text="{i18n>leadEmail}"/>
 												<Input id="motherEmail" value="{createMembershipModel>/Mother/EmailAddress}" placeholder="{i18n>leadPleaseEnterEmail}"/>
 												<core:Title/>
@@ -251,7 +251,7 @@
 												<Label text="{i18n>leadName}"/>
 												<Input id="guardianFirstName" value="{createMembershipModel>/Guardian/CardName}" placeholder="{i18n>leadPleaseEnterFirstName}"/>
 												<Label text="{i18n>leadPhone/Mobile}"/>
-												<Input id="guardianPhone" type="number" value="{createMembershipModel>/Guardian/Cellular}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
+												<Input id="guardianPhone" type="number"  value="{ path: 'createMembershipModel>/Guardian/Cellular'}"  placeholder="{i18n>leadPleaseEnterMobileNumber}"/>
 												<Label text="{i18n>leadEmail}"/>
 												<Input  id="guardianEmail" value="{createMembershipModel>/Guardian/EmailAddress}" placeholder="{i18n>leadPleaseEnterEmail}"/>
 												<core:Title/>

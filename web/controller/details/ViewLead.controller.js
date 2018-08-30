@@ -39,6 +39,7 @@ sap.ui.define([
 				that.getView().setModel(mLeadDetails, "mLeadDetails");
 				that.updateStatusPersonalInfo();
 				ele.setBusy(false);
+				that.setRemoveMobile();
 				headerLoading.setBusy(false);
 			}).fail(function(err) {
 				ele.setBusy(false);
@@ -232,6 +233,42 @@ sap.ui.define([
 					this.getOwnerComponent().getRouter().navTo("DashBoard");
 					break;
 			}
+		},
+		setRemoveMobile: function() {
+			var that = this;
+			var memModel = that.getView().getModel("mLeadDetails");
+			var mData = memModel.getData();
+
+			if (mData.Cellular !== "" && mData.Cellular !== null && mData.CardCode !== undefined) {
+				var getMemCellular = this.setRemoveCharacter(mData.Cellular);
+				mData.Cellular = getMemCellular;
+
+			}
+			if (mData.Father.Cellular !== "" && mData.Father.Cellular !== null && mData.Father.Cellular !== undefined) {
+				var getMemmFatherCellular = this.setRemoveCharacter(mData.Father.Cellular);
+				mData.Father.Cellular = getMemmFatherCellular;
+
+			}
+			if (mData.Mother.Cellular !== "" && mData.Mother.Cellular !== null && mData.Mother.Cellular !== undefined) {
+				var getMemMotherCellular = this.setRemoveCharacter(mData.Mother.Cellular);
+				mData.Mother.Cellular = getMemMotherCellular;
+
+			}
+			if (mData.Guardian.Cellular !== "" && mData.Guardian.Cellular !== null && mData.Guardian.CardCode !== undefined) {
+				var getMemGuardianCellular = this.setRemoveCharacter(mData.Guardian.Cellular);
+				mData.Guardian.Cellular = getMemGuardianCellular;
+
+			}
+
+			if (mData.U_School === "-1") {
+				mData.U_School = "";
+			}
+			if (mData.U_Nationality === "-1") {
+				mData.U_Nationality = "";
+			}
+			memModel.setData(mData);
+			memModel.refresh(true);
+
 		}
 	});
 

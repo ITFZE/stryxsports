@@ -1,5 +1,5 @@
 var baseURL = "/b1s/v1";
-var libPath = "/ITSFZE/Production/stryxsports/services/";
+var libPath = "/stryx_staging/services/";
 var cmnLib = $.import(libPath + "CommonLib.xsjslib");
 
 function getNewCode(path, method, body, sessionID, routeID) {

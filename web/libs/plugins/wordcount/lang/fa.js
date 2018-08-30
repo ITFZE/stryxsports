@@ -1,4 +1,4 @@
-﻿/*
+/*
 Its The Persian (Farsi) Language Translate For Iranian By "Mohsen Esmaili"
 */
 CKEDITOR.plugins.setLang('wordcount', 'fa', {

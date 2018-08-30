@@ -315,13 +315,6 @@ sap.ui.define([
 						that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
 					});
 					break;
-				case 'CreateEvnet':
-					that.getOwnerComponent().getRouter()
-						.navTo("CreateEvnet", {
-							PageID: 2
-						});
-					break;
-
 				default:
 					this.getRouter().navTo(item.getKey());
 					break;

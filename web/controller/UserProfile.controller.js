@@ -14,10 +14,6 @@ sap.ui.define([
 				var oRouter = this.getRouter();
 				oRouter.getRoute("UserProfile").attachMatched(this._onRouteMatched, this);
 				this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
-				var contexts = this.getContext();
-				var mUserProfile = new JSONModel();
-				mUserProfile.setData(contexts.User);
-				this.getView().setModel(mUserProfile, "mUserProfile");
 				sap.ui.getCore().attachValidationError(function(oEvent) {
 					oEvent.getParameter("element").setValueState(ValueState.Error);
 				});
@@ -27,6 +23,10 @@ sap.ui.define([
 			},
 			_onRouteMatched: function(oEvent) {
 				this._ID = oEvent.getParameter("arguments").PageID;
+				var contexts = this.getContext();
+				var mUserProfile = new JSONModel();
+				mUserProfile.setData(contexts.User);
+				this.getView().setModel(mUserProfile, "mUserProfile");
 			},
 			onPressSaveUserProfile: function() {
 				var that = this;

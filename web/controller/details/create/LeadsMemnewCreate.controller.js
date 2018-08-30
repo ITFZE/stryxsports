@@ -42,6 +42,7 @@ sap.ui.define([
 			$.when(that.fetchMemberById(memMD, getCardCode)).then(function(objs) {
 				that.getView().setModel(objs, "createMembershipModel");
 				that.updateStatus();
+				that.setRemoveMobile();
 				that.showLoading(false);
 				$.when(that.fetchSportsDetails(getCardCode)).then(function() {
 					$.when(that.fetchLeadLocationDetails(getCardCode)).then(function() {
@@ -476,16 +477,16 @@ sap.ui.define([
 				getEle.lmcNameDOB.setValueState("None");
 				getEle.lmcInputEmail.setValueState("Error");
 			} */
-			else if (!getEle.lmcInputEmail.getValue().match(rexMail)) {
+			/*	else if (!getEle.lmcInputEmail.getValue().match(rexMail)) {
 				this.MessageToastShow("Please Enter Valid Email Address");
 				getEle.lmcName.setValueState("None");
 
-			}
+			}*/
 			/*else if (getEle.lmcEmergencyMobile.getValue() === "") {
 				getEle.lmcInputEmail.setValueState("None");
 				getEle.lmcEmergencyMobile.setValueState("Error");
 			}*/
-			else if (getEle.lmcNationality.getValue() === "" || getEle.lmcNationality.getValue() === "Select The Nationality" || getEle.lmcNationality
+			/*else if (getEle.lmcNationality.getValue() === "" || getEle.lmcNationality.getValue() === "Select The Nationality" || getEle.lmcNationality
 				.getValue() === "-No Country-") {
 
 				getEle.lmcEmergencyMobile.setValueState("None");
@@ -497,7 +498,8 @@ sap.ui.define([
 			} else if (getEle.lmcSchoolName.getValue() === "Select The School" || getEle.lmcSchoolName.getValue() === "") {
 				getEle.lncHowdid.setValueState("None");
 				getEle.lmcSchoolName.setValueState("Error");
-			} else {
+			}*/
+			else {
 				getEle.lmcSchoolName.setValueState("None");
 				getEle.lmTypes.setValueState("None");
 				getEle.lmTypes.setValueState("None");
@@ -537,13 +539,15 @@ sap.ui.define([
 			} else if (!getEle.lmcName.getValue().match(letters)) {
 				getEle.lmTypes.setValueState("None");
 				this.MessageToastShow("Please Enter Alphabets");
-			} else if (date === "") {
+			}
+			/*else if (date === "") {
 				getEle.lmcName.setValueState("None");
 				getEle.lmcNameDOB.setValueState("Error");
 			} else if (givendate >= today) {
 				getEle.lmcName.setValueState("None");
 				this.MessageToastShow("Please Enter Date less than the current Date");
-			} else if (getEle.lmcInputEmail.getValue() === "") {
+			}*/
+			else if (getEle.lmcInputEmail.getValue() === "") {
 				getEle.lmcNameDOB.setValueState("None");
 				getEle.lmcInputEmail.setValueState("Error");
 			} else if (!getEle.lmcInputEmail.getValue().match(rexMail)) {
@@ -552,7 +556,8 @@ sap.ui.define([
 			} else if (getEle.lmcEmergencyMobile.getValue() === "") {
 				getEle.lmcInputEmail.setValueState("None");
 				getEle.lmcEmergencyMobile.setValueState("Error");
-			} else if (getEle.lmcNationality.getValue() === "" || getEle.lmcNationality.getValue() === "Select The Nationality" || getEle.lmcNationality
+			}
+			/*else if (getEle.lmcNationality.getValue() === "" || getEle.lmcNationality.getValue() === "Select The Nationality" || getEle.lmcNationality
 				.getValue() === "-No Country-") {
 				getEle.lmcEmergencyMobile.setValueState("None");
 				getEle.lmcNationality.setValueState("Error");
@@ -562,7 +567,8 @@ sap.ui.define([
 			} else if (getEle.lmcSchoolName.getValue() === "Select The School" || getEle.lmcSchoolName.getValue() === "") {
 				getEle.lncHowdid.setValueState("None");
 				getEle.lmcSchoolName.setValueState("Error");
-			} else {
+			}*/
+			else {
 				getEle.lmcSchoolName.setValueState("None");
 				getEle.lmTypes.setValueState("None");
 				getEle.lmTypes.setValueState("None");
@@ -589,14 +595,17 @@ sap.ui.define([
 			var memModel = this.getView().getModel("createMembershipModel");
 			var mData = memModel.getData();
 			var getdobDate = mData.U_Dob;
-			mData.CardType = "cLid";
-			var dobDate = this.toDateFormat(getdobDate);
-			try {
-				memModel.setProperty("/U_Dob", dobDate);
-			} catch (err) {
-				that.showLoading(false);
-				that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
+			if (getdobDate !== "" && getdobDate !== null && getdobDate !== undefined) {
+				mData.CardType = "cLid";
+				var dobDate = this.toDateFormat(getdobDate);
+				try {
+					memModel.setProperty("/U_Dob", dobDate);
+				} catch (err) {
+					that.showLoading(false);
+					that.fetchMessageOk("Error", "Error", err.toString(), "DashBoard");
+				}
 			}
+
 			memModel.refresh(true);
 			that.showLoading(true);
 
@@ -1223,6 +1232,34 @@ sap.ui.define([
 		setValueHowDidHearAbout: function() {
 			var getEle = this.leadsVariables();
 			getEle.lncHowdid.setValue("Select The How Did You Hear About Us");
+		},
+		setRemoveMobile: function() {
+			var that = this;
+			var memModel = that.getView().getModel("createMembershipModel");
+			var mData = memModel.getData();
+
+			if (mData.Cellular !== "" && mData.Cellular !== null && mData.CardCode !== undefined) {
+				var getMemCellular = this.setRemoveCharacter(mData.Cellular);
+				mData.Cellular = getMemCellular;
+
+			}
+			if (mData.Father.Cellular !== "" && mData.Father.Cellular !== null && mData.Father.Cellular !== undefined) {
+				var getMemmFatherCellular = this.setRemoveCharacter(mData.Father.Cellular);
+				mData.Father.Cellular = getMemmFatherCellular;
+
+			}
+			if (mData.Mother.Cellular !== "" && mData.Mother.Cellular !== null && mData.Mother.Cellular !== undefined) {
+				var getMemMotherCellular = this.setRemoveCharacter(mData.Mother.Cellular);
+				mData.Mother.Cellular = getMemMotherCellular;
+
+			}
+			if (mData.Guardian.Cellular !== "" && mData.Guardian.Cellular !== null && mData.Guardian.CardCode !== undefined) {
+				var getMemGuardianCellular = this.setRemoveCharacter(mData.Guardian.Cellular);
+				mData.Guardian.Cellular = getMemGuardianCellular;
+
+			}
+			memModel.setData(mData);
+			memModel.refresh(true);
 		}
 
 	});

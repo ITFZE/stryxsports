@@ -49,18 +49,6 @@
 				"key": "AssessmentFeedbackDetail"
 		}]
 	},
-	
-	{
-			"title": "Events",
-			"icon": "sap-icon://appointment",
-			"expanded": false,
-			"key": "Events",
-			"items": [{
-				"title": "Create Evnet",
-				"key": "CreateEvnet"
-		}]
-	
-	},
 		{
 			"title": "Templates",
 			"icon": "sap-icon://database",
@@ -640,5 +628,26 @@
 			"ST_Txt": "Travel",
 			"key": 3
         }
-    ]
+    ],
+	"SubscriptionType": [
+		{
+			"text": "Session",
+			"key": "1"
+        }, {
+			"text": "Fixed",
+			"key": "2"
+        }],
+	"DurationType": [{
+		"text": "Hour",
+		"key": "1"
+    }, {
+		"text": "Day",
+		"key": "2"
+    }, {
+		"text": "Week",
+		"key": "3"
+    }, {
+		"text": "Month",
+		"key": "4"
+    }]
 }

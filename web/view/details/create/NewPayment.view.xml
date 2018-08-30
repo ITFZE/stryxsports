@@ -64,6 +64,17 @@
 							<ObjectPageSubSection title="Invoice Details" >
 								<blocks >
 									<l:VerticalLayout id="containerLayout" width="100%"  >
+										<m:FlexBox 
+											height="50px"	
+											alignItems="Start"
+											justifyContent="Start">
+											<m:items>
+												<m:Label class="sapUiTinyMarginTop" text="Posting Date :" width="9em"/>
+												<m:DatePicker
+												id="DatePickerPostingDate"
+											  displayFormat="dd-MM-yyyy"/>
+											</m:items>
+										</m:FlexBox>
 										<m:VBox>
 											<m:Table class="width-full bg-color-table" items="{InvoiceDetailsModel>/DocumentLines}">
 												<m:columns>

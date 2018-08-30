@@ -5,8 +5,8 @@ sap.ui.define([
 	"com/ss/app/StryxSports/controller/sal/SportCategorySAL",
 	"com/ss/app/StryxSports/controller/sal/CoachsSAL",
 	"sap/ui/model/json/JSONModel",
-		"sap/ui/model/Filter",
-	 "sap/ui/core/ValueState",
+	"sap/ui/model/Filter",
+	"sap/ui/core/ValueState",
     "com/ss/app/StryxSports/controller/util/Validator"
 ], function(TeamsSAL, LocationsSAL, SeasonSAL, SportCategorySAL, CoachsSAL, JSONModel, Filter, ValueState, Validator) {
 	"use strict";
@@ -353,8 +353,8 @@ sap.ui.define([
 				}
 				cModel.refresh(true);
 			}
-			// 			var getEle = this.getVariables();
-			// 			getEle.addStartEndAndDate.setValue("");
+			// 	var getEle = this.getVariables();
+			// 	getEle.addStartEndAndDate.setValue("");
 			/*	getEle.addTeamName.setValueState("None");
 			getEle.addTeamSeason.setValueState("None");
 			getEle.addStartEndAndDate.setValueState("None");
@@ -369,7 +369,7 @@ sap.ui.define([
 		},
 
 		handleCloseTableDialog: function() {
-			// 			this.destroyDialog();
+			// this.destroyDialog();
 		},
 
 		onDeleteCoachEntry: function(oEvent) {
@@ -458,11 +458,6 @@ sap.ui.define([
 						//setThis.destroyDialog();
 						var Eteamsave = setThis.oBundle("UpdatedSuccessfully");
 						setThis.fetchMessageOk("Edit Team", "Success", Eteamsave, "Teams");
-						setThis.sendNotificationEmail().done(function(res) {
-							var body = res.body;
-						}).fail(function(err) {
-							console.log(err.status + " " + err.statusText);
-						});
 					}).fail(function(err) {
 						setThis.showLoading(false);
 						setThis.fetchMessageOk("Error", "Error", err.toString(), "Teams");
@@ -470,19 +465,6 @@ sap.ui.define([
 				}).fail(function(err) {
 					setThis.showLoading(false);
 					setThis.fetchMessageOk("Error", "Error", err.toString(), "Teams");
-				});
-				var URL = "/stryxsports/client/services/SendEmail.xsjs";
-				$.ajax({
-					type: 'GET',
-					data: 'Mail from stryx sports',
-					url: URL,
-					crossDomain: true,
-					success: function(response) {
-						console.log(JSON.stringify(response));
-					},
-					error: function(xhr, status, error) {
-						console.log(JSON.stringify(error));
-					}
 				});
 			}
 		},
@@ -537,7 +519,7 @@ sap.ui.define([
 				default:
 			}
 		},
-		// 		//Here function for Team table search 
+		//Here function for Team table search 
 		handleSearch: function(oEvent) {
 			var sValue = oEvent.getParameter("value");
 			var oFilter = new Filter("FirstName", sap.ui.model.FilterOperator.Contains, sValue);

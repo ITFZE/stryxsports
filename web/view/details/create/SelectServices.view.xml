@@ -118,21 +118,31 @@
         									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="3" columnsL="2" columnsM="2"
         									singleContainerFullSize="false" >
 												<f:content>
-													<core:Title  text="{i18n>ssSelectService}" />
+													<core:Title text="{i18n>ssSelectService}" />
+													<!--<m:Label text="Subscription"/>
+													<m:ComboBox id="subscriptionType" selectionChange="onSelectSubscription" placeholder="Please Select Subscription Type"
+								      	                items="{ path: '/SubscriptionType'}">
+														    <core:Item text="{text}" key="{key}"/>
+													</m:ComboBox>-->
 													<m:Label text="{i18n>ssItem}"/>
-													<m:ComboBox
-										          id="memberService"  enabled="false" selectionChange="getSelectedServiceItem"
-										          placeholder="{i18n>ssPleaseSelectService}"
-								      	          items="{ path: 'ItemsList>/value', sorter: { path: 'ItemName' } }">
-														<core:Item text="{ItemsList>ItemName}" key="{ItemsList>ItemCode}"/>
+													<m:ComboBox id="memberService" enabled="false" selectionChange="getSelectedServiceItem" placeholder="{i18n>ssPleaseSelectService}"
+								      	                items="{ path: 'ItemsList>/value', sorter: { path: 'ItemName' } }">
+														    <core:Item text="{ItemsList>ItemName}" key="{ItemsList>ItemCode}"/>
 													</m:ComboBox>
+													<m:Label text="Posting Date"/>
+													<m:DatePicker id="memberPostingDate" displayFormat="dd-MM-yyyy"  placeholder="{i18n>ssPleaseEnterDate}"/>
 													<m:Label text = "{i18n>ssRemarks}" />
 													<m:TextArea id="memberRemarks"  placeholder="{i18n>ssPleaseEnterAdditionalInformation}"  
 													value="" growing="true" class="width-full"/>
 													<core:Title/>
-													<m:Label text="{i18n>ssDurationTime}"/>
-													<m:Input value="{path: 'ItemDetails>/U_Duration' }" placeholder="{i18n>ssPleaseEnterDuration}"  id="memberMonths" editable="false" enabled="true" />
-													<m:Input value="{ItemDetails>/U_Time}" placeholder="{i18n>ssPleaseEnterTime}"  id="memberPeriods" editable="false" enabled="true" />
+													<m:Label text="Duration"/>
+													<m:ComboBox id="durationType" selectionChange="onSelectDuration" placeholder="Please Select Duration Type"
+								      	                items="{ path: '/DurationType'}">
+														    <core:Item text="{text}" key="{key}"/>
+													</m:ComboBox>
+													<!--<m:Label text="{i18n>ssDurationTime}"/>
+													<m:Input value="{path: 'ItemDetails>/U_Duration' }" placeholder="{i18n>ssPleaseEnterDuration}" id="memberMonths" editable="false" enabled="true" />
+													<m:Input value="{ItemDetails>/U_Time}" placeholder="{i18n>ssPleaseEnterTime}" id="memberPeriods" editable="false" enabled="true" />-->
 													<m:Label text="{i18n>ssQuantity}"/>
 													<m:Input id="memberQuantity" type="Number" placeholder="{i18n>ssPleaseEnterQuantity}" value="{ItemDetails>/Quantity}" />
 													<m:Label text="{i18n>ssPrice}"/>
@@ -142,123 +152,6 @@
 												     value="{parts:[{path:'ItemDetails>/Quantity'},{path:'ItemDetails>/ItemPrices/0/Price'},{path:'ItemDetails>/ItemPrices/0/Currency'}],formatter: '.toTotalPrice' }"/>
 												</f:content>
 											</f:SimpleForm>
-											<!--<m:Panel width="auto" class="sapUiResponsiveMargin" id="toSelectMemberCalendar" visible="false">
-												<m:headerToolbar>
-													<m:Toolbar>
-														<m:Title text="Select Timings" />
-														<m:ToolbarSpacer />
-														<m:Button icon="sap-icon://show" text="Existing Schedule" type="Ghost" press="handleExistingSchedulePress" />
-													</m:Toolbar>
-												</m:headerToolbar>
-												<m:content>
-													<m:ScrollContainer height="100%"
-                                                		width="100%"
-                                                		horizontal="true"
-                                                		vertical="true"
-                                                		focusable="true">
-														<m:Table id="" inset="false">
-															<m:columns>
-																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Begin"></m:Column>
-																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-																	<m:Text text="Start Time"/>
-																</m:Column>
-																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-																	<m:Text text="End Time"/>
-																</m:Column>
-																<m:Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
-																	<m:Text text="Timings"/>
-																</m:Column>
-															</m:columns>
-															<m:items>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Sunday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Monday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Tuesday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Wednesday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Thursday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Friday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-																<m:ColumnListItem>
-																	<m:cells>
-																		<m:CheckBox text="Saturday" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:Input value="" enabled="true" editable="false" />
-																		<m:TimePicker
-                                                        				valueFormat="HH:mm"
-                                                        				displayFormat="HH:mm"
-                                                        				change="handleChange"
-                                                        				placeholder="Choose your time"/>
-																	</m:cells>
-																</m:ColumnListItem>
-															</m:items>
-														</m:Table>
-													</m:ScrollContainer>
-												</m:content>
-											</m:Panel>-->
 											<m:HBox alignItems="Center" justifyContent="Center" class="sapUiTinyMarginBottom">
 												<m:Button  id="btnAddService" enabled="false" text="{i18n>ssAddService}"  press="addServiceItems"/>
 											</m:HBox>
@@ -308,9 +201,7 @@
 						</subSections>
 					</ObjectPageSection>
 					<!--<ObjectPageSection  id="caActivities" title="{i18n>ssServicesView}"><subSections><ObjectPageSubSection ><m:VBox width="100%"><m:Table id="tbServicesView" items="{ServiceDetails>/value}" growing="true" growingThreshold="10" inset="false"><m:columns><m:Column width="12em"><m:Text text="{i18n>ssService}"/></m:Column><m:Column  hAlign="Center" ><m:Text text="{i18n>ssStartDate}"/></m:Column><m:Column	hAlign="Center" ><m:Text text="{i18n>ssQuantity}"/></m:Column><m:Column hAlign="Center"><m:Text text="{i18n>ssPrice}"/></m:Column><m:Column hAlign="Center"><m:Text text="{i18n>ssTotalPrice}"/></m:Column></m:columns><m:items><m:ColumnListItem><m:cells><m:Text text="{ServiceDetails>ItemDescription}"/><m:Text text="{ServiceDetails>ShipDate}"/><m:Text text="{ServiceDetails>Quantity}" /><m:Text text=" {ServiceDetails>Currency} { path: 'ServiceDetails>UnitPrice',
-					  type: 'sap.ui.model.type.Float', formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" />
-					  <m:Text text="{parts:[{path:'ServiceDetails>Quantity'},{path:'ServiceDetails>UnitPrice'},{path:'ServiceDetails>Currency'}],formatter: '.toTotalPrice'}" />
-					  </m:cells></m:ColumnListItem></m:items></m:Table></m:VBox></ObjectPageSubSection></subSections></ObjectPageSection>-->
+					  type: 'sap.ui.model.type.Float', formatOptions: {minIntegerDigits: 2,minFractionDigits: 2}}" /><m:Text text="{parts:[{path:'ServiceDetails>Quantity'},{path:'ServiceDetails>UnitPrice'},{path:'ServiceDetails>Currency'}],formatter: '.toTotalPrice'}" /></m:cells></m:ColumnListItem></m:items></m:Table></m:VBox></ObjectPageSubSection></subSections></ObjectPageSection>-->
 				</sections>
 			</ObjectPageLayout>
 		</m:content>

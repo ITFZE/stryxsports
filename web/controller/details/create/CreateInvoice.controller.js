@@ -14,34 +14,44 @@ sap.ui.define([
 			this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
 			var oRouter = this.getRouter();
 			oRouter.getRoute("CreateInvoice").attachMatched(this._onRouteMatched, this);
+
+			this._dpPostingDate = this.byId("DatePickerPostingDate");
 		},
 		_onRouteMatched: function(oEvent) {
 			var that = this;
 			that.showLoading(true);
+			var getToday = new Date();
+			var docDate = this.toDateFormat(getToday);
+			this._dpPostingDate.setValue(docDate);
 			var getEle = oEvent.getParameters();
+			this._dpPostingDate.setValue(docDate);
+			this._dpPostingDate.setMaxDate(getToday);
+
 			this._setViewLevel = getEle.config.viewLevel;
 			var getDocID = oEvent.getParameter("arguments").DocEntryID;
 			this._pageID = oEvent.getParameter("arguments").PageID;
 			$.when(that.checkInvoiceStatus(getDocID)).then(function() {
 				return;
 			});
+
 		},
 		createGenerateInvoiceLater: function() {
 			var newModel = new JSONModel();
 			this.getView().setModel(newModel, "InvoiceDetailsModel");
 			this.getOwnerComponent().getRouter().navTo("DashBoard");
-
 		},
 		createInvoiceModel: function() {
 			var that = this;
+			var getDocDate = this.toDateFormat(this._dpPostingDate.getValue());
 			var invMD = new JSONModel();
 			var ordMD = that.getView().getModel("InvoiceDetailsModel");
 			var ordData = ordMD.getData();
-			this._AccountID = ordData.CardCode;
 
+			this._AccountID = ordData.CardCode;
 			invMD.setProperty('/CardCode', ordData.CardCode);
 			invMD.setProperty('/Comments', "Based On Sales Orders " + ordData.DocEntry + ".");
 			invMD.setProperty('/JournalMemo', "A/R Invoices - " + ordData.CardCode);
+			invMD.setProperty('/DocDate', getDocDate);
 			invMD.setProperty('/DocumentLines', []);
 			invMD.setProperty('/U_SalesOrderID', ordData.DocEntry);
 			var objInv = invMD.getData();
@@ -59,22 +69,29 @@ sap.ui.define([
 			invMD.setData(objInv);
 
 			return invMD;
+
 		},
 		createGenerateInvoice: function() {
 			var that = this;
-			that.showLoading(true);
-			var invMD = this.createInvoiceModel();
-			that.createInvoice(invMD, "").done(function(obj) {
-				var md = new JSONModel();
-				md.setData(obj);
-				that.showLoading(false);
-				that.fetchMessageOkNavTo("Invoice", "Success", "Created Successfully. \n Are You Want To Continue The Payment.",
-					"NewPayment", obj.DocEntry);
 
-			}).fail(function(err) {
-				that.showLoading(false);
-				that.fetchErrorMessageOk("Error", "Error", err.toString());
-			});
+			var invMD = this.createInvoiceModel();
+			if (this._dpPostingDate.getValue() !== "") {
+				this._dpPostingDate.setValueState("None");
+				that.showLoading(true);
+				that.createInvoice(invMD, "").done(function(obj) {
+					var md = new JSONModel();
+					md.setData(obj);
+					that.showLoading(false);
+					that.fetchMessageOkNavTo("Invoice", "Success", "Created Successfully. \n Do you want to continue with the payment procedure?",
+						"NewPayment", obj.DocEntry);
+
+				}).fail(function(err) {
+					that.showLoading(false);
+					that.fetchErrorMessageOk("Error", "Error", err.toString());
+				});
+			} else {
+				this._dpPostingDate.setValueState("Error");
+			}
 		},
 		checkInvoiceStatus: function(getID) {
 			var that = this;

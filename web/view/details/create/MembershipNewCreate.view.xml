@@ -35,7 +35,7 @@
 									<Label id="lmLEmail"  text="{i18n>mncleadEmail}"/>
 									<Input id="lmIEmail"  type="Email" value="{createMembershipModel>/EmailAddress}"  placeholder="{i18n>mncleadPleaseEnterEmail}"/>
 									<Label id="lmLPhone" text="{i18n>mncPhoneMobile}"/>
-									<Input id="lmIPhone" type="Number" value="{createMembershipModel>/Cellular}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+									<Input id="lmIPhone" type="Number"  value="{createMembershipModel>/Cellular}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
 									<core:Title/>
 									<Label text="{i18n>mncNationality}"/>
 									<ComboBox placeholder="{i18n>mncSelectCountry}" selectedKey="{createMembershipModel>/U_Nationality}"   id="participantNationality" 
@@ -71,6 +71,7 @@
 						</WizardStep>
 						<WizardStep id="ParentDetailsID" visiable="false" validated="true" activate="additionalInfoValidation" title="{i18n>mncParentDetails}">
 							<IconTabBar
+							   select="clearAllModels"
 		                       id="tabParents"
 		                          expanded="{device>/isNoPhone}" >
 								<items>
@@ -194,7 +195,7 @@
 									<Label text="{i18n>mncPerson1}"/>
 									<Input id="optionalPerson1" value="{createMembershipModel>/ContactEmployees/0/Name}"  placeholder="{i18n>mncPleaseEnterPerson1}"/>
 									<Label text="{i18n>mncPhoneMobile}"/>
-									<Input id="person1Mobile" value="{createMembershipModel>/ContactEmployees/0/MobilePhone}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
+									<Input id="person1Mobile" type="Number" value="{createMembershipModel>/ContactEmployees/0/MobilePhone}"  placeholder="{i18n>mncleadPleaseEnterMobileNumber}"/>
 									<Label text="{i18n>mncPerson2}"/>
 									<Input id="optionalPerson2" value="{createMembershipModel>/ContactEmployees/1/Name}"  placeholder="{i18n>mncPleaseEnterPerson2}"/>
 									<Label text="{i18n>mncPhoneMobile}"/>

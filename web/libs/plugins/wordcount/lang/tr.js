@@ -1,4 +1,4 @@
-﻿/*
+/*
 Mesut ÇAKIR
 mesut.cakir@hotmail.com.tr
 */
